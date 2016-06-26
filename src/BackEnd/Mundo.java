@@ -435,15 +435,15 @@ public class Mundo
 		}
 
 	}
-	public String eliminarZapato(String referencia, String NIT) 
+	public String eliminarZapato(String referencia, String ciudadAlmacen) 
 	{
 		for (int i = 0; i < zapatos.size(); i++)
 		{
 			Zapato x = zapatos.get(i);
-			if (x.getReferencia().equals(referencia) && x.getAlamacenes().get(0).getNit().equals(NIT))
+			if (x.getReferencia().equals(referencia) && x.getAlamacenes().get(0).getCiudad().equals(ciudadAlmacen))
 			{
 				zapatos.remove(i);
-				return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y Alamcen: "+NIT;
+				return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y Alamcen: "+ciudadAlmacen;
 			}
 
 		}

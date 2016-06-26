@@ -677,9 +677,9 @@ public class Principal extends JFrame implements ActionListener {
 		}
 	}
 
-	public void eliminar(String referencia, String NIT)
+	public void eliminar(String referencia, String ciudadAlmacen)
 	{
-		String res = mundo.eliminarZapato(referencia, NIT);
+		String res = mundo.eliminarZapato(referencia, ciudadAlmacen);
 		setModelToZapatos();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
