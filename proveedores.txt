@@ -1,2 +1,2 @@
 1,Proveedor1,Fabrica1,Direccion1,3001234567,Bogota
-2,Proveedor2,Direccion2,Fabrica2,3011234567,Bogota
+2,Proveedor2,Fabrica2,Direccion2,3011234567,Bogota

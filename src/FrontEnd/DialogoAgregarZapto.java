@@ -592,6 +592,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener
 				JOptionPane.showMessageDialog( this, "Error en el campo Fecha", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog( this, e1.getMessage(), "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
+				e1.printStackTrace();
 			}
 		}
 

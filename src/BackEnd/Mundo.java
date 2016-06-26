@@ -590,7 +590,7 @@ public class Mundo
 		ArrayList<Proveedor> resp = new ArrayList<Proveedor>();
 		for(Proveedor p: proveedores){
 			for(String s: provs){
-				if(p.getCodigo() == Integer.parseInt(s.split(" - ")[0]) && p.getNombre().equals(s.split(" - ")[1]))resp.add(p);
+				if(p.getFabrica().equals(s.split(" - ")[0]) && p.getNombre().equals(s.split(" - ")[1]))resp.add(p);
 			}
 		}
 		System.out.println(resp.size()+" proveedores");
@@ -601,7 +601,7 @@ public class Mundo
 		ArrayList<Almacen> resp = new ArrayList<Almacen>();
 		for(Almacen a: almacenes){
 			for(String s: alms){
-				if(a.getNit().equals(s.split("\\|")[1].trim()))resp.add(a);
+				if(a.getCiudad().equals(s))resp.add(a);
 			}
 		}
 		System.out.println(resp.size()+" almacenes");
