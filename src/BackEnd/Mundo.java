@@ -30,6 +30,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -235,9 +236,9 @@ public class Mundo
 		row.createCell(6).setCellValue("Almacenes");
 		row.createCell(7).setCellValue("Cantidad");
 		row.createCell(8).setCellValue("Precio Costo");
-		row.createCell(8).setCellValue("Precio Venta");
-		row.createCell(9).setCellValue("Categoria");
-		row.createCell(10).setCellValue("Fecha");
+		row.createCell(9).setCellValue("Precio Venta");
+		row.createCell(10).setCellValue("Categoria");
+		row.createCell(11).setCellValue("Fecha");
 
 		for (Zapato z : zapatos)
 		{
@@ -262,7 +263,7 @@ public class Mundo
 			CellStyle cs = workbook.createCellStyle();
 		    cs.setWrapText(true);
 		    cellProveedores.setCellStyle(cs);
-
+			sheetZapatos.autoSizeColumn(5);
 		    
 		    Cell cellAlmacenes = row.createCell(6);
 		    cellAlmacenes.setCellValue(z.getAlmacenesString().replace("{", "\n"));
@@ -275,13 +276,13 @@ public class Mundo
 			row.createCell(8).setCellValue(z.getPrecioCosto());
 			sheetZapatos.autoSizeColumn(8);
 			
-			row.createCell(8).setCellValue(z.getPrecioVenta());
+			row.createCell(9).setCellValue(z.getPrecioVenta());
 			sheetZapatos.autoSizeColumn(9);
 			
-			row.createCell(9).setCellValue(z.getCategoria());
+			row.createCell(10).setCellValue(z.getCategoria());
 			sheetZapatos.autoSizeColumn(10);
 			
-			row.createCell(10).setCellValue(z.getFecha());
+			row.createCell(11).setCellValue(z.getStringFecha());
 			sheetZapatos.autoSizeColumn(11);
 
 		}
