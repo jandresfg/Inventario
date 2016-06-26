@@ -616,7 +616,7 @@ public class Mundo
 		System.out.println("proveedores size: "+proveedores.size());
 		for(Proveedor p: proveedores){
 			for(String s: provsArr){
-				if(p.getCodigo() == Integer.parseInt(s.split(" - ")[0]) && p.getNombre().equals(s.split(" - ")[1]))resp.add(p);
+				if(p.getFabrica().equals(s.split(" - ")[0]) && p.getNombre().equals(s.split(" - ")[1]))resp.add(p);
 			}
 		}
 		System.out.println(resp.size()+" proveedores");
@@ -631,7 +631,7 @@ public class Mundo
 		System.out.println("almacenes size: "+almacenes.size());
 		for(Almacen a: almacenes){
 			for(String s: almsArr){
-				if(a.getNit().equals(s.split("\\|")[1].trim()))resp.add(a);
+				if(a.getCiudad().equals(s))resp.add(a);
 			}
 		}
 		System.out.println(resp.size()+" almacenes");
