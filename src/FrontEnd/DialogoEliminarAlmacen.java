@@ -213,9 +213,9 @@ public class DialogoEliminarAlmacen extends JDialog implements ActionListener
 				setVisible( false );
 				dispose( );
 			}
-			catch( NumberFormatException e1 )
+			catch( Exception e1 )
 			{
-				JOptionPane.showMessageDialog( this, "Error en el formulario", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, e1.getMessage(), "Eliminar almacen", JOptionPane.ERROR_MESSAGE );
 			}
 		}
 

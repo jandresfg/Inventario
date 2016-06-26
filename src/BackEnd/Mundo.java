@@ -538,38 +538,71 @@ public class Mundo
 	}
 
 
-	public void eliminarProveedor(String referencia) 
+	public void eliminarProveedor(String fabrica) throws Exception 
 	{
 		for (int i = 0; i < proveedores.size(); i++)
 		{
 			Proveedor x = proveedores.get(i);
-			if (x.getNombre().equals(referencia))
+			if (x.getFabrica().equals(fabrica))
 			{
-				proveedores.remove(i);
-				break;
+				if(!proveedorEstaRelacionadoConZapato(fabrica)){
+					proveedores.remove(i);
+					break;
+				}else{
+					throw new Exception("El Proveedor de fábrica '"+fabrica+"' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
+				}
 			}
 
 		}
-		// TODO Auto-generated method stub
+	}
 
+	/**
+	 * 
+	 * @param fabrica
+	 * @return true si el Proveedor con fabrica dada por parametro se encuentra en la lista de proveedores de cualquier zapato, false de lo contrario
+	 */
+	private boolean proveedorEstaRelacionadoConZapato(String fabrica) {
+		for(Zapato z: zapatos){
+			for(Proveedor p:z.getProveedores()){
+				if(p.getFabrica().equals(fabrica)) return true;
+			}
+		}
+		return false;
 	}
 
 
-	public void eliminarAlmacen(String ciudad)
+	public void eliminarAlmacen(String ciudad) throws Exception
 	{
 		for (int i = 0; i < almacenes.size(); i++)
 		{
 			Almacen x = almacenes.get(i);
 			if (x.getCiudad().equals(ciudad))
 			{
-				almacenes.remove(i);
-				break;
+				if(!almacenEstaRelacionadoConZapato(ciudad)){
+					almacenes.remove(i);
+					break;
+				}else{
+					throw new Exception("El Almacén de ciudad '"+ciudad+"' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
+				}
 			}
 
 		}
-		// TODO Auto-generated method stub
-
 	}
+
+	/**
+	 * 
+	 * @param ciudad
+	 * @return true si el Almacen con ciudad dada por parametro se encuentra en la lista de almacenes de cualquier zapato, false de lo contrario
+	 */
+	private boolean almacenEstaRelacionadoConZapato(String ciudad) {
+		for(Zapato z: zapatos){
+			for(Almacen a:z.getAlamacenes()){
+				if(a.getCiudad().equals(ciudad)) return true;
+			}
+		}
+		return false;
+	}
+
 
 	public void setAlmacenes(List<Almacen> almacenes) {
 		this.almacenes = almacenes;

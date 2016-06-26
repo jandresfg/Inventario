@@ -687,7 +687,7 @@ public class Principal extends JFrame implements ActionListener {
 		agregarCombobox();
 
 	}
-	public void eliminarProveedor(String referencia)
+	public void eliminarProveedor(String referencia) throws Exception
 	{
 		mundo.eliminarProveedor(referencia);
 		setModelToProveedores();
@@ -697,7 +697,7 @@ public class Principal extends JFrame implements ActionListener {
 
 	}
 
-	public void eliminarAlmacen(String referencia)
+	public void eliminarAlmacen(String referencia) throws Exception
 	{
 		mundo.eliminarAlmacen(referencia);
 		setModelToAlmacenes();
