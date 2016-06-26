@@ -136,7 +136,7 @@ public class Principal extends JFrame implements ActionListener {
 		frmInventario.setTitle("Inventario");
 		frmInventario.getContentPane().setBackground(UIManager.getColor("MenuBar.background"));
 		frmInventario.setBackground(Color.GRAY);
-		frmInventario.setBounds(100, 100, 1101, 528);
+		frmInventario.setBounds(100, 100, 1162, 527);
 		frmInventario.setResizable(false);
 		Principal.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -146,7 +146,7 @@ public class Principal extends JFrame implements ActionListener {
 
 		panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
-		panel.setBounds(0, 32, 911, 468);
+		panel.setBounds(0, 32, 973, 468);
 		frmInventario.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -154,7 +154,7 @@ public class Principal extends JFrame implements ActionListener {
 		tcr = table.getDefaultRenderer(Object.class);
 		
 		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 911, 468);
+		scrollPane.setBounds(0, 0, 973, 468);
 		panel.add(scrollPane);
 		try {
 			Image i = ImageIO.read(getClass().getResource("/resources/add_shoe.png"));
@@ -166,7 +166,7 @@ public class Principal extends JFrame implements ActionListener {
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 0, 911, 32);
+		panel_2.setBounds(0, 0, 973, 32);
 		frmInventario.getContentPane().add(panel_2);
 
 		button = new Button("Zapatos");
@@ -210,7 +210,7 @@ public class Principal extends JFrame implements ActionListener {
 		});
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(911, 0, 184, 281);
+		panel_3.setBounds(972, 0, 184, 281);
 		frmInventario.getContentPane().add(panel_3);
 				panel_3.setLayout(null);
 		
@@ -334,7 +334,7 @@ public class Principal extends JFrame implements ActionListener {
 		});
 
 		panel_4 = new JPanel();
-		panel_4.setBounds(921, 287, 164, 213);
+		panel_4.setBounds(982, 287, 164, 213);
 		frmInventario.getContentPane().add(panel_4);
 		panel_4.setLayout(null);
 		

@@ -534,9 +534,31 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener
 
 				}
 				String altura = textAltura.getText( );
-				int precioCosto = Integer.valueOf( textPC.getText( ) ).intValue( );
-				int precioVenta = Integer.valueOf( textPV.getText( ) ).intValue( );
-				int cantidad = Integer.valueOf( textCantidad.getText( ) ).intValue( );
+				int precioCosto= -1, precioVenta= -1, cantidad = -1;
+				try{
+					precioCosto = Integer.valueOf( textPC.getText( ) ).intValue( );
+				}
+				catch( NumberFormatException e1 )
+				{
+					JOptionPane.showMessageDialog( this, "Precio de Compra ingresado inválido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
+				}
+				
+				try{
+					precioVenta = Integer.valueOf( textPV.getText( ) ).intValue( );
+				}
+				catch( NumberFormatException e1 )
+				{
+					JOptionPane.showMessageDialog( this, "Precio de Venta ingresado inválido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
+				}
+
+				try{
+					cantidad = Integer.valueOf( textCantidad.getText( ) ).intValue( );
+				}
+				catch( NumberFormatException e1 )
+				{
+					JOptionPane.showMessageDialog( this, "Cantidad ingresada inválida", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
+				}
+				
 				String color = textFColor.getText();
 				String material =  textMaterial.getText();
 				String referencia = textReft.getText();
@@ -566,11 +588,8 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener
 				setVisible( false );
 				dispose( );
 			}
-			catch( NumberFormatException e1 )
-			{
-				JOptionPane.showMessageDialog( this, "Error en el formulario", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
-			} catch (ParseException e1) {
-				JOptionPane.showMessageDialog( this, "Error en el campo fecha", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
+			catch (ParseException e1) {
+				JOptionPane.showMessageDialog( this, "Error en el campo Fecha", "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog( this, e1.getMessage(), "Agregar Zapato", JOptionPane.ERROR_MESSAGE );
 			}
