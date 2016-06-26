@@ -227,29 +227,36 @@ public class Mundo
 
 		int rownum = 0;
 		Row row = sheetZapatos.createRow(rownum++);
-		row.createCell(0).setCellValue("Referencia");
-		row.createCell(1).setCellValue("Planta");
-		row.createCell(2).setCellValue("Altura");
+		row.createCell(0).setCellValue("Almacen");
+		row.createCell(1).setCellValue("Proveedor");
+		row.createCell(2).setCellValue("Referencia");
 		row.createCell(3).setCellValue("Color");
 		row.createCell(4).setCellValue("Material");
-		row.createCell(5).setCellValue("Proveedores");
-		row.createCell(6).setCellValue("Almacenes");
+		row.createCell(5).setCellValue("Planta");
+		row.createCell(6).setCellValue("Altura");
 		row.createCell(7).setCellValue("Cantidad");
-		row.createCell(8).setCellValue("Precio Costo");
-		row.createCell(9).setCellValue("Precio Venta");
+		row.createCell(8).setCellValue("Precio Venta");
+		row.createCell(9).setCellValue("Precio Costo");
 		row.createCell(10).setCellValue("Categoria");
 		row.createCell(11).setCellValue("Fecha");
 
 		for (Zapato z : zapatos)
 		{
 			row = sheetZapatos.createRow(rownum++);
-			row.createCell(0).setCellValue(z.getReferencia());
-			sheetZapatos.autoSizeColumn(0);
 			
-			row.createCell(1).setCellValue(z.getPlanta());
+			Cell cellAlmacenes = row.createCell(0);
+		    cellAlmacenes.setCellValue(z.getAlmacenesString().replace("{", "\n"));
+		    CellStyle cs = workbook.createCellStyle();
+		    cs.setWrapText(true);
+		    cellAlmacenes.setCellStyle(cs);
+		    sheetZapatos.autoSizeColumn(0);
+		    
+		    Cell cellProveedores = row.createCell(1);
+			cellProveedores.setCellValue(z.getProveedoresString().replace("{", "\n"));
+			cellProveedores.setCellStyle(cs);
 			sheetZapatos.autoSizeColumn(1);
 			
-			row.createCell(2).setCellValue(z.getAltura());
+			row.createCell(2).setCellValue(z.getReferencia());
 			sheetZapatos.autoSizeColumn(2);
 			
 			row.createCell(3).setCellValue(z.getColor());
@@ -258,25 +265,19 @@ public class Mundo
 			row.createCell(4).setCellValue(z.getMaterial());
 			sheetZapatos.autoSizeColumn(4);
 			
-			Cell cellProveedores = row.createCell(5);
-			cellProveedores.setCellValue(z.getProveedoresString().replace("{", "\n"));
-			CellStyle cs = workbook.createCellStyle();
-		    cs.setWrapText(true);
-		    cellProveedores.setCellStyle(cs);
+			row.createCell(5).setCellValue(z.getPlanta());
 			sheetZapatos.autoSizeColumn(5);
-		    
-		    Cell cellAlmacenes = row.createCell(6);
-		    cellAlmacenes.setCellValue(z.getAlmacenesString().replace("{", "\n"));
-		    cellAlmacenes.setCellStyle(cs);
-		    sheetZapatos.autoSizeColumn(6);
-		    
+			
+			row.createCell(6).setCellValue(z.getAltura());
+			sheetZapatos.autoSizeColumn(6);
+			
 			row.createCell(7).setCellValue(z.getCantidad());
 			sheetZapatos.autoSizeColumn(7);
 			
-			row.createCell(8).setCellValue(z.getPrecioCosto());
+			row.createCell(8).setCellValue(z.getPrecioVenta());
 			sheetZapatos.autoSizeColumn(8);
 			
-			row.createCell(9).setCellValue(z.getPrecioVenta());
+			row.createCell(9).setCellValue(z.getPrecioCosto());
 			sheetZapatos.autoSizeColumn(9);
 			
 			row.createCell(10).setCellValue(z.getCategoria());
@@ -360,11 +361,11 @@ public class Mundo
 		rownum = 0;
 		row = sheetTotales.createRow(rownum++);
 		row.createCell(0).setCellValue("Almacen");
-		row.createCell(1).setCellValue("Referencia");
-		row.createCell(2).setCellValue("Proveedor");
+		row.createCell(1).setCellValue("Proveedor");
+		row.createCell(2).setCellValue("Referencia");
 		row.createCell(3).setCellValue("Cantidad Total");
-		row.createCell(4).setCellValue("Precio Costo Total");
-		row.createCell(5).setCellValue("Precio Venta Total");
+		row.createCell(4).setCellValue("Precio Venta Total");
+		row.createCell(5).setCellValue("Precio Costo Total");
 
 		for (Object[] o: darTotales())
 		{
@@ -373,21 +374,20 @@ public class Mundo
 			row.createCell(0).setCellValue((String)o[0]);
 			sheetTotales.autoSizeColumn(0);
 			
-			row.createCell(1).setCellValue((String)o[1]);
+			row.createCell(1).setCellValue((String)o[2]);
 			sheetTotales.autoSizeColumn(1);
 			
-			row.createCell(2).setCellValue((String)o[2]);
+			row.createCell(2).setCellValue((String)o[1]);
 			sheetTotales.autoSizeColumn(2);
 			
 			row.createCell(3).setCellValue((Integer)o[3]);
 			sheetTotales.autoSizeColumn(3);
 			
-			row.createCell(4).setCellValue((Integer)o[4]);
+			row.createCell(4).setCellValue((Integer)o[5]);
 			sheetTotales.autoSizeColumn(4);
 			
-			row.createCell(5).setCellValue((Integer)o[5]);
+			row.createCell(5).setCellValue((Integer)o[4]);
 			sheetTotales.autoSizeColumn(5);
-
 		}
 		
 		try

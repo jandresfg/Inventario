@@ -18,7 +18,7 @@ public class TablaZapatos  extends AbstractTableModel
 	
 	    List<Zapato> data = new ArrayList<Zapato>();
 	    
-		String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedores", "Almacenes", "Cantidad", "Precio Costo", "Precio Venta","Categoría","Fecha" };
+		String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categoría","Fecha" };
 	    Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
 
 	    public TablaZapatos(List<Zapato> arr) 

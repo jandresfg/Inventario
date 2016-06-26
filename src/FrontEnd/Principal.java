@@ -720,8 +720,8 @@ public class Principal extends JFrame implements ActionListener {
 		});
 		table.setModel(sol);
 		table.setDefaultRenderer(Object.class, new MultipleLines());
-		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedores")).setPreferredWidth(100);
-		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Almacenes")).setPreferredWidth(180);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedor")).setPreferredWidth(100);
+		//table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Almacen")).setPreferredWidth(180);
 		refrescar();
 		button.requestFocus();
 		panel.setSize(panel.getWidth(), 468);
