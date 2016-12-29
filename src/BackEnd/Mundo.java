@@ -436,17 +436,21 @@ public class Mundo
 		}
 
 	}
-	public String eliminarZapato(String referencia, String ciudadAlmacen) 
+	public String eliminarZapato(String referencia, String codigoProveedor) 
 	{
 		for (int i = 0; i < zapatos.size(); i++)
 		{
 			Zapato x = zapatos.get(i);
-			if (x.getReferencia().equals(referencia) && x.getAlamacenes().get(0).getCiudad().equals(ciudadAlmacen))
+			if (x.getReferencia().equals(referencia))
 			{
-				zapatos.remove(i);
-				return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y Alamcen: "+ciudadAlmacen;
+                            for(int j = 0; j<x.getProveedores().size(); j++){
+                                Proveedor y = x.getProveedores().get(j);
+                                if (y.getCodigo()==Integer.parseInt(codigoProveedor)){
+                                    zapatos.remove(i);
+                                    return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y proveedor relacionado con código: "+codigoProveedor;
+                                }
+                            }
 			}
-
 		}
 		return "No se ha encontrado el Zapato especificado para eliminar.";
 	}
@@ -539,33 +543,37 @@ public class Mundo
 	}
 
 
-	public void eliminarProveedor(String fabrica) throws Exception 
-	{
-		for (int i = 0; i < proveedores.size(); i++)
-		{
-			Proveedor x = proveedores.get(i);
-			if (x.getFabrica().equals(fabrica))
-			{
-				if(!proveedorEstaRelacionadoConZapato(fabrica)){
-					proveedores.remove(i);
-					break;
-				}else{
-					throw new Exception("El Proveedor de fábrica '"+fabrica+"' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
-				}
-			}
+	public void eliminarProveedor(int codigoAborrar) throws Exception 
+	{   
+            boolean borrado=false;
+            for (int i = 0; i < proveedores.size() && !borrado; i++)
+            {
+                    Proveedor x = proveedores.get(i);
+                    if (x.getCodigo() == codigoAborrar)
+                    {
+                            if(!proveedorEstaRelacionadoConZapato(codigoAborrar)){
+                                    proveedores.remove(i);
+                                    borrado = true;
+                            }else{
+                                    throw new Exception("El Proveedor con código '"+codigoAborrar+"' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
+                            }
+                    }
 
-		}
+            }
+            if(!borrado){
+                throw new Exception("El Proveedor con código '"+codigoAborrar+"' no fue encontrado");
+            }
 	}
 
 	/**
 	 * 
-	 * @param fabrica
-	 * @return true si el Proveedor con fabrica dada por parametro se encuentra en la lista de proveedores de cualquier zapato, false de lo contrario
+	 * @param codigoProveedor
+	 * @return true si el Proveedor con codigo dado por parametro se encuentra en la lista de proveedores de cualquier zapato, false de lo contrario
 	 */
-	private boolean proveedorEstaRelacionadoConZapato(String fabrica) {
+	private boolean proveedorEstaRelacionadoConZapato(int codigoProveedor) {
 		for(Zapato z: zapatos){
 			for(Proveedor p:z.getProveedores()){
-				if(p.getFabrica().equals(fabrica)) return true;
+				if(p.getCodigo()==codigoProveedor) return true;
 			}
 		}
 		return false;

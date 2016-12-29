@@ -677,9 +677,9 @@ public class Principal extends JFrame implements ActionListener {
 		}
 	}
 
-	public void eliminar(String referencia, String ciudadAlmacen)
+	public void eliminar(String referencia, String codigoProveedor)
 	{
-		String res = mundo.eliminarZapato(referencia, ciudadAlmacen);
+		String res = mundo.eliminarZapato(referencia, codigoProveedor);
 		setModelToZapatos();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
@@ -687,11 +687,11 @@ public class Principal extends JFrame implements ActionListener {
 		agregarCombobox();
 
 	}
-	public void eliminarProveedor(String referencia) throws Exception
+	public void eliminarProveedor(String codigo) throws Exception
 	{
-		mundo.eliminarProveedor(referencia);
+		mundo.eliminarProveedor(Integer.parseInt(codigo));
 		setModelToProveedores();
-		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el proveedor de nombre: " + referencia);
+		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el proveedor con código: " + codigo);
 
 		// TODO Auto-generated method stub
 

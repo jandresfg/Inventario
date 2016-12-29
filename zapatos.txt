@@ -1,6 +1,5 @@
 ref1}pla1}alt1}col1}mat1}1234}1239}100}DAMA}0}18-jun-2016}Fabrica1 - Proveedor1}CUCUTA 1
 ref1}pla1}alt1}col1}mat1}1234}1239}100}DAMA}0}18-jun-2016}Fabrica1 - Proveedor1}CUCUTA 2
-ref2}pla2}alt2}col2}mat2}12345}12349}120}CABALLERO}0}25-jun-2016}Fabrica2 - Proveedor2}GIRARDOT 1
 ref2}pla2}alt2}col2}mat2}12345}12349}120}CABALLERO}0}25-jun-2016}Fabrica2 - Proveedor2}GIRARDOT 2
 ref2}pla2}alt2}col2}mat2}12345}12349}120}CABALLERO}0}25-jun-2016}Fabrica2 - Proveedor2}GIRARDOT 3
 ref2}pla2}alt2}col2}mat2}12345}12349}120}CABALLERO}0}25-jun-2016}Fabrica2 - Proveedor2}SAN ANDRES

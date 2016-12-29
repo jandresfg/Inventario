@@ -99,7 +99,7 @@ private JRadioButton radioServicio;
 private JTextField textReft;
 private JButton btnNewButton;
 private JButton btnNewButton_1;
-private JTextField textCiudadAlmacen;
+private JTextField textCodigoProveedor;
 // -----------------------------------------------
 // Métodos
 // -----------------------------------------------
@@ -134,14 +134,13 @@ public DialogoEliminarZapto( Principal pprincipal )
     	}
     });
     
-    JLabel lblciudadAlmacen = new JLabel("Ciudad Almacen");
+    JLabel lblciudadAlmacen = new JLabel("Cod. Proveedor");
     lblciudadAlmacen.setHorizontalAlignment(SwingConstants.LEFT);
     
-    textCiudadAlmacen = new JTextField();
-    textCiudadAlmacen.setColumns(10);
+    textCodigoProveedor = new JTextField();
+    textCodigoProveedor.setColumns(10);
     GroupLayout groupLayout = new GroupLayout(getContentPane());
-    groupLayout.setHorizontalGroup(
-    	groupLayout.createParallelGroup(Alignment.LEADING)
+    groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     		.addGroup(groupLayout.createSequentialGroup()
     			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
     				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
@@ -156,12 +155,11 @@ public DialogoEliminarZapto( Principal pprincipal )
     			.addGap(18)
     			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
     				.addComponent(lblciudadAlmacen, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(textCiudadAlmacen, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+    				.addComponent(textCodigoProveedor, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
     				.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     			.addContainerGap())
     );
-    groupLayout.setVerticalGroup(
-    	groupLayout.createParallelGroup(Alignment.LEADING)
+    groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     		.addGroup(groupLayout.createSequentialGroup()
     			.addContainerGap()
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -170,7 +168,7 @@ public DialogoEliminarZapto( Principal pprincipal )
     			.addGap(4)
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(textCiudadAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+    				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
     			.addPreferredGap(ComponentPlacement.RELATED)
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
@@ -219,10 +217,10 @@ public void actionPerformed( ActionEvent e )
         {
         	
           String referencia = textReft.getText();
-          String ciudadAlmacen = textCiudadAlmacen.getText();
+          String codigoProveedor = textCodigoProveedor.getText();
           
           
-        principal.eliminar(referencia, ciudadAlmacen);
+        principal.eliminar(referencia, codigoProveedor);
            
             setVisible( false );
             dispose( );

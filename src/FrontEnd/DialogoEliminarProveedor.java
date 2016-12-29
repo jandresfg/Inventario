@@ -118,7 +118,7 @@ public class DialogoEliminarProveedor extends JDialog implements ActionListener
 		btnNewButton = new JButton("Aceptar");
 		btnNewButton.setActionCommand( AGREGAR );
 		btnNewButton.addActionListener( this );
-		JLabel lblReferencia = new JLabel("Ingrese la fábrica del Proveedor a eliminar");
+		JLabel lblReferencia = new JLabel("Ingrese el código del Proveedor a eliminar");
 		lblReferencia.setHorizontalAlignment(SwingConstants.LEFT);
 
 		textReft = new JTextField();

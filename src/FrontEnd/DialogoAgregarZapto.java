@@ -362,7 +362,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener
 		gbc_datePicker.gridy = 6;
 		getContentPane().add(datePicker, gbc_datePicker);
 
-		lblPrecioDeCompra = new JLabel("Precio de Compra");
+		lblPrecioDeCompra = new JLabel("Precio de Costo");
 		GridBagConstraints gbc_10 = new GridBagConstraints();
 		gbc_10.fill = GridBagConstraints.VERTICAL;
 		gbc_10.insets = new Insets(0, 0, 5, 5);
