@@ -78,20 +78,17 @@ public class Principal extends JFrame implements ActionListener {
 	private JFrame frmInventario;
 	private Mundo mundo;
 	private JTable table;
-	private JTextField textFieldVM;
-	private JTextField textFieldTI;
 	private Button button;
 	private Button button_1;
 	private Button button_2;
 	private Button button_3;
+	private Button button_4;
+
 	private TableCellRenderer tcr;
-	private JComboBox comboBox;
-	private JPanel panel_4;
 	private JTextField filterText;
 	private TableRowSorter sorter;
 	private JPanel panel;
 	private JScrollPane scrollPane;
-	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -202,6 +199,19 @@ public class Principal extends JFrame implements ActionListener {
 		
 		button_3 = new Button("Totales por Almacen");
 		panel_2.add(button_3);
+		
+		button_4 = new Button("Totales");
+		panel_2.add(button_4);
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setModelToGrandesTotales();
+			}
+		});
+		
+		
+		
+		
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
@@ -210,7 +220,7 @@ public class Principal extends JFrame implements ActionListener {
 		});
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(972, 0, 184, 281);
+		panel_3.setBounds(972, 0, 184, 342);
 		frmInventario.getContentPane().add(panel_3);
 				panel_3.setLayout(null);
 		
@@ -220,7 +230,7 @@ public class Principal extends JFrame implements ActionListener {
 				panel_3.add(lblOpciones);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(2, 30, 175, 251);
+		panel_5.setBounds(2, 30, 175, 301);
 		panel_3.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 2, 5, 5));
 		
@@ -332,52 +342,8 @@ public class Principal extends JFrame implements ActionListener {
 				dez.setVisible(true);
 			}
 		});
-
-		panel_4 = new JPanel();
-		panel_4.setBounds(982, 287, 164, 213);
-		frmInventario.getContentPane().add(panel_4);
-		panel_4.setLayout(null);
-		
-		JLabel lblReferencia = new JLabel("Referencia");
-		lblReferencia.setBounds(0, 23, 136, 26);
-		panel_4.add(lblReferencia);
-
-		textFieldVM = new JTextField();
-		textFieldVM.setEditable(false);
-		textFieldVM.setBounds(0, 95, 155, 20);
-		panel_4.add(textFieldVM);
-		textFieldVM.setColumns(10);
-
-		JLabel lblTotalVentasMujer = new JLabel("Cantidad Total");
-		lblTotalVentasMujer.setBounds(0, 71, 136, 26);
-		panel_4.add(lblTotalVentasMujer);
-
-		JLabel lblNewLabel = new JLabel("Precio Costo Total");
-		lblNewLabel.setBounds(0, 120, 136, 20);
-		panel_4.add(lblNewLabel);
-
-		textFieldTI = new JTextField();
-		textFieldTI.setEditable(false);
-		textFieldTI.setBounds(0, 141, 155, 20);
-		panel_4.add(textFieldTI);
-		textFieldTI.setColumns(10);
 		
 		agregarCombobox();
-		
-				JLabel lblTotalVentas = new JLabel("Totales en todo Almacen");
-				lblTotalVentas.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblTotalVentas.setBounds(10, 0, 155, 26);
-				panel_4.add(lblTotalVentas);
-				
-				JLabel lblPrecioVentaTotal = new JLabel("Precio Venta Total");
-				lblPrecioVentaTotal.setBounds(0, 169, 136, 20);
-				panel_4.add(lblPrecioVentaTotal);
-				
-				textField = new JTextField();
-				textField.setEditable(false);
-				textField.setColumns(10);
-				textField.setBounds(0, 187, 155, 20);
-				panel_4.add(textField);
 				
 				JPanel panel_filter = new JPanel();
 				panel_filter.setLayout(null);
@@ -419,31 +385,13 @@ public class Principal extends JFrame implements ActionListener {
 
 
 	private void agregarCombobox() {
-		comboBox = new JComboBox(mundo.darListadoReferenciasZapatos().toArray());
-		comboBox.setBounds(0, 48, 155, 20);
-		comboBox.addActionListener(new ActionListener(	) {
-			
-			@SuppressWarnings("unchecked")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JComboBox cb = (JComboBox)e.getSource();
-		        String referencia = (String)cb.getSelectedItem();
-		        actualizarTotales(referencia);				
-			}
-		});
-		panel_4.add(comboBox);
 		
 	}
 
 	protected void actualizarTotales(String referencia) {
 		if (referencia.equals("Seleccione una referencia")) {
-			textFieldVM.setText("");
-			textFieldTI.setText("");
 		}else{
 			int[] res = mundo.darTotalesReferencia(referencia);
-			textFieldVM.setText(""+res[0]);
-			textFieldTI.setText("$ "+res[1]);
-			textField.setText("$ "+res[2]);
 		}
 	}
 
@@ -562,7 +510,6 @@ public class Principal extends JFrame implements ActionListener {
 		else if(accion.equals( "Guardar" ))
 		{
 			mundo.guardar();
-			panel_4.remove(comboBox);
 			agregarCombobox();
 		}
 		else if(accion.equals( "CARGAR" ))
@@ -611,14 +558,18 @@ public class Principal extends JFrame implements ActionListener {
 
 	}
 
-	public void agregarZapato(Zapato zap, ArrayList<String> provs, ArrayList<String> alms) 
+	public void agregarZapato(Zapato zap, ArrayList<String> provs, ArrayList<String> alms, boolean anuncio, String mensaje) 
 	{
+		
+
 		zap.setProveedores(mundo.darProveedores(provs));
 		zap.setAlmacenes(mundo.darAlmacenes(alms));
 		String resultado = mundo.agregarZapato(zap);
 		setModelToZapatos();
 
-		JOptionPane.showMessageDialog(this, resultado);
+		if (anuncio){
+		JOptionPane.showMessageDialog(this, mensaje);
+		}
 	}
 
 	public void agregarAlmacen(Almacen alma) 
@@ -639,14 +590,30 @@ public class Principal extends JFrame implements ActionListener {
 		return mundo.darCodigo();
 	}
 
-	public void agregarProveedor(Proveedor prov)
+	public void agregarProveedor(Proveedor prov, String flag)
 	{
-		String resultado = mundo.agregarProovedores(prov);
+		String resultado = mundo.agregarProovedores(prov,flag);
 		setModelToProveedores();
 		JOptionPane.showMessageDialog(this, resultado);
 		// TODO Auto-generated method stub
 
 	}
+	public String verificarCodigoProveedor(Proveedor prov) throws Exception
+	{
+		String resultado = mundo.verificarCodigoProveedor(prov);
+		if(resultado.equals("no") )
+		{
+		throw new Exception();
+		}
+		else
+		{
+			return resultado;
+		}
+		// TODO Auto-generated method stub
+
+	}
+	
+	
 
 	public void vender(String referencia, int cantidad) 
 	{
@@ -662,7 +629,6 @@ public class Principal extends JFrame implements ActionListener {
 		{
 			System.out.println("asdasd");
 			mundo.guardar();
-			panel_4.remove(comboBox);
 			agregarCombobox();
 			super.dispose( );
 		}
@@ -677,13 +643,12 @@ public class Principal extends JFrame implements ActionListener {
 		}
 	}
 
-	public void eliminar(String referencia, String codigoProveedor)
+	public void eliminar(String referencia, String codigoProveedor, String codigoAlmacen)
 	{
-		String res = mundo.eliminarZapato(referencia, codigoProveedor);
+		String res = mundo.eliminarZapato(referencia, codigoProveedor,codigoAlmacen);
 		setModelToZapatos();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
-		panel_4.remove(comboBox);
 		agregarCombobox();
 
 	}
@@ -714,7 +679,6 @@ public class Principal extends JFrame implements ActionListener {
 				System.out.println("table changed");
 				mundo.setZapatos(sol.getData());
 				mundo.guardar();
-				panel_4.remove(comboBox);
 				agregarCombobox();
 			}
 		});
@@ -726,7 +690,6 @@ public class Principal extends JFrame implements ActionListener {
 		button.requestFocus();
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
-		panel_4.remove(comboBox);
 		agregarCombobox();
 	}
 	
@@ -741,7 +704,6 @@ public class Principal extends JFrame implements ActionListener {
 				if(e.getColumn() == sol.findColumn("NIT")) mundo.actualizarNITsAlmacenes();
 				if(e.getColumn() == sol.findColumn("Almacen")) mundo.actualizarAlmacenesAlmacenes();
 				mundo.guardar();
-				panel_4.remove(comboBox);
 				agregarCombobox();
 			}
 		});
@@ -763,7 +725,6 @@ public class Principal extends JFrame implements ActionListener {
 				if(e.getColumn() == sol.findColumn("Codigo")) mundo.actualizarCodigosProveedores();
 				if(e.getColumn() == sol.findColumn("Nombre")) mundo.actualizarNombresProveedores();
 				mundo.guardar();
-				panel_4.remove(comboBox);
 				agregarCombobox();
 			}
 		});
@@ -798,6 +759,17 @@ public class Principal extends JFrame implements ActionListener {
 		table.setDefaultRenderer(Object.class, tcr);
 		button_3.requestFocus();
 	}
+	public void setModelToGrandesTotales(){
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotales());
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+		filterText.setVisible(true);
+		panel.setSize(panel.getWidth(), 435);
+		scrollPane.setSize(scrollPane.getWidth(), 435);
+		table.setDefaultRenderer(Object.class, tcr);
+		button_4.requestFocus();
+	}
 	
 	private void newFilter(){
 		RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
@@ -815,29 +787,6 @@ public class Principal extends JFrame implements ActionListener {
 		
 	public void refrescar()
 	{
-//		List<Zapato> rta = mundo.darZapatos();
-//		int vendidosH = 0;
-//		int vendidosM= 0;
-//		int ingresos= 0;
-//		for (int i = 0; i < rta.size(); i++) 
-//		{
-//			Zapato x = rta.get(i);
-//			if(x.getCategoria().equals("HOMBRE"))
-//			{
-//				vendidosH+=x.getCantidad();
-//			}
-//			else 
-//			{
-//				vendidosM+=x.getCantidad();
-//
-//			}
-//
-//			ingresos +=(x.getCantidad());
-//			
-//		}
-//		textFieldTI.setText(ingresos+ "");
-//		textFieldVM.setText(vendidosM+ "");
-		comboBox.setSelectedIndex(0);
 		actualizarTotales("Seleccione una referencia");
 
 

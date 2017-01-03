@@ -1,6 +1,6 @@
 package BackEnd;
 
-public class Proveedor 
+public class Proveedor  implements Comparable<Proveedor> 
 {
 	
 	private int codigo;
@@ -76,7 +76,26 @@ public class Proveedor
 
 	@Override
 	public String toString() {
-		return fabrica + " - " + nombre;
+		return codigo + " - " + fabrica;
 	}
+
+
+
+
+
+
+	@Override
+	public int compareTo(Proveedor o) {
+		// TODO Auto-generated method stub
+		 if (codigo< o.getCodigo())
+		 {
+			 return- 1;
+		 }
+		 else
+		 {
+			 return 1;
+		 }
+	}
+
 
 }

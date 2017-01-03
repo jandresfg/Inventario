@@ -100,6 +100,7 @@ private JTextField textReft;
 private JButton btnNewButton;
 private JButton btnNewButton_1;
 private JTextField textCodigoProveedor;
+private JTextField txtAlmacen;
 // -----------------------------------------------
 // Métodos
 // -----------------------------------------------
@@ -139,36 +140,55 @@ public DialogoEliminarZapto( Principal pprincipal )
     
     textCodigoProveedor = new JTextField();
     textCodigoProveedor.setColumns(10);
+    
+    JLabel lblAlmacen = new JLabel("Almacen");
+    lblAlmacen.setHorizontalAlignment(SwingConstants.LEFT);
+    
+    txtAlmacen = new JTextField();
+    txtAlmacen.setColumns(10);
     GroupLayout groupLayout = new GroupLayout(getContentPane());
-    groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    groupLayout.setHorizontalGroup(
+    	groupLayout.createParallelGroup(Alignment.LEADING)
     		.addGroup(groupLayout.createSequentialGroup()
     			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-    					.addContainerGap()
-    					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     				.addGroup(groupLayout.createSequentialGroup()
     					.addContainerGap()
     					.addComponent(textReft, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
     				.addGroup(groupLayout.createSequentialGroup()
     					.addGap(33)
-    					.addComponent(lblReferencia)))
+    					.addComponent(lblReferencia))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addContainerGap()
+    					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
     			.addGap(18)
-    			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-    				.addComponent(lblciudadAlmacen, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(textCodigoProveedor, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-    				.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    			.addContainerGap())
+    			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+    				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+    				.addComponent(lblciudadAlmacen, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+    			.addPreferredGap(ComponentPlacement.UNRELATED)
+    			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+    					.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+    					.addContainerGap())
+    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+    					.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+    					.addGap(34))
+    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+    					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+    					.addContainerGap())))
     );
-    groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    groupLayout.setVerticalGroup(
+    	groupLayout.createParallelGroup(Alignment.LEADING)
     		.addGroup(groupLayout.createSequentialGroup()
     			.addContainerGap()
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(lblReferencia)
-    				.addComponent(lblciudadAlmacen))
+    				.addComponent(lblciudadAlmacen)
+    				.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
     			.addGap(4)
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+    				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+    				.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
     			.addPreferredGap(ComponentPlacement.RELATED)
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
@@ -218,9 +238,10 @@ public void actionPerformed( ActionEvent e )
         	
           String referencia = textReft.getText();
           String codigoProveedor = textCodigoProveedor.getText();
+          String codigoAlmacen = txtAlmacen.getText();
+
           
-          
-        principal.eliminar(referencia, codigoProveedor);
+        principal.eliminar(referencia, codigoProveedor,codigoAlmacen);
            
             setVisible( false );
             dispose( );

@@ -18,9 +18,13 @@ public class TablaZapatos  extends AbstractTableModel
 	
 	    List<Zapato> data = new ArrayList<Zapato>();
 	    
-		String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categoría","Fecha" };
-	    Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
+	//	String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categoría","Fecha" };
+   // Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
+    Class<?> colClasses[] = { String.class,  Object.class, Object.class , String.class, String.class, Object.class, Object.class,  String.class, String.class,Integer.class, Integer.class, Integer.class};
+	String colNames[] = { "Fecha","Almacen","Proveedor","Referencia","Categoría", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta" };
 
+		
+		
 	    public TablaZapatos(List<Zapato> arr) 
 	    {
 	        data = arr;
@@ -39,42 +43,51 @@ public class TablaZapatos  extends AbstractTableModel
 		}
 	    
 	    public Object getValueAt(int rowIndex, int columnIndex) {
-	        if (columnIndex == 0) {
+	    	
+	    	String colNames[] = { "Fecha","Almacen","Proveedor","Referencia","Categoría", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta" };
+
+	    	
+	    	   if (columnIndex == 0) {
+		            return data.get(rowIndex).getStringFecha();
+		        }
+	    	   if (columnIndex == 1) {
+		            return data.get(rowIndex).getProveedoresString().replace('{', '\n');
+		        }
+		        if (columnIndex == 2) {
+		            return data.get(rowIndex).getAlmacenesString().replace('{', '\n');
+		        }
+	        if (columnIndex == 3) {
 	            return data.get(rowIndex).getReferencia();
 	        }
-	        if (columnIndex == 1) {
-	            return data.get(rowIndex).getPlanta();
-	        }
-	        if (columnIndex == 2) {
-	            return data.get(rowIndex).getAltura();
-	        }
-	        if (columnIndex == 3) {
-	            return data.get(rowIndex).getColor();
-	        }
 	        if (columnIndex == 4) {
-	            return data.get(rowIndex).getMaterial();
-	        }
-	        if (columnIndex == 5) {
-	            return data.get(rowIndex).getProveedoresString().replace('{', '\n');
-	        }
-	        if (columnIndex == 6) {
-	            return data.get(rowIndex).getAlmacenesString().replace('{', '\n');
-	        }
-	        if (columnIndex == 7) {
-	            return data.get(rowIndex).getCantidad();
-	        }
-	        if (columnIndex == 8) {
-	        	return data.get(rowIndex).getPrecioCosto();
-			}
-	        if (columnIndex == 9) {
-	        	return data.get(rowIndex).getPrecioVenta();
-			}
-	        if (columnIndex == 10) {
 	            return data.get(rowIndex).getCategoria();
 	        }
-	        if (columnIndex == 11) {
-	            return data.get(rowIndex).getStringFecha();
+	     
+	        
+	        
+	        if (columnIndex == 5) {
+	            return data.get(rowIndex).getPlanta();
 	        }
+	        if (columnIndex == 6) {
+	            return data.get(rowIndex).getAltura();
+	        }
+	        if (columnIndex == 7) {
+	            return data.get(rowIndex).getColor();
+	        }
+	        if (columnIndex == 8) {
+	            return data.get(rowIndex).getMaterial();
+	        }
+	     
+	        if (columnIndex == 9) {
+	            return data.get(rowIndex).getCantidad();
+	        }
+	        if (columnIndex == 10) {
+	        	return data.get(rowIndex).getPrecioCosto();
+			}
+	        if (columnIndex == 11) {
+	        	return data.get(rowIndex).getPrecioVenta();
+			}
+	       
 	        
 	        return null;
 	    }

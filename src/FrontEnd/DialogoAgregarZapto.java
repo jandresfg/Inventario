@@ -570,18 +570,47 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener
 				ArrayList<String> provs = new ArrayList<String>();
 				for(int i = 0; i<checkboxesProveedores.size(); i++){
 					JCheckBox x = checkboxesProveedores.get(i);
-					if(x.isSelected())provs.add(x.getText());
+					if(x.isSelected())
+					{
+						provs.add(x.getText());
+					}
 				}
 				if(provs.size()>1) throw new Exception("Sólo puede seleccionar un Proveedor a la vez. Hay "+provs.size()+" seleccionados.");
+				if (provs.size()==0) throw new Exception("No se ha seleecionado ningun Proveedor");
+
 				
 				ArrayList<String> alms = new ArrayList<String>();
+				int cantidadAlmacenes = 0;
+				for(int i = 0; i<checkboxesAlmacenes.size(); i++){
+					JCheckBox x = checkboxesAlmacenes.get(i);
+
+					if(x.isSelected()){
+						cantidadAlmacenes ++;
+					}
+				}	
+				
+
+		String mensaje = "Se ha agregado exitosamente el zapato de Referencia: \" "+ zap.getReferencia( ) + "\" \n A los Almacenes:";
+		
 				for(int i = 0; i<checkboxesAlmacenes.size(); i++){
 					JCheckBox x = checkboxesAlmacenes.get(i);
 					if(x.isSelected()){
+					
 						Zapato z = new Zapato(zap.getReferencia(), zap.getPlanta(), zap.getAltura(), zap.getColor(), zap.getMaterial(), zap.getPrecioCosto(), zap.getPrecioVenta(), zap.getCantidad(), zap.getCategoria(), 0, Zapato.getFechaFromString(fecha));
 						ArrayList<String> temp = new ArrayList<String>();
 						temp.add(x.getText());
-						principal.agregarZapato(z, provs, temp);
+						cantidadAlmacenes--;
+						mensaje += " \"" + x.getText() + "\"  \n";
+						if (cantidadAlmacenes == 0)
+						{
+							
+						principal.agregarZapato(z, provs, temp,true,mensaje);
+						}
+						else
+						{
+							principal.agregarZapato(z, provs, temp,false," ");
+
+						}
 					}
 				}		
 
