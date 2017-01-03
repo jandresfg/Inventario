@@ -180,7 +180,11 @@ public class Mundo
 		while((prov = bbb.readLine())!=null)
 		{
 			String [] arr = prov.split(",");
-
+                        System.out.println("Size: "+arr.length+" - Line: "+prov);
+                        System.out.println("0: "+arr[0]);
+                        System.out.println("1: "+arr[1]);
+                        System.out.println("2: "+arr[2]);
+                        System.out.println("3: "+arr[3]);
 			Proveedor provee = new Proveedor(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4], arr[5]);
 			proveedores.add(provee);
 		}
