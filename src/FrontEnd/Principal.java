@@ -72,6 +72,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 public class Principal extends JFrame implements ActionListener {
 
@@ -89,6 +90,7 @@ public class Principal extends JFrame implements ActionListener {
 	private TableRowSorter sorter;
 	private JPanel panel;
 	private JScrollPane scrollPane;
+	private JPanel panel_1;
 	
 	/**
 	 * Launch the application.
@@ -377,6 +379,33 @@ public class Principal extends JFrame implements ActionListener {
 				});
 				filterText.setVisible(false);
 				panel_filter.add(filterText);
+				
+				 panel_1 = new JPanel();
+				panel_1.setBounds(972, 341, 184, 159);
+				frmInventario.getContentPane().add(panel_1);
+				panel_1.setLayout(null);
+				
+				JLabel lblFiltros = new JLabel("Filtros");
+				lblFiltros.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblFiltros.setBounds(71, 0, 46, 14);
+				panel_1.add(lblFiltros);
+				
+				JRadioButton rdbtnDama = new JRadioButton("Dama");
+				rdbtnDama.setBounds(32, 21, 109, 23);
+				panel_1.add(rdbtnDama);
+				
+				JRadioButton rdbtnCaballero = new JRadioButton("Caballero");
+				rdbtnCaballero.setBounds(32, 47, 109, 23);
+				panel_1.add(rdbtnCaballero);
+				
+				JRadioButton rdbtnInfatil = new JRadioButton("Infatil");
+				rdbtnInfatil.setBounds(32, 73, 109, 23);
+				panel_1.add(rdbtnInfatil);
+				
+				JRadioButton rdbtnGlobal = new JRadioButton("Global");
+				rdbtnGlobal.setBounds(32, 99, 109, 23);
+				panel_1.add(rdbtnGlobal);
+				panel_1.setVisible(false);
 		actualizarTotales("Seleccione una referencia");
 		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
@@ -769,6 +798,8 @@ public class Principal extends JFrame implements ActionListener {
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
+		panel_1.setVisible(true);
+
 	}
 	
 	private void newFilter(){
