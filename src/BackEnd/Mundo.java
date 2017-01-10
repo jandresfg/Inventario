@@ -167,7 +167,7 @@ public class Mundo
 
 		while((alma = bb.readLine())!=null)
 		{
-			String [] arr = alma.split(",");
+			String [] arr = alma.split("\\,",-1);
 
 
 			Almacen almacen = new Almacen(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
@@ -187,7 +187,7 @@ public class Mundo
 
 		while((prov = bbb.readLine())!=null)
 		{
-			String [] arr = prov.split(",");
+			String [] arr = prov.split("\\,",-1);
                         System.out.println("Size: "+arr.length+" - Line: "+prov);
                         System.out.println("0: "+arr[0]);
                         System.out.println("1: "+arr[1]);
@@ -710,7 +710,7 @@ public class Mundo
 	public List<Proveedor> darProveedores(String provs) {
 		ArrayList<Proveedor> resp = new ArrayList<Proveedor>();
 		System.out.println("provs: "+provs);
-		String[] provsArr = provs.split("\\{");
+		String[] provsArr = provs.split("\\{",-1);
 		System.out.println("provsArr len: "+provsArr.length);
 		System.out.println("proveedores size: "+proveedores.size());
 		for(Proveedor p: proveedores){
