@@ -534,6 +534,7 @@ public class Mundo {
                     proveedores.remove(i);
                     proveedores.add(prov);
                     borrado = true;
+                    guardar() ;
                 } else {
                     throw new Exception("El Proveedor con código '" + codigoAborrar + "' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
