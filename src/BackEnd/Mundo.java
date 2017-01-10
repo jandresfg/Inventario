@@ -1061,6 +1061,8 @@ public class Mundo {
 
 		}
 
+System.out.println(arr.size());
+System.out.println(arr.get(8)[0]);
 
         return arr;
 	}

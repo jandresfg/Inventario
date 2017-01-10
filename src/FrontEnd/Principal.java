@@ -404,6 +404,8 @@ public class Principal extends JFrame implements ActionListener {
 					{
 						// Filtar modelo para ver solo dama
 						rdbtnGlobal.setSelected(false);
+						rdbtnTotal.setSelected(false);
+
 if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
 	setModelToGrandesTotalesFiltrados("DAMA");
 
@@ -443,12 +445,6 @@ else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.
 
 }
 
-
-
-
-
-
-
 else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
 	//DAMA && CABALLERO
 	setModelToGrandesTotalesFiltradosTriple();
@@ -469,7 +465,8 @@ else
 					{
 						// Filtar modelo para ver solo dama
 						rdbtnGlobal.setSelected(false);
-						
+						rdbtnTotal.setSelected(false);
+
 						
 						if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
 							setModelToGrandesTotalesFiltrados("CABALLERO");
@@ -482,7 +479,7 @@ else
 						}
 						else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
 							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+							setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
 						
 						}
 						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
@@ -543,7 +540,8 @@ else
 					{
 						// Filtar modelo para ver solo dama
 						rdbtnGlobal.setSelected(false);
-					
+						rdbtnTotal.setSelected(false);
+
 						
 						
 						if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
@@ -1162,12 +1160,15 @@ rdbtnCaballero.setSelected(false);
 	public void setModelToGrandesTotalesFiltradosTriple(){
 
 		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoTriple("DAMA","CABALLERO","INFANTIL"));
+		System.out.println( "TOTAL" +sol.getRowCount());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
+		
 		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
+		
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
 		    public Component getTableCellRendererComponent(JTable table,
@@ -1185,7 +1186,12 @@ rdbtnCaballero.setSelected(false);
 		        }       
 		        return this;
 		    }   
-		});		button_4.requestFocus();
+		});		
+		button_4.requestFocus();
+        table.setRowSorter(sorter);
+
+        filterText.setText("");
+
 		panel_1.setVisible(true);
 		estoyEnTotales = false;
 
