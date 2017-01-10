@@ -50,6 +50,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
@@ -95,7 +96,7 @@ public class Principal extends JFrame implements ActionListener {
 	private JRadioButton rdbtnDama = new JRadioButton("Dama");
 	private 				JRadioButton rdbtnCaballero = new JRadioButton("Caballero");
 	private JRadioButton rdbtnInfatil = new JRadioButton("Infatil");
-
+	private JRadioButton rdbtnTotal = new JRadioButton("Total");
 	/**
 	 * Launch the application.
 	 */
@@ -634,6 +635,33 @@ else
 					}
 				});
 				panel_1.add(rdbtnGlobal);
+				
+				
+				rdbtnTotal.setBounds(32, 125, 109, 23);
+				rdbtnTotal.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) 
+					{
+						if(rdbtnTotal.isSelected()){
+						rdbtnInfatil.setSelected(false);
+						rdbtnCaballero.setSelected(false);
+						rdbtnDama.setSelected(false);
+						rdbtnGlobal.setSelected(false);
+						setModelToHiperDuperTotal();
+}
+						else 
+						{
+							setModelToGrandesTotales();
+
+							
+						}
+						
+						
+						// Filtar modelo para ver solo dama
+					}
+				});
+				
+				
+				panel_1.add(rdbtnTotal);
 				panel_1.setVisible(false);
 		actualizarTotales("Seleccione una referencia");
 		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -952,7 +980,12 @@ else
 		scrollPane.setSize(scrollPane.getWidth(), 468);
 		agregarCombobox();
 		panel_1.setVisible(false);
+rdbtnDama.setSelected(false);
+rdbtnCaballero.setSelected(false);	
 
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
+		rdbtnTotal.setSelected(false);
 	}
 	
 	public void setModelToAlmacenes(){
@@ -975,7 +1008,12 @@ else
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
 		panel_1.setVisible(false);
+rdbtnDama.setSelected(false);
+	rdbtnCaballero.setSelected(false);	
+		rdbtnGlobal.setSelected(false);
+		rdbtnTotal.setSelected(false);
 
+		rdbtnInfatil.setSelected(false);
 	}
 	
 	public void setModelToProveedores(){
@@ -999,7 +1037,13 @@ else
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
 		panel_1.setVisible(false);
+rdbtnDama.setSelected(false);
+rdbtnTotal.setSelected(false);
 
+rdbtnCaballero.setSelected(false);	
+
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
 	}
 	
 	public void setModelToTotalesPorAlmacen(){
@@ -1025,6 +1069,13 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_3.requestFocus();
 		panel_1.setVisible(false);
+		rdbtnDama.setSelected(false);
+		rdbtnCaballero.setSelected(false);	
+		
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
+		rdbtnTotal.setSelected(false);
+
 
 	}
 	public void setModelToGrandesTotales(){
@@ -1038,6 +1089,7 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
+		
 
 	}
 	public void setModelToGrandesTotalesFiltrados(String filtro){
@@ -1062,9 +1114,34 @@ else
 		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
-		table.setDefaultRenderer(Object.class, tcr);
+//		table.setDefaultRenderer(Object.class, tcr);
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
+		            setBackground(Color.BLACK);
+		            setForeground(Color.WHITE);
+		        } else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});
+
+		
+		
+		
+		
+		
 		button_4.requestFocus();
 		panel_1.setVisible(true);
+		
 
 	}
 	public void setModelToGrandesTotalesFiltradosTriple(){
@@ -1076,11 +1153,42 @@ else
 		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
+		            setBackground(Color.BLACK);
+		            setForeground(Color.WHITE);
+		        } else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});		button_4.requestFocus();
+		panel_1.setVisible(true);
+
+	}
+	public void setModelToHiperDuperTotal(){
+
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.setModelToHiperDuperTotal( ));
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+		filterText.setVisible(true);
+		panel.setSize(panel.getWidth(), 435);
+		scrollPane.setSize(scrollPane.getWidth(), 435);
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
 
 	}
+
 	
 	private void newFilter(){
 		RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
