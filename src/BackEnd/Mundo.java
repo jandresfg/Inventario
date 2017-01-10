@@ -800,7 +800,7 @@ public class Mundo {
                 }
             }
         }
-        return arr;
+        return quickSort(arr, 0 , (arr.size())-1);
     }
 
     public ArrayList<Object[]> darGrandesTotales() {
@@ -899,6 +899,7 @@ public class Mundo {
 
     }
 
+<<<<<<< HEAD
 	public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro) 
 	{
 
@@ -1063,5 +1064,86 @@ public class Mundo {
 
         return arr;
 	}
+=======
+    private ArrayList<Object[]> quickSort(ArrayList<Object[]> arr, int lowerIndex, int higherIndex) {
+        int i = lowerIndex;
+        int j = higherIndex;
+        Object[] pivot = arr.get(lowerIndex+(higherIndex-lowerIndex)/2);
+        
+        while(i <= j){            
+            
+            while(compararCategoria(arr.get(i), pivot) == -1){
+                i++;
+            }
+            
+            while(compararCategoria(arr.get(j), pivot) == 1){
+                j--;
+            }
+            
+            if(i <= j){
+                //intercambia i y j dentro de arr
+                Object[] swap = arr.get(i);
+                arr.set(i, arr.get(j));
+                arr.set(j, swap);
+                
+                //mueve indice a la siguiente posicion en ambos lados
+                i++;
+                j--;
+            }
+            
+        }
+        
+        if(lowerIndex < j){
+            arr = quickSort(arr, lowerIndex, j);
+        }
+        
+        if(i < higherIndex){
+            arr = quickSort(arr, i, higherIndex);   
+        }
+        
+        return arr;
+    }
+
+    /**
+     * el orden deseado es DAMA, luego, CABALLERO, luego INFANTIL
+     * @param a
+     * @param b
+     * @return 
+     */
+    private int compararCategoria(Object[] a, Object[] b) {
+        if(a[8].equals("X")){ //a es DAMA
+            
+            if(b[8].equals("X")){ //b es DAMA
+                return 0;
+            }else if(b[9].equals("X")){ //b es CABALLERO
+                return -1;
+            }else if(b[10].equals("X")){ //b es INFANTIL
+                return -1;
+            }
+            
+        }else if(a[9].equals("X")){ //a es CABALLERO
+            
+            if(b[8].equals("X")){ //b es DAMA
+                return 1;
+            }else if(b[9].equals("X")){ //b es CABALLERO
+                return 0;
+            }else if(b[10].equals("X")){ //b es INFANTIL
+                return -1;
+            }
+            
+        }else if(a[10].equals("X")){ //a es INFANTIL
+            
+            if(b[8].equals("X")){ //b es DAMA
+                return 1;
+            }else if(b[9].equals("X")){ //b es CABALLERO
+                return 1;
+            }else if(b[10].equals("X")){ //b es INFANTIL
+                return 0;
+            }
+            
+        }
+        return Integer.MAX_VALUE;
+    }
+>>>>>>> origin/master
 
 }
