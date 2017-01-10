@@ -811,7 +811,6 @@ public class Mundo {
 
         for (int j = 0; j < zapatos.size(); j++) {
             Zapato z = zapatos.get(j);
-            System.out.println("INTERO ZAPATO");
 
             Almacen ka = z.getAlamacenes().get(0);
             if (z.getCantidad() > 0) {
@@ -819,14 +818,11 @@ public class Mundo {
                 for (int k = 0; k < almas.size() && !flag; k++) {
                     Almacen papitas = almas.get(k);
                     if (papitas.getCiudad().equals(ka.getCiudad())) {
-                        System.out.println("ENTRO");
 
                         flag = true;
                         papitas.setTotalCosto(z.getPrecioCosto());
-                        System.out.println("ANTES" + ka.getTotalPares());
 
                         ka.setTotalPares(z.getCantidad());
-                        System.out.println("DEPUES" + ka.getTotalPares());
 
                         papitas.setTotalVenta(z.getPrecioVenta());
                         if (z.getCategoria().equals("CABALLERO")) {
@@ -841,7 +837,6 @@ public class Mundo {
                 }
                 if (!flag) {
                     ka.setTotalCosto(z.getPrecioCosto());
-                    System.out.println("ANTES" + ka.getTotalPares());
 
                     ka.setTotalPares(z.getCantidad());
 
@@ -854,10 +849,8 @@ public class Mundo {
                     } else if (z.getCategoria().equals("INFANTIL")) {
                         ka.setTotalInfantil(z.getPrecioCosto());
                     }
-                    System.out.println("Añado afuera");
 
                     almas.add(ka);
-                    System.out.println(almas.size());
 
                 }
             }
@@ -866,22 +859,18 @@ public class Mundo {
 
         for (int i = 0; i < almas.size(); i++) {
             Almacen x = almas.get(i);
-            System.out.println("NOMBRE " + x.getCiudad());
 
             res[0] = x.getCiudad();
             res[1] = x.getTotalCosto();
 
             res[2] = x.getTotalVenta();
             res[3] = x.getTotalPares();
-            System.out.println("PARES" + x.getTotalPares());
 
             arr.add(res);
             x.volverCero();
             res = new Object[4];
 
         }
-        System.out.println(arr.get(0)[0].toString());
-        System.out.println(arr.get(1)[0].toString());
 
         return arr;
     }
@@ -909,5 +898,170 @@ public class Mundo {
         }
 
     }
+
+	public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro) 
+	{
+
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto());
+
+                        ka.setTotalPares(z.getCantidad());
+
+                        papitas.setTotalVenta(z.getPrecioVenta());
+                        if (z.getCategoria().equals("CABALLERO")) {
+                            papitas.setTotalCaballero(z.getPrecioCosto());
+
+                        } else if (z.getCategoria().equals("DAMA")) {
+                            papitas.setTotalDama(z.getPrecioCosto());
+                        } else if (z.getCategoria().equals("INFANTIL")) {
+                            papitas.setTotalInfantil(z.getPrecioCosto());
+                        }
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta());
+                    if (z.getCategoria().equals("CABALLERO")) {
+                        ka.setTotalCaballero(z.getPrecioCosto());
+
+                    } else if (z.getCategoria().equals("DAMA")) {
+                        ka.setTotalDama(z.getPrecioCosto());
+                    } else if (z.getCategoria().equals("INFANTIL")) {
+                        ka.setTotalInfantil(z.getPrecioCosto());
+                    }
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            res[0] = x.getCiudad();
+            res[1] = x.getTotalCosto();
+
+            res[2] = x.getTotalVenta();
+            res[3] = x.getTotalPares();
+
+            arr.add(res);
+            x.volverCero();
+            res = new Object[4];
+
+        }
+
+        return arr;
+	}
+
+	public ArrayList<Object[]> darGrandesTotalesFiltradoDoble(String filtroA, String filtroB)
+	{
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+      
+        Object[] res = new Object[4];
+        res[0] = filtroA;
+        res[1] = "";
+
+        res[2] = "";
+        res[3] = "";
+        arr.add(res);
+        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA) ;
+        for (int i = 0; i < papitas.size(); i++) 
+        {
+            Object[] a = papitas.get(i);
+            arr.add(a);
+
+		}
+        Object[] ras = new Object[4];
+
+        ras[0] = filtroB;
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB) ;
+        for (int i = 0; i < doritos.size(); i++) 
+        {
+            Object[] a = doritos.get(i);
+            arr.add(a);
+
+		}
+
+        return arr;
+	}
+
+	public ArrayList<Object[]> darGrandesTotalesFiltradoTriple(String filtroA, String filtroB, String filtroC)
+	{
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+	      
+        Object[] res = new Object[4];
+        res[0] = filtroA;
+        res[1] = "";
+
+        res[2] = "";
+        res[3] = "";
+        arr.add(res);
+        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA) ;
+        for (int i = 0; i < papitas.size(); i++) 
+        {
+            Object[] a = papitas.get(i);
+            arr.add(a);
+
+		}
+        Object[] ras = new Object[4];
+
+        ras[0] = filtroB;
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB) ;
+        for (int i = 0; i < doritos.size(); i++) 
+        {
+            Object[] a = doritos.get(i);
+            arr.add(a);
+
+		}
+        Object[] rus = new Object[4];
+
+        rus[0] = filtroC;
+        rus[1] = "";
+
+        rus[2] = "";
+        rus[3] = "";
+        arr.add(rus);
+        ArrayList<Object[]> tostacos =darGrandesTotalesFiltrado(filtroC) ;
+        for (int i = 0; i < tostacos.size(); i++) 
+        {
+            Object[] a = tostacos.get(i);
+            arr.add(a);
+
+		}
+
+
+        return arr;
+	}
 
 }

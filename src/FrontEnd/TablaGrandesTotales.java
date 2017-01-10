@@ -18,7 +18,7 @@ public class TablaGrandesTotales  extends AbstractTableModel
 	    //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
 		String colNames[] = { "Almacen", "Total Precio Costo", "Total Precio Venta", "Cantidad Total Pares" };
 		   
-		Class<?> colClasses[] = { String.class,  Integer.class , Integer.class, Integer.class };
+		Class<?> colClasses[] = { String.class,  String.class , String.class, String.class };
 
 	    public TablaGrandesTotales(ArrayList<Object[]> totales) 
 	    {
