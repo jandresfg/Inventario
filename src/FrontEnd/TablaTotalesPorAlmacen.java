@@ -14,11 +14,15 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
     //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
     String colNames[] = {"Almacen", "Proveedor", "Referencia", "Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil"};
 
-    Class<?> colClasses[] = {String.class, String.class, String.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, String.class, String.class, String.class};
+    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class};
 
     public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) {
         data = totales;
     }
+    public ArrayList<Object[]> getModel() {
+        return data;
+    }
+
 
     public int getRowCount() {
         return data.size();

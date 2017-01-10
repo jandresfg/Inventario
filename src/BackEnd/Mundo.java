@@ -1231,6 +1231,117 @@ public class Mundo {
         }
         return Integer.MAX_VALUE;
     }
+    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix) 
+    {
+
+    	
+    	        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+    	        for (int i = 0; i < almacenes.size(); i++) {
+    	            for (int j = 0; j < zapatos.size(); j++) {
+    	                Object[] res = new Object[11];
+    	                Almacen a = almacenes.get(i);
+    	                Zapato z = zapatos.get(j);
+    	                int sumaCantidad = 0;
+    	                int sumaPrecioCosto = 0;
+    	                int sumaPrecioVenta = 0;
+    	                Almacen ka = z.getAlamacenes().get(0);
+    	                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix)) {
+    	                    sumaCantidad += z.getCantidad();
+    	                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+    	                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+    	                }
+    	                res[0] = a.toString();
+    	                res[1] = z.getProveedores().get(0).toString();
+    	                res[2] = z.getReferencia();
+    	                res[3] = z.getPrecioCosto();
+    	                res[4] = z.getPrecioVenta();
+    	                res[5] = sumaCantidad;
+    	                res[6] = sumaPrecioCosto;
+    	                res[7] = sumaPrecioVenta;
+    	                if (z.getCategoria().equals("CABALLERO")) {
+    	                    res[9] = "X";
+    	                    res[8] = " ";
+    	                    res[10] = " ";
+    	                } else if (z.getCategoria().equals("DAMA")) {
+    	                    res[8] = "X";
+    	                    res[9] = " ";
+    	                    res[10] = " ";
+    	                } else if (z.getCategoria().equals("INFANTIL")) {
+    	                    res[10] = "X";
+    	                    res[8] = " ";
+    	                    res[9] = " ";
+
+    	                }
+
+    	                if ((int) res[5] > 0) {
+    	                    arr.add(res);
+    	                }
+    	            }
+    	        }
+    	        if (arr.size() ==0)
+    	        {
+    	        	
+    	        	System.out.println("NO HAY");
+        	        return arr;
+
+    	        }
+    	        else
+    	        {
+    	        	Object[] linea  = new Object[11];
+    	        	linea[0] = "TOTALES";
+    	        	linea[1] = " ";
+    	        	linea[2] = " ";
+    	        	linea[3] = " ";
+    	        	linea[4] = " ";
+    	        linea[9] = " ";
+    	        	linea[8] = " ";
+    	        	linea[10] = " ";
+	 linea[5] =  " ";
+	                	linea[6] =  " ";
+	                	linea[7] = " ";
+    	        	
+    Object[] fabulosoTotal  = new Object[11];
+    	        	fabulosoTotal[0] = " ";
+    	        	fabulosoTotal[1] = " ";
+    	        	fabulosoTotal[2] = " ";
+    	        	fabulosoTotal[3] = " ";
+    	        	fabulosoTotal[4] = " ";
+    	        
+	                	fabulosoTotal[9] = " ";
+	                	fabulosoTotal[8] = " ";
+	                	fabulosoTotal[10] = " ";
+	                	int sumaCantidad = 0;
+	                	int sumaPrecioCosto = 0 ;
+	                	int  sumaPrecioVenta = 0 ;
+	                	
+    	        	for (int i = 0; i < arr.size(); i++) 
+    	        	{
+    	                Object[] res = arr.get(i);
+    	                
+
+    	        		sumaCantidad += (int )res [5] ;
+    	        		sumaPrecioCosto += (int )res [6] ;
+    	        		sumaPrecioVenta += (int )res [7] ;
+                
+      	                
+    	        	}
+    	        	fabulosoTotal[5] = sumaCantidad;
+    	        	fabulosoTotal[6] = sumaPrecioCosto;
+    	        	fabulosoTotal[7] = sumaPrecioVenta;
+    	        	
+    	        
+    	        	
+    	        	System.out.println(arr.size());
+        	        ArrayList<Object[]> retorno =  quickSort(arr, 0 , (arr.size())-1);
+        	        retorno.add(linea);
+retorno.add(fabulosoTotal);
+System.out.println(retorno.size());
+
+    	        return retorno;
+    	        }
+    	    
+    }
+
 
     private List<Zapato> quickSortZapatos(List<Zapato> zapatos, int lowerIndex, int higherIndex) {
         int i = lowerIndex;

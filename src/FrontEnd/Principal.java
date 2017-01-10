@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import java.awt.Button;
 import java.awt.Component;
+import java.awt.Cursor;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -97,6 +98,7 @@ public class Principal extends JFrame implements ActionListener {
 	private 				JRadioButton rdbtnCaballero = new JRadioButton("Caballero");
 	private JRadioButton rdbtnInfatil = new JRadioButton("Infatil");
 	private JRadioButton rdbtnTotal = new JRadioButton("Total");
+	private boolean estoyEnTotales = false;
 	/**
 	 * Launch the application.
 	 */
@@ -989,6 +991,7 @@ rdbtnCaballero.setSelected(false);
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 		rdbtnTotal.setSelected(false);
+		estoyEnTotales = false;
 	}
 	
 	public void setModelToAlmacenes(){
@@ -1020,6 +1023,7 @@ rdbtnDama.setSelected(false);
 		rdbtnTotal.setSelected(false);
 
 		rdbtnInfatil.setSelected(false);
+		estoyEnTotales = false;
 	}
 	
 	public void setModelToProveedores(){
@@ -1053,24 +1057,12 @@ rdbtnCaballero.setSelected(false);
 
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
+		estoyEnTotales = false;
 	}
 	
 	public void setModelToTotalesPorAlmacen(){
 		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotales());
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
-//		La tabla de totales no es editable
-//		sol.addTableModelListener(new TableModelListener() {
-//
-//			@Override
-//			public void tableChanged(TableModelEvent e) {
-//				System.out.println("table changed");
-//				mundo.setAlmacenes(sol.getData());
-//				if(e.getColumn() == sol.findColumn("NIT")) mundo.actualizarNITsAlmacenes();
-//				if(e.getColumn() == sol.findColumn("Almacen")) mundo.actualizarAlmacenesAlmacenes();
-//				mundo.guardar();
-//			}
-//			
-//		});
 		table.setModel(sol);
 		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
@@ -1080,7 +1072,9 @@ rdbtnCaballero.setSelected(false);
 		panel_1.setVisible(false);
                 table.setRowSorter(sorter);
                 filterText.setText("");
-		rdbtnDama.setSelected(false);
+                estoyEnTotales = true;
+                rdbtnDama.setSelected(false);
+		
 		rdbtnCaballero.setSelected(false);	
 		
 		rdbtnGlobal.setSelected(false);
@@ -1102,6 +1096,8 @@ rdbtnCaballero.setSelected(false);
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
                 filterText.setText("");
+        		estoyEnTotales = false;
+
 		
 
 	}
@@ -1119,6 +1115,8 @@ rdbtnCaballero.setSelected(false);
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
                 filterText.setText("");
+        		estoyEnTotales = false;
+
 
 	}
 	public void setModelToGrandesTotalesFiltradosDoble(String filtroA, String filtroB){
@@ -1158,7 +1156,8 @@ rdbtnCaballero.setSelected(false);
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
                 filterText.setText("");
-		
+        		estoyEnTotales = false;
+
 	}
 	public void setModelToGrandesTotalesFiltradosTriple(){
 
@@ -1188,6 +1187,8 @@ rdbtnCaballero.setSelected(false);
 		    }   
 		});		button_4.requestFocus();
 		panel_1.setVisible(true);
+		estoyEnTotales = false;
+
 
 	}
 	public void setModelToHiperDuperTotal(){
@@ -1204,6 +1205,8 @@ rdbtnCaballero.setSelected(false);
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
                 filterText.setText("");
+        		estoyEnTotales = false;
+
 
 	}
 
@@ -1216,11 +1219,74 @@ rdbtnCaballero.setSelected(false);
 	    } catch (java.util.regex.PatternSyntaxException e) {
 	        return;
 	    }
+if(estoyEnTotales)
+{
+System.out.println("TEXO:"  + filterText.getText());	
+
+if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
+{
+	System.out.println("ENTRO");	
+
+setModelToTotalesPorAlmacenFabuloso(filterText.getText());
+}
+else
+{
+	setModelToTotalesPorAlmacen();
+}
+
+
+}
+else
+{
 	    sorter.setRowFilter(rf);
 
 		table.setRowSorter(sorter);
+}
+	}
+	
+	public void setModelToTotalesPorAlmacenFabuloso(String prefix){
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaro(prefix));
+		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
+		table.setModel(sol);
+		filterText.setVisible(true);
+		//filterText.setCursor(new Cursor(Cursor.TEXT_CURSOR));filterText.requestFocus();
+		panel.setSize(panel.getWidth(), 435);
+		scrollPane.setSize(scrollPane.getWidth(), 435);
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("TOTALES".equals(status) ) {
+		            setBackground(Color.BLACK);
+		            setForeground(Color.WHITE);
+		        } else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});			button_3.requestFocus();
+        table.setRowSorter(sorter);
+
+		panel_1.setVisible(false);
+                estoyEnTotales = true;
+                rdbtnDama.setSelected(false);
+		
+		rdbtnCaballero.setSelected(false);	
+		
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
+		rdbtnTotal.setSelected(false);
+
+		filterText.requestFocusInWindow();
 
 	}
+	
+	
 		
 	public void refrescar()
 	{
