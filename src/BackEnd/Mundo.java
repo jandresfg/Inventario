@@ -158,7 +158,7 @@ public class Mundo {
     }
 
     public List<Zapato> darZapatos() {
-        return zapatos;
+        return quickSortZapatos(zapatos, 0, zapatos.size()-1);
 
     }
 
@@ -1230,6 +1230,50 @@ public class Mundo {
             
         }
         return Integer.MAX_VALUE;
+    }
+
+    private List<Zapato> quickSortZapatos(List<Zapato> zapatos, int lowerIndex, int higherIndex) {
+        int i = lowerIndex;
+        int j = higherIndex;
+        Zapato pivot = zapatos.get(lowerIndex+(higherIndex-lowerIndex)/2);
+        
+        while(i <= j){            
+            
+            while(compararZapato(zapatos.get(i), pivot) < 0){
+                i++;
+            }
+            
+            while(compararZapato(zapatos.get(j), pivot) > 0){
+                j--;
+            }
+            
+            if(i <= j){
+                //intercambia i y j dentro de arr
+                Zapato swap = zapatos.get(i);
+                zapatos.set(i, zapatos.get(j));
+                zapatos.set(j, swap);
+                
+                //mueve indice a la siguiente posicion en ambos lados
+                i++;
+                j--;
+            }
+            
+        }
+        
+        if(lowerIndex < j){
+            zapatos = quickSortZapatos(zapatos, lowerIndex, j);
+        }
+        
+        if(i < higherIndex){
+            zapatos = quickSortZapatos(zapatos, i, higherIndex);   
+        }
+        
+        return zapatos;
+    }
+
+    private int compararZapato(Zapato a, Zapato b) {
+        System.out.println("Se comparan: '"+a.getAlmacenesString()+"' vs '"+b.getAlmacenesString()+"' - resultado: "+a.getAlmacenesString().compareToIgnoreCase(b.getAlmacenesString()));
+        return a.getAlmacenesString().compareTo(b.getAlmacenesString());
     }
 
 	
