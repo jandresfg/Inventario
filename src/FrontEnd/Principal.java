@@ -952,6 +952,9 @@ else
 		scrollPane.setSize(scrollPane.getWidth(), 468);
 		agregarCombobox();
 		panel_1.setVisible(false);
+                
+                //vaina para que el filtro no influya en este model
+                table.setRowSorter(new TableRowSorter<>(table.getModel()));
 
 	}
 	
@@ -975,6 +978,9 @@ else
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
 		panel_1.setVisible(false);
+                
+                //vaina para que el filtro no influya en este model
+                table.setRowSorter(new TableRowSorter<>(table.getModel()));
 
 	}
 	
@@ -999,6 +1005,9 @@ else
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
 		panel_1.setVisible(false);
+                
+                //vaina para que el filtro no influya en este model
+                table.setRowSorter(new TableRowSorter<>(table.getModel()));
 
 	}
 	
@@ -1025,6 +1034,8 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_3.requestFocus();
 		panel_1.setVisible(false);
+                table.setRowSorter(sorter);
+                filterText.setText("");
 
 	}
 	public void setModelToGrandesTotales(){
@@ -1038,6 +1049,8 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
+                table.setRowSorter(sorter);
+                filterText.setText("");
 
 	}
 	public void setModelToGrandesTotalesFiltrados(String filtro){
@@ -1052,6 +1065,8 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
+                table.setRowSorter(sorter);
+                filterText.setText("");
 
 	}
 	public void setModelToGrandesTotalesFiltradosDoble(String filtroA, String filtroB){
@@ -1065,6 +1080,8 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
+                table.setRowSorter(sorter);
+                filterText.setText("");
 
 	}
 	public void setModelToGrandesTotalesFiltradosTriple(){
@@ -1079,6 +1096,8 @@ else
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
+                table.setRowSorter(sorter);
+                filterText.setText("");
 
 	}
 	
