@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -27,6 +28,8 @@ public class TablaProveedor  extends AbstractTableModel
 	    public TablaProveedor(List<Proveedor> arr) 
 	    {
 	        data = arr;
+	        Collections.sort(data);
+
 	    }
 
 	    public int getRowCount() {

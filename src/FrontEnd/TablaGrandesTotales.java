@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import BackEnd.Almacen;
 import BackEnd.Zapato;
 
-public class TablaTotalesPorAlmacen  extends AbstractTableModel 
+public class TablaGrandesTotales  extends AbstractTableModel 
 {
 	
 
@@ -16,11 +16,11 @@ public class TablaTotalesPorAlmacen  extends AbstractTableModel
 	
 		ArrayList<Object[]> data = new ArrayList<Object[]>();
 	    //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
-		String colNames[] = { "Almacen", "Proveedor", "Referencia", "Precio Costo Unitario","Precio Venta Unitario", "Cantidad Total" ,"Precio Costo Total", "Precio Venta Total","Dama","Caballero","Infantil" };
+		String colNames[] = { "Almacen", "Total Precio Costo", "Total Precio Venta", "Cantidad Total Pares" };
 		   
-		Class<?> colClasses[] = { String.class, String.class, String.class, Integer.class , Integer.class, Integer.class, Integer.class, Integer.class, String.class, String.class, String.class };
+		Class<?> colClasses[] = { String.class,  Integer.class , Integer.class, Integer.class };
 
-	    public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) 
+	    public TablaGrandesTotales(ArrayList<Object[]> totales) 
 	    {
 	        data = totales;
 	    }

@@ -1,6 +1,6 @@
 package BackEnd;
 
-public class Almacen
+public class Almacen implements Comparable<Almacen> 
 {
 	private String ciudad;
 	private String almacen;
@@ -8,6 +8,124 @@ public class Almacen
 	private String telefono;
 	private String razonSocial;
 	private String nit;
+	public int getTotalCosto() {
+		return totalCosto;
+	}
+
+
+
+
+
+
+
+	public void setTotalCosto(int totalCosto) {
+		this.totalCosto += totalCosto;
+	}
+
+
+
+
+
+
+
+	public int getTotalVenta() {
+		return totalVenta;
+	}
+
+
+
+
+
+
+
+	public void setTotalVenta(int totalVenta) {
+		this.totalVenta += totalVenta;
+	}
+
+
+
+
+
+
+
+	public int getTotalPares() {
+		return totalPares;
+	}
+
+
+
+
+
+
+
+	public void setTotalPares(int totalPares) {
+		this.totalPares += totalPares;
+	}
+
+
+
+
+
+
+
+	public int getTotalDama() {
+		return totalDama;
+	}
+
+
+
+
+
+
+
+	public void setTotalDama(int totalDama) {
+		this.totalDama += totalDama;
+	}
+
+
+
+
+
+
+
+	public int getTotalCaballero() {
+		return totalCaballero;
+	}
+
+
+
+
+
+
+
+	public void setTotalCaballero(int totalCaballero) {
+		this.totalCaballero += totalCaballero;
+	}
+	public int getTotalInfantil() {
+		return totalInfantil;
+	}
+public void setTotalInfantil(int totalInfantil) {
+		this.totalInfantil += totalInfantil;
+	}
+
+
+
+
+
+
+
+	private int totalCosto = 0;
+	private int totalVenta= 0;
+	private int totalPares= 0;
+	private int totalDama= 0;
+	private int totalCaballero= 0;
+	private int totalInfantil= 0;
+
+
+
+
+
+
 
 
 	public Almacen(String pCiudad, String pAlmacen,  String pDireccion,  String pTelefono, String pRazonSocial, String pNit)
@@ -24,7 +142,15 @@ public class Almacen
 	}
 
 
-
+public void volverCero()
+{
+	 totalCosto = 0;
+	 totalVenta= 0;
+	totalPares= 0;
+	 totalDama= 0;
+	totalCaballero= 0;
+	 totalInfantil= 0;	
+}
 
 
 
@@ -75,5 +201,16 @@ public class Almacen
 	@Override
 	public String toString() {
 		return ciudad;
+	}
+
+
+
+
+
+
+
+	@Override
+	public int compareTo(Almacen arg0) {
+		return ciudad.compareTo(arg0.getCiudad());
 	}
 }

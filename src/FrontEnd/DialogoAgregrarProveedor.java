@@ -139,7 +139,7 @@ public DialogoAgregrarProveedor( Principal pprincipal )
     
     textField_1 = new JTextField();
     textField_1.setText(principal.darCodigo());
-    textField_1.setEditable(false);
+    textField_1.setEditable(true);
     GridBagConstraints gbc_textField_1 = new GridBagConstraints();
     gbc_textField_1.insets = new Insets(0, 0, 5, 0);
     gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
@@ -279,7 +279,9 @@ int codigo = Integer.parseInt(textField_1.getText());
 String  nombre =textNombre.getText();
 String telefono  = textTelefono.getText();
 Proveedor prov = new Proveedor(codigo, nombre, fabrica, direccion, telefono, ciudad);
-principal.agregarProveedor(prov);
+String flag = principal.verificarCodigoProveedor(prov);
+
+principal.agregarProveedor(prov,flag);
          
 
             
@@ -289,6 +291,10 @@ principal.agregarProveedor(prov);
         catch( NumberFormatException e1 )
         {
             JOptionPane.showMessageDialog( this, "Error en el formulario", "Agregar Proveedor", JOptionPane.ERROR_MESSAGE );
+        }
+        catch( Exception asd )
+        {
+            JOptionPane.showMessageDialog( this, "El codigo " +textField_1.getText()+" ya se encuentra en uso", "Agregar Proveedor", JOptionPane.ERROR_MESSAGE );
         }
     }
 

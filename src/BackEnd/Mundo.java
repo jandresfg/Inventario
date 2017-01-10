@@ -107,11 +107,19 @@ public class Mundo
 
 	}
 
-	public String agregarProovedores(Proveedor pProveedor)
+	public String agregarProovedores(Proveedor pProveedor, String flag)
 	{
-		proveedores.add(pProveedor);
-		guardar();
-
+		if(flag.equals("facil"))
+		{
+			proveedores.add(pProveedor);
+			guardar();
+		}
+		else
+		{
+			proveedores.remove(pProveedor.getCodigo()-1);
+			proveedores.add(pProveedor);
+			guardar();
+		}
 
 		return "Se ha agregado exitosamente el proveedor " + pProveedor.getNombre();
 
@@ -217,6 +225,36 @@ public class Mundo
 	public String darCodigo() 
 	{
 		// TODO Auto-generated method stub
+	
+		for (int i = 0; i < proveedores.size(); i++) 
+		{
+		Proveedor z = proveedores.get(i)	;
+		int numeroActual = z.getCodigo();
+		if(z.getFabrica().equals(" "))
+		{
+			System.out.println("ENTRO");
+
+			System.out.println(z.getFabrica());
+			return i+1+ "";
+		}
+		else if (z.getFabrica().equals(""))
+		{
+			System.out.println("ENTRANDO");
+
+			System.out.println(z.getFabrica());
+			return i+1+ "";
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		}
+		System.out.println("FINALIZO");
+
 		return (proveedores.size()	+1) + "";
 	}
 
@@ -440,7 +478,7 @@ public class Mundo
 		}
 
 	}
-	public String eliminarZapato(String referencia, String codigoProveedor) 
+	public String eliminarZapato(String referencia, String codigoProveedor, String codigoAlmacen) 
 	{
 		for (int i = 0; i < zapatos.size(); i++)
 		{
@@ -450,8 +488,21 @@ public class Mundo
                             for(int j = 0; j<x.getProveedores().size(); j++){
                                 Proveedor y = x.getProveedores().get(j);
                                 if (y.getCodigo()==Integer.parseInt(codigoProveedor)){
-                                    zapatos.remove(i);
-                                    return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y proveedor relacionado con código: "+codigoProveedor;
+                                   
+                                	
+                                	  for(int k = 0; k<x.getAlamacenes().size(); k++){
+                                          Almacen alm = x.getAlamacenes().get(k);
+                                          
+                                          if (alm.getCiudad().equals(codigoAlmacen)){
+                                              zapatos.remove(i);
+                                              return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y proveedor relacionado con código: "+codigoProveedor;
+                                          }
+                                      }
+                                	
+                                	
+                                	
+                                	
+                                	
                                 }
                             }
 			}
@@ -556,7 +607,9 @@ public class Mundo
                     if (x.getCodigo() == codigoAborrar)
                     {
                             if(!proveedorEstaRelacionadoConZapato(codigoAborrar)){
-                                    proveedores.remove(i);
+                                Proveedor prov = new Proveedor(x.getCodigo(), "", "", "", "", "");
+                                proveedores.remove(i);
+                                proveedores.add(prov);
                                     borrado = true;
                             }else{
                                     throw new Exception("El Proveedor con código '"+codigoAborrar+"' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
@@ -636,7 +689,7 @@ public class Mundo
 		ArrayList<Proveedor> resp = new ArrayList<Proveedor>();
 		for(Proveedor p: proveedores){
 			for(String s: provs){
-				if(p.getFabrica().equals(s.split(" - ")[0]) && p.getNombre().equals(s.split(" - ")[1]))resp.add(p);
+				if(String.valueOf(p.getCodigo()).equals(s.split(" - ")[0]) && p.getFabrica().equals(s.split(" - ")[1]))resp.add(p);
 			}
 		}
 		System.out.println(resp.size()+" proveedores");
@@ -662,7 +715,7 @@ public class Mundo
 		System.out.println("proveedores size: "+proveedores.size());
 		for(Proveedor p: proveedores){
 			for(String s: provsArr){
-				if(p.getFabrica().equals(s.split(" - ")[0]) && p.getNombre().equals(s.split(" - ")[1]))resp.add(p);
+				if(String.valueOf(p.getCodigo()).equals(s.split(" - ")[0]) && p.getFabrica().equals(s.split(" - ")[1]))resp.add(p);
 			}
 		}
 		System.out.println(resp.size()+" proveedores");
@@ -767,7 +820,7 @@ public class Mundo
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 		for (int i = 0; i<almacenes.size(); i++) {
 			for(int j = 0; j<zapatos.size(); j++){
-				Object[] res = new Object[6];
+				Object[] res = new Object[11];
 				Almacen a = almacenes.get(i);
 				Zapato z = zapatos.get(j);
 				int sumaCantidad = 0;
@@ -780,15 +833,158 @@ public class Mundo
 					sumaPrecioVenta+=z.getPrecioVenta()*z.getCantidad();
 				}
 				res[0] = a.toString();
-				res[1] = z.getReferencia();
-				res[2] = z.getProveedores().get(0).toString();
-				res[3] = sumaCantidad;
-				res[4] = sumaPrecioCosto;
-				res[5] = sumaPrecioVenta;
-				if((int)res[3]>0)arr.add(res);
+				res[1] = z.getProveedores().get(0).toString();
+				res[2] = z.getReferencia();
+				res[3] = z.getPrecioCosto();
+				res[4] = z.getPrecioVenta();
+				res[5] = sumaCantidad;
+				res[6] = sumaPrecioCosto;
+				res[7] = sumaPrecioVenta;
+				if(z.getCategoria().equals("CABALLERO"))
+				{
+					res[9] = "X";
+					res[8] = " ";
+					res[10] = " ";
+				}else if(z.getCategoria().equals("DAMA"))
+				{
+					res[8] = "X";	
+					res[9] = " ";
+					res[10] = " ";
+				}
+				else if(z.getCategoria().equals("INFANTIL"))
+				{
+					res[10] = "X";	
+					res[8] = " ";
+					res[9] = " ";
+
+				}
+				
+				
+				if((int)res[5]>0)arr.add(res);
 			}
 		}
 		return arr;
+	}
+	public ArrayList<Object[]> darGrandesTotales() {
+		
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+		
+		ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+		for(int j = 0; j<zapatos.size(); j++){
+			Zapato z = zapatos.get(j);
+			System.out.println("INTERO ZAPATO");
+
+			Almacen ka = z.getAlamacenes().get(0);
+			if(z.getCantidad()>0)
+			{
+				boolean flag = false;
+				for (int k = 0; k < almas.size() && !flag; k++)
+				{
+					Almacen papitas = almas.get(k);
+					if(papitas.getCiudad().equals(ka.getCiudad()) ) 
+					{
+						System.out.println("ENTRO");
+
+						flag = true;
+						papitas.setTotalCosto(z.getPrecioCosto());
+						System.out.println("ANTES"+ka.getTotalPares());
+
+						 ka.setTotalPares(z.getCantidad());
+							System.out.println("DEPUES"+ka.getTotalPares());
+
+						papitas.setTotalVenta(z.getPrecioVenta());
+							if(z.getCategoria().equals("CABALLERO"))
+							{
+								papitas.setTotalCaballero(z.getPrecioCosto());
+
+							}else if(z.getCategoria().equals("DAMA"))
+							{
+								papitas.setTotalDama(z.getPrecioCosto());
+							}
+							else if(z.getCategoria().equals("INFANTIL"))
+							{
+								papitas.setTotalInfantil(z.getPrecioCosto());
+							}
+					}
+				}
+				if (!flag){
+				ka.setTotalCosto(z.getPrecioCosto());
+				System.out.println("ANTES"+ka.getTotalPares());
+
+				 ka.setTotalPares(z.getCantidad());
+
+				 ka.setTotalVenta(z.getPrecioVenta());
+				 if(z.getCategoria().equals("CABALLERO"))
+					{
+						 ka.setTotalCaballero(z.getPrecioCosto());
+
+					}else if(z.getCategoria().equals("DAMA"))
+					{
+						ka.setTotalDama(z.getPrecioCosto());
+					}
+					else if(z.getCategoria().equals("INFANTIL"))
+					{
+					ka.setTotalInfantil(z.getPrecioCosto());
+					}
+					System.out.println("Añado afuera");
+
+				almas.add(ka);
+				System.out.println(almas.size());
+
+				}
+	}
+}
+		Object[] res = new Object[4];
+
+		for (int i = 0; i < almas.size(); i++) 
+		{
+			Almacen x = almas.get(i);
+			System.out.println("NOMBRE "  +x.getCiudad());
+
+			res[0]= x.getCiudad();
+			res[1] = x.getTotalCosto();
+
+			res[2] = x.getTotalVenta();
+			res[3] = x.getTotalPares();
+			System.out.println("PARES"+x.getTotalPares());
+
+		arr.add( res);
+		x.volverCero();
+		res = new Object[4];
+
+			
+			
+		}
+		System.out.println(arr.get(0)[0].toString());
+		System.out.println(arr.get(1)[0].toString());
+
+		return arr;
+	}
+	
+
+
+	public String verificarCodigoProveedor(Proveedor prov) 
+	{
+		System.out.println(proveedores.size());
+		System.out.println(prov.getCodigo());
+
+		if (prov.getCodigo()>proveedores.size())
+		{
+			return "facil";
+			
+		}
+		else if (proveedores.get(prov.getCodigo()-1).getFabrica().equals(""))
+		{
+			return "posicion";
+
+		}
+		else
+		{
+			return "no";
+			
+		}
+		
 	}
 
 }
