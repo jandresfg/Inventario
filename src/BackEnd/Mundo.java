@@ -1064,6 +1064,94 @@ public class Mundo {
         return arr;
 	}
 
+	public ArrayList<Object[]> setModelToHiperDuperTotal()
+	{
+		  ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+	        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+	        for (int j = 0; j < zapatos.size(); j++) {
+	            Zapato z = zapatos.get(j);
+
+	            Almacen ka = z.getAlamacenes().get(0);
+	            if (z.getCantidad() > 0) {
+	                boolean flag = false;
+	                for (int k = 0; k < almas.size() && !flag; k++) {
+	                    Almacen papitas = almas.get(k);
+	                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+	                        flag = true;
+	                        papitas.setTotalCosto(z.getPrecioCosto());
+
+	                        ka.setTotalPares(z.getCantidad());
+
+	                        papitas.setTotalVenta(z.getPrecioVenta());
+	                        if (z.getCategoria().equals("CABALLERO")) {
+	                            papitas.setTotalCaballero(z.getPrecioCosto());
+
+	                        } else if (z.getCategoria().equals("DAMA")) {
+	                            papitas.setTotalDama(z.getPrecioCosto());
+	                        } else if (z.getCategoria().equals("INFANTIL")) {
+	                            papitas.setTotalInfantil(z.getPrecioCosto());
+	                        }
+	                    }
+	                }
+	                if (!flag) {
+	                    ka.setTotalCosto(z.getPrecioCosto());
+
+	                    ka.setTotalPares(z.getCantidad());
+
+	                    ka.setTotalVenta(z.getPrecioVenta());
+	                    if (z.getCategoria().equals("CABALLERO")) {
+	                        ka.setTotalCaballero(z.getPrecioCosto());
+
+	                    } else if (z.getCategoria().equals("DAMA")) {
+	                        ka.setTotalDama(z.getPrecioCosto());
+	                    } else if (z.getCategoria().equals("INFANTIL")) {
+	                        ka.setTotalInfantil(z.getPrecioCosto());
+	                    }
+
+	                    almas.add(ka);
+
+	                }
+	            }
+	        }
+	        Object[] res = new Object[4];
+
+	        int totalCosto = 0;
+	        int totalVenta = 0;
+	        int totalPares = 0;
+
+
+	        for (int i = 0; i < almas.size(); i++) {
+	            Almacen x = almas.get(i);
+
+	            totalCosto+= x.getTotalCosto();
+	            totalVenta+=x.getTotalVenta();
+	            totalPares +=x.getTotalPares();
+	            x.volverCero();
+
+	        }
+	        res[0] = "Gasolina Extra";
+            res[1] = totalCosto;
+
+            res[2] = totalVenta;
+            res[3] = totalPares;
+	        arr.add(res);
+
+	        return arr;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     private ArrayList<Object[]> quickSort(ArrayList<Object[]> arr, int lowerIndex, int higherIndex) {
         int i = lowerIndex;
         int j = higherIndex;
@@ -1143,6 +1231,8 @@ public class Mundo {
         }
         return Integer.MAX_VALUE;
     }
+
+	
 
 
 }
