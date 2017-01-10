@@ -899,7 +899,6 @@ public class Mundo {
 
     }
 
-<<<<<<< HEAD
 	public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro) 
 	{
 
@@ -1064,7 +1063,7 @@ public class Mundo {
 
         return arr;
 	}
-=======
+
     private ArrayList<Object[]> quickSort(ArrayList<Object[]> arr, int lowerIndex, int higherIndex) {
         int i = lowerIndex;
         int j = higherIndex;
@@ -1144,6 +1143,6 @@ public class Mundo {
         }
         return Integer.MAX_VALUE;
     }
->>>>>>> origin/master
+
 
 }
