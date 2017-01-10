@@ -187,7 +187,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
 
             JCheckBox chckbxProveedor = new JCheckBox(x.toString());
             GridBagConstraints gbc_chckbxProveedor = new GridBagConstraints();
-            gbc_chckbxProveedor.anchor = GridBagConstraints.NORTH;
+            gbc_chckbxProveedor.anchor = GridBagConstraints.WEST;
             gbc_chckbxProveedor.insets = new Insets(0, 0, 5, 0);
             gbc_chckbxProveedor.gridx = 0;
             gbc_chckbxProveedor.gridy = i;
@@ -223,7 +223,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
 
             JCheckBox chckbxAlmacen = new JCheckBox(x.toString());
             GridBagConstraints gbc_chckbxAlmacen = new GridBagConstraints();
-            gbc_chckbxAlmacen.anchor = GridBagConstraints.NORTH;
+            gbc_chckbxAlmacen.anchor = GridBagConstraints.WEST;
             gbc_chckbxAlmacen.insets = new Insets(0, 0, 5, 0);
             gbc_chckbxAlmacen.gridx = 0;
             gbc_chckbxAlmacen.gridy = i;
