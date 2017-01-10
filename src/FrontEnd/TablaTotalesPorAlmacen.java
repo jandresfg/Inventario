@@ -8,48 +8,43 @@ import javax.swing.table.AbstractTableModel;
 import BackEnd.Almacen;
 import BackEnd.Zapato;
 
-public class TablaTotalesPorAlmacen  extends AbstractTableModel 
-{
-	
+public class TablaTotalesPorAlmacen extends AbstractTableModel {
 
+    ArrayList<Object[]> data = new ArrayList<Object[]>();
+    //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
+    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Precio Costo Unitario", "Precio Venta Unitario", "Cantidad Total", "Precio Costo Total", "Precio Venta Total", "Dama", "Caballero", "Infantil"};
 
-	
-		ArrayList<Object[]> data = new ArrayList<Object[]>();
-	    //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
-		String colNames[] = { "Almacen", "Proveedor", "Referencia", "Precio Costo Unitario","Precio Venta Unitario", "Cantidad Total" ,"Precio Costo Total", "Precio Venta Total","Dama","Caballero","Infantil" };
-		   
-		Class<?> colClasses[] = { String.class, String.class, String.class, Integer.class , Integer.class, Integer.class, Integer.class, Integer.class, String.class, String.class, String.class };
+    Class<?> colClasses[] = {String.class, String.class, String.class, Integer.class, Integer.class, Integer.class, Integer.class, Integer.class, String.class, String.class, String.class};
 
-	    public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) 
-	    {
-	        data = totales;
-	    }
+    public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) {
+        data = totales;
+    }
 
-	    public int getRowCount() {
-	        return data.size();
-	    }
+    public int getRowCount() {
+        return data.size();
+    }
 
-	    public int getColumnCount() {
-	        return colNames.length;
-	    }
-	
-	    public Object getValueAt(int rowIndex, int columnIndex) {
-	    	return data.get(rowIndex)[columnIndex];
-	    }
+    public int getColumnCount() {
+        return colNames.length;
+    }
 
-	    public String getColumnName(int columnIndex) {
-	        return colNames[columnIndex];
-	    }
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        return data.get(rowIndex)[columnIndex];
+    }
 
-	    public Class<?> getColumnClass(int columnIndex) {
-	        return colClasses[columnIndex];
-	    }
+    public String getColumnName(int columnIndex) {
+        return colNames[columnIndex];
+    }
 
-	    public boolean isCellEditable(int rowIndex, int columnIndex) {
-	        return false;
-	    }
+    public Class<?> getColumnClass(int columnIndex) {
+        return colClasses[columnIndex];
+    }
 
-	    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false;
+    }
+
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 //	    	Celdas no son editables
 //	    	System.out.println("Almacenes setValue: "+aValue);
 //	    	if (columnIndex == 0) {
@@ -71,12 +66,9 @@ public class TablaTotalesPorAlmacen  extends AbstractTableModel
 //	            data.get(rowIndex).setNit((String) aValue);
 //	        }
 //	        fireTableCellUpdated(rowIndex, columnIndex);
-	    }
+    }
 
-		public ArrayList<Object[]> getData() {
-			return data;
-		}
-	}
-
-	
-
+    public ArrayList<Object[]> getData() {
+        return data;
+    }
+}

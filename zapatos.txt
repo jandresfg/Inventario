@@ -3,3 +3,5 @@ referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7
 referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}LA MESA
 referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}PATIO BONITO
 referencia3}planta3}altura3}color3}material3}99999}88888}10}CABALLERO}0}09-ene-2017}1 - YDERYU}CUCUTA 1
+referencia4}planta4}altura4}color4}material4}99999}88888}20}INFANTIL}0}10-ene-2017}4 - asd}CUCUTA 1
+referencia4}planta4}altura4}color4}material4}99999}88888}20}INFANTIL}0}10-ene-2017}4 - asd}CUCUTA 2
