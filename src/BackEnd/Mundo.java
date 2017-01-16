@@ -968,6 +968,9 @@ public class Mundo {
             }
         }
         Object[] res = new Object[4];
+        int totalCosto = 0;
+        int totalVenta = 0;
+        int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
             Almacen x = almas.get(i);
@@ -978,11 +981,26 @@ public class Mundo {
             res[2] = x.getTotalVenta();
             res[3] = x.getTotalPares();
 
+            totalCosto += x.getTotalCosto();
+             totalVenta += x.getTotalVenta();
+             totalPares += x.getTotalPares();
+
+            
+            
             arr.add(res);
             x.volverCero();
             res = new Object[4];
 
         }
+        Object[] ras = new Object[4];
+      
+        ras[0] = "Total";
+        ras[1] = totalCosto;
+
+        ras[2] = totalVenta;
+        ras[3] = totalPares;
+        arr.add(ras);
+        
 
         return arr;
 	}
