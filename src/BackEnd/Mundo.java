@@ -872,6 +872,20 @@ public class Mundo {
             res = new Object[4];
 
         }
+        
+        
+        Object[] ras = new Object[4];
+
+
+        ras[0] = "TOTAL";
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        
+        ArrayList<Object[]> papitas =    setModelToHiperDuperTotal();
+        arr.addAll(papitas);
 
         return arr;
     }
