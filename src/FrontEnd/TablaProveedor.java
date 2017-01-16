@@ -23,7 +23,7 @@ public class TablaProveedor  extends AbstractTableModel
 
 
 		String colNames[] = { "Codigo", "Nombre", "Fabrica", "Direccion", "Telefono", "Ciudad" };
-	    Class<?> colClasses[] = { Integer.class, String.class, String.class , String.class, Integer.class, String.class};
+	    Class<?> colClasses[] = { Integer.class, String.class, String.class , String.class, String.class, String.class};
 
 	    public TablaProveedor(List<Proveedor> arr) 
 	    {
@@ -91,7 +91,16 @@ public class TablaProveedor  extends AbstractTableModel
 	            data.get(rowIndex).setDireccion((String) aValue);
 	        }
 	        if (columnIndex == 4) {
-	            data.get(rowIndex).setTelefono((String) aValue);
+	       if(aValue instanceof Integer)
+	       {
+	            data.get(rowIndex).setTelefono((Integer) aValue + "");
+
+	       }
+	       else
+	       {
+	    	   data.get(rowIndex).setTelefono((String) aValue);
+	       }
+	        
 	        }
 	        if (columnIndex == 5) {
 	            data.get(rowIndex).setCiudad((String) aValue);
