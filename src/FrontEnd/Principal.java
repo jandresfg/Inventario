@@ -928,7 +928,7 @@ else
 	{
 		mundo.eliminarAlmacen(referencia);
 		setModelToAlmacenes();
-		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el almacen de Nit: " + referencia);
+		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el almacén de ciudad: " + referencia);
 
 	}
 	
