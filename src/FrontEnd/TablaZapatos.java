@@ -1,9 +1,11 @@
 package FrontEnd;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -15,10 +17,10 @@ public class TablaZapatos extends AbstractTableModel {
 
     List<Zapato> data = new ArrayList<Zapato>();
 
-    //	String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categor�a","Fecha" };
+    //	String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categor�a","Fecha" };
     // Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
-    Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class, Object.class, Object.class, String.class, String.class, Integer.class, Integer.class, Integer.class};
-    String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categor�a", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
+    Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class, Object.class, Object.class, String.class, String.class, Integer.class, String.class, String.class};
+    String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categoría", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
 
     public TablaZapatos(List<Zapato> arr) {
         data = arr;
@@ -38,7 +40,6 @@ public class TablaZapatos extends AbstractTableModel {
 
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categor�a", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
 
         if (columnIndex == 0) {
             return data.get(rowIndex).getAlmacenesString().replace('{', '\n');
@@ -73,10 +74,14 @@ public class TablaZapatos extends AbstractTableModel {
             return data.get(rowIndex).getCantidad();
         }
         if (columnIndex == 10) {
-            return data.get(rowIndex).getPrecioCosto();
+        	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
+        	String number_ge = nf_ge.format(data.get(rowIndex).getPrecioCosto());
+            return number_ge;
         }
         if (columnIndex == 11) {
-            return data.get(rowIndex).getPrecioVenta();
+        	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
+        	String number_ge = nf_ge.format(data.get(rowIndex).getPrecioVenta());
+            return number_ge;
         }
 
         return null;
@@ -111,7 +116,7 @@ public class TablaZapatos extends AbstractTableModel {
             try {
                 data.get(rowIndex).setFecha(Zapato.getFechaFromString((String) aValue));
             } catch (ParseException e) {
-                JOptionPane.showMessageDialog(null, "Fecha inv�lida. El formato de fecha apropiado es " + Zapato.FORMATO_FECHA + "\nEjemplo: " + Zapato.cadenafechaEjemplo(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            	JOptionPane.showMessageDialog(null, "Fecha inválida. El formato de fecha apropiado es " + Zapato.FORMATO_FECHA + "\nEjemplo: " + Zapato.cadenafechaEjemplo(), "ERROR", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             }
         }
@@ -137,10 +142,25 @@ public class TablaZapatos extends AbstractTableModel {
             data.get(rowIndex).setCantidad((int) aValue);
         }
         if (columnIndex == 10) {
-            data.get(rowIndex).setPrecioCosto((int) aValue);
+        	try {
+        		String input = ((String) aValue).replaceAll("\\.", "");
+        		System.out.println("Precio Costo: "+input);
+				int output = Integer.parseInt(input);
+				data.get(rowIndex).setPrecioCosto(output);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Precio Costo '"+aValue+"' inválido: por favor use sólo números.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+            
         }
         if (columnIndex == 11) {
-            data.get(rowIndex).setPrecioVenta((int) aValue);
+        	try {
+        		String input = ((String) aValue).replaceAll("\\.", "");
+        		System.out.println("Precio Venta: "+input);
+				int output = Integer.parseInt(input);
+				data.get(rowIndex).setPrecioVenta(output);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Precio Venta '"+aValue+"' inválido: por favor use sólo números.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }
