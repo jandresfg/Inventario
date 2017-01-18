@@ -98,6 +98,7 @@ public class Principal extends JFrame implements ActionListener {
 	private 				JRadioButton rdbtnCaballero = new JRadioButton("Caballero");
 	private JRadioButton rdbtnInfatil = new JRadioButton("Infatil");
 	private boolean estoyEnTotales = false;
+        private JPanel panel_filter;
 	/**
 	 * Launch the application.
 	 */
@@ -354,7 +355,7 @@ public class Principal extends JFrame implements ActionListener {
 		
 		agregarCombobox();
 				
-				JPanel panel_filter = new JPanel();
+				 panel_filter = new JPanel();
 				panel_filter.setLayout(null);
 				panel_filter.setBounds(0, 468, 911, 32);
 				frmInventario.getContentPane().add(panel_filter);
@@ -1073,7 +1074,6 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 		table.setDefaultRenderer(Object.class, tcr);
@@ -1088,7 +1088,15 @@ rdbtnCaballero.setSelected(false);
 		        if ("TOTAL".equals(status) ) {
 		            setBackground(Color.BLACK);
 		            setForeground(Color.WHITE);
-		        } else {
+		        }
+                         else if ("GASOLINA EXTRA".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 12));
+      setBackground(Color.LIGHT_GRAY);
+		            setForeground(Color.WHITE);
+                        }
+                        
+                        else {
 		            setBackground(table.getBackground());
 		            setForeground(table.getForeground());
 		        }       
@@ -1097,8 +1105,8 @@ rdbtnCaballero.setSelected(false);
 		});		button_4.requestFocus();
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
-                filterText.setText("");
         		estoyEnTotales = false;
+                        panel_filter.setVisible(false);
 
 		
 
@@ -1109,15 +1117,35 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
-		table.setDefaultRenderer(Object.class, tcr);
-		button_4.requestFocus();
+	table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		     if ("TOTAL".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 12));
+                            setBackground(Color.LIGHT_GRAY);
+		            setForeground(Color.WHITE);
+                        } 
+                        
+                        
+                        else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});		button_4.requestFocus();
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
-                filterText.setText("");
         		estoyEnTotales = false;
+                        panel_filter.setVisible(false);
 
 
 	}
@@ -1126,7 +1154,6 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 //		table.setDefaultRenderer(Object.class, tcr);
@@ -1141,7 +1168,16 @@ rdbtnCaballero.setSelected(false);
 		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
 		            setBackground(Color.BLACK);
 		            setForeground(Color.WHITE);
-		        } else {
+		        } 
+                        else if ("TOTAL".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 12));
+                  setBackground(Color.LIGHT_GRAY);
+		            setForeground(Color.WHITE);
+                        } 
+                        
+                        
+                        else {
 		            setBackground(table.getBackground());
 		            setForeground(table.getForeground());
 		        }       
@@ -1157,8 +1193,8 @@ rdbtnCaballero.setSelected(false);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
-                filterText.setText("");
         		estoyEnTotales = false;
+                        panel_filter.setVisible(false);
 
 	}
 	public void setModelToGrandesTotalesFiltradosTriple(){
@@ -1169,7 +1205,6 @@ rdbtnCaballero.setSelected(false);
 
 		table.setModel(sol);
 		
-		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 		
@@ -1184,7 +1219,19 @@ rdbtnCaballero.setSelected(false);
 		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
 		            setBackground(Color.BLACK);
 		            setForeground(Color.WHITE);
-		        } else {
+		        } 
+                        else   if ("TOTAL".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 12));
+                          // setBackground(table.getBackground());
+		            //setForeground(table.getForeground());
+                            setBackground(Color.LIGHT_GRAY);
+		            setForeground(Color.WHITE);
+                        } 
+                       
+
+
+                        else {
 		            setBackground(table.getBackground());
 		            setForeground(table.getForeground());
 		        }       
@@ -1194,11 +1241,11 @@ rdbtnCaballero.setSelected(false);
 		button_4.requestFocus();
         table.setRowSorter(sorter);
 
-        filterText.setText("");
 
 		panel_1.setVisible(true);
 		estoyEnTotales = false;
 
+                        panel_filter.setVisible(false);
 
 	}
 	public void setModelToHiperDuperTotal(){
@@ -1207,15 +1254,14 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		filterText.setVisible(true);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
-                filterText.setText("");
         		estoyEnTotales = false;
+                        panel_filter.setVisible(false);
 
 
 	}

@@ -994,7 +994,7 @@ public class Mundo {
         }
         Object[] ras = new Object[4];
       
-        ras[0] = "Total";
+        ras[0] = "TOTAL";
         ras[1] = totalCosto;
 
         ras[2] = totalVenta;
@@ -1167,7 +1167,7 @@ System.out.println(arr.get(8)[0]);
 	            x.volverCero();
 
 	        }
-	        res[0] = "Gasolina Extra";
+	        res[0] = "GASOLINA EXTRA";
             res[1] = totalCosto;
 
             res[2] = totalVenta;
