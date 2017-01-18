@@ -36,7 +36,6 @@ public class TablaGrandesTotales  extends AbstractTableModel
 	    }
 	
 	    public Object getValueAt(int rowIndex, int columnIndex) {
-	    	System.out.println("ENTRADA"  + data.get(rowIndex)[2]);
 
 	    	if(data.get(rowIndex)[columnIndex] instanceof Integer){
 		    	if (columnIndex == 1 || columnIndex == 2 || columnIndex ==3 ) {

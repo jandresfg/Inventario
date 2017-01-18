@@ -35,11 +35,12 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
+        if(data.get(rowIndex)[columnIndex] instanceof Integer){
     	if (columnIndex == 4 || columnIndex == 3 || columnIndex == 6 || columnIndex == 7) {
         	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
         	String number_ge = nf_ge.format(data.get(rowIndex)[columnIndex]);
             return number_ge;
-        }
+        }}
         return data.get(rowIndex)[columnIndex];
     }
 
