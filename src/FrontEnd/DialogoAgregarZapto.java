@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,12 +47,12 @@ import javax.swing.ScrollPaneConstants;
 public class DialogoAgregarZapto extends JDialog implements ActionListener {
 
     /**
-     * Comando para el botón Agregar
+     * Comando para el botï¿½n Agregar
      */
     private static final String AGREGAR = "Agregar";
 
     /**
-     * Comando para el botón Cancelar
+     * Comando para el botï¿½n Cancelar
      */
     private static final String CANCELAR = "Cancelar";
 
@@ -62,7 +65,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
     private JLabel lblId;
 
     /**
-     * Campo de texto donde se ingresa la identificación de la caja
+     * Campo de texto donde se ingresa la identificaciï¿½n de la caja
      */
     private JTextField txtId;
 
@@ -77,17 +80,17 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
     private JTextField txtDineroInicial;
 
     /**
-     * Botón usado para agregar la caja
+     * Botï¿½n usado para agregar la caja
      */
     private JButton botonAgregar;
 
     /**
-     * Botón para cancelar
+     * Botï¿½n para cancelar
      */
     private JButton botonCancelar;
 
     /**
-     * Ventana principal de la aplicación
+     * Ventana principal de la aplicaciï¿½n
      */
     private Principal principal;
 
@@ -98,17 +101,17 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
     private ButtonGroup grupo;
 
     /**
-     * Radio Button para indicar una transacción de retiro
+     * Radio Button para indicar una transacciï¿½n de retiro
      */
     private JRadioButton radioRetiro;
 
     /**
-     * Radio Button para indicar una transacción de consignación
+     * Radio Button para indicar una transacciï¿½n de consignaciï¿½n
      */
     private JRadioButton radioConsignacion;
 
     /**
-     * Radio Button para indicar una transacción de pago de servicio
+     * Radio Button para indicar una transacciï¿½n de pago de servicio
      */
     private JRadioButton radioServicio;
     private JTextField textReft;
@@ -140,12 +143,12 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
     private JLabel lblPrecioDeVenta;
 
     // -----------------------------------------------
-    // Métodos
+    // Mï¿½todos
     // -----------------------------------------------
     /**
-     * Crea el diálogo para agregar una caja
+     * Crea el diï¿½logo para agregar una caja
      *
-     * @param principal Ventana principal de la aplicación
+     * @param principal Ventana principal de la aplicaciï¿½n
      */
     public DialogoAgregarZapto(Principal pprincipal) {
         super(pprincipal, true);
@@ -344,7 +347,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
         Properties p = new Properties();
         p.put("text.today", "Hoy");
         p.put("text.month", "Mes");
-        p.put("text.year", "Año");
+        p.put("text.year", "Aï¿½o");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         // Don't know about the formatter, but there it is...
         datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
@@ -365,6 +368,31 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
         getContentPane().add(lblPrecioDeCompra, gbc_10);
 
         textPC = new JTextField();
+        textPC.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                try {
+					JTextField textField = (JTextField) e.getSource();
+					String input = textField.getText();
+					int inputInt = Integer.parseInt(input.replaceAll("\\.", ""));
+					NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
+					String number_ge = nf_ge.format(inputInt);
+					textField.setText(number_ge);
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "Precio Costo invÃ¡lido: por favor use sÃ³lo nÃºmeros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JTextField textField = (JTextField) e.getSource();
+					textField.setText(textField.getText().substring(0, textField.getText().length()-1));
+					
+				}
+            }
+
+            public void keyTyped(KeyEvent e) {
+                // TODO: Do something for the keyTyped event
+            }
+
+            public void keyPressed(KeyEvent e) {
+                // TODO: Do something for the keyPressed event
+            }
+        });
         GridBagConstraints gbc_11 = new GridBagConstraints();
         gbc_11.fill = GridBagConstraints.BOTH;
         gbc_11.insets = new Insets(0, 0, 5, 5);
@@ -382,6 +410,30 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
 
         textPV = new JTextField();
         textPV.setColumns(10);
+        textPV.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                try {
+					JTextField textField = (JTextField) e.getSource();
+					String input = textField.getText();
+					int inputInt = Integer.parseInt(input.replaceAll("\\.", ""));
+					NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
+					String number_ge = nf_ge.format(inputInt);
+					textField.setText(number_ge);
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "Precio Venta invÃ¡lido: por favor use sÃ³lo nÃºmeros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JTextField textField = (JTextField) e.getSource();
+					textField.setText(textField.getText().substring(0, textField.getText().length()-1));
+				}
+            }
+
+            public void keyTyped(KeyEvent e) {
+                // TODO: Do something for the keyTyped event
+            }
+
+            public void keyPressed(KeyEvent e) {
+                // TODO: Do something for the keyPressed event
+            }
+        });
         GridBagConstraints gbc_textPV = new GridBagConstraints();
         gbc_textPV.fill = GridBagConstraints.HORIZONTAL;
         gbc_textPV.insets = new Insets(0, 0, 5, 5);
@@ -472,9 +524,9 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
     }
 
     /**
-     * Método que recoge las acciones sobre los objetos que está escuchando.
+     * Mï¿½todo que recoge las acciones sobre los objetos que estï¿½ escuchando.
      *
-     * @param e Evento que se realizó.
+     * @param e Evento que se realizï¿½.
      */
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(AGREGAR)) {
@@ -496,30 +548,30 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
                 String altura = textAltura.getText();
                 int precioCosto = -1, precioVenta = -1, cantidad = -1;
                 try {
-                    precioCosto = Integer.valueOf(textPC.getText()).intValue();
+                    precioCosto = Integer.valueOf(textPC.getText().replaceAll("\\.", "")).intValue();
                     if (precioCosto == -1) {
-                        JOptionPane.showMessageDialog(this, "Precio de Costo ingresado inválido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Precio de Costo ingresado invï¿½lido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException e1) {
-                    JOptionPane.showMessageDialog(this, "Precio de Costo ingresado inválido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Precio de Costo ingresado invï¿½lido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
                 }
 
                 try {
-                    precioVenta = Integer.valueOf(textPV.getText()).intValue();
+                    precioVenta = Integer.valueOf(textPV.getText().replaceAll("\\.", "")).intValue();
                     if (precioVenta == -1) {
-                        JOptionPane.showMessageDialog(this, "Precio de Venta ingresado inválido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Precio de Venta ingresado invï¿½lido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException e1) {
-                    JOptionPane.showMessageDialog(this, "Precio de Venta ingresado inválido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Precio de Venta ingresado invï¿½lido", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
                 }
 
                 try {
                     cantidad = Integer.valueOf(textCantidad.getText()).intValue();
                     if (cantidad == -1) {
-                        JOptionPane.showMessageDialog(this, "Cantidad ingresada inválida", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Cantidad ingresada invï¿½lida", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException e1) {
-                    JOptionPane.showMessageDialog(this, "Cantidad ingresada inválida", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Cantidad ingresada invï¿½lida", "Agregar Zapato", JOptionPane.ERROR_MESSAGE);
                 }
 
                 if (precioCosto != -1 && precioVenta != -1 && cantidad != -1) {
@@ -539,7 +591,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
                         }
                     }
                     if (provs.size() > 1) {
-                        throw new Exception("Sólo puede seleccionar un Proveedor a la vez. Hay " + provs.size() + " seleccionados.");
+                        throw new Exception("Sï¿½lo puede seleccionar un Proveedor a la vez. Hay " + provs.size() + " seleccionados.");
                     }
                     if (provs.size() == 0) {
                         throw new Exception("No se ha seleecionado ningun Proveedor");
