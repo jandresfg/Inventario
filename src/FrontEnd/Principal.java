@@ -948,6 +948,10 @@ else
 		table.setDefaultRenderer(Object.class, new MultipleLines());
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedor")).setPreferredWidth(100);
 		//table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Almacen")).setPreferredWidth(180);
+		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+		leftRenderer.setVerticalAlignment(JLabel.NORTH);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
 		refrescar();
 		button.requestFocus();
 		panel.setSize(panel.getWidth(), 468);
@@ -981,6 +985,12 @@ rdbtnCaballero.setSelected(false);
 		});
 		table.setModel(sol);
 		table.setDefaultRenderer(Object.class, tcr);
+		
+		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+		leftRenderer.setVerticalAlignment(JLabel.NORTH);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Telefono")).setCellRenderer(leftRenderer);
+		
 		button_1.requestFocus();
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
@@ -1013,6 +1023,13 @@ rdbtnDama.setSelected(false);
 		table.setModel(sol);
 		
 		table.setDefaultRenderer(Object.class, tcr);
+		
+		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+		leftRenderer.setVerticalAlignment(JLabel.NORTH);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setCellRenderer(leftRenderer);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setMaxWidth(50);
+		
 		button_2.requestFocus();
 		panel.setSize(panel.getWidth(), 468);
 		scrollPane.setSize(scrollPane.getWidth(), 468);
