@@ -1013,7 +1013,7 @@ rdbtnDama.setSelected(false);
 	public void setModelToProveedores(){
 		TablaProveedor sol = new TablaProveedor(mundo.darProveedores());
 		sol.addTableModelListener(new TableModelListener() {
-			
+
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				System.out.println("table changed");
@@ -1025,7 +1025,9 @@ rdbtnDama.setSelected(false);
 			}
 		});
 		table.setModel(sol);
-		
+		sorter = new TableRowSorter<TablaProveedor>(sol);
+	       table.setRowSorter(sorter);
+
 		table.setDefaultRenderer(Object.class, tcr);
 		
 		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
@@ -1038,15 +1040,16 @@ rdbtnDama.setSelected(false);
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 		
+                
 		//agrega el panel_filter
 		panel_filter.setVisible(true);
 		filterText.setVisible(true);
 		filterText.setText("");
         lblTextoDeFiltro.setText("Filtrar por Nombre:");
-		//
+
+        //
                 
                 //vaina para que el filtro no influya en este model
-                table.setRowSorter(new TableRowSorter<>(table.getModel()));
 rdbtnDama.setSelected(false);
 
 rdbtnCaballero.setSelected(false);	
@@ -1280,15 +1283,18 @@ rdbtnCaballero.setSelected(false);
 
 	
 	private void newFilter(){
-		RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
+		
+if(estoyEnTotales)
+{
+    
+    RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
 	    //If current expression doesn't parse, don't update.
 	    try {
 	        rf = RowFilter.regexFilter(filterText.getText(), 0);
 	    } catch (java.util.regex.PatternSyntaxException e) {
 	        return;
 	    }
-if(estoyEnTotales)
-{
+    
 System.out.println("TEXO:"  + filterText.getText());	
 
 if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
@@ -1306,6 +1312,15 @@ else
 }
 else
 {
+        RowFilter<TablaProveedor, Object> rf = null;
+  try {
+       
+	        rf = RowFilter.regexFilter(filterText.getText(),1);
+	    } catch (java.util.regex.PatternSyntaxException e) {
+	        return;
+	    }
+  
+    
 	    sorter.setRowFilter(rf);
 
 		table.setRowSorter(sorter);
