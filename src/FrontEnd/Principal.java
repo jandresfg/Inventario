@@ -98,7 +98,10 @@ public class Principal extends JFrame implements ActionListener {
 	private 				JRadioButton rdbtnCaballero = new JRadioButton("Caballero");
 	private JRadioButton rdbtnInfatil = new JRadioButton("Infatil");
 	private boolean estoyEnTotales = false;
-        private JPanel panel_filter;
+    private JPanel panel_filter;
+    private JLabel lblTextoDeFiltro;
+    
+        
 	/**
 	 * Launch the application.
 	 */
@@ -360,7 +363,7 @@ public class Principal extends JFrame implements ActionListener {
 				panel_filter.setBounds(0, 468, 911, 32);
 				frmInventario.getContentPane().add(panel_filter);
 				
-				JLabel lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
+				lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
 				lblTextoDeFiltro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblTextoDeFiltro.setBounds(10, 0, 150, 26);
 				panel_filter.add(lblTextoDeFiltro);
@@ -1032,9 +1035,15 @@ rdbtnDama.setSelected(false);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setMaxWidth(50);
 		
 		button_2.requestFocus();
-		panel.setSize(panel.getWidth(), 468);
-		scrollPane.setSize(scrollPane.getWidth(), 468);
-		panel_1.setVisible(false);
+		panel.setSize(panel.getWidth(), 435);
+		scrollPane.setSize(scrollPane.getWidth(), 435);
+		
+		//agrega el panel_filter
+		panel_filter.setVisible(true);
+		filterText.setVisible(true);
+		filterText.setText("");
+        lblTextoDeFiltro.setText("Filtrar por Nombre:");
+		//
                 
                 //vaina para que el filtro no influya en este model
                 table.setRowSorter(new TableRowSorter<>(table.getModel()));
@@ -1045,6 +1054,8 @@ rdbtnCaballero.setSelected(false);
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
+		panel_1.setVisible(false);
+		
 	}
 	
 	public void setModelToTotalesPorAlmacen(){
@@ -1052,6 +1063,7 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
+		lblTextoDeFiltro.setText("Filtrar por Almac\u00E9n:");
 		panel.setSize(panel.getWidth(), 435);
 		scrollPane.setSize(scrollPane.getWidth(), 435);
 		table.setDefaultRenderer(Object.class, tcr);
