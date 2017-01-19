@@ -1045,7 +1045,7 @@ rdbtnDama.setSelected(false);
 		panel_filter.setVisible(true);
 		filterText.setVisible(true);
 		filterText.setText("");
-        lblTextoDeFiltro.setText("Filtrar por Nombre:");
+        lblTextoDeFiltro.setText("Buscar Proveedor:");
 
         //
                 
@@ -1324,6 +1324,23 @@ else
 	    sorter.setRowFilter(rf);
 
 		table.setRowSorter(sorter);
+		if(table.getRowCount() == 0 )
+		{
+			 rf = null;
+			  try {
+			       
+				        rf = RowFilter.regexFilter(filterText.getText(),2);
+				    } catch (java.util.regex.PatternSyntaxException e) {
+				        return;
+				    }
+			  
+			    
+				    sorter.setRowFilter(rf);
+
+					table.setRowSorter(sorter);
+			
+			System.out.println("CASO 2");	
+			}
 }
 	}
 	
