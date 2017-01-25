@@ -831,7 +831,7 @@ public class Mundo {
                 int sumaPrecioCosto = 0;
                 int sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
-                if (ka.toString().equals(a.toString())) {
+                if (ka.toString().equals(a.toString()) &&  !z.esReposicion()) {
                     sumaCantidad += z.getCantidad();
                     sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
@@ -867,7 +867,7 @@ public class Mundo {
         return quickSort(arr, 0 , (arr.size())-1);
     }
 
-    public ArrayList<Object[]> darGrandesTotales() {
+    public ArrayList<Object[]> darGrandesTotales(boolean selecionado) {
 
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -877,7 +877,7 @@ public class Mundo {
             Zapato z = zapatos.get(j);
 
             Almacen ka = z.getAlamacenes().get(0);
-            if (z.getCantidad() > 0) {
+            if (z.getCantidad() > 0 && z.esReposicion() == selecionado) {
                 boolean flag = false;
                 for (int k = 0; k < almas.size() && !flag; k++) {
                     Almacen papitas = almas.get(k);
@@ -947,7 +947,7 @@ public class Mundo {
         ras[3] = "";
         arr.add(ras);
         
-        ArrayList<Object[]> papitas =    setModelToHiperDuperTotal();
+        ArrayList<Object[]> papitas =    setModelToHiperDuperTotal(selecionado);
         arr.addAll(papitas);
 
         return arr;
@@ -977,7 +977,7 @@ public class Mundo {
 
     }
 
-	public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro) 
+	public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro, boolean selecionado) 
 	{
 
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
@@ -988,7 +988,7 @@ public class Mundo {
             Zapato z = zapatos.get(j);
 
             Almacen ka = z.getAlamacenes().get(0);
-            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro)) {
+            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro) && z.esReposicion()== selecionado) {
                 boolean flag = false;
                 for (int k = 0; k < almas.size() && !flag; k++) {
                     Almacen papitas = almas.get(k);
@@ -1068,7 +1068,7 @@ public class Mundo {
         return arr;
 	}
 
-	public ArrayList<Object[]> darGrandesTotalesFiltradoDoble(String filtroA, String filtroB)
+	public ArrayList<Object[]> darGrandesTotalesFiltradoDoble(String filtroA, String filtroB, boolean selecionado)
 	{
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -1080,7 +1080,7 @@ public class Mundo {
         res[2] = "";
         res[3] = "";
         arr.add(res);
-        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA) ;
+        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA,selecionado) ;
         for (int i = 0; i < papitas.size(); i++) 
         {
             Object[] a = papitas.get(i);
@@ -1095,7 +1095,7 @@ public class Mundo {
         ras[2] = "";
         ras[3] = "";
         arr.add(ras);
-        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB) ;
+        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB,selecionado) ;
         for (int i = 0; i < doritos.size(); i++) 
         {
             Object[] a = doritos.get(i);
@@ -1106,7 +1106,7 @@ public class Mundo {
         return arr;
 	}
 
-	public ArrayList<Object[]> darGrandesTotalesFiltradoTriple(String filtroA, String filtroB, String filtroC)
+	public ArrayList<Object[]> darGrandesTotalesFiltradoTriple(String filtroA, String filtroB, String filtroC, boolean selecionado)
 	{
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -1118,7 +1118,7 @@ public class Mundo {
         res[2] = "";
         res[3] = "";
         arr.add(res);
-        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA) ;
+        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA,selecionado) ;
         for (int i = 0; i < papitas.size(); i++) 
         {
             Object[] a = papitas.get(i);
@@ -1133,7 +1133,7 @@ public class Mundo {
         ras[2] = "";
         ras[3] = "";
         arr.add(ras);
-        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB) ;
+        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB,selecionado) ;
         for (int i = 0; i < doritos.size(); i++) 
         {
             Object[] a = doritos.get(i);
@@ -1148,7 +1148,7 @@ public class Mundo {
         rus[2] = "";
         rus[3] = "";
         arr.add(rus);
-        ArrayList<Object[]> tostacos =darGrandesTotalesFiltrado(filtroC) ;
+        ArrayList<Object[]> tostacos =darGrandesTotalesFiltrado(filtroC,selecionado) ;
         for (int i = 0; i < tostacos.size(); i++) 
         {
             Object[] a = tostacos.get(i);
@@ -1162,7 +1162,7 @@ System.out.println(arr.get(8)[0]);
         return arr;
 	}
 
-	public ArrayList<Object[]> setModelToHiperDuperTotal()
+	public ArrayList<Object[]> setModelToHiperDuperTotal(boolean selecionado)
 	{
 		  ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -1172,7 +1172,7 @@ System.out.println(arr.get(8)[0]);
 	            Zapato z = zapatos.get(j);
 
 	            Almacen ka = z.getAlamacenes().get(0);
-	            if (z.getCantidad() > 0) {
+	            if (z.getCantidad() > 0 && z.esReposicion() ==selecionado ) {
 	                boolean flag = false;
 	                for (int k = 0; k < almas.size() && !flag; k++) {
 	                    Almacen papitas = almas.get(k);
@@ -1511,6 +1511,65 @@ System.out.println(retorno.size());
         }
         return "No se ha encontrado la reposición especificada para eliminar.";
 	}
+	public ArrayList<Object[]> darTotalesResposicion() {
+		        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+		        for (int i = 0; i < almacenes.size(); i++) {
+		            for (int j = 0; j < zapatos.size(); j++) {
+		                Object[] res = new Object[11];
+		                Almacen a = almacenes.get(i);
+		                Zapato  z = zapatos.get(j);
+		                int sumaCantidad = 0;
+		                int sumaPrecioCosto = 0;
+		                int sumaPrecioVenta = 0;
+		                Almacen ka = z.getAlamacenes().get(0);
+		                if (ka.toString().equals(a.toString())  && z.esReposicion()) {
+		                    sumaCantidad += z.getCantidad();
+		                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+		                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+		                }
+		                res[0] = a.toString();
+		                res[1] = z.getProveedores().get(0).toString();
+		                res[2] = z.getReferencia();
+		                res[3] = z.getPrecioCosto();
+		                res[4] = z.getPrecioVenta();
+		                res[5] = sumaCantidad;
+		                res[6] = sumaPrecioCosto;
+		                res[7] = sumaPrecioVenta;
+		                if (z.getCategoria().equals("CABALLERO")) {
+		                    res[9] = "X";
+		                    res[8] = " ";
+		                    res[10] = " ";
+		                } else if (z.getCategoria().equals("DAMA")) {
+		                    res[8] = "X";
+		                    res[9] = " ";
+		                    res[10] = " ";
+		                } else if (z.getCategoria().equals("INFANTIL")) {
+		                    res[10] = "X";
+		                    res[8] = " ";
+		                    res[9] = " ";
+
+		                }
+
+		                if ((int) res[5] > 0) {
+		                    arr.add(res);
+		                }
+		            }
+		        }
+		        
+		        if(arr.size()== 0)
+		        {
+		        	
+		        	return arr;
+		        }
+		        else
+		        {
+			        return quickSort(arr, 0 , (arr.size())-1);
+
+		        }
+		        
+		        
+		        
+		    }
 
 	
 
