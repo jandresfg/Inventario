@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import java.awt.Button;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -75,6 +76,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 public class Principal extends JFrame implements ActionListener {
 
@@ -100,8 +102,8 @@ public class Principal extends JFrame implements ActionListener {
 	private boolean estoyEnTotales = false;
     private JPanel panel_filter;
     private JLabel lblTextoDeFiltro;
-    
-        
+    private JPanel  panel_filterReposiciones;
+
 	/**
 	 * Launch the application.
 	 */
@@ -145,17 +147,311 @@ public class Principal extends JFrame implements ActionListener {
 		frmInventario.setTitle("Inventario");
 		frmInventario.getContentPane().setBackground(UIManager.getColor("MenuBar.background"));
 		frmInventario.setBackground(Color.GRAY);
-		frmInventario.setBounds(100, 100, 1162, 527);
+		frmInventario.setBounds(100, 100, 1162, 542);
 		frmInventario.setResizable(false);
 		Principal.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		frmInventario.getContentPane().setLayout(null);
+		 
+		  panel_1 = new JPanel();
+		  panel_1.setBounds(972, 335, 184, 183);
+		  frmInventario.getContentPane().add(panel_1);
+		  panel_1.setLayout(null);
+		  
+		  JLabel lblFiltros = new JLabel("Filtros");
+		  lblFiltros.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		  lblFiltros.setBounds(71, 0, 46, 14);
+		  panel_1.add(lblFiltros);
+		  
+		  
+		  
+		  
+		  rdbtnDama.setBounds(33, 75, 109, 23);
+		  rdbtnDama.addActionListener(new ActionListener() {
+		  	public void actionPerformed(ActionEvent e) 
+		  	{
+		  		// Filtar modelo para ver solo dama
+		  		rdbtnGlobal.setSelected(false);
 
+if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+	setModelToGrandesTotalesFiltrados("DAMA");
+
+}
+else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+	//DAMA && CABALLERO
+	setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+}
+else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+	//DAMA && CABALLERO
+	setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+}
+else 		if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+	setModelToGrandesTotalesFiltrados("CABALLERO");
+
+}
+
+else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+	//DAMA && CABALLERO
+	setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+
+}
+else 	if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+	setModelToGrandesTotalesFiltrados("INFANTIL");
+
+}
+else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+	//DAMA && CABALLERO
+	setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+}
+else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+	//DAMA && CABALLERO
+	setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+
+}
+
+else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+	//DAMA && CABALLERO
+	setModelToGrandesTotalesFiltradosTriple();
+
+}
+else 
+{
+	setModelToGrandesTotales();
+
+}
+		  	}
+		  });
+		  panel_1.add(rdbtnDama);
+		  
+		  rdbtnCaballero.setBounds(33, 101, 109, 23);
+		  rdbtnCaballero.addActionListener(new ActionListener() {
+		  	public void actionPerformed(ActionEvent e) 
+		  	{
+		  		// Filtar modelo para ver solo dama
+		  		rdbtnGlobal.setSelected(false);
+
+		  		
+		  		if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			setModelToGrandesTotalesFiltrados("CABALLERO");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+		  		}
+		  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+		  		
+		  		}
+		  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosTriple();
+
+		  		}
+		  		else 	if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			setModelToGrandesTotalesFiltrados("INFANTIL");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+		  		}
+		  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+		  		
+		  		}
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			setModelToGrandesTotalesFiltrados("DAMA");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+		  		}
+		  		
+		  		else 
+		  		{
+		  			setModelToGrandesTotales();
+
+		  		}
+		  	}
+		  });
+		  panel_1.add(rdbtnCaballero);
+		  
+		  rdbtnInfatil.addActionListener(new ActionListener() {
+		  	public void actionPerformed(ActionEvent e) 
+		  	{
+		  		// Filtar modelo para ver solo dama
+		  		rdbtnGlobal.setSelected(false);
+
+		  		
+		  		
+		  		if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			setModelToGrandesTotalesFiltrados("INFANTIL");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+		  		}
+		  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+		  		
+		  		}
+		  		
+		  		else  if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			setModelToGrandesTotalesFiltrados("DAMA");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+		  		}
+		  		
+		  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			setModelToGrandesTotalesFiltrados("CABALLERO");
+
+		  		}
+		  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+		  		}
+		  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+		  		
+		  		}
+		  		
+		  		
+		  		
+		  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+		  			//DAMA && CABALLERO
+		  			setModelToGrandesTotalesFiltradosTriple();
+
+		  		}
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		else 
+		  		{
+		  			setModelToGrandesTotales();
+
+		  		}
+		  	}
+		  });
+		  rdbtnInfatil.setBounds(33, 127, 109, 23);
+		  panel_1.add(rdbtnInfatil);
+		  
+		  
+		  
+		  rdbtnGlobal.setBounds(33, 153, 109, 23);
+		  rdbtnGlobal.addActionListener(new ActionListener() {
+		  	public void actionPerformed(ActionEvent e) 
+		  	{
+		  		rdbtnInfatil.setSelected(false);
+		  		rdbtnCaballero.setSelected(false);
+		  		rdbtnDama.setSelected(false);
+		  		// Filtar modelo para ver solo dama
+		  		setModelToGrandesTotales();
+		  	}
+		  });
+		  panel_1.add(rdbtnGlobal);
+		  
+		  JCheckBox checkBox_2 = new JCheckBox("Reposiciones");
+		  checkBox_2.setBounds(33, 21, 109, 23);
+		  panel_1.add(checkBox_2);
+		  
+		  JCheckBox checkBox_3 = new JCheckBox("Pedidos");
+		  checkBox_3.setBounds(33, 47, 109, 23);
+		  panel_1.add(checkBox_3);
+		  
+		  JSeparator separator = new JSeparator();
+		  separator.setBounds(0, 70, 184, 20);
+		  Dimension d = separator.getPreferredSize();
+		  d.height = panel_1.getPreferredSize().height;
+		  separator.setPreferredSize(d);
+		  
+		  panel_1.add(separator);
+		  
+		  
+			
+		  
+		panel_1.setVisible(false);
+		 
+
+		  
+		 
+		 
+		 
+		 
+		 panel_filterReposiciones = new JPanel();
+		 panel_filterReposiciones.setBounds(972, 335, 184, 183);
+		 frmInventario.getContentPane().add(panel_filterReposiciones);
+		 panel_filterReposiciones.setLayout(null);
+		 
+		 JLabel lblFil = new JLabel("Filtros");
+		 lblFil.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		 lblFil.setBounds(71, 0, 46, 14);
+		 panel_filterReposiciones.add(lblFil);
+		 			
+		 			JCheckBox checkBox = new JCheckBox("Reposiciones");
+		 			checkBox.setBounds(32, 21, 122, 23);
+		 			panel_filterReposiciones.add(checkBox);
+		 			
+		 			JCheckBox checkBox_1 = new JCheckBox("Pedidos");
+		 			checkBox_1.setBounds(32, 59, 122, 23);
+		 			panel_filterReposiciones.add(checkBox_1);
+		 			
+		 								panel_filterReposiciones.setVisible(false);
 
 
 		panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
-		panel.setBounds(0, 32, 973, 468);
+		panel.setBounds(0, 32, 973, 481);
 		frmInventario.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -163,7 +459,7 @@ public class Principal extends JFrame implements ActionListener {
 		tcr = table.getDefaultRenderer(Object.class);
 		
 		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 973, 468);
+		scrollPane.setBounds(0, 0, 973, 484);
 		panel.add(scrollPane);
 		try {
 			Image i = ImageIO.read(getClass().getResource("/resources/add_shoe.png"));
@@ -184,6 +480,7 @@ public class Principal extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
 				setModelToZapatos();
+				panel_filterReposiciones.setVisible(false);
 			}
 		});
 
@@ -195,6 +492,8 @@ public class Principal extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) 
 			{
 				setModelToAlmacenes();
+				panel_filterReposiciones.setVisible(false);
+
 			}
 		});
 		button_1.setBounds(108, 0, 70, 22);
@@ -205,6 +504,8 @@ public class Principal extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
 				setModelToProveedores();
+				panel_filterReposiciones.setVisible(false);
+
 			}
 		});
 		button_2.setBounds(201, 0, 70, 22);
@@ -219,6 +520,7 @@ public class Principal extends JFrame implements ActionListener {
 			{
 				setModelToGrandesTotales();
 				rdbtnGlobal.setSelected(true);
+				panel_filterReposiciones.setVisible(false);
 			}
 		});
 		
@@ -230,6 +532,8 @@ public class Principal extends JFrame implements ActionListener {
 			{
 				setModelToTotalesPorAlmacen();
                 panel_filter.setVisible(true);
+				panel_filterReposiciones.setVisible(true);
+
 
 			}
 		});
@@ -362,7 +666,7 @@ public class Principal extends JFrame implements ActionListener {
 				
 				 panel_filter = new JPanel();
 				panel_filter.setLayout(null);
-				panel_filter.setBounds(0, 468, 911, 32);
+				panel_filter.setBounds(0, 481, 911, 32);
 				frmInventario.getContentPane().add(panel_filter);
 				
 				lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
@@ -392,261 +696,12 @@ public class Principal extends JFrame implements ActionListener {
 				});
 				filterText.setVisible(false);
 				panel_filter.add(filterText);
-				
-				 panel_1 = new JPanel();
-				panel_1.setBounds(972, 341, 184, 159);
-				frmInventario.getContentPane().add(panel_1);
-				panel_1.setLayout(null);
-				
-				JLabel lblFiltros = new JLabel("Filtros");
-				lblFiltros.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblFiltros.setBounds(71, 0, 46, 14);
-				panel_1.add(lblFiltros);
-				
-				
-				rdbtnDama.setBounds(32, 21, 109, 23);
-				rdbtnDama.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) 
-					{
-						// Filtar modelo para ver solo dama
-						rdbtnGlobal.setSelected(false);
-
-if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-	setModelToGrandesTotalesFiltrados("DAMA");
-
-}
-else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-	//DAMA && CABALLERO
-	setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
-
-}
-else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-	//DAMA && CABALLERO
-	setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-
-}
-else 		if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-	setModelToGrandesTotalesFiltrados("CABALLERO");
-
-}
-
-else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-	//DAMA && CABALLERO
-	setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
-
-}
-else 	if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-	setModelToGrandesTotalesFiltrados("INFANTIL");
-
-}
-else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-	//DAMA && CABALLERO
-	setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-
-}
-else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-	//DAMA && CABALLERO
-	setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
-
-}
-
-else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-	//DAMA && CABALLERO
-	setModelToGrandesTotalesFiltradosTriple();
-
-}
-else 
-{
-	setModelToGrandesTotales();
-
-}
-					}
-				});
-				panel_1.add(rdbtnDama);
-				
-				rdbtnCaballero.setBounds(32, 47, 109, 23);
-				rdbtnCaballero.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) 
-					{
-						// Filtar modelo para ver solo dama
-						rdbtnGlobal.setSelected(false);
-
-						
-						if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							setModelToGrandesTotalesFiltrados("CABALLERO");
-
-						}
-						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
-
-						}
-						else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
-						
-						}
-						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosTriple();
-
-						}
-						else 	if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							setModelToGrandesTotalesFiltrados("INFANTIL");
-
-						}
-						else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-
-						}
-						else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
-						
-						}
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							setModelToGrandesTotalesFiltrados("DAMA");
-
-						}
-						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
-
-						}
-						else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-
-						}
-						
-						else 
-						{
-							setModelToGrandesTotales();
-
-						}
-					}
-				});
-				panel_1.add(rdbtnCaballero);
-				
-				rdbtnInfatil.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) 
-					{
-						// Filtar modelo para ver solo dama
-						rdbtnGlobal.setSelected(false);
-
-						
-						
-						if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							setModelToGrandesTotalesFiltrados("INFANTIL");
-
-						}
-						else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-
-						}
-						else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
-						
-						}
-						
-						else  if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							setModelToGrandesTotalesFiltrados("DAMA");
-
-						}
-						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
-
-						}
-						else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-
-						}
-						
-						else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							setModelToGrandesTotalesFiltrados("CABALLERO");
-
-						}
-						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
-
-						}
-						else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
-						
-						}
-						
-						
-						
-						else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
-							//DAMA && CABALLERO
-							setModelToGrandesTotalesFiltradosTriple();
-
-						}
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						else 
-						{
-							setModelToGrandesTotales();
-
-						}
-					}
-				});
-				rdbtnInfatil.setBounds(32, 73, 109, 23);
-				panel_1.add(rdbtnInfatil);
-				
-				
-				
-				rdbtnGlobal.setBounds(32, 99, 109, 23);
-				rdbtnGlobal.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) 
-					{
-						rdbtnInfatil.setSelected(false);
-						rdbtnCaballero.setSelected(false);
-						rdbtnDama.setSelected(false);
-						// Filtar modelo para ver solo dama
-						setModelToGrandesTotales();
-					}
-				});
-				panel_1.add(rdbtnGlobal);
-				
-				
-			
-				
-		panel_1.setVisible(false);
 		actualizarTotales("Seleccione una referencia");
 		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
-
+		
+		
+		
 	}
 
 
@@ -960,8 +1015,8 @@ else
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
 		refrescar();
 		button.requestFocus();
-		panel.setSize(panel.getWidth(), 468);
-		scrollPane.setSize(scrollPane.getWidth(), 468);
+		panel.setSize(panel.getWidth(), 481);
+		scrollPane.setSize(scrollPane.getWidth(), 481);
 		agregarCombobox();
 		panel_1.setVisible(false);
                 
@@ -998,8 +1053,8 @@ rdbtnCaballero.setSelected(false);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Telefono")).setCellRenderer(leftRenderer);
 		
 		button_1.requestFocus();
-		panel.setSize(panel.getWidth(), 468);
-		scrollPane.setSize(scrollPane.getWidth(), 468);
+		panel.setSize(panel.getWidth(), 481);
+		scrollPane.setSize(scrollPane.getWidth(), 481);
 		panel_1.setVisible(false);
                 
                 //vaina para que el filtro no influya en este model
