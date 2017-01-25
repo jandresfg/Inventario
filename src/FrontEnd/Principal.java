@@ -103,8 +103,11 @@ public class Principal extends JFrame implements ActionListener {
     private JPanel panel_filter;
     private JLabel lblTextoDeFiltro;
     private JPanel  panel_filterReposiciones;
-
-	/**
+    private JCheckBox checkBoxREP ;
+    private JCheckBox   checkBoxPedidos;
+	private JCheckBox checkBox_2Repo ;
+	private JCheckBox checkBox_3Pedidos;
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -401,13 +404,178 @@ else
 		  });
 		  panel_1.add(rdbtnGlobal);
 		  
-		  JCheckBox checkBox_2 = new JCheckBox("Reposiciones");
-		  checkBox_2.setBounds(33, 21, 109, 23);
-		  panel_1.add(checkBox_2);
+		   checkBox_2Repo = new JCheckBox("Reposiciones");
+		  checkBox_2Repo.setBounds(33, 21, 109, 23);
+		  checkBox_2Repo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+
+					if(checkBox_3Pedidos.isSelected())
+					{
+						checkBox_2Repo.setSelected(true);
+						checkBox_3Pedidos.setSelected(false);
+						if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltrados("INFANTIL");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+				  		
+				  		}
+				  		
+				  		else  if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltrados("DAMA");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+				  		}
+				  		
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltrados("CABALLERO");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+				  		
+				  		}
+				  		
+				  		
+				  		
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosTriple();
+
+				  		}
+				  		else
+				  		{
+				  			setModelToGrandesTotales();
+
+				  		}
+						
+						
+						
+					}
+					else
+					{
+						checkBox_2Repo.setSelected(true);
+
+						
+					}
+				}
+			});
 		  
-		  JCheckBox checkBox_3 = new JCheckBox("Pedidos");
-		  checkBox_3.setBounds(33, 47, 109, 23);
-		  panel_1.add(checkBox_3);
+		  panel_1.add(checkBox_2Repo);
+		  
+		   checkBox_3Pedidos = new JCheckBox("Pedidos");
+		  checkBox_3Pedidos.setBounds(33, 47, 109, 23);
+		  checkBox_3Pedidos.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+
+					if(checkBox_2Repo.isSelected())
+					{
+						checkBox_3Pedidos.setSelected(true);
+						checkBox_2Repo.setSelected(false);
+						if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltrados("INFANTIL");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
+				  		
+				  		}
+				  		
+				  		else  if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltrados("DAMA");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+
+				  		}
+				  		
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltrados("CABALLERO");
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","CABALLERO");
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDoble("DAMA","INFANTIL");
+				  		
+				  		}
+				  		
+				  		
+				  		
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosTriple();
+
+				  		}
+				  		
+			else 
+				  		{
+				  			setModelToGrandesTotales();
+
+				  		}
+
+					}
+					else
+					{
+						checkBox_3Pedidos.setSelected(true);
+
+
+						
+					}
+
+				}
+			});
+		  
+		  
+		  
+		  
+		  
+		  
+		  panel_1.add(checkBox_3Pedidos);
+		  
+		  
+		  
 		  
 		  JSeparator separator = new JSeparator();
 		  separator.setBounds(0, 70, 184, 20);
@@ -438,16 +606,63 @@ else
 		 lblFil.setBounds(71, 0, 46, 14);
 		 panel_filterReposiciones.add(lblFil);
 		 			
-		 			JCheckBox checkBox = new JCheckBox("Reposiciones");
-		 			checkBox.setBounds(32, 21, 122, 23);
-		 			panel_filterReposiciones.add(checkBox);
+		 			 checkBoxREP = new JCheckBox("Reposiciones");
+		 			 checkBoxREP.setBounds(32, 21, 122, 23);
+		 			checkBoxREP.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e)
+						{
+
+							if(checkBoxPedidos.isSelected())
+							{
+								checkBoxREP.setSelected(true);
+								checkBoxPedidos.setSelected(false);
+								setModelToTotalesPorAlmacenResposicion();
+
+							}
+							else
+							{
+								checkBoxREP.setSelected(true);
+								setModelToTotalesPorAlmacenResposicion();
+
+								
+							}
+						}
+					});
+		 			panel_filterReposiciones.add( checkBoxREP);
 		 			
-		 			JCheckBox checkBox_1 = new JCheckBox("Pedidos");
-		 			checkBox_1.setBounds(32, 59, 122, 23);
-		 			panel_filterReposiciones.add(checkBox_1);
+		 			
+		 			
+		 			
+		 			 checkBoxPedidos= new JCheckBox("Pedidos");
+		 			checkBoxPedidos.setBounds(32, 59, 122, 23);
+		 			
+		 			checkBoxPedidos.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e)
+						{
+
+							if(checkBoxREP.isSelected())
+							{
+								checkBoxPedidos.setSelected(true);
+								setModelToTotalesPorAlmacen();
+								checkBoxREP.setSelected(false);
+
+							}
+							else
+							{
+								checkBoxPedidos.setSelected(true);
+								setModelToTotalesPorAlmacen();
+
+
+								
+							}
+
+						}
+					});
+					
+		 			
+		 			panel_filterReposiciones.add(checkBoxPedidos);
 		 			
 		 								panel_filterReposiciones.setVisible(false);
-
 
 		panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
@@ -521,19 +736,20 @@ else
 				setModelToGrandesTotales();
 				rdbtnGlobal.setSelected(true);
 				panel_filterReposiciones.setVisible(false);
+				checkBox_3Pedidos.setSelected(true);		
+
 			}
 		});
-		
-		
-		
-		
-		button_3.addActionListener(new ActionListener() {
+	button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				setModelToTotalesPorAlmacen();
                 panel_filter.setVisible(true);
 				panel_filterReposiciones.setVisible(true);
 
+				
+
+					checkBoxPedidos.setSelected(true);		
 
 			}
 		});
@@ -1141,8 +1357,37 @@ rdbtnCaballero.setSelected(false);
 
 
 	}
+	
+	public void setModelToTotalesPorAlmacenResposicion(){
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotalesResposicion());
+		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
+		table.setModel(sol);
+		filterText.setVisible(true);
+		lblTextoDeFiltro.setText("Filtrar por Almac\u00E9n:");
+		panel.setSize(panel.getWidth(), 435);
+		scrollPane.setSize(scrollPane.getWidth(), 435);
+		table.setDefaultRenderer(Object.class, tcr);
+		button_3.requestFocus();
+		panel_1.setVisible(false);
+                table.setRowSorter(sorter);
+                filterText.setText("");
+                estoyEnTotales = true;
+                rdbtnDama.setSelected(false);
+		
+		rdbtnCaballero.setSelected(false);	
+		
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
+
+
+	}
+	
+	
+	
 	public void setModelToGrandesTotales(){
-		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotales());
+		
+		
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotales(checkBox_2Repo.isSelected()));
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
@@ -1184,7 +1429,7 @@ setBackground(table.getBackground());
 	}
 	public void setModelToGrandesTotalesFiltrados(String filtro){
 		System.out.println(filtro);
-		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltrado(filtro));
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltrado(filtro, checkBox_2Repo.isSelected()));
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
@@ -1221,7 +1466,7 @@ setBackground(table.getBackground());
 
 	}
 	public void setModelToGrandesTotalesFiltradosDoble(String filtroA, String filtroB){
-		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoDoble(filtroA,filtroB));
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoDoble(filtroA,filtroB,checkBox_2Repo.isSelected()));
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
@@ -1271,7 +1516,7 @@ setBackground(table.getBackground());
 	}
 	public void setModelToGrandesTotalesFiltradosTriple(){
 
-		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoTriple("DAMA","CABALLERO","INFANTIL"));
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoTriple("DAMA","CABALLERO","INFANTIL",checkBox_2Repo.isSelected()));
 		System.out.println( "TOTAL" +sol.getRowCount());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
@@ -1321,7 +1566,7 @@ setBackground(table.getBackground());
 	}
 	public void setModelToHiperDuperTotal(){
 
-		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.setModelToHiperDuperTotal( ));
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.setModelToHiperDuperTotal( checkBox_2Repo.isSelected()));
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
