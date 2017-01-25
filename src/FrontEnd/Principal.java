@@ -748,7 +748,8 @@ else
 				setModelToGrandesTotales();
 				rdbtnGlobal.setSelected(true);
 				panel_filterReposiciones.setVisible(false);
-				checkBox_3Pedidos.setSelected(true);		
+				checkBox_3Pedidos.setSelected(true);
+                                checkBox_2Repo.setSelected(false);
 
 			}
 		});
@@ -762,6 +763,7 @@ else
 				
 
 					checkBoxPedidos.setSelected(true);		
+                                checkBoxREP.setSelected(false);
 
 			}
 		});
