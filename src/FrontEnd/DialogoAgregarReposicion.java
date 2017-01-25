@@ -622,9 +622,9 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
                                 mensaje += " \"" + x.getText() + "\"  \n";
                                 if (cantidadAlmacenes == 0) {
 
-                                    principal.agregarZapato(z, provs, temp, true, mensaje);
+                                    principal.agregarReposicion(z, provs, temp, true, mensaje);
                                 } else {
-                                    principal.agregarZapato(z, provs, temp, false, " ");
+                                    principal.agregarReposicion(z, provs, temp, false, " ");
 
                                 }
                             }

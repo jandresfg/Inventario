@@ -78,7 +78,13 @@ public class Mundo {
         guardar();
 
         return "Se ha agregado exitosamente el zapato de Referencia: \"" + pZapato.getReferencia() + "\" y Almacén: \"" + pZapato.getAlmacenesString() + "\"";
+    }
+    
+    public String agregarReposicion(Zapato pZapato) {
+        zapatos.add(pZapato);
+        guardar();
 
+        return "Se ha agregado exitosamente la reposición de Referencia: \"" + pZapato.getReferencia() + "\" y Almacén: \"" + pZapato.getAlmacenesString() + "\"";
     }
 
     public String agregarProovedores(Proveedor pProveedor, String flag) {
@@ -111,7 +117,7 @@ public class Mundo {
 
             String[] arr = cadena.split("\\}");
 
-            Zapato zap = new Zapato(arr[0], arr[1], arr[2], arr[3], arr[4], Integer.parseInt(arr[5]), Integer.parseInt(arr[6]), Integer.parseInt(arr[7]), arr[8], Integer.parseInt(arr[9]), Zapato.getFechaFromString(arr[10]));
+            Zapato zap = new Zapato(arr[0], arr[1], arr[2], arr[3], arr[4], Integer.parseInt(arr[5]), Integer.parseInt(arr[6]), Integer.parseInt(arr[7]), arr[8], Integer.parseInt(arr[9]), Zapato.getFechaFromString(arr[10]), Boolean.parseBoolean(arr[13]));
             zap.setProveedores(darProveedores(arr[11]));
             zap.setAlmacenes(darAlmacenes(arr[12]));
             zapatos.add(zap);
@@ -158,8 +164,25 @@ public class Mundo {
     }
 
     public List<Zapato> darZapatos() {
-        return quickSortZapatos(zapatos, 0, zapatos.size()-1);
-
+    	List<Zapato> zapatosSinReposiciones = new ArrayList<Zapato>();
+    	for(Zapato x: zapatos){
+    		if(!x.esReposicion()){
+    			zapatosSinReposiciones.add(x);
+    		}
+    	}
+    	if(zapatosSinReposiciones.isEmpty()) return zapatosSinReposiciones;
+    	else return quickSortZapatos(zapatosSinReposiciones, 0, zapatosSinReposiciones.size()-1);
+    }
+    
+    public List<Zapato> darReposiciones() {
+    	List<Zapato> soloReposiciones = new ArrayList<Zapato>();
+    	for(Zapato x: zapatos){
+    		if(x.esReposicion()){
+    			soloReposiciones.add(x);
+    		}
+    	}
+    	if (soloReposiciones.isEmpty()) return soloReposiciones;
+    	else return quickSortZapatos(soloReposiciones, 0, soloReposiciones.size()-1);
     }
 
     public List<Almacen> darAlmacenes() {
@@ -403,7 +426,6 @@ public class Mundo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // TODO Auto-generated method stub
 
     }
 
@@ -435,23 +457,26 @@ public class Mundo {
     public String eliminarZapato(String referencia, String codigoProveedor, String codigoAlmacen) {
         for (int i = 0; i < zapatos.size(); i++) {
             Zapato x = zapatos.get(i);
-            if (x.getReferencia().equals(referencia)) {
-                for (int j = 0; j < x.getProveedores().size(); j++) {
-                    Proveedor y = x.getProveedores().get(j);
-                    if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
+            if (!x.esReposicion()) {
+				if (x.getReferencia().equals(referencia)) {
+					for (int j = 0; j < x.getProveedores().size(); j++) {
+						Proveedor y = x.getProveedores().get(j);
+						if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
 
-                        for (int k = 0; k < x.getAlamacenes().size(); k++) {
-                            Almacen alm = x.getAlamacenes().get(k);
+							for (int k = 0; k < x.getAlamacenes().size(); k++) {
+								Almacen alm = x.getAlamacenes().get(k);
 
-                            if (alm.getCiudad().equals(codigoAlmacen)) {
-                                zapatos.remove(i);
-                                return "Se ha eliminado exitosamente el zapato de referencia: " + referencia + " y proveedor relacionado con código: " + codigoProveedor;
-                            }
-                        }
+								if (alm.getCiudad().equals(codigoAlmacen)) {
+									zapatos.remove(i);
+									return "Se ha eliminado exitosamente el zapato de referencia: " + referencia
+											+ " y proveedor relacionado con código: " + codigoProveedor;
+								}
+							}
 
-                    }
-                }
-            }
+						}
+					}
+				} 
+			}
         }
         return "No se ha encontrado el Zapato especificado para eliminar.";
     }
@@ -507,7 +532,7 @@ public class Mundo {
                 for (int i = 0; i < zapatos.size(); i++) {
 
                     Zapato pZapato = zapatos.get(i);
-                    out.println(pZapato.getReferencia() + "}" + pZapato.getPlanta() + "}" + pZapato.getAltura() + "}" + pZapato.getColor() + "}" + pZapato.getMaterial() + "}" + pZapato.getPrecioCosto() + "}" + pZapato.getPrecioVenta() + "}" + pZapato.getCantidad() + "}" + pZapato.getCategoria() + "}" + pZapato.getVendidos() + "}" + pZapato.getStringFecha() + "}" + pZapato.getProveedoresString() + "}" + pZapato.getAlmacenesString());
+                    out.println(pZapato.getReferencia() + "}" + pZapato.getPlanta() + "}" + pZapato.getAltura() + "}" + pZapato.getColor() + "}" + pZapato.getMaterial() + "}" + pZapato.getPrecioCosto() + "}" + pZapato.getPrecioVenta() + "}" + pZapato.getCantidad() + "}" + pZapato.getCategoria() + "}" + pZapato.getVendidos() + "}" + pZapato.getStringFecha() + "}" + pZapato.getProveedoresString() + "}" + pZapato.getAlmacenesString() + "}" + pZapato.esReposicion());
 
                 }
                 out.close();
@@ -604,7 +629,45 @@ public class Mundo {
     }
 
     public void setZapatos(List<Zapato> zapatos) {
-        this.zapatos = zapatos;
+        //mierda para identificar zapato y actualizarlo
+    	for(int i = 0; i<zapatos.size(); i++){//el zapato que llega desde la JTable
+    		Zapato x=zapatos.get(i);
+    		
+    		for(int j = 0; j<this.zapatos.size(); j++){//el zapato que esta ya en el mundo; el que hay que reemplazar
+    			Zapato z = this.zapatos.get(j);
+    			
+    			
+    			if (!z.esReposicion() &&
+    					z.getReferencia().equals(x.getReferencia()) &&
+    					x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString()) &&
+    					x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
+    				
+    				this.zapatos.set(j, x);
+    				
+    			}
+			}
+    	}
+    }
+    
+    public void setReposiciones(List<Zapato> reposiciones) {
+    	//mierda para identificar referencia y actualizarla
+    	for(int i = 0; i<zapatos.size(); i++){//el zapato que llega desde la JTable
+    		Zapato x=zapatos.get(i);
+    		
+    		for(int j = 0; j<this.zapatos.size(); j++){//el zapato que esta ya en el mundo; el que hay que reemplazar
+    			Zapato z = this.zapatos.get(j);
+    			
+    			
+    			if (z.esReposicion() &&
+    					z.getReferencia().equals(x.getReferencia()) &&
+    					x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString()) &&
+    					x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
+    				
+    				this.zapatos.set(j, x);
+    				
+    			}
+			}
+    	}
     }
 
     public List<Proveedor> darProveedores(ArrayList<String> provs) {
@@ -1421,6 +1484,33 @@ System.out.println(retorno.size());
         System.out.println("Se comparan: '"+a.getAlmacenesString()+"' vs '"+b.getAlmacenesString()+"' - resultado: "+a.getAlmacenesString().compareToIgnoreCase(b.getAlmacenesString()));
         return a.getAlmacenesString().compareTo(b.getAlmacenesString());
     }
+
+	public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
+		for (int i = 0; i < zapatos.size(); i++) {
+            Zapato x = zapatos.get(i);
+            if (x.esReposicion()) {
+				if (x.getReferencia().equals(referencia)) {
+					for (int j = 0; j < x.getProveedores().size(); j++) {
+						Proveedor y = x.getProveedores().get(j);
+						if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
+
+							for (int k = 0; k < x.getAlamacenes().size(); k++) {
+								Almacen alm = x.getAlamacenes().get(k);
+
+								if (alm.getCiudad().equals(codigoAlmacen)) {
+									zapatos.remove(i);
+									return "Se ha eliminado exitosamente la reposicion de referencia: " + referencia
+											+ " y proveedor relacionado con código: " + codigoProveedor;
+								}
+							}
+
+						}
+					}
+				} 
+			}
+        }
+        return "No se ha encontrado la reposición especificada para eliminar.";
+	}
 
 	
 

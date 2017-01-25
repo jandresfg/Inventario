@@ -84,6 +84,7 @@ public class Principal extends JFrame implements ActionListener {
 	private Mundo mundo;
 	private JTable table;
 	private Button button;
+	private Button buttonReposiciones;
 	private Button button_1;
 	private Button button_2;
 	private Button button_3;
@@ -485,6 +486,17 @@ else
 		});
 
 		button.setBounds(10, 0, 70, 22);
+		
+		buttonReposiciones = new Button("Reposiciones");
+		panel_2.add(buttonReposiciones);
+		buttonReposiciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				setModelToReposiciones();
+				panel_filterReposiciones.setVisible(false);
+			}
+		});
+
 
 		button_1 = new Button("Almacenes");
 		panel_2.add(button_1);
@@ -629,6 +641,28 @@ else
 										dez.setVisible(true);
 									}
 								});
+								
+								JButton btnAgregarReposicin = new JButton("");
+								btnAgregarReposicin.setIcon(new ImageIcon(Principal.class.getResource("/resources/add_replacement.png")));
+								btnAgregarReposicin.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										DialogoAgregarReposicion dar = new DialogoAgregarReposicion(Principal.this);
+										dar.setVisible(true);
+									}
+								});
+								btnAgregarReposicin.setToolTipText("Agregar reposici\u00F3n");
+								panel_5.add(btnAgregarReposicin);
+								
+								JButton btnEliminarReposicion = new JButton("");
+								btnEliminarReposicion.setIcon(new ImageIcon(Principal.class.getResource("/resources/del_replacement.png")));
+								btnEliminarReposicion.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										DialogoEliminarReposicion der = new DialogoEliminarReposicion(Principal.this);
+										der.setVisible(true);
+									}
+								});
+								btnEliminarReposicion.setToolTipText("Eliminar Reposicion");
+								panel_5.add(btnEliminarReposicion);
 						
 								JButton mntmGuardar = new JButton("");
 								mntmGuardar.setIcon(new ImageIcon(Principal.class.getResource("/resources/save.png")));
@@ -636,12 +670,6 @@ else
 								panel_5.add(mntmGuardar);
 								mntmGuardar.setActionCommand( "Guardar" );
 								mntmGuardar.addActionListener( this );
-								
-								JButton mntmExportar = new JButton("");
-								mntmExportar.setIcon(new ImageIcon(Principal.class.getResource("/resources/excel.png")));
-								mntmExportar.setToolTipText("Exportar a Excel");
-								panel_5.add(mntmExportar);
-								mntmExportar.setActionCommand( "EXPO" );
 								
 								JButton mntmImprimir = new JButton("");
 								mntmImprimir.setIcon(new ImageIcon(Principal.class.getResource("/resources/printer1.png")));
@@ -653,7 +681,6 @@ else
 								mntmImprimir.setActionCommand("PRINT");
 								mntmImprimir.addActionListener(this);
 								panel_5.add(mntmImprimir);
-								mntmExportar.addActionListener( this );
 		btnEliminarZapato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -894,6 +921,20 @@ else
 		JOptionPane.showMessageDialog(this, mensaje);
 		}
 	}
+	
+	public void agregarReposicion(Zapato zap, ArrayList<String> provs, ArrayList<String> alms, boolean anuncio, String mensaje) 
+	{
+		
+
+		zap.setProveedores(mundo.darProveedores(provs));
+		zap.setAlmacenes(mundo.darAlmacenes(alms));
+		String resultado = mundo.agregarReposicion(zap);
+		setModelToReposiciones();
+
+		if (anuncio){
+		JOptionPane.showMessageDialog(this, mensaje);
+		}
+	}
 
 	public void agregarAlmacen(Almacen alma) 
 	{
@@ -1024,6 +1065,43 @@ else
                 table.setRowSorter(new TableRowSorter<>(table.getModel()));
 rdbtnDama.setSelected(false);
 rdbtnCaballero.setSelected(false);	
+
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
+		estoyEnTotales = false;
+	}
+	
+	public void setModelToReposiciones(){
+		TablaReposiciones sol = new TablaReposiciones(mundo.darReposiciones());
+		sol.addTableModelListener(new TableModelListener() {
+			
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				System.out.println("table changed");
+				mundo.setReposiciones(sol.getData());
+				mundo.guardar();
+				agregarCombobox();
+			}
+		});
+		table.setModel(sol);
+		table.setDefaultRenderer(Object.class, new MultipleLines());
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedor")).setPreferredWidth(100);
+		//table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Almacen")).setPreferredWidth(180);
+		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+		leftRenderer.setVerticalAlignment(JLabel.NORTH);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
+		refrescar();
+		buttonReposiciones.requestFocus();
+		panel.setSize(panel.getWidth(), 481);
+		scrollPane.setSize(scrollPane.getWidth(), 481);
+		agregarCombobox();
+		panel_1.setVisible(false);
+                
+        //vaina para que el filtro no influya en este model
+        table.setRowSorter(new TableRowSorter<>(table.getModel()));
+		rdbtnDama.setSelected(false);
+		rdbtnCaballero.setSelected(false);	
 
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
@@ -1456,5 +1534,13 @@ else
 	
 	public List<Almacen> getAlmacenes() {
 		return mundo.darAlmacenes();
+	}
+
+	public void eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
+		String res = mundo.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen);
+		setModelToReposiciones();
+		JOptionPane.showMessageDialog(this, res);
+		mundo.guardar();
+		agregarCombobox();		
 	}
 }

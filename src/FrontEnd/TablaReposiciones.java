@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
 import BackEnd.Almacen;
 import BackEnd.Zapato;
 
-public class TablaZapatos extends AbstractTableModel {
+public class TablaReposiciones extends AbstractTableModel {
 
     List<Zapato> data = new ArrayList<Zapato>();
 
@@ -22,7 +22,7 @@ public class TablaZapatos extends AbstractTableModel {
     Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class, Object.class, Object.class, String.class, String.class, Integer.class, String.class, String.class};
     String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categoría", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
 
-    public TablaZapatos(List<Zapato> arr) {
+    public TablaReposiciones(List<Zapato> arr) {
         data = arr;
     }
 

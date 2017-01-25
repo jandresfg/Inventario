@@ -591,7 +591,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
                         }
                     }
                     if (provs.size() > 1) {
-                        throw new Exception("SÃ³lo puede seleccionar un Proveedor a la vez. Hay " + provs.size() + " seleccionados.");
+                        throw new Exception("Sólo puede seleccionar un Proveedor a la vez. Hay " + provs.size() + " seleccionados.");
                     }
                     if (provs.size() == 0) {
                         throw new Exception("No se ha seleecionado ningun Proveedor");

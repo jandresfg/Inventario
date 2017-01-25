@@ -1,8 +1,9 @@
-referencian}planta2}altura2}color2}material2}99998}88889}101}CABALLERO}0}09-ene-2017}1 - YDERYU}20 DE JULIO
-referencia3}planta3}altura3}color3}material3}99999}88888}10}CABALLERO}0}09-ene-2017}1 - YDERYU}CUCUTA 1
-referencia4}planta4}altura4}color4}material4}99999}88888}20}INFANTIL}0}10-ene-2017}4 - asd}CUCUTA 1
-referencia4}planta4}altura3}color4}material4}99999}88888}20}INFANTIL}0}10-ene-2017}4 - asd}CUCUTA 2
-referencia5}planta5}altura5}color5}mat5}99999}88888}40}CABALLERO}0}10-ene-2017}8 - GINU'S}ENGATIVA
-referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}GIRARDOT 1
-referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}LA MESA
-referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}PATIO BONITO
+referencian}planta2}altura2}color2}material2}99998}88889}101}CABALLERO}0}09-ene-2017}1 - YDERYU}20 DE JULIO}false
+referencia3}planta3}altura3}color3}material3}99999}88888}10}CABALLERO}0}09-ene-2017}1 - YDERYU}CUCUTA 1}false
+referencia4}planta4}altura4}color4}material4}99999}88888}20}INFANTIL}0}10-ene-2017}4 - asd}CUCUTA 1}false
+referencia4}planta4}altura3}color4}material4}99999}88888}20}INFANTIL}0}10-ene-2017}4 - asd}CUCUTA 2}false
+referencia5}planta5}altura5}color5}mat5}99999}88888}40}CABALLERO}0}10-ene-2017}8 - GINU'S}ENGATIVA}false
+referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}GIRARDOT 1}false
+referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}LA MESA}false
+referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7 - MARIANGEL}PATIO BONITO}false
+jesus}planta1}alt1}col1}mat1}34567}87654}345}DAMA}0}25-ene-2017}4 - asd}BOSA 1}true
