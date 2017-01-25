@@ -378,9 +378,9 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
 					String number_ge = nf_ge.format(inputInt);
 					textField.setText(number_ge);
 				} catch (NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null, "Precio Costo invÃ¡lido: por favor use sÃ³lo nÃºmeros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Precio Costo inválido: por favor use sólo números.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
 					JTextField textField = (JTextField) e.getSource();
-					textField.setText(textField.getText().substring(0, textField.getText().length()-1));
+					if(!textField.getText().isEmpty())textField.setText(textField.getText().substring(0, textField.getText().length()-1));
 					
 				}
             }
@@ -420,9 +420,9 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
 					String number_ge = nf_ge.format(inputInt);
 					textField.setText(number_ge);
 				} catch (NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null, "Precio Venta invÃ¡lido: por favor use sÃ³lo nÃºmeros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Precio Venta inválido: por favor use sólo números.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
 					JTextField textField = (JTextField) e.getSource();
-					textField.setText(textField.getText().substring(0, textField.getText().length()-1));
+					if(!textField.getText().isEmpty())textField.setText(textField.getText().substring(0, textField.getText().length()-1));
 				}
             }
 

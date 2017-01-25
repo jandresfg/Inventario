@@ -1,6 +1,9 @@
 FrontEnd\Principal$12.class
+FrontEnd\Principal$22.class
 FrontEnd\TablaAlmacen.class
+FrontEnd\Principal$19.class
 FrontEnd\Principal$7.class
+FrontEnd\DialogoAgregarZapto$3.class
 FrontEnd\Principal$3.class
 FrontEnd\DialogoVenderZapto.class
 FrontEnd\TablaProveedor.class
@@ -12,7 +15,11 @@ BackEnd\Proveedor.class
 FrontEnd\DialogoVenderZapto$1.class
 FrontEnd\Principal$4.class
 FrontEnd\Principal$16.class
+FrontEnd\Principal$21.class
+FrontEnd\TablaGrandesTotales.class
+FrontEnd\DialogoAgregarZapto$2.class
 FrontEnd\DialogoAgregarZapto.class
+FrontEnd\Principal$25.class
 FrontEnd\Principal$10.class
 FrontEnd\MultipleLines.class
 FrontEnd\DialogoAgregrarProveedor.class
@@ -25,6 +32,7 @@ BackEnd\Almacen.class
 FrontEnd\TablaTotalesPorAlmacen.class
 FrontEnd\DialogoAgregrarAlmacen$1.class
 FrontEnd\InterfazManejadorExcel.class
+FrontEnd\Principal$24.class
 FrontEnd\Principal$9.class
 FrontEnd\Principal$1.class
 FrontEnd\Principal$17.class
@@ -35,6 +43,7 @@ FrontEnd\DialogoEliminarAlmacen$1.class
 FrontEnd\DialogoEliminarZapto$1.class
 FrontEnd\DialogoEliminarProveedor.class
 FrontEnd\TablaZapatos.class
+FrontEnd\Principal$26.class
 FrontEnd\Principal$8.class
 FrontEnd\Principal$11.class
 BackEnd\Mundo.class
@@ -42,3 +51,6 @@ FrontEnd\DialogoAgregrarProveedor$1.class
 FrontEnd\Principal$15.class
 BackEnd\Zapato.class
 FrontEnd\Principal$2.class
+FrontEnd\Principal$20.class
+FrontEnd\Principal$23.class
+FrontEnd\Principal$18.class

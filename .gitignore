@@ -49,3 +49,5 @@ Temporary Items
 
 # Ignorar todo lo que esta en la carpeta target
 target
+*.class
+*.jar
