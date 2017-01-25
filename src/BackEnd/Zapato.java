@@ -27,6 +27,8 @@ public class Zapato
 	private List<Almacen> almacenes;
 	
 	private Date fecha;
+        
+        private boolean esReposicion;
 
 
 
@@ -46,18 +48,36 @@ public class Zapato
 		fecha = pFecha;
 		proveedores = new ArrayList<Proveedor>();
 		almacenes = new ArrayList<Almacen>();
+                esReposicion=false;
+	}
+
+
+
+        public Zapato(String pRef, String pPlanta, String pAltura , String pColor, String pMaterial, int pPrecioCosto, int pPrecioVenta,int pCantidad,String pCategoria, int pVendidos, Date pFecha, boolean pesReposicion )
+	{
+
+		referencia =pRef;
+		planta =pPlanta;
+		altura = pAltura;
+		material = pMaterial;
+		color =  pColor;
+		precioCosto = pPrecioCosto;
+		precioVenta = pPrecioVenta;
+		cantidad = pCantidad;
+		setCategoria(pCategoria);
+		vendidos=pVendidos;
+		fecha = pFecha;
+		proveedores = new ArrayList<Proveedor>();
+		almacenes = new ArrayList<Almacen>();
+                esReposicion=pesReposicion;
 	}
 
 
 
 
-
-
-
-
-
-
-
+        public boolean esReposicion(){
+            return esReposicion;
+        }
 	public String getReferencia() {
 		return referencia;
 	}
