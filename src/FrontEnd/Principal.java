@@ -1101,15 +1101,14 @@ rdbtnCaballero.setSelected(false);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
 		        if ("TOTAL".equals(status) ) {
-		            setBackground(Color.BLACK);
-		            setForeground(Color.WHITE);
-		        }
+                            setFont(new Font("default", Font.BOLD, 15));
+setBackground(table.getBackground());
+		            setForeground(table.getForeground());		        }
                          else if ("GASOLINA EXTRA".equals(status))
                         {		          
-                            setFont(new Font("default", Font.BOLD, 12));
-      setBackground(Color.LIGHT_GRAY);
-		            setForeground(Color.WHITE);
-                        }
+                            setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());           }
                         
                         else {
 		            setBackground(table.getBackground());
@@ -1144,9 +1143,9 @@ rdbtnCaballero.setSelected(false);
 		        String status = (String)table.getModel().getValueAt(row, 0);
 		     if ("TOTAL".equals(status))
                         {		          
-                            setFont(new Font("default", Font.BOLD, 12));
-                            setBackground(Color.LIGHT_GRAY);
-		            setForeground(Color.WHITE);
+                            setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
                         } 
                         
                         
@@ -1181,14 +1180,15 @@ rdbtnCaballero.setSelected(false);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
 		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
-		            setBackground(Color.BLACK);
-		            setForeground(Color.WHITE);
+		          setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
 		        } 
                         else if ("TOTAL".equals(status))
                         {		          
-                            setFont(new Font("default", Font.BOLD, 12));
-                  setBackground(Color.LIGHT_GRAY);
-		            setForeground(Color.WHITE);
+                         setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
                         } 
                         
                         
@@ -1232,16 +1232,15 @@ rdbtnCaballero.setSelected(false);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
 		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
-		            setBackground(Color.BLACK);
-		            setForeground(Color.WHITE);
+		      setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
 		        } 
                         else   if ("TOTAL".equals(status))
                         {		          
-                            setFont(new Font("default", Font.BOLD, 12));
-                          // setBackground(table.getBackground());
-		            //setForeground(table.getForeground());
-                            setBackground(Color.LIGHT_GRAY);
-		            setForeground(Color.WHITE);
+                            setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
                         } 
                        
 
