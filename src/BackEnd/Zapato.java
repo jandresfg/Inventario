@@ -352,7 +352,10 @@ public class Zapato
 
 
 
-
+public int getProveedoresNumber() {
+		
+		return proveedores.get(0).getCodigo();
+	}
 
 
 

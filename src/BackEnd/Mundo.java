@@ -1213,11 +1213,11 @@ public class Mundo {
         
         while(i <= j){            
             
-            while(compararCategoria(arr.get(i), pivot) == -1){
+            while(compararCategoria(arr.get(i), pivot) <= -1){
                 i++;
             }
             
-            while(compararCategoria(arr.get(j), pivot) == 1){
+            while(compararCategoria(arr.get(j), pivot) >= 1){
                 j--;
             }
             
@@ -1255,7 +1255,17 @@ public class Mundo {
         if(a[8].equals("X")){ //a es DAMA
             
             if(b[8].equals("X")){ //b es DAMA
-                return 0;
+             
+                int retorno = a[0].toString().compareTo(b[0].toString());
+                if (retorno == 0)
+                {
+                    return a[1].toString().substring(0,3).compareTo(b[1].toString().substring(0,3));
+                }
+                else
+                {
+                
+                return  a[0].toString().compareTo(b[0].toString());
+                }
             }else if(b[9].equals("X")){ //b es CABALLERO
                 return -1;
             }else if(b[10].equals("X")){ //b es INFANTIL
@@ -1267,8 +1277,16 @@ public class Mundo {
             if(b[8].equals("X")){ //b es DAMA
                 return 1;
             }else if(b[9].equals("X")){ //b es CABALLERO
-                return 0;
-            }else if(b[10].equals("X")){ //b es INFANTIL
+    int retorno = a[0].toString().compareTo(b[0].toString());
+                if (retorno == 0)
+                {
+                    return a[1].toString().substring(0,3).compareTo(b[1].toString().substring(0,3));
+                }
+                else
+                {
+                
+                return  a[0].toString().compareTo(b[0].toString());
+                }            }else if(b[10].equals("X")){ //b es INFANTIL
                 return -1;
             }
             
@@ -1279,8 +1297,16 @@ public class Mundo {
             }else if(b[9].equals("X")){ //b es CABALLERO
                 return 1;
             }else if(b[10].equals("X")){ //b es INFANTIL
-                return 0;
-            }
+    int retorno = a[0].toString().compareTo(b[0].toString());
+                if (retorno == 0)
+                {
+                    return a[1].toString().substring(0,3).compareTo(b[1].toString().substring(0,3));
+                }
+                else
+                {
+                
+                return  a[0].toString().compareTo(b[0].toString());
+                }            }
             
         }
         return Integer.MAX_VALUE;
@@ -1437,8 +1463,32 @@ System.out.println(retorno.size());
     }
 
     private int compararZapato(Zapato a, Zapato b) {
-        System.out.println("Se comparan: '"+a.getAlmacenesString()+"' vs '"+b.getAlmacenesString()+"' - resultado: "+a.getAlmacenesString().compareToIgnoreCase(b.getAlmacenesString()));
-        return a.getAlmacenesString().compareTo(b.getAlmacenesString());
+        System.out.println("Se comparan: '"+a.getProveedoresString()+"' vs '"+b.getProveedoresString()+"' - resultado: "+a.getProveedoresString().compareTo(b.getProveedoresString()));
+       
+        int retorno  = a.getAlmacenesString().compareTo(b.getAlmacenesString());
+        if (retorno == 0)
+        {
+           if(a.getProveedoresNumber()> b.getProveedoresNumber())
+           {
+           return 1;
+           }
+           else if (a.getProveedoresNumber()<b.getProveedoresNumber())
+           {
+               return -1;
+           }
+           else
+           {
+               
+               return a.getReferencia().compareTo(b.getReferencia());
+               
+          }
+           
+        }
+        else
+        {
+        return retorno;
+        }
+        
     }
 
 	public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
