@@ -884,35 +884,21 @@ public class Mundo {
                     if (papitas.getCiudad().equals(ka.getCiudad())) {
 
                         flag = true;
-                        papitas.setTotalCosto(z.getPrecioCosto());
+                        papitas.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
 
                         ka.setTotalPares(z.getCantidad());
 
-                        papitas.setTotalVenta(z.getPrecioVenta());
-                        if (z.getCategoria().equals("CABALLERO")) {
-                            papitas.setTotalCaballero(z.getPrecioCosto());
-
-                        } else if (z.getCategoria().equals("DAMA")) {
-                            papitas.setTotalDama(z.getPrecioCosto());
-                        } else if (z.getCategoria().equals("INFANTIL")) {
-                            papitas.setTotalInfantil(z.getPrecioCosto());
-                        }
+                        papitas.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
+        
                     }
                 }
                 if (!flag) {
-                    ka.setTotalCosto(z.getPrecioCosto());
+                    ka.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
 
                     ka.setTotalPares(z.getCantidad());
 
-                    ka.setTotalVenta(z.getPrecioVenta());
-                    if (z.getCategoria().equals("CABALLERO")) {
-                        ka.setTotalCaballero(z.getPrecioCosto());
-
-                    } else if (z.getCategoria().equals("DAMA")) {
-                        ka.setTotalDama(z.getPrecioCosto());
-                    } else if (z.getCategoria().equals("INFANTIL")) {
-                        ka.setTotalInfantil(z.getPrecioCosto());
-                    }
+                    ka.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
+                   
 
                     almas.add(ka);
 
@@ -995,35 +981,21 @@ public class Mundo {
                     if (papitas.getCiudad().equals(ka.getCiudad())) {
 
                         flag = true;
-                        papitas.setTotalCosto(z.getPrecioCosto());
+                        papitas.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
 
                         ka.setTotalPares(z.getCantidad());
 
-                        papitas.setTotalVenta(z.getPrecioVenta());
-                        if (z.getCategoria().equals("CABALLERO")) {
-                            papitas.setTotalCaballero(z.getPrecioCosto());
-
-                        } else if (z.getCategoria().equals("DAMA")) {
-                            papitas.setTotalDama(z.getPrecioCosto());
-                        } else if (z.getCategoria().equals("INFANTIL")) {
-                            papitas.setTotalInfantil(z.getPrecioCosto());
-                        }
+                        papitas.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
+                      
                     }
                 }
                 if (!flag) {
-                    ka.setTotalCosto(z.getPrecioCosto());
+                    ka.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
 
                     ka.setTotalPares(z.getCantidad());
 
-                    ka.setTotalVenta(z.getPrecioVenta());
-                    if (z.getCategoria().equals("CABALLERO")) {
-                        ka.setTotalCaballero(z.getPrecioCosto());
-
-                    } else if (z.getCategoria().equals("DAMA")) {
-                        ka.setTotalDama(z.getPrecioCosto());
-                    } else if (z.getCategoria().equals("INFANTIL")) {
-                        ka.setTotalInfantil(z.getPrecioCosto());
-                    }
+                    ka.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
+                   
 
                     almas.add(ka);
 
@@ -1156,8 +1128,6 @@ public class Mundo {
 
 		}
 
-System.out.println(arr.size());
-System.out.println(arr.get(8)[0]);
 
         return arr;
 	}
@@ -1179,35 +1149,21 @@ System.out.println(arr.get(8)[0]);
 	                    if (papitas.getCiudad().equals(ka.getCiudad())) {
 
 	                        flag = true;
-	                        papitas.setTotalCosto(z.getPrecioCosto());
+	                        papitas.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
 
-	                        ka.setTotalPares(z.getCantidad());
+                        ka.setTotalPares(z.getCantidad());
 
-	                        papitas.setTotalVenta(z.getPrecioVenta());
-	                        if (z.getCategoria().equals("CABALLERO")) {
-	                            papitas.setTotalCaballero(z.getPrecioCosto());
-
-	                        } else if (z.getCategoria().equals("DAMA")) {
-	                            papitas.setTotalDama(z.getPrecioCosto());
-	                        } else if (z.getCategoria().equals("INFANTIL")) {
-	                            papitas.setTotalInfantil(z.getPrecioCosto());
-	                        }
+                        papitas.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
+	                     
 	                    }
 	                }
 	                if (!flag) {
-	                    ka.setTotalCosto(z.getPrecioCosto());
+	                    ka.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
 
 	                    ka.setTotalPares(z.getCantidad());
 
-	                    ka.setTotalVenta(z.getPrecioVenta());
-	                    if (z.getCategoria().equals("CABALLERO")) {
-	                        ka.setTotalCaballero(z.getPrecioCosto());
-
-	                    } else if (z.getCategoria().equals("DAMA")) {
-	                        ka.setTotalDama(z.getPrecioCosto());
-	                    } else if (z.getCategoria().equals("INFANTIL")) {
-	                        ka.setTotalInfantil(z.getPrecioCosto());
-	                    }
+	                    ka.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
+	                   
 
 	                    almas.add(ka);
 
@@ -1329,7 +1285,7 @@ System.out.println(arr.get(8)[0]);
         }
         return Integer.MAX_VALUE;
     }
-    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix) 
+    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix, boolean es) 
     {
 
     	
@@ -1343,7 +1299,7 @@ System.out.println(arr.get(8)[0]);
     	                int sumaPrecioCosto = 0;
     	                int sumaPrecioVenta = 0;
     	                Almacen ka = z.getAlamacenes().get(0);
-    	                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix)) {
+    	                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
     	                    sumaCantidad += z.getCantidad();
     	                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
     	                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();

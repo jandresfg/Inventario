@@ -1686,8 +1686,18 @@ setModelToTotalesPorAlmacenFabuloso(filterText.getText());
 }
 else
 {
-	setModelToTotalesPorAlmacen();
-}
+    if(checkBoxREP.isSelected())
+    {
+    setModelToTotalesPorAlmacenResposicion();
+
+    }
+    else
+    {
+    	setModelToTotalesPorAlmacen();
+
+    }
+    }
+    
 
 
 }
@@ -1726,7 +1736,7 @@ else
 	}
 	
 	public void setModelToTotalesPorAlmacenFabuloso(String prefix){
-		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaro(prefix));
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaro(prefix, checkBoxREP.isSelected()));
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
