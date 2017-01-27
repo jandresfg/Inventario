@@ -101,6 +101,8 @@ private JButton btnNewButton;
 private JButton btnNewButton_1;
 private JTextField textCodigoProveedor;
 private JTextField txtAlmacen;
+private JLabel lblColor;
+private JTextField textField;
 // -----------------------------------------------
 // Métodos
 // -----------------------------------------------
@@ -146,6 +148,12 @@ public DialogoEliminarReposicion( Principal pprincipal )
     
     txtAlmacen = new JTextField();
     txtAlmacen.setColumns(10);
+    
+    lblColor = new JLabel("Color");
+    lblColor.setHorizontalAlignment(SwingConstants.LEFT);
+    
+    textField = new JTextField();
+    textField.setColumns(10);
     GroupLayout groupLayout = new GroupLayout(getContentPane());
     groupLayout.setHorizontalGroup(
     	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -160,39 +168,55 @@ public DialogoEliminarReposicion( Principal pprincipal )
     				.addGroup(groupLayout.createSequentialGroup()
     					.addContainerGap()
     					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
-    			.addGap(18)
     			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-    				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(lblciudadAlmacen, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-    			.addPreferredGap(ComponentPlacement.UNRELATED)
-    			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-    					.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-    					.addContainerGap())
-    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-    					.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-    					.addGap(34))
-    				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-    					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(18)
+    					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+    						.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(lblciudadAlmacen, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+    					.addPreferredGap(ComponentPlacement.UNRELATED, 10, Short.MAX_VALUE)
+    					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+    						.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+    						.addGroup(groupLayout.createSequentialGroup()
+    							.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+    							.addGap(34)))
+    					.addPreferredGap(ComponentPlacement.RELATED)
+    					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+    						.addGroup(groupLayout.createSequentialGroup()
+    							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+    							.addContainerGap())
+    						.addGroup(groupLayout.createSequentialGroup()
+    							.addComponent(lblColor, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+    							.addGap(26))))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addPreferredGap(ComponentPlacement.RELATED)
+    					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
     					.addContainerGap())))
     );
     groupLayout.setVerticalGroup(
     	groupLayout.createParallelGroup(Alignment.LEADING)
     		.addGroup(groupLayout.createSequentialGroup()
     			.addContainerGap()
-    			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-    				.addComponent(lblReferencia)
-    				.addComponent(lblciudadAlmacen)
-    				.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-    			.addGap(4)
-    			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-    				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+    			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+    						.addComponent(lblReferencia)
+    						.addComponent(lblciudadAlmacen)
+    						.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(lblColor))
+    					.addGap(4)
+    					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+    						.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(18)
+    					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)))
     			.addPreferredGap(ComponentPlacement.RELATED)
-    			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+    			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     				.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-    				.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
+    				.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+    			.addContainerGap())
     );
     getContentPane().setLayout(groupLayout);
     pack( );
@@ -239,9 +263,10 @@ public void actionPerformed( ActionEvent e )
           String referencia = textReft.getText();
           String codigoProveedor = textCodigoProveedor.getText();
           String codigoAlmacen = txtAlmacen.getText();
+          String color = textField.getText();
 
           
-        principal.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen);
+        principal.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen,color);
            
             setVisible( false );
             dispose( );

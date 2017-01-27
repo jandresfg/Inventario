@@ -1468,11 +1468,11 @@ public class Mundo {
 
     }
 
-    public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
+    public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen, String color) {
         for (int i = 0; i < zapatos.size(); i++) {
             Zapato x = zapatos.get(i);
             if (x.esReposicion()) {
-                if (x.getReferencia().equals(referencia)) {
+                if (x.getReferencia().equals(referencia) && x.getColor().equalsIgnoreCase(color)) {
                     for (int j = 0; j < x.getProveedores().size(); j++) {
                         Proveedor y = x.getProveedores().get(j);
                         if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
@@ -1483,7 +1483,7 @@ public class Mundo {
                                 if (alm.getCiudad().equals(codigoAlmacen)) {
                                     zapatos.remove(i);
                                     return "Se ha eliminado exitosamente la reposicion de referencia: " + referencia
-                                            + " y proveedor relacionado con código: " + codigoProveedor;
+                                            + ", color "+color+" y proveedor relacionado con código: " + codigoProveedor;
                                 }
                             }
 

@@ -1793,8 +1793,8 @@ else
 		return mundo.darAlmacenes();
 	}
 
-	public void eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
-		String res = mundo.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen);
+	public void eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen, String color) {
+		String res = mundo.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen, color);
 		setModelToReposiciones();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
