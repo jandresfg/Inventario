@@ -1225,9 +1225,9 @@ else
 		}
 	}
 
-	public void eliminar(String referencia, String codigoProveedor, String codigoAlmacen)
+	public void eliminar(String referencia, String codigoProveedor, String codigoAlmacen, String color)
 	{
-		String res = mundo.eliminarZapato(referencia, codigoProveedor,codigoAlmacen);
+		String res = mundo.eliminarZapato(referencia, codigoProveedor,codigoAlmacen, color);
 		setModelToZapatos();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
