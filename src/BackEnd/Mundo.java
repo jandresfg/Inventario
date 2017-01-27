@@ -79,7 +79,7 @@ public class Mundo {
 
         return "Se ha agregado exitosamente el zapato de Referencia: \"" + pZapato.getReferencia() + "\" y Almacén: \"" + pZapato.getAlmacenesString() + "\"";
     }
-    
+
     public String agregarReposicion(Zapato pZapato) {
         zapatos.add(pZapato);
         guardar();
@@ -164,25 +164,31 @@ public class Mundo {
     }
 
     public List<Zapato> darZapatos() {
-    	List<Zapato> zapatosSinReposiciones = new ArrayList<Zapato>();
-    	for(Zapato x: zapatos){
-    		if(!x.esReposicion()){
-    			zapatosSinReposiciones.add(x);
-    		}
-    	}
-    	if(zapatosSinReposiciones.isEmpty()) return zapatosSinReposiciones;
-    	else return quickSortZapatos(zapatosSinReposiciones, 0, zapatosSinReposiciones.size()-1);
+        List<Zapato> zapatosSinReposiciones = new ArrayList<Zapato>();
+        for (Zapato x : zapatos) {
+            if (!x.esReposicion()) {
+                zapatosSinReposiciones.add(x);
+            }
+        }
+        if (zapatosSinReposiciones.isEmpty()) {
+            return zapatosSinReposiciones;
+        } else {
+            return quickSortZapatos(zapatosSinReposiciones, 0, zapatosSinReposiciones.size() - 1);
+        }
     }
-    
+
     public List<Zapato> darReposiciones() {
-    	List<Zapato> soloReposiciones = new ArrayList<Zapato>();
-    	for(Zapato x: zapatos){
-    		if(x.esReposicion()){
-    			soloReposiciones.add(x);
-    		}
-    	}
-    	if (soloReposiciones.isEmpty()) return soloReposiciones;
-    	else return quickSortZapatos(soloReposiciones, 0, soloReposiciones.size()-1);
+        List<Zapato> soloReposiciones = new ArrayList<Zapato>();
+        for (Zapato x : zapatos) {
+            if (x.esReposicion()) {
+                soloReposiciones.add(x);
+            }
+        }
+        if (soloReposiciones.isEmpty()) {
+            return soloReposiciones;
+        } else {
+            return quickSortZapatos(soloReposiciones, 0, soloReposiciones.size() - 1);
+        }
     }
 
     public List<Almacen> darAlmacenes() {
@@ -197,42 +203,43 @@ public class Mundo {
 
     /**
      * Detecta codigos que no se han usado en la lista de proveedores
+     *
      * @return el primer codigo encontrado
      */
     public String darCodigo() {
-        
+
         //se crea una lista del tamano de la lista de proveedores con numeros ordenados asendentes empezando en 1
         ArrayList listaIdealDeCodigos = new ArrayList();
-        for(int i = 0; i<proveedores.size(); i++){
-            listaIdealDeCodigos.add(i, i+1);
+        for (int i = 0; i < proveedores.size(); i++) {
+            listaIdealDeCodigos.add(i, i + 1);
         }
-        System.out.println("tamaño lista: "+listaIdealDeCodigos.size());
+        System.out.println("tamaño lista: " + listaIdealDeCodigos.size());
 
         //luego se recorre esa lista y se retorna el primer numero que no sea codigo de ningun proveedor
-        for(int i = 0; i<listaIdealDeCodigos.size(); i++){
-            int codigoAct = (int)listaIdealDeCodigos.get(i);
+        for (int i = 0; i < listaIdealDeCodigos.size(); i++) {
+            int codigoAct = (int) listaIdealDeCodigos.get(i);
             boolean codigoEncontrado = false;
-            for(int j = 0; j<proveedores.size() && !codigoEncontrado; j++){
+            for (int j = 0; j < proveedores.size() && !codigoEncontrado; j++) {
                 Proveedor x = proveedores.get(j);
-                if(codigoAct == x.getCodigo()){
+                if (codigoAct == x.getCodigo()) {
                     codigoEncontrado = true;
-                    if(x.getFabrica().equals("") || x.getFabrica().equals(" ")){
-                        return ""+codigoAct;
+                    if (x.getFabrica().equals("") || x.getFabrica().equals(" ")) {
+                        return "" + codigoAct;
                     }
                 }
             }
-            if(!codigoEncontrado){
-                return ""+codigoAct;
+            if (!codigoEncontrado) {
+                return "" + codigoAct;
             }
         }
-        
+
         /*
         Si no se encuentra ningun numero que no sea codigo de ningun proveedor, 
         significa que la lista de proveedores es igual a la lista ideal.
         Entonces se retorna simplemente el siguiente numero
-        */
-        return ""+(listaIdealDeCodigos.size()+1);
-        
+         */
+        return "" + (listaIdealDeCodigos.size() + 1);
+
         /*for (int i = 0; i < proveedores.size(); i++) {
             Proveedor z = proveedores.get(i);
             int numeroActual = z.getCodigo();
@@ -458,25 +465,25 @@ public class Mundo {
         for (int i = 0; i < zapatos.size(); i++) {
             Zapato x = zapatos.get(i);
             if (!x.esReposicion()) {
-				if (x.getReferencia().equals(referencia)) {
-					for (int j = 0; j < x.getProveedores().size(); j++) {
-						Proveedor y = x.getProveedores().get(j);
-						if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
+                if (x.getReferencia().equals(referencia)) {
+                    for (int j = 0; j < x.getProveedores().size(); j++) {
+                        Proveedor y = x.getProveedores().get(j);
+                        if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
 
-							for (int k = 0; k < x.getAlamacenes().size(); k++) {
-								Almacen alm = x.getAlamacenes().get(k);
+                            for (int k = 0; k < x.getAlamacenes().size(); k++) {
+                                Almacen alm = x.getAlamacenes().get(k);
 
-								if (alm.getCiudad().equals(codigoAlmacen)) {
-									zapatos.remove(i);
-									return "Se ha eliminado exitosamente el zapato de referencia: " + referencia
-											+ " y proveedor relacionado con código: " + codigoProveedor;
-								}
-							}
+                                if (alm.getCiudad().equals(codigoAlmacen)) {
+                                    zapatos.remove(i);
+                                    return "Se ha eliminado exitosamente el zapato de referencia: " + referencia
+                                            + " y proveedor relacionado con código: " + codigoProveedor;
+                                }
+                            }
 
-						}
-					}
-				} 
-			}
+                        }
+                    }
+                }
+            }
         }
         return "No se ha encontrado el Zapato especificado para eliminar.";
     }
@@ -559,7 +566,7 @@ public class Mundo {
                     proveedores.remove(i);
                     proveedores.add(prov);
                     borrado = true;
-                    guardar() ;
+                    guardar();
                 } else {
                     throw new Exception("El Proveedor con código '" + codigoAborrar + "' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
@@ -630,44 +637,42 @@ public class Mundo {
 
     public void setZapatos(List<Zapato> zapatos) {
         //mierda para identificar zapato y actualizarlo
-    	for(int i = 0; i<zapatos.size(); i++){//el zapato que llega desde la JTable
-    		Zapato x=zapatos.get(i);
-    		
-    		for(int j = 0; j<this.zapatos.size(); j++){//el zapato que esta ya en el mundo; el que hay que reemplazar
-    			Zapato z = this.zapatos.get(j);
-    			
-    			
-    			if (!z.esReposicion() &&
-    					z.getReferencia().equals(x.getReferencia()) &&
-    					x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString()) &&
-    					x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
-    				
-    				this.zapatos.set(j, x);
-    				
-    			}
-			}
-    	}
+        for (int i = 0; i < zapatos.size(); i++) {//el zapato que llega desde la JTable
+            Zapato x = zapatos.get(i);
+
+            for (int j = 0; j < this.zapatos.size(); j++) {//el zapato que esta ya en el mundo; el que hay que reemplazar
+                Zapato z = this.zapatos.get(j);
+
+                if (!z.esReposicion()
+                        && z.getReferencia().equals(x.getReferencia())
+                        && x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString())
+                        && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
+
+                    this.zapatos.set(j, x);
+
+                }
+            }
+        }
     }
-    
+
     public void setReposiciones(List<Zapato> reposiciones) {
-    	//mierda para identificar referencia y actualizarla
-    	for(int i = 0; i<zapatos.size(); i++){//el zapato que llega desde la JTable
-    		Zapato x=zapatos.get(i);
-    		
-    		for(int j = 0; j<this.zapatos.size(); j++){//el zapato que esta ya en el mundo; el que hay que reemplazar
-    			Zapato z = this.zapatos.get(j);
-    			
-    			
-    			if (z.esReposicion() &&
-    					z.getReferencia().equals(x.getReferencia()) &&
-    					x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString()) &&
-    					x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
-    				
-    				this.zapatos.set(j, x);
-    				
-    			}
-			}
-    	}
+        //mierda para identificar referencia y actualizarla
+        for (int i = 0; i < zapatos.size(); i++) {//el zapato que llega desde la JTable
+            Zapato x = zapatos.get(i);
+
+            for (int j = 0; j < this.zapatos.size(); j++) {//el zapato que esta ya en el mundo; el que hay que reemplazar
+                Zapato z = this.zapatos.get(j);
+
+                if (z.esReposicion()
+                        && z.getReferencia().equals(x.getReferencia())
+                        && x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString())
+                        && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
+
+                    this.zapatos.set(j, x);
+
+                }
+            }
+        }
     }
 
     public List<Proveedor> darProveedores(ArrayList<String> provs) {
@@ -831,7 +836,7 @@ public class Mundo {
                 int sumaPrecioCosto = 0;
                 int sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
-                if (ka.toString().equals(a.toString()) &&  !z.esReposicion()) {
+                if (ka.toString().equals(a.toString()) && !z.esReposicion()) {
                     sumaCantidad += z.getCantidad();
                     sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
@@ -864,7 +869,7 @@ public class Mundo {
                 }
             }
         }
-        return quickSort(arr, 0 , (arr.size())-1);
+        return quickSort(arr, 0, (arr.size()) - 1);
     }
 
     public ArrayList<Object[]> darGrandesTotales(boolean selecionado) {
@@ -884,21 +889,20 @@ public class Mundo {
                     if (papitas.getCiudad().equals(ka.getCiudad())) {
 
                         flag = true;
-                        papitas.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
 
                         ka.setTotalPares(z.getCantidad());
 
-                        papitas.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
-        
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
                     }
                 }
                 if (!flag) {
-                    ka.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
 
                     ka.setTotalPares(z.getCantidad());
 
-                    ka.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
-                   
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
 
                     almas.add(ka);
 
@@ -921,10 +925,8 @@ public class Mundo {
             res = new Object[4];
 
         }
-        
-        
-        Object[] ras = new Object[4];
 
+        Object[] ras = new Object[4];
 
         ras[0] = "TOTAL";
         ras[1] = "";
@@ -932,8 +934,8 @@ public class Mundo {
         ras[2] = "";
         ras[3] = "";
         arr.add(ras);
-        
-        ArrayList<Object[]> papitas =    setModelToHiperDuperTotal(selecionado);
+
+        ArrayList<Object[]> papitas = setModelToHiperDuperTotal(selecionado);
         arr.addAll(papitas);
 
         return arr;
@@ -942,14 +944,14 @@ public class Mundo {
     public String verificarCodigoProveedor(Proveedor prov) {
         System.out.println(proveedores.size());
         System.out.println(prov.getCodigo());
-        
+
         boolean codigoUsado = false;
-        for(int i = 0; i<proveedores.size() && !codigoUsado; i++){
-            if(prov.getCodigo() == proveedores.get(i).getCodigo()){
+        for (int i = 0; i < proveedores.size() && !codigoUsado; i++) {
+            if (prov.getCodigo() == proveedores.get(i).getCodigo()) {
                 codigoUsado = true;
             }
         }
-        
+
         if (!codigoUsado || prov.getCodigo() > proveedores.size()) {
             return "facil";
 
@@ -963,8 +965,7 @@ public class Mundo {
 
     }
 
-	public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro, boolean selecionado) 
-	{
+    public ArrayList<Object[]> darGrandesTotalesFiltrado(String filtro, boolean selecionado) {
 
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -974,28 +975,27 @@ public class Mundo {
             Zapato z = zapatos.get(j);
 
             Almacen ka = z.getAlamacenes().get(0);
-            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro) && z.esReposicion()== selecionado) {
+            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro) && z.esReposicion() == selecionado) {
                 boolean flag = false;
                 for (int k = 0; k < almas.size() && !flag; k++) {
                     Almacen papitas = almas.get(k);
                     if (papitas.getCiudad().equals(ka.getCiudad())) {
 
                         flag = true;
-                        papitas.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
 
                         ka.setTotalPares(z.getCantidad());
 
-                        papitas.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
-                      
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
                     }
                 }
                 if (!flag) {
-                    ka.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
 
                     ka.setTotalPares(z.getCantidad());
 
-                    ka.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
-                   
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
 
                     almas.add(ka);
 
@@ -1017,34 +1017,29 @@ public class Mundo {
             res[3] = x.getTotalPares();
 
             totalCosto += x.getTotalCosto();
-             totalVenta += x.getTotalVenta();
-             totalPares += x.getTotalPares();
+            totalVenta += x.getTotalVenta();
+            totalPares += x.getTotalPares();
 
-            
-            
             arr.add(res);
             x.volverCero();
             res = new Object[4];
 
         }
         Object[] ras = new Object[4];
-      
+
         ras[0] = "TOTAL";
         ras[1] = totalCosto;
 
         ras[2] = totalVenta;
         ras[3] = totalPares;
         arr.add(ras);
-        
 
         return arr;
-	}
+    }
 
-	public ArrayList<Object[]> darGrandesTotalesFiltradoDoble(String filtroA, String filtroB, boolean selecionado)
-	{
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+    public ArrayList<Object[]> darGrandesTotalesFiltradoDoble(String filtroA, String filtroB, boolean selecionado) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
-      
         Object[] res = new Object[4];
         res[0] = filtroA;
         res[1] = "";
@@ -1052,13 +1047,12 @@ public class Mundo {
         res[2] = "";
         res[3] = "";
         arr.add(res);
-        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA,selecionado) ;
-        for (int i = 0; i < papitas.size(); i++) 
-        {
+        ArrayList<Object[]> papitas = darGrandesTotalesFiltrado(filtroA, selecionado);
+        for (int i = 0; i < papitas.size(); i++) {
             Object[] a = papitas.get(i);
             arr.add(a);
 
-		}
+        }
         Object[] ras = new Object[4];
 
         ras[0] = filtroB;
@@ -1067,22 +1061,19 @@ public class Mundo {
         ras[2] = "";
         ras[3] = "";
         arr.add(ras);
-        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB,selecionado) ;
-        for (int i = 0; i < doritos.size(); i++) 
-        {
+        ArrayList<Object[]> doritos = darGrandesTotalesFiltrado(filtroB, selecionado);
+        for (int i = 0; i < doritos.size(); i++) {
             Object[] a = doritos.get(i);
             arr.add(a);
 
-		}
+        }
 
         return arr;
-	}
+    }
 
-	public ArrayList<Object[]> darGrandesTotalesFiltradoTriple(String filtroA, String filtroB, String filtroC, boolean selecionado)
-	{
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+    public ArrayList<Object[]> darGrandesTotalesFiltradoTriple(String filtroA, String filtroB, String filtroC, boolean selecionado) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
-	      
         Object[] res = new Object[4];
         res[0] = filtroA;
         res[1] = "";
@@ -1090,13 +1081,12 @@ public class Mundo {
         res[2] = "";
         res[3] = "";
         arr.add(res);
-        ArrayList<Object[]> papitas =darGrandesTotalesFiltrado(filtroA,selecionado) ;
-        for (int i = 0; i < papitas.size(); i++) 
-        {
+        ArrayList<Object[]> papitas = darGrandesTotalesFiltrado(filtroA, selecionado);
+        for (int i = 0; i < papitas.size(); i++) {
             Object[] a = papitas.get(i);
             arr.add(a);
 
-		}
+        }
         Object[] ras = new Object[4];
 
         ras[0] = filtroB;
@@ -1105,13 +1095,12 @@ public class Mundo {
         ras[2] = "";
         ras[3] = "";
         arr.add(ras);
-        ArrayList<Object[]> doritos =darGrandesTotalesFiltrado(filtroB,selecionado) ;
-        for (int i = 0; i < doritos.size(); i++) 
-        {
+        ArrayList<Object[]> doritos = darGrandesTotalesFiltrado(filtroB, selecionado);
+        for (int i = 0; i < doritos.size(); i++) {
             Object[] a = doritos.get(i);
             arr.add(a);
 
-		}
+        }
         Object[] rus = new Object[4];
 
         rus[0] = filtroC;
@@ -1120,464 +1109,446 @@ public class Mundo {
         rus[2] = "";
         rus[3] = "";
         arr.add(rus);
-        ArrayList<Object[]> tostacos =darGrandesTotalesFiltrado(filtroC,selecionado) ;
-        for (int i = 0; i < tostacos.size(); i++) 
-        {
+        ArrayList<Object[]> tostacos = darGrandesTotalesFiltrado(filtroC, selecionado);
+        for (int i = 0; i < tostacos.size(); i++) {
             Object[] a = tostacos.get(i);
             arr.add(a);
 
-		}
-
+        }
 
         return arr;
-	}
+    }
 
-	public ArrayList<Object[]> setModelToHiperDuperTotal(boolean selecionado)
-	{
-		  ArrayList<Object[]> arr = new ArrayList<Object[]>();
+    public ArrayList<Object[]> setModelToHiperDuperTotal(boolean selecionado) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
-	        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
 
-	        for (int j = 0; j < zapatos.size(); j++) {
-	            Zapato z = zapatos.get(j);
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
 
-	            Almacen ka = z.getAlamacenes().get(0);
-	            if (z.getCantidad() > 0 && z.esReposicion() ==selecionado ) {
-	                boolean flag = false;
-	                for (int k = 0; k < almas.size() && !flag; k++) {
-	                    Almacen papitas = almas.get(k);
-	                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.esReposicion() == selecionado) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
 
-	                        flag = true;
-	                        papitas.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
 
                         ka.setTotalPares(z.getCantidad());
 
-                        papitas.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
-	                     
-	                    }
-	                }
-	                if (!flag) {
-	                    ka.setTotalCosto(z.getPrecioCosto()*z.getCantidad());
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
 
-	                    ka.setTotalPares(z.getCantidad());
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
 
-	                    ka.setTotalVenta(z.getPrecioVenta()*z.getCantidad());
-	                   
+                    ka.setTotalPares(z.getCantidad());
 
-	                    almas.add(ka);
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
 
-	                }
-	            }
-	        }
-	        Object[] res = new Object[4];
+                    almas.add(ka);
 
-	        int totalCosto = 0;
-	        int totalVenta = 0;
-	        int totalPares = 0;
+                }
+            }
+        }
+        Object[] res = new Object[4];
 
+        int totalCosto = 0;
+        int totalVenta = 0;
+        int totalPares = 0;
 
-	        for (int i = 0; i < almas.size(); i++) {
-	            Almacen x = almas.get(i);
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
 
-	            totalCosto+= x.getTotalCosto();
-	            totalVenta+=x.getTotalVenta();
-	            totalPares +=x.getTotalPares();
-	            x.volverCero();
+            totalCosto += x.getTotalCosto();
+            totalVenta += x.getTotalVenta();
+            totalPares += x.getTotalPares();
+            x.volverCero();
 
-	        }
-	        res[0] = "GASOLINA EXTRA";
-            res[1] = totalCosto;
+        }
+        res[0] = "GASOLINA EXTRA";
+        res[1] = totalCosto;
 
-            res[2] = totalVenta;
-            res[3] = totalPares;
-	        arr.add(res);
+        res[2] = totalVenta;
+        res[3] = totalPares;
+        arr.add(res);
 
-	        return arr;
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+        return arr;
+
+    }
+
     private ArrayList<Object[]> quickSort(ArrayList<Object[]> arr, int lowerIndex, int higherIndex) {
         int i = lowerIndex;
         int j = higherIndex;
-        Object[] pivot = arr.get(lowerIndex+(higherIndex-lowerIndex)/2);
-        
-        while(i <= j){            
-            
-            while(compararCategoria(arr.get(i), pivot) <= -1){
+        Object[] pivot = arr.get(lowerIndex + (higherIndex - lowerIndex) / 2);
+
+        while (i <= j) {
+
+            while (compararCategoria(arr.get(i), pivot) <= -1) {
                 i++;
             }
-            
-            while(compararCategoria(arr.get(j), pivot) >= 1){
+
+            while (compararCategoria(arr.get(j), pivot) >= 1) {
                 j--;
             }
-            
-            if(i <= j){
+
+            if (i <= j) {
                 //intercambia i y j dentro de arr
                 Object[] swap = arr.get(i);
                 arr.set(i, arr.get(j));
                 arr.set(j, swap);
-                
+
                 //mueve indice a la siguiente posicion en ambos lados
                 i++;
                 j--;
             }
-            
+
         }
-        
-        if(lowerIndex < j){
+
+        if (lowerIndex < j) {
             arr = quickSort(arr, lowerIndex, j);
         }
-        
-        if(i < higherIndex){
-            arr = quickSort(arr, i, higherIndex);   
+
+        if (i < higherIndex) {
+            arr = quickSort(arr, i, higherIndex);
         }
-        
+
         return arr;
     }
 
     /**
      * el orden deseado es DAMA, luego, CABALLERO, luego INFANTIL
+     *
      * @param a
      * @param b
-     * @return 
+     * @return
      */
     private int compararCategoria(Object[] a, Object[] b) {
-        if(a[8].equals("X")){ //a es DAMA
-            
-            if(b[8].equals("X")){ //b es DAMA
-             
+        if (a[8].equals("X")) { //a es DAMA
+
+            if (b[8].equals("X")) { //b es DAMA
+
                 int retorno = a[0].toString().compareTo(b[0].toString());
-                if (retorno == 0)
-                {
-                    return a[1].toString().substring(0,3).compareTo(b[1].toString().substring(0,3));
+                if (retorno == 0) {
+                    int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
+                    int betha = Integer.parseInt(b[1].toString().split(" -")[0]);
+                    if (alpha > betha) {
+                        return 1;
+                    } else if (alpha < betha) {
+                        return -1;
+                    } else {
+                        return a[2].toString().compareTo(b[2].toString());
+
+                    }
+                } else {
+                    return retorno;
                 }
-                else
-                {
-                
-                return  a[0].toString().compareTo(b[0].toString());
-                }
-            }else if(b[9].equals("X")){ //b es CABALLERO
+
+            } else if (b[9].equals("X")) { //b es CABALLERO
                 return -1;
-            }else if(b[10].equals("X")){ //b es INFANTIL
-                return -1;
-            }
-            
-        }else if(a[9].equals("X")){ //a es CABALLERO
-            
-            if(b[8].equals("X")){ //b es DAMA
-                return 1;
-            }else if(b[9].equals("X")){ //b es CABALLERO
-    int retorno = a[0].toString().compareTo(b[0].toString());
-                if (retorno == 0)
-                {
-                    return a[1].toString().substring(0,3).compareTo(b[1].toString().substring(0,3));
-                }
-                else
-                {
-                
-                return  a[0].toString().compareTo(b[0].toString());
-                }            }else if(b[10].equals("X")){ //b es INFANTIL
+            } else if (b[10].equals("X")) { //b es INFANTIL
                 return -1;
             }
-            
-        }else if(a[10].equals("X")){ //a es INFANTIL
-            
-            if(b[8].equals("X")){ //b es DAMA
+
+        } else if (a[9].equals("X")) { //a es CABALLERO
+
+            if (b[8].equals("X")) { //b es DAMA
                 return 1;
-            }else if(b[9].equals("X")){ //b es CABALLERO
-                return 1;
-            }else if(b[10].equals("X")){ //b es INFANTIL
-    int retorno = a[0].toString().compareTo(b[0].toString());
-                if (retorno == 0)
-                {
-                    return a[1].toString().substring(0,3).compareTo(b[1].toString().substring(0,3));
+            } else if (b[9].equals("X")) { //b es CABALLERO
+                int retorno = a[0].toString().compareTo(b[0].toString());
+                if (retorno == 0) {
+                    int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
+                    int betha = Integer.parseInt(b[1].toString().split(" -")[0]);
+
+
+                    if (alpha > betha) {
+                        return 1;
+                    } else if (alpha < betha) {
+                        return -1;
+                    } else {
+                        return a[2].toString().compareTo(b[2].toString());
+
+                    }
+                } else {
+                    return retorno;
                 }
-                else
-                {
-                
-                return  a[0].toString().compareTo(b[0].toString());
-                }            }
-            
+            } else if (b[10].equals("X")) { //b es INFANTIL
+                return -1;
+            }
+
+        } else if (a[10].equals("X")) { //a es INFANTIL
+
+            if (b[8].equals("X")) { //b es DAMA
+                return 1;
+            } else if (b[9].equals("X")) { //b es CABALLERO
+                return 1;
+            } else if (b[10].equals("X")) { //b es INFANTIL
+                int retorno = a[0].toString().compareTo(b[0].toString());
+                if (retorno == 0) {
+                    int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
+                    int betha = Integer.parseInt(b[1].toString().split(" -")[0]);
+    if (alpha > betha) {
+                        return 1;
+                    } else if (alpha < betha) {
+                        return -1;
+                    } else {
+                        return a[2].toString().compareTo(b[2].toString());
+
+                    }
+                } else {
+                    return retorno;
+                }
+            }
+
         }
         return Integer.MAX_VALUE;
     }
-    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix, boolean es) 
-    {
 
-    	
-    	        ArrayList<Object[]> arr = new ArrayList<Object[]>();
-    	        for (int i = 0; i < almacenes.size(); i++) {
-    	            for (int j = 0; j < zapatos.size(); j++) {
-    	                Object[] res = new Object[11];
-    	                Almacen a = almacenes.get(i);
-    	                Zapato z = zapatos.get(j);
-    	                int sumaCantidad = 0;
-    	                int sumaPrecioCosto = 0;
-    	                int sumaPrecioVenta = 0;
-    	                Almacen ka = z.getAlamacenes().get(0);
-    	                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
-    	                    sumaCantidad += z.getCantidad();
-    	                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
-    	                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
-    	                }
-    	                res[0] = a.toString();
-    	                res[1] = z.getProveedores().get(0).toString();
-    	                res[2] = z.getReferencia();
-    	                res[3] = z.getPrecioCosto();
-    	                res[4] = z.getPrecioVenta();
-    	                res[5] = sumaCantidad;
-    	                res[6] = sumaPrecioCosto;
-    	                res[7] = sumaPrecioVenta;
-    	                if (z.getCategoria().equals("CABALLERO")) {
-    	                    res[9] = "X";
-    	                    res[8] = " ";
-    	                    res[10] = " ";
-    	                } else if (z.getCategoria().equals("DAMA")) {
-    	                    res[8] = "X";
-    	                    res[9] = " ";
-    	                    res[10] = " ";
-    	                } else if (z.getCategoria().equals("INFANTIL")) {
-    	                    res[10] = "X";
-    	                    res[8] = " ";
-    	                    res[9] = " ";
+    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix, boolean es) {
 
-    	                }
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+        for (int i = 0; i < almacenes.size(); i++) {
+            for (int j = 0; j < zapatos.size(); j++) {
+                Object[] res = new Object[11];
+                Almacen a = almacenes.get(i);
+                Zapato z = zapatos.get(j);
+                int sumaCantidad = 0;
+                int sumaPrecioCosto = 0;
+                int sumaPrecioVenta = 0;
+                Almacen ka = z.getAlamacenes().get(0);
+                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
+                    sumaCantidad += z.getCantidad();
+                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+                }
+                res[0] = a.toString();
+                res[1] = z.getProveedores().get(0).toString();
+                res[2] = z.getReferencia();
+                res[3] = z.getPrecioCosto();
+                res[4] = z.getPrecioVenta();
+                res[5] = sumaCantidad;
+                res[6] = sumaPrecioCosto;
+                res[7] = sumaPrecioVenta;
+                if (z.getCategoria().equals("CABALLERO")) {
+                    res[9] = "X";
+                    res[8] = " ";
+                    res[10] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[8] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[10] = "X";
+                    res[8] = " ";
+                    res[9] = " ";
 
-    	                if ((int) res[5] > 0) {
-    	                    arr.add(res);
-    	                }
-    	            }
-    	        }
-    	        if (arr.size() ==0)
-    	        {
-    	        	
-    	        	System.out.println("NO HAY");
-        	        return arr;
+                }
 
-    	        }
-    	        else
-    	        {
-    	        	Object[] linea  = new Object[11];
-    	        	linea[0] = "TOTALES";
-    	        	linea[1] = " ";
-    	        	linea[2] = " ";
-    	        	linea[3] = " ";
-    	        	linea[4] = " ";
-    	        linea[9] = " ";
-    	        	linea[8] = " ";
-    	        	linea[10] = " ";
-	 linea[5] =  " ";
-	                	linea[6] =  " ";
-	                	linea[7] = " ";
-    	        	
-    Object[] fabulosoTotal  = new Object[11];
-    	        	fabulosoTotal[0] = " ";
-    	        	fabulosoTotal[1] = " ";
-    	        	fabulosoTotal[2] = " ";
-    	        	fabulosoTotal[3] = " ";
-    	        	fabulosoTotal[4] = " ";
-    	        
-	                	fabulosoTotal[9] = " ";
-	                	fabulosoTotal[8] = " ";
-	                	fabulosoTotal[10] = " ";
-	                	int sumaCantidad = 0;
-	                	int sumaPrecioCosto = 0 ;
-	                	int  sumaPrecioVenta = 0 ;
-	                	
-    	        	for (int i = 0; i < arr.size(); i++) 
-    	        	{
-    	                Object[] res = arr.get(i);
-    	                
+                if ((int) res[5] > 0) {
+                    arr.add(res);
+                }
+            }
+        }
+        if (arr.size() == 0) {
 
-    	        		sumaCantidad += (int )res [5] ;
-    	        		sumaPrecioCosto += (int )res [6] ;
-    	        		sumaPrecioVenta += (int )res [7] ;
-                
-      	                
-    	        	}
-    	        	fabulosoTotal[5] = sumaCantidad;
-    	        	fabulosoTotal[6] = sumaPrecioCosto;
-    	        	fabulosoTotal[7] = sumaPrecioVenta;
-    	        	
-    	        
-    	        	
-    	        	System.out.println(arr.size());
-        	        ArrayList<Object[]> retorno =  quickSort(arr, 0 , (arr.size())-1);
-        	        retorno.add(linea);
-retorno.add(fabulosoTotal);
-System.out.println(retorno.size());
+            System.out.println("NO HAY");
+            return arr;
 
-    	        return retorno;
-    	        }
-    	    
+        } else {
+            Object[] linea = new Object[11];
+            linea[0] = "TOTALES";
+            linea[1] = " ";
+            linea[2] = " ";
+            linea[3] = " ";
+            linea[4] = " ";
+            linea[9] = " ";
+            linea[8] = " ";
+            linea[10] = " ";
+            linea[5] = " ";
+            linea[6] = " ";
+            linea[7] = " ";
+
+            Object[] fabulosoTotal = new Object[11];
+            fabulosoTotal[0] = " ";
+            fabulosoTotal[1] = " ";
+            fabulosoTotal[2] = " ";
+            fabulosoTotal[3] = " ";
+            fabulosoTotal[4] = " ";
+
+            fabulosoTotal[9] = " ";
+            fabulosoTotal[8] = " ";
+            fabulosoTotal[10] = " ";
+            int sumaCantidad = 0;
+            int sumaPrecioCosto = 0;
+            int sumaPrecioVenta = 0;
+
+            for (int i = 0; i < arr.size(); i++) {
+                Object[] res = arr.get(i);
+
+                sumaCantidad += (int) res[5];
+                sumaPrecioCosto += (int) res[6];
+                sumaPrecioVenta += (int) res[7];
+
+            }
+            fabulosoTotal[5] = sumaCantidad;
+            fabulosoTotal[6] = sumaPrecioCosto;
+            fabulosoTotal[7] = sumaPrecioVenta;
+
+            System.out.println(arr.size());
+            ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
+            retorno.add(linea);
+            retorno.add(fabulosoTotal);
+            System.out.println(retorno.size());
+
+            return retorno;
+        }
+
     }
-
 
     private List<Zapato> quickSortZapatos(List<Zapato> zapatos, int lowerIndex, int higherIndex) {
         int i = lowerIndex;
         int j = higherIndex;
-        Zapato pivot = zapatos.get(lowerIndex+(higherIndex-lowerIndex)/2);
-        
-        while(i <= j){            
-            
-            while(compararZapato(zapatos.get(i), pivot) < 0){
+        Zapato pivot = zapatos.get(lowerIndex + (higherIndex - lowerIndex) / 2);
+
+        while (i <= j) {
+
+            while (compararZapato(zapatos.get(i), pivot) < 0) {
                 i++;
             }
-            
-            while(compararZapato(zapatos.get(j), pivot) > 0){
+
+            while (compararZapato(zapatos.get(j), pivot) > 0) {
                 j--;
             }
-            
-            if(i <= j){
+
+            if (i <= j) {
                 //intercambia i y j dentro de arr
                 Zapato swap = zapatos.get(i);
                 zapatos.set(i, zapatos.get(j));
                 zapatos.set(j, swap);
-                
+
                 //mueve indice a la siguiente posicion en ambos lados
                 i++;
                 j--;
             }
-            
+
         }
-        
-        if(lowerIndex < j){
+
+        if (lowerIndex < j) {
             zapatos = quickSortZapatos(zapatos, lowerIndex, j);
         }
-        
-        if(i < higherIndex){
-            zapatos = quickSortZapatos(zapatos, i, higherIndex);   
+
+        if (i < higherIndex) {
+            zapatos = quickSortZapatos(zapatos, i, higherIndex);
         }
-        
+
         return zapatos;
     }
 
     private int compararZapato(Zapato a, Zapato b) {
-        System.out.println("Se comparan: '"+a.getProveedoresString()+"' vs '"+b.getProveedoresString()+"' - resultado: "+a.getProveedoresString().compareTo(b.getProveedoresString()));
-       
-        int retorno  = a.getAlmacenesString().compareTo(b.getAlmacenesString());
-        if (retorno == 0)
-        {
-           if(a.getProveedoresNumber()> b.getProveedoresNumber())
-           {
-           return 1;
-           }
-           else if (a.getProveedoresNumber()<b.getProveedoresNumber())
-           {
-               return -1;
-           }
-           else
-           {
-               
-               return a.getReferencia().compareTo(b.getReferencia());
-               
-          }
-           
+        System.out.println("Se comparan: '" + a.getProveedoresString() + "' vs '" + b.getProveedoresString() + "' - resultado: " + a.getProveedoresString().compareTo(b.getProveedoresString()));
+
+        int retorno = a.getAlmacenesString().compareTo(b.getAlmacenesString());
+        if (retorno == 0) {
+            if (a.getProveedoresNumber() > b.getProveedoresNumber()) {
+                return 1;
+            } else if (a.getProveedoresNumber() < b.getProveedoresNumber()) {
+                return -1;
+            } else {
+
+                return a.getReferencia().compareTo(b.getReferencia());
+
+            }
+
+        } else {
+            return retorno;
         }
-        else
-        {
-        return retorno;
-        }
-        
+
     }
 
-	public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
-		for (int i = 0; i < zapatos.size(); i++) {
+    public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen) {
+        for (int i = 0; i < zapatos.size(); i++) {
             Zapato x = zapatos.get(i);
             if (x.esReposicion()) {
-				if (x.getReferencia().equals(referencia)) {
-					for (int j = 0; j < x.getProveedores().size(); j++) {
-						Proveedor y = x.getProveedores().get(j);
-						if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
+                if (x.getReferencia().equals(referencia)) {
+                    for (int j = 0; j < x.getProveedores().size(); j++) {
+                        Proveedor y = x.getProveedores().get(j);
+                        if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
 
-							for (int k = 0; k < x.getAlamacenes().size(); k++) {
-								Almacen alm = x.getAlamacenes().get(k);
+                            for (int k = 0; k < x.getAlamacenes().size(); k++) {
+                                Almacen alm = x.getAlamacenes().get(k);
 
-								if (alm.getCiudad().equals(codigoAlmacen)) {
-									zapatos.remove(i);
-									return "Se ha eliminado exitosamente la reposicion de referencia: " + referencia
-											+ " y proveedor relacionado con código: " + codigoProveedor;
-								}
-							}
+                                if (alm.getCiudad().equals(codigoAlmacen)) {
+                                    zapatos.remove(i);
+                                    return "Se ha eliminado exitosamente la reposicion de referencia: " + referencia
+                                            + " y proveedor relacionado con código: " + codigoProveedor;
+                                }
+                            }
 
-						}
-					}
-				} 
-			}
+                        }
+                    }
+                }
+            }
         }
         return "No se ha encontrado la reposición especificada para eliminar.";
-	}
-	public ArrayList<Object[]> darTotalesResposicion() {
-		        ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		        for (int i = 0; i < almacenes.size(); i++) {
-		            for (int j = 0; j < zapatos.size(); j++) {
-		                Object[] res = new Object[11];
-		                Almacen a = almacenes.get(i);
-		                Zapato  z = zapatos.get(j);
-		                int sumaCantidad = 0;
-		                int sumaPrecioCosto = 0;
-		                int sumaPrecioVenta = 0;
-		                Almacen ka = z.getAlamacenes().get(0);
-		                if (ka.toString().equals(a.toString())  && z.esReposicion()) {
-		                    sumaCantidad += z.getCantidad();
-		                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
-		                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
-		                }
-		                res[0] = a.toString();
-		                res[1] = z.getProveedores().get(0).toString();
-		                res[2] = z.getReferencia();
-		                res[3] = z.getPrecioCosto();
-		                res[4] = z.getPrecioVenta();
-		                res[5] = sumaCantidad;
-		                res[6] = sumaPrecioCosto;
-		                res[7] = sumaPrecioVenta;
-		                if (z.getCategoria().equals("CABALLERO")) {
-		                    res[9] = "X";
-		                    res[8] = " ";
-		                    res[10] = " ";
-		                } else if (z.getCategoria().equals("DAMA")) {
-		                    res[8] = "X";
-		                    res[9] = " ";
-		                    res[10] = " ";
-		                } else if (z.getCategoria().equals("INFANTIL")) {
-		                    res[10] = "X";
-		                    res[8] = " ";
-		                    res[9] = " ";
+    }
 
-		                }
+    public ArrayList<Object[]> darTotalesResposicion() {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+        for (int i = 0; i < almacenes.size(); i++) {
+            for (int j = 0; j < zapatos.size(); j++) {
+                Object[] res = new Object[11];
+                Almacen a = almacenes.get(i);
+                Zapato z = zapatos.get(j);
+                int sumaCantidad = 0;
+                int sumaPrecioCosto = 0;
+                int sumaPrecioVenta = 0;
+                Almacen ka = z.getAlamacenes().get(0);
+                if (ka.toString().equals(a.toString()) && z.esReposicion()) {
+                    sumaCantidad += z.getCantidad();
+                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+                }
+                res[0] = a.toString();
+                res[1] = z.getProveedores().get(0).toString();
+                res[2] = z.getReferencia();
+                res[3] = z.getPrecioCosto();
+                res[4] = z.getPrecioVenta();
+                res[5] = sumaCantidad;
+                res[6] = sumaPrecioCosto;
+                res[7] = sumaPrecioVenta;
+                if (z.getCategoria().equals("CABALLERO")) {
+                    res[9] = "X";
+                    res[8] = " ";
+                    res[10] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[8] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[10] = "X";
+                    res[8] = " ";
+                    res[9] = " ";
 
-		                if ((int) res[5] > 0) {
-		                    arr.add(res);
-		                }
-		            }
-		        }
-		        
-		        if(arr.size()== 0)
-		        {
-		        	
-		        	return arr;
-		        }
-		        else
-		        {
-			        return quickSort(arr, 0 , (arr.size())-1);
+                }
 
-		        }
-		        
-		        
-		        
-		    }
+                if ((int) res[5] > 0) {
+                    arr.add(res);
+                }
+            }
+        }
 
-	
+        if (arr.size() == 0) {
 
+            return arr;
+        } else {
+            return quickSort(arr, 0, (arr.size()) - 1);
+
+        }
+
+    }
 
 }
