@@ -14,9 +14,9 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
 
     ArrayList<Object[]> data = new ArrayList<Object[]>();
     //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
-    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil"};
+    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Color","Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil"};
 
-    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class};
+    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class};
 
     public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) {
         data = totales;
@@ -36,11 +36,14 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         if(data.get(rowIndex)[columnIndex] instanceof Integer){
-    	if (columnIndex == 4 || columnIndex == 3 || columnIndex == 6 || columnIndex == 7) {
+    	if (columnIndex == 5 || columnIndex == 4 || columnIndex == 7 || columnIndex == 8) {
         	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
         	String number_ge = nf_ge.format(data.get(rowIndex)[columnIndex]);
             return number_ge;
         }}
+        
+        
+        
         return data.get(rowIndex)[columnIndex];
     }
 

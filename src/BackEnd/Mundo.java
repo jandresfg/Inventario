@@ -828,7 +828,7 @@ public class Mundo {
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[11];
+                Object[] res = new Object[12];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -843,27 +843,28 @@ public class Mundo {
                 res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
-                res[3] = z.getPrecioCosto();
-                res[4] = z.getPrecioVenta();
-                res[5] = sumaCantidad;
-                res[6] = sumaPrecioCosto;
-                res[7] = sumaPrecioVenta;
+                res[3] = z.getColor();
+                res[4] = z.getPrecioCosto();
+                res[5] = z.getPrecioVenta();
+                res[6] = sumaCantidad;
+                res[7] = sumaPrecioCosto;
+                res[8] = sumaPrecioVenta;
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[9] = "X";
-                    res[8] = " ";
-                    res[10] = " ";
-                } else if (z.getCategoria().equals("DAMA")) {
-                    res[8] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[10] = "X";
-                    res[8] = " ";
                     res[9] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[9] = "X";
+                    res[10] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[11] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
 
                 }
 
-                if ((int) res[5] > 0) {
+                if ((int) res[6] > 0) {
                     arr.add(res);
                 }
             }
@@ -1227,9 +1228,9 @@ public class Mundo {
      * @return
      */
     private int compararCategoria(Object[] a, Object[] b) {
-        if (a[8].equals("X")) { //a es DAMA
+        if (a[9].equals("X")) { //a es DAMA
 
-            if (b[8].equals("X")) { //b es DAMA
+            if (b[9].equals("X")) { //b es DAMA
 
                 int retorno = a[0].toString().compareTo(b[0].toString());
                 if (retorno == 0) {
@@ -1247,17 +1248,17 @@ public class Mundo {
                     return retorno;
                 }
 
-            } else if (b[9].equals("X")) { //b es CABALLERO
+            } else if (b[10].equals("X")) { //b es CABALLERO
                 return -1;
-            } else if (b[10].equals("X")) { //b es INFANTIL
+            } else if (b[11].equals("X")) { //b es INFANTIL
                 return -1;
             }
 
-        } else if (a[9].equals("X")) { //a es CABALLERO
+        } else if (a[10].equals("X")) { //a es CABALLERO
 
-            if (b[8].equals("X")) { //b es DAMA
+            if (b[9].equals("X")) { //b es DAMA
                 return 1;
-            } else if (b[9].equals("X")) { //b es CABALLERO
+            } else if (b[10].equals("X")) { //b es CABALLERO
                 int retorno = a[0].toString().compareTo(b[0].toString());
                 if (retorno == 0) {
                     int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
@@ -1275,17 +1276,17 @@ public class Mundo {
                 } else {
                     return retorno;
                 }
-            } else if (b[10].equals("X")) { //b es INFANTIL
+            } else if (b[11].equals("X")) { //b es INFANTIL
                 return -1;
             }
 
-        } else if (a[10].equals("X")) { //a es INFANTIL
+        } else if (a[11].equals("X")) { //a es INFANTIL
 
-            if (b[8].equals("X")) { //b es DAMA
+            if (b[9].equals("X")) { //b es DAMA
                 return 1;
-            } else if (b[9].equals("X")) { //b es CABALLERO
+            } else if (b[10].equals("X")) { //b es CABALLERO
                 return 1;
-            } else if (b[10].equals("X")) { //b es INFANTIL
+            } else if (b[11].equals("X")) { //b es INFANTIL
                 int retorno = a[0].toString().compareTo(b[0].toString());
                 if (retorno == 0) {
                     int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
@@ -1312,7 +1313,7 @@ public class Mundo {
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[11];
+                Object[] res = new Object[12];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -1324,30 +1325,31 @@ public class Mundo {
                     sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
                 }
-                res[0] = a.toString();
+               res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
-                res[3] = z.getPrecioCosto();
-                res[4] = z.getPrecioVenta();
-                res[5] = sumaCantidad;
-                res[6] = sumaPrecioCosto;
-                res[7] = sumaPrecioVenta;
+                res[3] = z.getColor();
+                res[4] = z.getPrecioCosto();
+                res[5] = z.getPrecioVenta();
+                res[6] = sumaCantidad;
+                res[7] = sumaPrecioCosto;
+                res[8] = sumaPrecioVenta;
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[9] = "X";
-                    res[8] = " ";
-                    res[10] = " ";
-                } else if (z.getCategoria().equals("DAMA")) {
-                    res[8] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[10] = "X";
-                    res[8] = " ";
                     res[9] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[9] = "X";
+                    res[10] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[11] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
 
                 }
 
-                if ((int) res[5] > 0) {
+                if ((int) res[6] > 0) {
                     arr.add(res);
                 }
             }
@@ -1358,7 +1360,7 @@ public class Mundo {
             return arr;
 
         } else {
-            Object[] linea = new Object[11];
+            Object[] linea = new Object[12];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -1370,17 +1372,21 @@ public class Mundo {
             linea[5] = " ";
             linea[6] = " ";
             linea[7] = " ";
+            linea[11] = " ";
 
-            Object[] fabulosoTotal = new Object[11];
+            Object[] fabulosoTotal = new Object[12];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
             fabulosoTotal[3] = " ";
             fabulosoTotal[4] = " ";
+            fabulosoTotal[5] = " ";
 
             fabulosoTotal[9] = " ";
             fabulosoTotal[8] = " ";
             fabulosoTotal[10] = " ";
+                        fabulosoTotal[11] = " ";
+
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
             int sumaPrecioVenta = 0;
@@ -1388,14 +1394,14 @@ public class Mundo {
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
-                sumaCantidad += (int) res[5];
-                sumaPrecioCosto += (int) res[6];
-                sumaPrecioVenta += (int) res[7];
+                sumaCantidad += (int) res[6];
+                sumaPrecioCosto += (int) res[7];
+                sumaPrecioVenta += (int) res[8];
 
             }
-            fabulosoTotal[5] = sumaCantidad;
-            fabulosoTotal[6] = sumaPrecioCosto;
-            fabulosoTotal[7] = sumaPrecioVenta;
+            fabulosoTotal[6] = sumaCantidad;
+            fabulosoTotal[7] = sumaPrecioCosto;
+            fabulosoTotal[8] = sumaPrecioVenta;
 
             System.out.println(arr.size());
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
@@ -1496,10 +1502,11 @@ public class Mundo {
     }
 
     public ArrayList<Object[]> darTotalesResposicion() {
-        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+    
+                     ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[11];
+                Object[] res = new Object[12];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -1514,40 +1521,36 @@ public class Mundo {
                 res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
-                res[3] = z.getPrecioCosto();
-                res[4] = z.getPrecioVenta();
-                res[5] = sumaCantidad;
-                res[6] = sumaPrecioCosto;
-                res[7] = sumaPrecioVenta;
+                res[3] = z.getColor();
+                res[4] = z.getPrecioCosto();
+                res[5] = z.getPrecioVenta();
+                res[6] = sumaCantidad;
+                res[7] = sumaPrecioCosto;
+                res[8] = sumaPrecioVenta;
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[9] = "X";
-                    res[8] = " ";
-                    res[10] = " ";
-                } else if (z.getCategoria().equals("DAMA")) {
-                    res[8] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[10] = "X";
-                    res[8] = " ";
                     res[9] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[9] = "X";
+                    res[10] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[11] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
 
                 }
 
-                if ((int) res[5] > 0) {
+                if ((int) res[6] > 0) {
                     arr.add(res);
                 }
             }
         }
-
-        if (arr.size() == 0) {
-
-            return arr;
-        } else {
-            return quickSort(arr, 0, (arr.size()) - 1);
+        return quickSort(arr, 0, (arr.size()) - 1);
 
         }
 
-    }
+    
 
 }
