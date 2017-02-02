@@ -766,37 +766,37 @@ public class Mundo {
 //        }
 //    }
 
-    /**
-     * Actualiza los codigos de los Proveedores relacionados a todos los
-     * Zapatos, por medio de comparacion del Nombre
-     */
-    public void actualizarCodigosProveedores() {
-        for (Zapato z : zapatos) {
-            for (Proveedor pTemp : z.getProveedores()) {
-                for (Proveedor p : proveedores) {
-                    if (pTemp.getNombre().equals(p.getNombre())) {
-                        pTemp.setCodigo((p.getCodigo()));
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//     * Actualiza los codigos de los Proveedores relacionados a todos los
+//     * Zapatos, por medio de comparacion del Nombre
+//     */
+//    public void actualizarCodigosProveedores() {
+//        for (Zapato z : zapatos) {
+//            for (Proveedor pTemp : z.getProveedores()) {
+//                for (Proveedor p : proveedores) {
+//                    if (pTemp.getNombre().equals(p.getNombre())) {
+//                        pTemp.setCodigo((p.getCodigo()));
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    /**
-     * Actualiza los nombres de los Proveedores relacionados a todos los
-     * Zapatos, por medio de comparacion del codigo
-     */
-    public void actualizarNombresProveedores() {
-        for (Zapato z : zapatos) {
-            for (Proveedor pTemp : z.getProveedores()) {
-                for (Proveedor p : proveedores) {
-                    if (pTemp.getCodigo() == p.getCodigo()) {
-                        pTemp.setNombre((p.getNombre()));
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//     * Actualiza los nombres de los Proveedores relacionados a todos los
+//     * Zapatos, por medio de comparacion del codigo
+//     */
+//    public void actualizarNombresProveedores() {
+//        for (Zapato z : zapatos) {
+//            for (Proveedor pTemp : z.getProveedores()) {
+//                for (Proveedor p : proveedores) {
+//                    if (pTemp.getCodigo() == p.getCodigo()) {
+//                        pTemp.setNombre((p.getNombre()));
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     public ArrayList<String> darListadoReferenciasZapatos() {
         ArrayList<String> res = new ArrayList<String>();
@@ -1564,6 +1564,21 @@ public class Mundo {
 			}
 			z.setAlmacenes(almacenesz);
 		}	
+	}
+
+	public void actualizarProveedoresEnZapatosYReferencias() {
+		for(Zapato z: zapatos){
+			List<Proveedor> proveedoresz = z.getProveedores();
+			for(int i = 0; i<proveedoresz.size(); i++){
+				Proveedor pz = proveedoresz.get(i);
+				for(Proveedor p:proveedores){
+					if(pz.getCodigo() == p.getCodigo()){
+						proveedoresz.set(i, p);
+					}
+				}
+			}
+			z.setProveedores(proveedoresz);
+		}
 	}
 
 }

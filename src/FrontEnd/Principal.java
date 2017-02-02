@@ -1370,8 +1370,7 @@ rdbtnDama.setSelected(false);
 			public void tableChanged(TableModelEvent e) {
 				System.out.println("table changed");
 				mundo.setProveedores(sol.getData());
-				if(e.getColumn() == sol.findColumn("Codigo")) mundo.actualizarCodigosProveedores();
-				if(e.getColumn() == sol.findColumn("Nombre")) mundo.actualizarNombresProveedores();
+				mundo.actualizarProveedoresEnZapatosYReferencias();
 				mundo.guardar();
 				agregarCombobox();
 			}
