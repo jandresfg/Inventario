@@ -734,37 +734,37 @@ public class Mundo {
         return resp;
     }
 
-    /**
-     * Actualiza los NIT de los Almacenes relacionados a todos los Zapatos, por
-     * medio de comparacion del atributo "Almacen"
-     */
-    public void actualizarNITsAlmacenes() {
-        for (Zapato z : zapatos) {
-            for (Almacen aTemp : z.getAlamacenes()) {
-                for (Almacen a : almacenes) {
-                    if (aTemp.getAlmacen().equals(a.getAlmacen())) {
-                        aTemp.setNit(a.getNit());//tal vez hay que borrarlo y voverlo a insertar
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//     * Actualiza los NIT de los Almacenes relacionados a todos los Zapatos, por
+//     * medio de comparacion del atributo "Ciudad"
+//     */
+//    public void actualizarNITsAlmacenes() {
+//        for (Zapato z : zapatos) {
+//            for (Almacen aTemp : z.getAlamacenes()) {
+//                for (Almacen a : almacenes) {
+//                    if (aTemp.getCiudad().equals(a.getCiudad())) {
+//                        aTemp.setNit(a.getNit());//tal vez hay que borrarlo y voverlo a insertar
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    /**
-     * Actualiza los "Alamcen" de los Almacenes relacionados a todos los
-     * Zapatos, por medio de comparacion del NIT
-     */
-    public void actualizarAlmacenesAlmacenes() {
-        for (Zapato z : zapatos) {
-            for (Almacen aTemp : z.getAlamacenes()) {
-                for (Almacen a : almacenes) {
-                    if (aTemp.getNit().equals(a.getNit())) {
-                        aTemp.setAlmacen((a.getAlmacen()));
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//     * Actualiza los "Alamcen" de los Almacenes relacionados a todos los
+//     * Zapatos, por medio de comparacion del NIT
+//     */
+//    public void actualizarAlmacenesAlmacenes() {
+//        for (Zapato z : zapatos) {
+//            for (Almacen aTemp : z.getAlamacenes()) {
+//                for (Almacen a : almacenes) {
+//                    if (aTemp.getNit().equals(a.getNit())) {
+//                        aTemp.setAlmacen((a.getAlmacen()));
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     /**
      * Actualiza los codigos de los Proveedores relacionados a todos los
@@ -1551,6 +1551,19 @@ public class Mundo {
 
         }
 
-    
+	public void actualizarAlmacenesEnZapatosYReferencias() {
+		for(Zapato z: zapatos){
+			List<Almacen> almacenesz = z.getAlamacenes();
+			for(int i = 0; i<almacenesz.size(); i++){
+				Almacen az = almacenesz.get(i);
+				for(Almacen a:almacenes){
+					if(az.getCiudad().equalsIgnoreCase(a.getCiudad())){
+						almacenesz.set(i, a);
+					}
+				}
+			}
+			z.setAlmacenes(almacenesz);
+		}	
+	}
 
 }

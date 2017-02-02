@@ -1334,8 +1334,7 @@ rdbtnCaballero.setSelected(false);
 			public void tableChanged(TableModelEvent e) {
 				System.out.println("table changed");
 				mundo.setAlmacenes(sol.getData());
-				if(e.getColumn() == sol.findColumn("NIT")) mundo.actualizarNITsAlmacenes();
-				if(e.getColumn() == sol.findColumn("Almacen")) mundo.actualizarAlmacenesAlmacenes();
+				mundo.actualizarAlmacenesEnZapatosYReferencias();
 				mundo.guardar();
 				agregarCombobox();
 			}

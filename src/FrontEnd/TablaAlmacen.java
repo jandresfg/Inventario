@@ -17,7 +17,7 @@ public class TablaAlmacen  extends AbstractTableModel
 	
 	    List<Almacen> data = new ArrayList<Almacen>();
 	    String colNames[] = { "Ciudad", "Almacen", "Direccion", "Telefono", "Razon Social", "NIT" };
-	    Class<?> colClasses[] = { String.class, String.class, String.class , Integer.class, String.class, String.class};
+	    Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, String.class};
 
 	    public TablaAlmacen(List<Almacen> arr) 
 	    {
@@ -83,7 +83,7 @@ public class TablaAlmacen  extends AbstractTableModel
 	            data.get(rowIndex).setTelefono((String) aValue);
 	        }
 	        if (columnIndex == 4) {
-	            data.get(rowIndex).setDireccion((String) aValue);
+	            data.get(rowIndex).setRazonSocial((String) aValue);
 	        }
 	        if (columnIndex == 5) {
 	            data.get(rowIndex).setNit((String) aValue);
