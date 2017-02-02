@@ -116,7 +116,7 @@ public class TablaReposiciones extends AbstractTableModel {
             try {
                 data.get(rowIndex).setFecha(Zapato.getFechaFromString((String) aValue));
             } catch (ParseException e) {
-            	JOptionPane.showMessageDialog(null, "Fecha inv√°lida. El formato de fecha apropiado es " + Zapato.FORMATO_FECHA + "\nEjemplo: " + Zapato.cadenafechaEjemplo(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            	JOptionPane.showMessageDialog(null, "Fecha inv·lida. El formato de fecha apropiado es " + Zapato.FORMATO_FECHA + "\nEjemplo: " + Zapato.cadenafechaEjemplo(), "ERROR", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             }
         }
@@ -148,7 +148,7 @@ public class TablaReposiciones extends AbstractTableModel {
 				int output = Integer.parseInt(input);
 				data.get(rowIndex).setPrecioCosto(output);
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Precio Costo '"+aValue+"' inv√°lido: por favor use s√≥lo n√∫meros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Precio Costo '"+aValue+"' inv·lido: por favor use sÛlo n˙meros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
             
         }
@@ -159,7 +159,7 @@ public class TablaReposiciones extends AbstractTableModel {
 				int output = Integer.parseInt(input);
 				data.get(rowIndex).setPrecioVenta(output);
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Precio Venta '"+aValue+"' inv√°lido: por favor use s√≥lo n√∫meros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Precio Venta '"+aValue+"' inv·lido: por favor use sÛlo n˙meros.\nSi lo desea puede usar punto como separador de miles.", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
         }
         fireTableCellUpdated(rowIndex, columnIndex);
