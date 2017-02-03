@@ -644,6 +644,7 @@ public class Mundo {
 
                 if (!z.esReposicion()
                         && z.getReferencia().equals(x.getReferencia())
+                                                 && z.getColor().equals(x.getColor())
                         && x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString())
                         && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
 
@@ -664,6 +665,7 @@ public class Mundo {
 
                 if (z.esReposicion()
                         && z.getReferencia().equals(x.getReferencia())
+                         && z.getColor().equals(x.getColor())
                         && x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString())
                         && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
 
