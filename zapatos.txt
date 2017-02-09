@@ -32,3 +32,4 @@ referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7
 204}}PLANO}DORADO}SINTETICO}18000}36000}12}DAMA}0}25-ene-2017}649 - STYLOS}KENNEDY 1}true
 prueba}planta1}alt1}col2}mat1}15000}30000}12}DAMA}0}25-ene-2017}7 - MARIANGEL}BOSA 1}true
 prueba}planta1}alt1}col3}mat1}15000}30000}12}DAMA}0}25-ene-2017}7 - MARIANGEL}BOSA 1}true
+test}test}test}test}test}15000}30000}10}DAMA}0}09-feb-2017}4 - MARIA K}PRADO}false

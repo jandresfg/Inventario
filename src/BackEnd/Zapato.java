@@ -373,4 +373,15 @@ public int getProveedoresNumber() {
 		return resp;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Zapato [referencia=" + referencia + ", planta=" + planta + ", altura=" + altura + ", color=" + color
+				+ ", material=" + material + ", precioCosto=" + precioCosto + ", precioVenta=" + precioVenta
+				+ ", cantidad=" + cantidad + ", vendidos=" + vendidos + ", categoria=" + categoria + ", proveedores="
+				+ proveedores + ", almacenes=" + almacenes + ", fecha=" + fecha + ", esReposicion=" + esReposicion
+				+ "]";
+	}
+
 }

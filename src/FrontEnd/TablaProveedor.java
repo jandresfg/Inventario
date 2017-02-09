@@ -82,13 +82,13 @@ public class TablaProveedor  extends AbstractTableModel
 	            data.get(rowIndex).setCodigo((int) aValue);
 	        }
 	        if (columnIndex == 1) {
-	            data.get(rowIndex).setNombre((String) aValue);
+	            data.get(rowIndex).setNombre(((String) aValue).trim());
 	        }
 	        if (columnIndex == 2) {
-	            data.get(rowIndex).setFabrica((String) aValue);
+	            data.get(rowIndex).setFabrica(((String) aValue).trim());
 	        }
 	        if (columnIndex == 3) {
-	            data.get(rowIndex).setDireccion((String) aValue);
+	            data.get(rowIndex).setDireccion(((String) aValue).trim());
 	        }
 	        if (columnIndex == 4) {
 	       if(aValue instanceof Integer)
@@ -98,12 +98,12 @@ public class TablaProveedor  extends AbstractTableModel
 	       }
 	       else
 	       {
-	    	   data.get(rowIndex).setTelefono((String) aValue);
+	    	   data.get(rowIndex).setTelefono(((String) aValue).trim());
 	       }
 	        
 	        }
 	        if (columnIndex == 5) {
-	            data.get(rowIndex).setCiudad((String) aValue);
+	            data.get(rowIndex).setCiudad(((String) aValue).trim());
 	        }
 	        fireTableCellUpdated(rowIndex, columnIndex);
 	    }

@@ -114,36 +114,36 @@ public class TablaReposiciones extends AbstractTableModel {
         */
         if (columnIndex == 2) {
             try {
-                data.get(rowIndex).setFecha(Zapato.getFechaFromString((String) aValue));
+                data.get(rowIndex).setFecha(Zapato.getFechaFromString(((String) aValue).trim()));
             } catch (ParseException e) {
             	JOptionPane.showMessageDialog(null, "Fecha inválida. El formato de fecha apropiado es " + Zapato.FORMATO_FECHA + "\nEjemplo: " + Zapato.cadenafechaEjemplo(), "ERROR", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
             }
         }
         if (columnIndex == 3) {
-            data.get(rowIndex).setReferencia((String) aValue);
+            data.get(rowIndex).setReferencia(((String) aValue).trim());
         }
         if (columnIndex == 4) {
-            data.get(rowIndex).setCategoria((String) aValue);
+            data.get(rowIndex).setCategoria(((String) aValue).trim());
         }
         if (columnIndex == 5) {
-            data.get(rowIndex).setPlanta((String) aValue);
+            data.get(rowIndex).setPlanta(((String) aValue).trim());
         }
         if (columnIndex == 6) {
-            data.get(rowIndex).setAltura((String) aValue);
+            data.get(rowIndex).setAltura(((String) aValue).trim());
         }
         if (columnIndex == 7) {
-            data.get(rowIndex).setColor((String) aValue);
+            data.get(rowIndex).setColor(((String) aValue).trim());
         }
         if (columnIndex == 8) {
-            data.get(rowIndex).setMaterial((String) aValue);
+            data.get(rowIndex).setMaterial(((String) aValue).trim());
         }
         if (columnIndex == 9) {
             data.get(rowIndex).setCantidad((int) aValue);
         }
         if (columnIndex == 10) {
         	try {
-        		String input = ((String) aValue).replaceAll("\\.", "");
+        		String input = (((String) aValue).trim()).replaceAll("\\.", "");
         		System.out.println("Precio Costo: "+input);
 				int output = Integer.parseInt(input);
 				data.get(rowIndex).setPrecioCosto(output);
@@ -154,7 +154,7 @@ public class TablaReposiciones extends AbstractTableModel {
         }
         if (columnIndex == 11) {
         	try {
-        		String input = ((String) aValue).replaceAll("\\.", "");
+        		String input = (((String) aValue).trim()).replaceAll("\\.", "");
         		System.out.println("Precio Venta: "+input);
 				int output = Integer.parseInt(input);
 				data.get(rowIndex).setPrecioVenta(output);

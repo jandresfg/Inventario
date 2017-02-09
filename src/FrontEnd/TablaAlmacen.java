@@ -71,22 +71,22 @@ public class TablaAlmacen  extends AbstractTableModel
 	    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 	    	System.out.println("Almacenes setValue: "+aValue);
 	    	if (columnIndex == 0) {
-	            data.get(rowIndex).setCiudad((String) aValue);
+	            data.get(rowIndex).setCiudad(((String) aValue).trim());
 	        }
 	        if (columnIndex == 1) {
-	            data.get(rowIndex).setAlmacen((String) aValue);
+	            data.get(rowIndex).setAlmacen(((String) aValue).trim());
 	        }
 	        if (columnIndex == 2) {
-	            data.get(rowIndex).setDireccion((String) aValue);
+	            data.get(rowIndex).setDireccion(((String) aValue).trim());
 	        }
 	        if (columnIndex == 3) {
-	            data.get(rowIndex).setTelefono((String) aValue);
+	            data.get(rowIndex).setTelefono(((String) aValue).trim());
 	        }
 	        if (columnIndex == 4) {
-	            data.get(rowIndex).setRazonSocial((String) aValue);
+	            data.get(rowIndex).setRazonSocial(((String) aValue).trim());
 	        }
 	        if (columnIndex == 5) {
-	            data.get(rowIndex).setNit((String) aValue);
+	            data.get(rowIndex).setNit(((String) aValue).trim());
 	        }
 	        fireTableCellUpdated(rowIndex, columnIndex);
 	    }

@@ -116,6 +116,8 @@ public class Mundo {
         while ((cadena = b.readLine()) != null) {
 
             String[] arr = cadena.split("\\}");
+            
+            for(int i = 0;i<arr.length; i++){arr[i] = arr[i].trim();}
 
             Zapato zap = new Zapato(arr[0], arr[1], arr[2], arr[3], arr[4], Integer.parseInt(arr[5]), Integer.parseInt(arr[6]), Integer.parseInt(arr[7]), arr[8], Integer.parseInt(arr[9]), Zapato.getFechaFromString(arr[10]), Boolean.parseBoolean(arr[13]));
             zap.setProveedores(darProveedores(arr[11]));
@@ -134,6 +136,7 @@ public class Mundo {
 
         while ((alma = bb.readLine()) != null) {
             String[] arr = alma.split("\\,", -1);
+            for(int i = 0;i<arr.length; i++){arr[i] = arr[i].trim();}
 
             Almacen almacen = new Almacen(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
             almacenes.add(almacen);
@@ -151,6 +154,7 @@ public class Mundo {
 
         while ((prov = bbb.readLine()) != null) {
             String[] arr = prov.split("\\,", -1);
+            for(int i = 0;i<arr.length; i++){arr[i] = arr[i].trim();}
             System.out.println("Size: " + arr.length + " - Line: " + prov);
             System.out.println("0: " + arr[0]);
             System.out.println("1: " + arr[1]);
@@ -727,7 +731,7 @@ public class Mundo {
         System.out.println("almacenes size: " + almacenes.size());
         for (Almacen a : almacenes) {
             for (String s : almsArr) {
-                if (a.getCiudad().equals(s)) {
+                if (a.getCiudad().equalsIgnoreCase(s)) {
                     resp.add(a);
                 }
             }
