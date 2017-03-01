@@ -30,15 +30,19 @@ import BackEnd.Zapato;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -57,6 +61,10 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import javax.xml.ws.handler.MessageContext;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.Color;
 import javax.swing.JList;
@@ -92,6 +100,8 @@ public class Principal extends JFrame implements ActionListener {
 
 	private TableCellRenderer tcr;
 	private JTextField filterText;
+	private JDatePickerImpl filterDate1;
+	private JDatePickerImpl filterDate2;
 	private TableRowSorter sorter;
 	private JPanel panel;
 	private JScrollPane scrollPane;
@@ -108,6 +118,12 @@ public class Principal extends JFrame implements ActionListener {
     private JCheckBox   checkBoxPedidos;
 	private JCheckBox checkBox_2Repo ;
 	private JCheckBox checkBox_3Pedidos;
+	private JLabel lblFiltrarPorRango;
+	private JLabel lblHasta;
+	
+	private String fecha1 = "";
+	private String fecha2 = "";
+	
     /**
 	 * Launch the application.
 	 */
@@ -911,7 +927,7 @@ else
 				
 				 panel_filter = new JPanel();
 				panel_filter.setLayout(null);
-				panel_filter.setBounds(0, 481, 911, 32);
+				panel_filter.setBounds(0, 445, 973, 68);
 				frmInventario.getContentPane().add(panel_filter);
 				
 				lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
@@ -941,6 +957,87 @@ else
 				});
 				filterText.setVisible(false);
 				panel_filter.add(filterText);
+				
+				lblFiltrarPorRango = new JLabel("Filtrar por Rango de Fecha:  Desde");
+				lblFiltrarPorRango.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblFiltrarPorRango.setBounds(10, 31, 200, 26);
+				panel_filter.add(lblFiltrarPorRango);
+				
+				UtilDateModel model = new UtilDateModel();
+		        //model.setDate(20,04,2014);
+		        // Need this...
+		        Properties p = new Properties();
+		        p.put("text.today", "Hoy");
+		        p.put("text.month", "Mes");
+		        p.put("text.year", "AÃ±o");
+		        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		        // Don't know about the formatter, but there it is...
+		        filterDate1 = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		        filterDate1.setTextEditable(false);
+				filterDate1.setBounds(200, 31, 200, 22);
+				filterDate1.getJFormattedTextField().getDocument().addDocumentListener(new DocumentListener() {
+					
+					@Override
+					public void removeUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						newFilter();
+					}
+					
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						newFilter();
+					}
+					
+					@Override
+					public void changedUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						newFilter();
+					}
+				});
+				filterDate1.setVisible(false);
+				panel_filter.add(filterDate1);
+				
+				UtilDateModel model2 = new UtilDateModel();
+		        //model.setDate(20,04,2014);
+		        // Need this...
+		        Properties p2 = new Properties();
+		        p2.put("text.today", "Hoy");
+		        p2.put("text.month", "Mes");
+		        p2.put("text.year", "AÃ±o");
+		        JDatePanelImpl datePanel2 = new JDatePanelImpl(model2, p2);
+		        // Don't know about the formatter, but there it is...
+		        filterDate2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
+				filterDate2.setTextEditable(false);
+				filterDate2.setBounds(440, 31, 200, 22);
+				filterDate2.getJFormattedTextField().getDocument().addDocumentListener(new DocumentListener() {
+					
+					@Override
+					public void removeUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						newFilter2();
+					}
+					
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						newFilter2();
+					}
+					
+					@Override
+					public void changedUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						newFilter2();
+					}
+				});
+				filterDate2.setVisible(false);
+				
+				lblHasta = new JLabel("hasta");
+				lblHasta.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblHasta.setBounds(405, 31, 150, 26);
+				panel_filter.add(lblHasta);
+				panel_filter.add(filterDate2);
+				
 		actualizarTotales("Seleccione una referencia");
 		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
@@ -965,7 +1062,7 @@ else
 
 	/**
 	 * Manejo de los eventos de los botones
-	 * @param e Acción que generó el evento.
+	 * @param e Acciï¿½n que generï¿½ el evento.
 	 */
 	public void actionPerformed( ActionEvent e )
 	{
@@ -975,9 +1072,9 @@ else
 			try{
 				boolean success = table.print();
 				if(success){
-					JOptionPane.showMessageDialog(this, "Impresión exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Impresiï¿½n exitosa", "Informaciï¿½n", JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					JOptionPane.showMessageDialog(this, "Impresión Fallida", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Impresiï¿½n Fallida", "Informaciï¿½n", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}catch (PrinterException e2) {
 				JOptionPane.showMessageDialog(this, "Erorr al intentar imprimir", "Error", JOptionPane.ERROR_MESSAGE);
@@ -997,7 +1094,7 @@ else
 					fileChooser.showOpenDialog(this);
 					rutaDestino = fileChooser.getSelectedFile().getAbsolutePath();
 
-					confirmado = JOptionPane.showConfirmDialog(this, "¿Guardar export en '"+rutaDestino+"'?")==JOptionPane.YES_OPTION;
+					confirmado = JOptionPane.showConfirmDialog(this, "ï¿½Guardar export en '"+rutaDestino+"'?")==JOptionPane.YES_OPTION;
 				}
 				mundo.exportarExcel(rutaDestino);
 				JOptionPane.showMessageDialog(this, "Datos exportados exitosamente", "Export existoso", JOptionPane.INFORMATION_MESSAGE);
@@ -1217,7 +1314,7 @@ else
 		catch( Exception e )
 		{
 			setVisible( true );
-			int respuesta = JOptionPane.showConfirmDialog( this, "Problemas salvando la información: \n" + e.getMessage( ) + "\n¿Quiere cerrar el programa sin salvar?", "Error", JOptionPane.YES_NO_OPTION );
+			int respuesta = JOptionPane.showConfirmDialog( this, "Problemas salvando la informaciï¿½n: \n" + e.getMessage( ) + "\nï¿½Quiere cerrar el programa sin salvar?", "Error", JOptionPane.YES_NO_OPTION );
 			if( respuesta == JOptionPane.YES_OPTION )
 			{
 				super.dispose( );
@@ -1238,7 +1335,7 @@ else
 	{
 		mundo.eliminarProveedor(Integer.parseInt(codigo));
 		setModelToProveedores();
-		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el proveedor con código: " + codigo);
+		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el proveedor con cï¿½digo: " + codigo);
 
 		// TODO Auto-generated method stub
 
@@ -1388,14 +1485,16 @@ rdbtnDama.setSelected(false);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setMaxWidth(50);
 		
 		button_2.requestFocus();
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		
                 
 		//agrega el panel_filter
 		panel_filter.setVisible(true);
 		filterText.setVisible(true);
 		filterText.setText("");
+		filterDate1.setVisible(true);
+		filterDate2.setVisible(true);
         lblTextoDeFiltro.setText("Buscar Proveedor:");
 
         //
@@ -1413,20 +1512,23 @@ rdbtnCaballero.setSelected(false);
 	}
 	
 	public void setModelToTotalesPorAlmacen(){
-		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotales());
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotales(fecha1, fecha2));
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
+		
 		lblTextoDeFiltro.setText("Filtrar por Almac\u00E9n:");
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		table.setDefaultRenderer(Object.class, tcr);
 		button_3.requestFocus();
 		panel_1.setVisible(false);
-                table.setRowSorter(sorter);
-                filterText.setText("");
-                estoyEnTotales = true;
-                rdbtnDama.setSelected(false);
+			    table.setRowSorter(sorter);
+			    filterText.setText("");
+			    estoyEnTotales = true;
+			    rdbtnDama.setSelected(false);
+			    filterDate1.setVisible(true);
+				filterDate2.setVisible(true);
 		
 		rdbtnCaballero.setSelected(false);	
 		
@@ -1437,13 +1539,13 @@ rdbtnCaballero.setSelected(false);
 	}
 	
 	public void setModelToTotalesPorAlmacenResposicion(){
-		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotalesResposicion());
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotalesResposicion(fecha1, fecha2));
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
 		lblTextoDeFiltro.setText("Filtrar por Almac\u00E9n:");
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		table.setDefaultRenderer(Object.class, tcr);
 		button_3.requestFocus();
 		panel_1.setVisible(false);
@@ -1451,6 +1553,8 @@ rdbtnCaballero.setSelected(false);
                 filterText.setText("");
                 estoyEnTotales = true;
                 rdbtnDama.setSelected(false);
+                filterDate1.setVisible(true);
+        		filterDate2.setVisible(true);
 		
 		rdbtnCaballero.setSelected(false);	
 		
@@ -1469,8 +1573,8 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		table.setDefaultRenderer(Object.class, tcr);
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
@@ -1511,8 +1615,8 @@ setBackground(table.getBackground());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 	table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
 		    public Component getTableCellRendererComponent(JTable table,
@@ -1548,8 +1652,8 @@ setBackground(table.getBackground());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 //		table.setDefaultRenderer(Object.class, tcr);
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
@@ -1600,8 +1704,8 @@ setBackground(table.getBackground());
 
 		table.setModel(sol);
 		
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
@@ -1648,8 +1752,8 @@ setBackground(table.getBackground());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
@@ -1662,85 +1766,189 @@ setBackground(table.getBackground());
 
 	
 	private void newFilter(){
-		
-if(estoyEnTotales)
-{
-    
-    RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
-	    //If current expression doesn't parse, don't update.
-	    try {
-	        rf = RowFilter.regexFilter(filterText.getText(), 0);
-	    } catch (java.util.regex.PatternSyntaxException e) {
-	        return;
-	    }
-    
-System.out.println("TEXO:"  + filterText.getText());	
+		System.out.println("NEW FILTER 11111111");
+		if (sorter != null) {
+			if (estoyEnTotales) {
+				
+				fecha1 = filterDate1.getJFormattedTextField().getText();
+				System.out.println(fecha1);
+				fecha2 = filterDate2.getJFormattedTextField().getText();
+				System.out.println(fecha2);
+				try {
+					if(!fecha1.isEmpty() && !fecha2.isEmpty() && Zapato.getFechaFromString(fecha1).compareTo(Zapato.getFechaFromString(fecha2))>0){
+						filterDate2.getModel().setDay(filterDate1.getModel().getDay());
+						filterDate2.getModel().setMonth(filterDate1.getModel().getMonth());
+						filterDate2.getModel().setYear(filterDate1.getModel().getYear());
+						fecha2 = filterDate2.getJFormattedTextField().getText();
+						System.out.println("fecha2 cambio: "+fecha2);
+					}
+				} catch (ParseException e1) {
+					// no deberia incurrir; el valor que puede tomar fecha1 y fecha2 es controlado
+					System.out.println("esto no deberia pasar");
+				} catch (IllegalStateException e1) {
+					// no deberia incurrir; el valor que puede tomar fecha1 y fecha2 es controlado
+					System.out.println("esto no deberia pasar 2");
+					
+				}
 
-if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
-{
-	System.out.println("ENTRO");	
+					
+				
+				
 
-setModelToTotalesPorAlmacenFabuloso(filterText.getText());
-}
-else
-{
-    if(checkBoxREP.isSelected())
-    {
-    setModelToTotalesPorAlmacenResposicion();
+				RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
+				//If current expression doesn't parse, don't update.
+				try {
+					rf = RowFilter.regexFilter(filterText.getText(), 0);
+				} catch (java.util.regex.PatternSyntaxException e) {
+					return;
+				}
 
-    }
-    else
-    {
-    	setModelToTotalesPorAlmacen();
+				System.out.println("TEXO:" + filterText.getText());
 
-    }
-    }
-    
+				if (!filterText.getText().equals("") && !filterText.getText().equals(" ")
+						&& filterText.getText().length() > 0) {
+					System.out.println("ENTRO");
 
+					setModelToTotalesPorAlmacenFabuloso(filterText.getText());
+				} else {
+					if (checkBoxREP.isSelected()) {
+						setModelToTotalesPorAlmacenResposicion();
 
-}
-else
-{
-        RowFilter<TablaProveedor, Object> rf = null;
-  try {
-       
-	        rf = RowFilter.regexFilter(filterText.getText(),1);
-	    } catch (java.util.regex.PatternSyntaxException e) {
-	        return;
-	    }
-  
-    
-	    sorter.setRowFilter(rf);
+					} else {
+						setModelToTotalesPorAlmacen();
 
-		table.setRowSorter(sorter);
-		if(table.getRowCount() == 0 )
-		{
-			 rf = null;
-			  try {
-			       
-				        rf = RowFilter.regexFilter(filterText.getText(),2);
-				    } catch (java.util.regex.PatternSyntaxException e) {
-				        return;
-				    }
-			  
-			    
-				    sorter.setRowFilter(rf);
+					}
+				}
+
+			} else {
+				RowFilter<TablaProveedor, Object> rf = null;
+				try {
+
+					rf = RowFilter.regexFilter(filterText.getText(), 1);
+				} catch (java.util.regex.PatternSyntaxException e) {
+					return;
+				}
+
+				sorter.setRowFilter(rf);
+
+				table.setRowSorter(sorter);
+				if (table.getRowCount() == 0) {
+					rf = null;
+					try {
+
+						rf = RowFilter.regexFilter(filterText.getText(), 2);
+					} catch (java.util.regex.PatternSyntaxException e) {
+						return;
+					}
+
+					sorter.setRowFilter(rf);
 
 					table.setRowSorter(sorter);
-			
-			System.out.println("CASO 2");	
-			}
-}
+
+					System.out.println("CASO 2");
+				}
+			} 
+		}
 	}
 	
+	private void newFilter2(){
+		System.out.println("NEW FILTER 222222");
+		if (sorter != null) {
+			if (estoyEnTotales) {
+				
+				fecha1 = filterDate1.getJFormattedTextField().getText();
+				System.out.println(fecha1);
+				fecha2 = filterDate2.getJFormattedTextField().getText();
+				System.out.println(fecha2);
+				try {
+					if(!fecha1.isEmpty() && !fecha2.isEmpty() && Zapato.getFechaFromString(fecha1).compareTo(Zapato.getFechaFromString(fecha2))>0){
+						filterDate1.getModel().setDay(filterDate2.getModel().getDay());
+						filterDate1.getModel().setMonth(filterDate2.getModel().getMonth());
+						filterDate1.getModel().setYear(filterDate2.getModel().getYear());
+						fecha1 = filterDate1.getJFormattedTextField().getText();
+						System.out.println("fecha1 cambio: "+fecha1);
+					}
+				} catch (ParseException e1) {
+					// no deberia incurrir; el valor que puede tomar fecha1 y fecha2 es controlado
+					System.out.println("esto no deberia pasar");
+				}catch (IllegalStateException e1) {
+					// no deberia incurrir; el valor que puede tomar fecha1 y fecha2 es controlado
+					System.out.println("esto no deberia pasar 2");
+					
+				}
+
+					
+				
+				
+
+				RowFilter<TablaTotalesPorAlmacen, Object> rf = null;
+				//If current expression doesn't parse, don't update.
+				try {
+					rf = RowFilter.regexFilter(filterText.getText(), 0);
+				} catch (java.util.regex.PatternSyntaxException e) {
+					return;
+				}
+
+				System.out.println("TEXO:" + filterText.getText());
+
+				if (!filterText.getText().equals("") && !filterText.getText().equals(" ")
+						&& filterText.getText().length() > 0) {
+					System.out.println("ENTRO");
+
+					setModelToTotalesPorAlmacenFabuloso(filterText.getText());
+				} else {
+					if (checkBoxREP.isSelected()) {
+						setModelToTotalesPorAlmacenResposicion();
+
+					} else {
+						setModelToTotalesPorAlmacen();
+
+					}
+				}
+
+			} else {
+				RowFilter<TablaProveedor, Object> rf = null;
+				try {
+
+					rf = RowFilter.regexFilter(filterText.getText(), 1);
+				} catch (java.util.regex.PatternSyntaxException e) {
+					return;
+				}
+
+				sorter.setRowFilter(rf);
+
+				table.setRowSorter(sorter);
+				if (table.getRowCount() == 0) {
+					rf = null;
+					try {
+
+						rf = RowFilter.regexFilter(filterText.getText(), 2);
+					} catch (java.util.regex.PatternSyntaxException e) {
+						return;
+					}
+
+					sorter.setRowFilter(rf);
+
+					table.setRowSorter(sorter);
+
+					System.out.println("CASO 2");
+				}
+			} 
+		}
+	}
+
+	
+	
 	public void setModelToTotalesPorAlmacenFabuloso(String prefix){
-		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaro(prefix, checkBoxREP.isSelected()));
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaro(prefix, fecha1, fecha2, checkBoxREP.isSelected()));
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
+		filterDate1.setVisible(true);
+		filterDate2.setVisible(true);
 		//filterText.setCursor(new Cursor(Cursor.TEXT_CURSOR));filterText.requestFocus();
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		panel.setSize(panel.getWidth(), 400);
+		scrollPane.setSize(scrollPane.getWidth(), 400);
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
 		    public Component getTableCellRendererComponent(JTable table,

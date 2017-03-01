@@ -77,14 +77,14 @@ public class Mundo {
         zapatos.add(pZapato);
         guardar();
 
-        return "Se ha agregado exitosamente el zapato de Referencia: \"" + pZapato.getReferencia() + "\" y Almacén: \"" + pZapato.getAlmacenesString() + "\"";
+        return "Se ha agregado exitosamente el zapato de Referencia: \"" + pZapato.getReferencia() + "\" y Almacï¿½n: \"" + pZapato.getAlmacenesString() + "\"";
     }
 
     public String agregarReposicion(Zapato pZapato) {
         zapatos.add(pZapato);
         guardar();
 
-        return "Se ha agregado exitosamente la reposición de Referencia: \"" + pZapato.getReferencia() + "\" y Almacén: \"" + pZapato.getAlmacenesString() + "\"";
+        return "Se ha agregado exitosamente la reposiciï¿½n de Referencia: \"" + pZapato.getReferencia() + "\" y Almacï¿½n: \"" + pZapato.getAlmacenesString() + "\"";
     }
 
     public String agregarProovedores(Proveedor pProveedor, String flag) {
@@ -217,7 +217,7 @@ public class Mundo {
         for (int i = 0; i < proveedores.size(); i++) {
             listaIdealDeCodigos.add(i, i + 1);
         }
-        System.out.println("tamaño lista: " + listaIdealDeCodigos.size());
+        System.out.println("tamaï¿½o lista: " + listaIdealDeCodigos.size());
 
         //luego se recorre esa lista y se retorna el primer numero que no sea codigo de ningun proveedor
         for (int i = 0; i < listaIdealDeCodigos.size(); i++) {
@@ -406,7 +406,7 @@ public class Mundo {
         row.createCell(4).setCellValue("Precio Venta Total");
         row.createCell(5).setCellValue("Precio Costo Total");
 
-        for (Object[] o : darTotales()) {
+        for (Object[] o : darTotales("","")) {
             row = sheetTotales.createRow(rownum++);
 
             row.createCell(0).setCellValue((String) o[0]);
@@ -480,7 +480,7 @@ public class Mundo {
                                 if (alm.getCiudad().equals(codigoAlmacen)) {
                                     zapatos.remove(i);
                                     return "Se ha eliminado exitosamente el zapato de referencia: " + referencia
-                                            + ", color "+color+" y proveedor relacionado con código: " + codigoProveedor;
+                                            + ", color "+color+" y proveedor relacionado con cï¿½digo: " + codigoProveedor;
                                 }
                             }
                         }
@@ -571,13 +571,13 @@ public class Mundo {
                     borrado = true;
                     guardar();
                 } else {
-                    throw new Exception("El Proveedor con código '" + codigoAborrar + "' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
+                    throw new Exception("El Proveedor con cï¿½digo '" + codigoAborrar + "' estï¿½ vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
             }
 
         }
         if (!borrado) {
-            throw new Exception("El Proveedor con código '" + codigoAborrar + "' no fue encontrado");
+            throw new Exception("El Proveedor con cï¿½digo '" + codigoAborrar + "' no fue encontrado");
         }
     }
 
@@ -606,7 +606,7 @@ public class Mundo {
                     almacenes.remove(i);
                     break;
                 } else {
-                    throw new Exception("El Almacén de ciudad '" + ciudad + "' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
+                    throw new Exception("El Almacï¿½n de ciudad '" + ciudad + "' estï¿½ vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
             }
 
@@ -830,7 +830,7 @@ public class Mundo {
         return res;
     }
 
-    public ArrayList<Object[]> darTotales() {
+    public ArrayList<Object[]> darTotales(String fecha1, String fecha2) {
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
@@ -841,11 +841,20 @@ public class Mundo {
                 int sumaPrecioCosto = 0;
                 int sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
-                if (ka.toString().equals(a.toString()) && !z.esReposicion()) {
-                    sumaCantidad += z.getCantidad();
-                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
-                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
-                }
+                try {
+					if (!fecha1.isEmpty() && !fecha2.isEmpty() && z.getFecha().compareTo(Zapato.getFechaFromString(fecha1))>=0 && z.getFecha().compareTo(Zapato.getFechaFromString(fecha2))<=0 && ka.toString().equals(a.toString()) && !z.esReposicion()) {
+					    sumaCantidad += z.getCantidad();
+					    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+					    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+					} else if (ka.toString().equals(a.toString()) && !z.esReposicion()) {
+					    sumaCantidad += z.getCantidad();
+					    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+					    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
@@ -1314,7 +1323,7 @@ public class Mundo {
         return Integer.MAX_VALUE;
     }
 
-    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix, boolean es) {
+    public ArrayList<Object[]> darGrandiososTotalesCasoRaro(String prefix, String fecha1, String fecha2, boolean es) {
 
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
@@ -1326,11 +1335,21 @@ public class Mundo {
                 int sumaPrecioCosto = 0;
                 int sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
-                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
-                    sumaCantidad += z.getCantidad();
-                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
-                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
-                }
+                
+                try {
+					if (!fecha1.isEmpty() && !fecha2.isEmpty() && z.getFecha().compareTo(Zapato.getFechaFromString(fecha1))>=0 && z.getFecha().compareTo(Zapato.getFechaFromString(fecha2))<=0 && ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
+					    sumaCantidad += z.getCantidad();
+					    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+					    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+					}else if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
+					    sumaCantidad += z.getCantidad();
+					    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+					    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
@@ -1495,7 +1514,7 @@ public class Mundo {
                                 if (alm.getCiudad().equals(codigoAlmacen)) {
                                     zapatos.remove(i);
                                     return "Se ha eliminado exitosamente la reposicion de referencia: " + referencia
-                                            + ", color "+color+" y proveedor relacionado con código: " + codigoProveedor;
+                                            + ", color "+color+" y proveedor relacionado con cï¿½digo: " + codigoProveedor;
                                 }
                             }
 
@@ -1504,10 +1523,10 @@ public class Mundo {
                 }
             }
         }
-        return "No se ha encontrado la reposición especificada para eliminar.";
+        return "No se ha encontrado la reposiciï¿½n especificada para eliminar.";
     }
 
-    public ArrayList<Object[]> darTotalesResposicion() {
+    public ArrayList<Object[]> darTotalesResposicion(String fecha1, String fecha2) {
     
                      ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
@@ -1519,11 +1538,20 @@ public class Mundo {
                 int sumaPrecioCosto = 0;
                 int sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
-                if (ka.toString().equals(a.toString()) && z.esReposicion()) {
-                    sumaCantidad += z.getCantidad();
-                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
-                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
-                }
+                try {
+					if (!fecha1.isEmpty() && !fecha2.isEmpty() && z.getFecha().compareTo(Zapato.getFechaFromString(fecha1))>=0 && z.getFecha().compareTo(Zapato.getFechaFromString(fecha2))<=0 && ka.toString().equals(a.toString()) && z.esReposicion()) {
+					    sumaCantidad += z.getCantidad();
+					    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+					    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+					}else if (ka.toString().equals(a.toString()) && z.esReposicion()) {
+					    sumaCantidad += z.getCantidad();
+					    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+					    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                 res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
