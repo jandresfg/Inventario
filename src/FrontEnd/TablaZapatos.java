@@ -11,19 +11,22 @@ import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import BackEnd.Almacen;
+import BackEnd.Mundo;
 import BackEnd.Zapato;
 
 public class TablaZapatos extends AbstractTableModel {
 
     List<Zapato> data = new ArrayList<Zapato>();
+    Mundo mundo;
 
     //	String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categorï¿½a","Fecha" };
     // Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
     Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class, Object.class, Object.class, String.class, String.class, Integer.class, String.class, String.class};
     String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categoría", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
 
-    public TablaZapatos(List<Zapato> arr) {
+    public TablaZapatos(List<Zapato> arr, Mundo mundop) {
         data = arr;
+        mundo = mundop;
     }
 
     public int getRowCount() {
@@ -96,7 +99,7 @@ public class TablaZapatos extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex == 0 || columnIndex == 1) {
+        if (columnIndex == 0 ) {
             return false;
         }
         return true;
@@ -107,11 +110,12 @@ public class TablaZapatos extends AbstractTableModel {
         /*
         if (columnIndex == 0) {
 
+        }*/
+        if (columnIndex == 1){
+        	ArrayList<String> a = new ArrayList<String>();
+        	a.add(((String) aValue).trim());
+			data.get(rowIndex).setProveedores(mundo.darProveedores(a));
         }
-        if (columnIndex == 1) {
-
-        }
-        */
         if (columnIndex == 2) {
             try {
                 data.get(rowIndex).setFecha(Zapato.getFechaFromString(((String) aValue).trim()));

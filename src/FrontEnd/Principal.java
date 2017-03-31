@@ -19,6 +19,7 @@ import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
@@ -1253,7 +1254,7 @@ else
 	}
 	
 	public void setModelToZapatos(){
-		TablaZapatos sol = new TablaZapatos(mundo.darZapatos());
+		TablaZapatos sol = new TablaZapatos(mundo.darZapatos(), mundo);
 		sol.addTableModelListener(new TableModelListener() {
 			
 			@Override
@@ -1267,6 +1268,11 @@ else
 		table.setModel(sol);
 		table.setDefaultRenderer(Object.class, new MultipleLines());
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedor")).setPreferredWidth(100);
+		JComboBox comboBox = new JComboBox();
+		for(Proveedor p:mundo.darProveedores()){
+			comboBox.addItem(p.toString());
+		}
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedor")).setCellEditor(new DefaultCellEditor(comboBox));
 		//table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Almacen")).setPreferredWidth(180);
 		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
 		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
