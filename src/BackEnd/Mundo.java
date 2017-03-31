@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -201,6 +203,11 @@ public class Mundo {
     }
 
     public List<Proveedor> darProveedores() {
+Collections.sort(proveedores, new Comparator<Proveedor>(){
+    public int compare(Proveedor s1, Proveedor s2) {
+        return s1.compareTo(s2);
+    }
+});
         return proveedores;
 
     }
