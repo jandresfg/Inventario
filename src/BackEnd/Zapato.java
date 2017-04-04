@@ -22,6 +22,7 @@ public class Zapato
 	private int cantidad;
 	private int vendidos;
 	private String categoria;
+	private String numeracion;
 
 	private List<Proveedor> proveedores;
 	private List<Almacen> almacenes;
@@ -32,9 +33,9 @@ public class Zapato
 
 
 
-	public Zapato(String pRef, String pPlanta, String pAltura , String pColor, String pMaterial, int pPrecioCosto, int pPrecioVenta,int pCantidad,String pCategoria, int pVendidos, Date pFecha )
+	public Zapato(String pRef, String pPlanta, String pAltura , String pColor, String pMaterial, int pPrecioCosto, int pPrecioVenta,int pCantidad,String pCategoria, int pVendidos, Date pFecha,String pnumeracion )
 	{
-
+		numeracion = "0";
 		referencia =pRef;
 		planta =pPlanta;
 		altura = pAltura;
@@ -49,13 +50,26 @@ public class Zapato
 		proveedores = new ArrayList<Proveedor>();
 		almacenes = new ArrayList<Almacen>();
                 esReposicion=false;
-	}
+                if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
+                {
+                	numeracion = pnumeracion;
+
+
+                }	}
 
 
 
-        public Zapato(String pRef, String pPlanta, String pAltura , String pColor, String pMaterial, int pPrecioCosto, int pPrecioVenta,int pCantidad,String pCategoria, int pVendidos, Date pFecha, boolean pesReposicion )
+        public Zapato(String pRef, String pPlanta, String pAltura , String pColor, String pMaterial, int pPrecioCosto, int pPrecioVenta,int pCantidad,String pCategoria, int pVendidos, Date pFecha, boolean pesReposicion,String pnumeracion )
 	{
 
+        	
+    		numeracion = "0";
+if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
+{
+	numeracion = pnumeracion;
+
+
+}
 		referencia =pRef;
 		planta =pPlanta;
 		altura = pAltura;
@@ -70,6 +84,7 @@ public class Zapato
 		proveedores = new ArrayList<Proveedor>();
 		almacenes = new ArrayList<Almacen>();
                 esReposicion=pesReposicion;
+
 	}
 
 
@@ -381,7 +396,20 @@ public int getProveedoresNumber() {
 				+ ", material=" + material + ", precioCosto=" + precioCosto + ", precioVenta=" + precioVenta
 				+ ", cantidad=" + cantidad + ", vendidos=" + vendidos + ", categoria=" + categoria + ", proveedores="
 				+ proveedores + ", almacenes=" + almacenes + ", fecha=" + fecha + ", esReposicion=" + esReposicion
+				+ ", numeracion=" + numeracion
 				+ "]";
+	}
+
+
+
+	public String getNumeracion() {
+		return numeracion;
+	}
+
+
+
+	public void setNumeracion(String numeracion) {
+		this.numeracion = numeracion;
 	}
 
 }

@@ -21,8 +21,8 @@ public class TablaZapatos extends AbstractTableModel {
 
     //	String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categorï¿½a","Fecha" };
     // Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
-    Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class, Object.class, Object.class, String.class, String.class, Integer.class, String.class, String.class};
-    String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categoría", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
+    Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class,String.class, Object.class, Object.class, String.class, String.class, Integer.class, String.class, String.class};
+    String colNames[] = {"Almacen", "Proveedor", "Fecha", "Referencia", "Categoría","Numeración", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
 
     public TablaZapatos(List<Zapato> arr, Mundo mundop) {
         data = arr;
@@ -59,33 +59,47 @@ public class TablaZapatos extends AbstractTableModel {
         if (columnIndex == 4) {
             return data.get(rowIndex).getCategoria();
         }
-
+//        INSERTADO
         if (columnIndex == 5) {
-            return data.get(rowIndex).getPlanta();
+        	
+        	if(data.get(rowIndex).getNumeracion().equals("0"))
+        	{
+                return "";
+
+        	}
+        	else
+        	{
+            return data.get(rowIndex).getNumeracion();
+        	}
         }
         if (columnIndex == 6) {
-            return data.get(rowIndex).getAltura();
+            return data.get(rowIndex).getPlanta();
         }
         if (columnIndex == 7) {
-            return data.get(rowIndex).getColor();
+            return data.get(rowIndex).getAltura();
         }
         if (columnIndex == 8) {
+            return data.get(rowIndex).getColor();
+        }
+        if (columnIndex == 9) {
             return data.get(rowIndex).getMaterial();
         }
 
-        if (columnIndex == 9) {
+        if (columnIndex == 10) {
             return data.get(rowIndex).getCantidad();
         }
-        if (columnIndex == 10) {
+        if (columnIndex == 11) {
         	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
         	String number_ge = nf_ge.format(data.get(rowIndex).getPrecioCosto());
             return number_ge;
         }
-        if (columnIndex == 11) {
+        if (columnIndex == 12) {
         	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
         	String number_ge = nf_ge.format(data.get(rowIndex).getPrecioVenta());
             return number_ge;
-        }
+        }  
+
+        
 
         return null;
     }
@@ -131,21 +145,36 @@ public class TablaZapatos extends AbstractTableModel {
             data.get(rowIndex).setCategoria(((String) aValue).trim());
         }
         if (columnIndex == 5) {
-            data.get(rowIndex).setPlanta(((String) aValue).trim());
+        	String papitas= (String) aValue;
+        	if(papitas.equals("")||papitas.equals(" "))
+        	{
+                data.get(rowIndex).setNumeracion("0");
+        	}
+        	else
+        	{
+                data.get(rowIndex).setNumeracion(((String) aValue).trim());
+	
+        	}
+        	
+        	
+        	
         }
         if (columnIndex == 6) {
-            data.get(rowIndex).setAltura(((String) aValue).trim());
+            data.get(rowIndex).setPlanta(((String) aValue).trim());
         }
         if (columnIndex == 7) {
-            data.get(rowIndex).setColor(((String) aValue).trim());
+            data.get(rowIndex).setAltura(((String) aValue).trim());
         }
         if (columnIndex == 8) {
-            data.get(rowIndex).setMaterial(((String) aValue).trim());
+            data.get(rowIndex).setColor(((String) aValue).trim());
         }
         if (columnIndex == 9) {
-            data.get(rowIndex).setCantidad((int) aValue);
+            data.get(rowIndex).setMaterial(((String) aValue).trim());
         }
         if (columnIndex == 10) {
+            data.get(rowIndex).setCantidad((int) aValue);
+        }
+        if (columnIndex == 11) {
         	try {
         		String input = (((String) aValue).trim()).replaceAll("\\.", "");
         		System.out.println("Precio Costo: "+input);
@@ -156,7 +185,7 @@ public class TablaZapatos extends AbstractTableModel {
 			}
             
         }
-        if (columnIndex == 11) {
+        if (columnIndex == 12) {
         	try {
         		String input = (((String) aValue).trim()).replaceAll("\\.", "");
         		System.out.println("Precio Venta: "+input);

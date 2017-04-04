@@ -14,9 +14,9 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
 
     ArrayList<Object[]> data = new ArrayList<Object[]>();
     //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
-    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Color","Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil"};
+    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Color","Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil","Numeracion"};
 
-    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class};
+    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class,String.class};
 
     public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) {
         data = totales;

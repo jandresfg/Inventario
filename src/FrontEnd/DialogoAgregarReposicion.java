@@ -141,6 +141,8 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
     private List<JCheckBox> checkboxesAlmacenes;
     private JTextField textPV;
     private JLabel lblPrecioDeVenta;
+    private JLabel lblNumeracion_1;
+    private JTextField lblNumeracion;
 
     // -----------------------------------------------
     // Métodos
@@ -158,9 +160,9 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
         setTitle("Agregar Reposici\u00F3n");
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{130, 146, 260, 260, 0};
-        gridBagLayout.rowHeights = new int[]{30, 26, 26, 26, 26, 26, 25, 26, 0, 26, 26, 0, 27, 0, 0};
-        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowHeights = new int[]{30, 26, 26, 26, 26, 26, 25, 26, 0, 26, 26, 0, 27, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         grupo = new ButtonGroup();
 
@@ -206,7 +208,7 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
         gbc_panelProveedores.insets = new Insets(0, 0, 5, 5);
         gbc_panelProveedores.gridx = 2;
         gbc_panelProveedores.gridy = 1;
-        gbc_panelProveedores.gridheight = 12;
+        gbc_panelProveedores.gridheight = 13;
         getContentPane().add(scrollPanel, gbc_panelProveedores);
 
         //ALMACENES///////////////////////////////////////////////////////////////////
@@ -243,7 +245,7 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
         gbc_panelAlmacenes.insets = new Insets(0, 0, 5, 0);
         gbc_panelAlmacenes.gridx = 3;
         gbc_panelAlmacenes.gridy = 1;
-        gbc_panelAlmacenes.gridheight = 12;
+        gbc_panelAlmacenes.gridheight = 13;
         getContentPane().add(scrollPanelAlmacenes, gbc_panelAlmacenes);
 
         //DATOS GENERALES///////////////////////////////////////////////////////////////////
@@ -498,6 +500,13 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
         getContentPane().add(rdbtnHombre, gbc_rdbtnHombre);
 
         rdbtnInfantil = new JRadioButton("Infantil");
+        rdbtnInfantil.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	lblNumeracion.setEnabled(true);
+lblNumeracion.setEditable(true);
+
+            }
+        });
         GridBagConstraints gbc_rdbtnInfantil = new GridBagConstraints();
         gbc_rdbtnInfantil.anchor = GridBagConstraints.WEST;
         gbc_rdbtnInfantil.insets = new Insets(0, 0, 5, 5);
@@ -505,17 +514,37 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
         gbc_rdbtnInfantil.gridy = 12;
         grupo.add(rdbtnInfantil);
         getContentPane().add(rdbtnInfantil, gbc_rdbtnInfantil);
+        
+        lblNumeracion_1 = new JLabel("Numeracion");
+        lblNumeracion_1.setHorizontalAlignment(SwingConstants.LEFT);
+        
+        GridBagConstraints gbc_lblNumeracion_1 = new GridBagConstraints();
+        gbc_lblNumeracion_1.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNumeracion_1.gridx = 0;
+        gbc_lblNumeracion_1.gridy = 13;
+        getContentPane().add(lblNumeracion_1, gbc_lblNumeracion_1);
+        
+        lblNumeracion = new JTextField();
+        lblNumeracion.setColumns(10);
+        lblNumeracion.setEnabled(false);
+        lblNumeracion.setEditable(false);
+        GridBagConstraints gbc_lblNumeracion = new GridBagConstraints();
+        gbc_lblNumeracion.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNumeracion.fill = GridBagConstraints.HORIZONTAL;
+        gbc_lblNumeracion.gridx = 1;
+        gbc_lblNumeracion.gridy = 13;
+        getContentPane().add(lblNumeracion, gbc_lblNumeracion);
         GridBagConstraints gbc_18 = new GridBagConstraints();
         gbc_18.insets = new Insets(0, 0, 0, 5);
         gbc_18.fill = GridBagConstraints.BOTH;
         gbc_18.gridx = 0;
-        gbc_18.gridy = 13;
+        gbc_18.gridy = 14;
         gbc_18.gridwidth = 3;
         getContentPane().add(btnNewButton, gbc_18);
         GridBagConstraints gbc_19 = new GridBagConstraints();
         gbc_19.fill = GridBagConstraints.BOTH;
         gbc_19.gridx = 3;
-        gbc_19.gridy = 13;
+        gbc_19.gridy = 14;
         getContentPane().add(btnNewButton_1, gbc_19);
         pack();
         setLocationRelativeTo(null);
@@ -580,8 +609,9 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
                     String referencia = textReft.getText();
                     String planta = textPlanta.getText();
                     String fecha = datePicker.getJFormattedTextField().getText();
+                    String numeracion = lblNumeracion.getText();
 
-                    Zapato zap = new Zapato(referencia, planta, altura, color, material, precioCosto, precioVenta, cantidad, categoria, 0, Zapato.getFechaFromString(fecha));
+                    Zapato zap = new Zapato(referencia, planta, altura, color, material, precioCosto, precioVenta, cantidad, categoria, 0, Zapato.getFechaFromString(fecha),numeracion);
 
                     ArrayList<String> provs = new ArrayList<String>();
                     for (int i = 0; i < checkboxesProveedores.size(); i++) {
@@ -615,7 +645,7 @@ public class DialogoAgregarReposicion extends JDialog implements ActionListener 
                             JCheckBox x = checkboxesAlmacenes.get(i);
                             if (x.isSelected()) {
 
-                                Zapato z = new Zapato(zap.getReferencia(), zap.getPlanta(), zap.getAltura(), zap.getColor(), zap.getMaterial(), zap.getPrecioCosto(), zap.getPrecioVenta(), zap.getCantidad(), zap.getCategoria(), 0, Zapato.getFechaFromString(fecha), true);
+                                Zapato z = new Zapato(zap.getReferencia(), zap.getPlanta(), zap.getAltura(), zap.getColor(), zap.getMaterial(), zap.getPrecioCosto(), zap.getPrecioVenta(), zap.getCantidad(), zap.getCategoria(), 0, Zapato.getFechaFromString(fecha), true,numeracion);
                                 ArrayList<String> temp = new ArrayList<String>();
                                 temp.add(x.getText());
                                 cantidadAlmacenes--;

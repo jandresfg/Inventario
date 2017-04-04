@@ -119,9 +119,26 @@ public class Mundo {
 
             String[] arr = cadena.split("\\}");
             
-            for(int i = 0;i<arr.length; i++){arr[i] = arr[i].trim();}
+            for(int i = 0;i<arr.length; i++){
+            	if(i==14)
+            	{
+            		if(arr[i].equals("0"))
+            		{
+            			arr[i]= " ";
+            		}
+            		else
+            		{
+                    	arr[i] = arr[i].trim();
 
-            Zapato zap = new Zapato(arr[0], arr[1], arr[2], arr[3], arr[4], Integer.parseInt(arr[5]), Integer.parseInt(arr[6]), Integer.parseInt(arr[7]), arr[8], Integer.parseInt(arr[9]), Zapato.getFechaFromString(arr[10]), Boolean.parseBoolean(arr[13]));
+            		}
+            	}
+            	else
+            	{
+            	arr[i] = arr[i].trim();}
+            }
+
+
+            Zapato zap = new Zapato(arr[0], arr[1], arr[2], arr[3], arr[4], Integer.parseInt(arr[5]), Integer.parseInt(arr[6]), Integer.parseInt(arr[7]), arr[8], Integer.parseInt(arr[9]), Zapato.getFechaFromString(arr[10]), Boolean.parseBoolean(arr[13]),arr[14]);
             zap.setProveedores(darProveedores(arr[11]));
             zap.setAlmacenes(darAlmacenes(arr[12]));
             zapatos.add(zap);
@@ -157,11 +174,6 @@ public class Mundo {
         while ((prov = bbb.readLine()) != null) {
             String[] arr = prov.split("\\,", -1);
             for(int i = 0;i<arr.length; i++){arr[i] = arr[i].trim();}
-            System.out.println("Size: " + arr.length + " - Line: " + prov);
-            System.out.println("0: " + arr[0]);
-            System.out.println("1: " + arr[1]);
-            System.out.println("2: " + arr[2]);
-            System.out.println("3: " + arr[3]);
             Proveedor provee = new Proveedor(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4], arr[5]);
             proveedores.add(provee);
         }
@@ -224,7 +236,6 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         for (int i = 0; i < proveedores.size(); i++) {
             listaIdealDeCodigos.add(i, i + 1);
         }
-        System.out.println("tamaño lista: " + listaIdealDeCodigos.size());
 
         //luego se recorre esa lista y se retorna el primer numero que no sea codigo de ningun proveedor
         for (int i = 0; i < listaIdealDeCodigos.size(); i++) {
@@ -255,7 +266,6 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             Proveedor z = proveedores.get(i);
             int numeroActual = z.getCodigo();
             if (z.getFabrica().equals(" ") || z.getFabrica().equals("")) {
-                System.out.println("ENTRO");
 
                 System.out.println(z.getFabrica());
                 return i + 1 + "";
@@ -549,7 +559,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 for (int i = 0; i < zapatos.size(); i++) {
 
                     Zapato pZapato = zapatos.get(i);
-                    out.println(pZapato.getReferencia() + "}" + pZapato.getPlanta() + "}" + pZapato.getAltura() + "}" + pZapato.getColor() + "}" + pZapato.getMaterial() + "}" + pZapato.getPrecioCosto() + "}" + pZapato.getPrecioVenta() + "}" + pZapato.getCantidad() + "}" + pZapato.getCategoria() + "}" + pZapato.getVendidos() + "}" + pZapato.getStringFecha() + "}" + pZapato.getProveedoresString() + "}" + pZapato.getAlmacenesString() + "}" + pZapato.esReposicion());
+                    System.out.println(pZapato.getNumeracion());
+                    out.println(pZapato.getReferencia() + "}" + pZapato.getPlanta() + "}" + pZapato.getAltura() + "}" + pZapato.getColor() + "}" + pZapato.getMaterial() + "}" + pZapato.getPrecioCosto() + "}" + pZapato.getPrecioVenta() + "}" + pZapato.getCantidad() + "}" + pZapato.getCategoria() + "}" + pZapato.getVendidos() + "}" + pZapato.getStringFecha() + "}" + pZapato.getProveedoresString() + "}" + pZapato.getAlmacenesString() + "}" + pZapato.esReposicion()+"}" + pZapato.getNumeracion());
 
                 }
                 out.close();
@@ -696,7 +707,6 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 }
             }
         }
-        System.out.println(resp.size() + " proveedores");
         return resp;
     }
 
@@ -709,16 +719,12 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 }
             }
         }
-        System.out.println(resp.size() + " almacenes");
         return resp;
     }
 
     public List<Proveedor> darProveedores(String provs) {
         ArrayList<Proveedor> resp = new ArrayList<Proveedor>();
-        System.out.println("provs: " + provs);
         String[] provsArr = provs.split("\\{", -1);
-        System.out.println("provsArr len: " + provsArr.length);
-        System.out.println("proveedores size: " + proveedores.size());
         for (Proveedor p : proveedores) {
             for (String s : provsArr) {
                 if (String.valueOf(p.getCodigo()).equals(s.split(" - ")[0]) && p.getFabrica().equals(s.split(" - ")[1])) {
@@ -732,10 +738,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 
     public List<Almacen> darAlmacenes(String alms) {
         ArrayList<Almacen> resp = new ArrayList<Almacen>();
-        System.out.println("alms: " + alms);
         String[] almsArr = alms.split("\\{");
-        System.out.println("almsArr len: " + almsArr.length);
-        System.out.println("almacenes size: " + almacenes.size());
         for (Almacen a : almacenes) {
             for (String s : almsArr) {
                 if (a.getCiudad().equalsIgnoreCase(s)) {
@@ -743,7 +746,6 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 }
             }
         }
-        System.out.println(resp.size() + " almacenes");
         return resp;
     }
 
@@ -841,7 +843,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[12];
+                Object[] res = new Object[13];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -875,6 +877,16 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     res[9] = " ";
                     res[10] = " ";
 
+                }
+                String numeracion = z.getNumeracion();
+                if(numeracion.equals("0"))
+                {
+                    res[12] = "";
+
+                }
+                else
+                {
+                res[12] = numeracion;
                 }
 
                 if ((int) res[6] > 0) {
@@ -955,8 +967,6 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
     }
 
     public String verificarCodigoProveedor(Proveedor prov) {
-        System.out.println(proveedores.size());
-        System.out.println(prov.getCodigo());
 
         boolean codigoUsado = false;
         for (int i = 0; i < proveedores.size() && !codigoUsado; i++) {
@@ -1326,7 +1336,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[12];
+                Object[] res = new Object[13];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -1361,6 +1371,17 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     res[10] = " ";
 
                 }
+                String numeracion = z.getNumeracion();
+
+                if(numeracion.equals("0"))
+                {
+                    res[12] = "";
+
+                }
+                else
+                {
+                res[12] = numeracion;
+                }
 
                 if ((int) res[6] > 0) {
                     arr.add(res);
@@ -1369,11 +1390,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         }
         if (arr.size() == 0) {
 
-            System.out.println("NO HAY");
             return arr;
 
         } else {
-            Object[] linea = new Object[12];
+            Object[] linea = new Object[13];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -1386,8 +1406,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             linea[6] = " ";
             linea[7] = " ";
             linea[11] = " ";
+            linea[12] = " ";
 
-            Object[] fabulosoTotal = new Object[12];
+            Object[] fabulosoTotal = new Object[13];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
@@ -1399,6 +1420,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[8] = " ";
             fabulosoTotal[10] = " ";
                         fabulosoTotal[11] = " ";
+                        fabulosoTotal[12] = " ";
 
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
@@ -1416,11 +1438,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[7] = sumaPrecioCosto;
             fabulosoTotal[8] = sumaPrecioVenta;
 
-            System.out.println(arr.size());
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
             retorno.add(linea);
             retorno.add(fabulosoTotal);
-            System.out.println(retorno.size());
 
             return retorno;
         }
@@ -1467,7 +1487,6 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
     }
 
     private int compararZapato(Zapato a, Zapato b) {
-        System.out.println("Se comparan: '" + a.getProveedoresString() + "' vs '" + b.getProveedoresString() + "' - resultado: " + a.getProveedoresString().compareTo(b.getProveedoresString()));
 
         int retorno = a.getAlmacenesString().compareTo(b.getAlmacenesString());
         if (retorno == 0) {
@@ -1519,7 +1538,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                      ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[12];
+                Object[] res = new Object[13];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -1554,6 +1573,18 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     res[10] = " ";
 
                 }
+                String numeracion = z.getNumeracion();
+
+                if(numeracion.equals("0"))
+                {
+                    res[12] = "";
+
+                }
+                else
+                {
+                res[12] = numeracion;
+                }
+
 
                 if ((int) res[6] > 0) {
                     arr.add(res);

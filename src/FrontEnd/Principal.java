@@ -1296,7 +1296,7 @@ rdbtnCaballero.setSelected(false);
 	}
 	
 	public void setModelToReposiciones(){
-		TablaReposiciones sol = new TablaReposiciones(mundo.darReposiciones());
+		TablaReposiciones sol = new TablaReposiciones(mundo.darReposiciones(),mundo);
 		sol.addTableModelListener(new TableModelListener() {
 			
 			@Override
