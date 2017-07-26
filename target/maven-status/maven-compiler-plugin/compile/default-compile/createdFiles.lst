@@ -11,6 +11,7 @@ FrontEnd\DialogoAgregarZapto$3.class
 FrontEnd\Principal$3.class
 FrontEnd\DialogoVenderZapto.class
 FrontEnd\TablaProveedor.class
+BackEnd\Mundo$1.class
 FrontEnd\DialogoEliminarZapto.class
 FrontEnd\DialogoEliminarAlmacen.class
 FrontEnd\Visualizacion.class
@@ -45,6 +46,7 @@ FrontEnd\DialogoAgregrarAlmacen$1.class
 FrontEnd\InterfazManejadorExcel.class
 FrontEnd\DialogoAgregarReposicion.class
 FrontEnd\Principal$34.class
+FrontEnd\DialogoAgregarReposicion$4.class
 FrontEnd\Principal$24.class
 FrontEnd\Principal$9.class
 FrontEnd\Principal$1.class
@@ -56,6 +58,7 @@ FrontEnd\DialogoEliminarAlmacen$1.class
 FrontEnd\DialogoEliminarZapto$1.class
 FrontEnd\DialogoEliminarProveedor.class
 FrontEnd\TablaZapatos.class
+FrontEnd\DialogoAgregarZapto$4.class
 FrontEnd\Principal$26.class
 FrontEnd\Principal$8.class
 FrontEnd\Principal$11.class

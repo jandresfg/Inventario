@@ -2,6 +2,7 @@ package FrontEnd;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,9 +15,9 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
 
     ArrayList<Object[]> data = new ArrayList<Object[]>();
     //String colNames[] = { "Almacen", "Proveedor", "Referencia", "Cantidad Total", "Precio Costo Total", "Precio Venta Total"  };
-    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Color","Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil","Numeracion"};
+    String colNames[] = {"Almacen", "Proveedor", "Referencia", "Color","Costo Unitario", "Venta Unitario", "Cantidad Total", "Costo Total", "Venta Total", "Dama", "Caballero", "Infantil","Numeracion","Fecha"};
 
-    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class,String.class};
+    Class<?> colClasses[] = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class,String.class,Date.class};
 
     public TablaTotalesPorAlmacen(ArrayList<Object[]> totales) {
         data = totales;

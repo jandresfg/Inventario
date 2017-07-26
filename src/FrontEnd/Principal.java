@@ -37,9 +37,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.EventObject;
 import java.util.List;
+import java.util.Locale;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -109,6 +114,10 @@ public class Principal extends JFrame implements ActionListener {
     private JCheckBox   checkBoxPedidos;
 	private JCheckBox checkBox_2Repo ;
 	private JCheckBox checkBox_3Pedidos;
+	private JComboBox<String> comboBox_1;
+	
+	private static final String FORMATO_FECHA = "dd-MMM-yyyy";
+
     /**
 	 * Launch the application.
 	 */
@@ -152,7 +161,7 @@ public class Principal extends JFrame implements ActionListener {
 		frmInventario.setTitle("Inventario");
 		frmInventario.getContentPane().setBackground(UIManager.getColor("MenuBar.background"));
 		frmInventario.setBackground(Color.GRAY);
-		frmInventario.setBounds(100, 100, 1162, 542);
+		frmInventario.setBounds(100, 100, 1162, 585);
 		frmInventario.setResizable(false);
 		Principal.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -668,7 +677,7 @@ else
 
 		panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
-		panel.setBounds(0, 32, 973, 481);
+		panel.setBounds(0, 32, 973, 511);
 		frmInventario.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -676,7 +685,7 @@ else
 		tcr = table.getDefaultRenderer(Object.class);
 		
 		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 973, 484);
+		scrollPane.setBounds(0, 0, 973, 482);
 		panel.add(scrollPane);
 		try {
 			Image i = ImageIO.read(getClass().getResource("/resources/add_shoe.png"));
@@ -910,9 +919,9 @@ else
 		
 		agregarCombobox();
 				
-				 panel_filter = new JPanel();
+				panel_filter = new JPanel();
 				panel_filter.setLayout(null);
-				panel_filter.setBounds(0, 481, 911, 32);
+				panel_filter.setBounds(0, 524, 911, 32);
 				frmInventario.getContentPane().add(panel_filter);
 				
 				lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
@@ -942,6 +951,12 @@ else
 				});
 				filterText.setVisible(false);
 				panel_filter.add(filterText);
+				panel_filter.setVisible(false);
+
+				comboBox_1 = new JComboBox();
+				comboBox_1.setBounds(921, 527, 235, 22);
+				frmInventario.getContentPane().add(comboBox_1);
+				comboBox_1.setVisible(false);
 		actualizarTotales("Seleccione una referencia");
 		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
@@ -1293,6 +1308,10 @@ rdbtnCaballero.setSelected(false);
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
+		panel_filter.setVisible(false);
+		comboBox_1.setVisible(false);
+
+
 	}
 	
 	public void setModelToReposiciones(){
@@ -1321,15 +1340,18 @@ rdbtnCaballero.setSelected(false);
 		scrollPane.setSize(scrollPane.getWidth(), 481);
 		agregarCombobox();
 		panel_1.setVisible(false);
-                
+
         //vaina para que el filtro no influya en este model
         table.setRowSorter(new TableRowSorter<>(table.getModel()));
 		rdbtnDama.setSelected(false);
 		rdbtnCaballero.setSelected(false);	
+		panel_filter.setVisible(false);
 
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
+		comboBox_1.setVisible(false);
+
 	}
 	
 	public void setModelToAlmacenes(){
@@ -1354,18 +1376,20 @@ rdbtnCaballero.setSelected(false);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Telefono")).setCellRenderer(leftRenderer);
 		
 		button_1.requestFocus();
-		panel.setSize(panel.getWidth(), 481);
-		scrollPane.setSize(scrollPane.getWidth(), 481);
 		panel_1.setVisible(false);
                 
                 //vaina para que el filtro no influya en este model
                 table.setRowSorter(new TableRowSorter<>(table.getModel()));
-rdbtnDama.setSelected(false);
-	rdbtnCaballero.setSelected(false);	
-		rdbtnGlobal.setSelected(false);
+                rdbtnDama.setSelected(false);
+                rdbtnCaballero.setSelected(false);	
+                rdbtnGlobal.setSelected(false);
+                panel_filter.setVisible(false);
+
 
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
+		comboBox_1.setVisible(false);
+
 	}
 	
 	public void setModelToProveedores(){
@@ -1394,8 +1418,7 @@ rdbtnDama.setSelected(false);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setMaxWidth(50);
 		
 		button_2.requestFocus();
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 		
                 
 		//agrega el panel_filter
@@ -1415,25 +1438,33 @@ rdbtnCaballero.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
 		panel_1.setVisible(false);
+		comboBox_1.setVisible(false);
+
 		
 	}
 	
 	public void setModelToTotalesPorAlmacen(){
+
 		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotales());
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
 		lblTextoDeFiltro.setText("Filtrar por Almac\u00E9n:");
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 		table.setDefaultRenderer(Object.class, tcr);
+
 		button_3.requestFocus();
 		panel_1.setVisible(false);
                 table.setRowSorter(sorter);
                 filterText.setText("");
                 estoyEnTotales = true;
                 rdbtnDama.setSelected(false);
-		
+        		panel_filter.setVisible(true);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+
 		rdbtnCaballero.setSelected(false);	
 		
 		rdbtnGlobal.setSelected(false);
@@ -1448,8 +1479,7 @@ rdbtnCaballero.setSelected(false);
 		table.setModel(sol);
 		filterText.setVisible(true);
 		lblTextoDeFiltro.setText("Filtrar por Almac\u00E9n:");
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+		
 		table.setDefaultRenderer(Object.class, tcr);
 		button_3.requestFocus();
 		panel_1.setVisible(false);
@@ -1475,8 +1505,7 @@ rdbtnCaballero.setSelected(false);
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 		table.setDefaultRenderer(Object.class, tcr);
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
@@ -1517,8 +1546,7 @@ setBackground(table.getBackground());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 	table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
 		    public Component getTableCellRendererComponent(JTable table,
@@ -1554,8 +1582,7 @@ setBackground(table.getBackground());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 //		table.setDefaultRenderer(Object.class, tcr);
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
@@ -1606,8 +1633,7 @@ setBackground(table.getBackground());
 
 		table.setModel(sol);
 		
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 		
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
@@ -1654,8 +1680,7 @@ setBackground(table.getBackground());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
 		table.setModel(sol);
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 		table.setDefaultRenderer(Object.class, tcr);
 		button_4.requestFocus();
 		panel_1.setVisible(true);
@@ -1745,8 +1770,7 @@ else
 		table.setModel(sol);
 		filterText.setVisible(true);
 		//filterText.setCursor(new Cursor(Cursor.TEXT_CURSOR));filterText.requestFocus();
-		panel.setSize(panel.getWidth(), 435);
-		scrollPane.setSize(scrollPane.getWidth(), 435);
+
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
 		    public Component getTableCellRendererComponent(JTable table,

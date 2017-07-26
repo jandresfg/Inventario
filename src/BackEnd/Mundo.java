@@ -26,6 +26,7 @@ import java.util.TreeMap;
 
 import javax.swing.ComboBoxModel;
 
+import org.apache.commons.collections.list.SetUniqueList;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -42,13 +43,14 @@ public class Mundo {
     private List<Almacen> almacenes;
     private List<Proveedor> proveedores;
     private List<Zapato> zapatos;
-
+    private List<Date>fechas;
     public Mundo() {
 
         almacenes = new ArrayList<Almacen>();
 
         proveedores = new ArrayList<Proveedor>();
         zapatos = new ArrayList<Zapato>();
+        fechas = new ArrayList<Date>();
 
         //primero se cargan los proveedores y almacenes, luego los Zapatos.
         //para que no apunten a proveedores/almacenes no cargados aun
@@ -843,7 +845,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[13];
+                Object[] res = new Object[14];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -864,6 +866,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[6] = sumaCantidad;
                 res[7] = sumaPrecioCosto;
                 res[8] = sumaPrecioVenta;
+                res[13] = z.getFecha();
+                addDateToARR(z.getFecha());
+                
                 if (z.getCategoria().equals("CABALLERO")) {
                     res[10] = "X";
                     res[9] = " ";
@@ -897,7 +902,27 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         return quickSort(arr, 0, (arr.size()) - 1);
     }
 
-    public ArrayList<Object[]> darGrandesTotales(boolean selecionado) {
+    private void addDateToARR(Date fecha) {
+
+    	boolean centinela = false;
+    	for (int i = 0; i < fechas.size(); i++) {
+    		Date x = fechas.get(i);
+    		if(x.equals(fecha))
+    		{
+    			centinela =true;
+    			break;
+    		}
+			
+		}
+        if(!centinela)
+        {
+			fechas.add(fecha);
+
+        }
+    	
+	}
+
+	public ArrayList<Object[]> darGrandesTotales(boolean selecionado) {
 
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -1538,7 +1563,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                      ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[13];
+                Object[] res = new Object[14];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -1559,6 +1584,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[6] = sumaCantidad;
                 res[7] = sumaPrecioCosto;
                 res[8] = sumaPrecioVenta;
+                res[13] = z.getFecha();
+                addDateToARR(z.getFecha());
                 if (z.getCategoria().equals("CABALLERO")) {
                     res[10] = "X";
                     res[9] = " ";
@@ -1623,6 +1650,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 			}
 			z.setProveedores(proveedoresz);
 		}
+	}
+	public List<Date> getFechasNoRepetidas()
+	{
+		
+		Collections.sort(fechas);
+		
+		
+		return fechas;
+		
 	}
 
 }
