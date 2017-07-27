@@ -22,6 +22,7 @@ import javax.swing.Box;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
+import javax.swing.JTable.PrintMode;
 
 import BackEnd.Almacen;
 import BackEnd.Mundo;
@@ -32,6 +33,8 @@ import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileFilter;
@@ -39,6 +42,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,6 +84,8 @@ import java.awt.Panel;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.BevelBorder;
@@ -121,6 +127,7 @@ public class Principal extends JFrame implements ActionListener {
 	private ItemListener itemListener;
 	private static final String FORMATO_FECHA = "dd-MMM-yyyy";
 	private boolean agregado;
+	private static String actualDate = "";
     /**
 	 * Launch the application.
 	 */
@@ -996,7 +1003,14 @@ else
 		if( accion.equals( "PRINT" ) ){
 			System.out.println("imprimir");
 			try{
-				boolean success = table.print();
+				//boolean success = table.print();
+				 MessageFormat headerFormat = new MessageFormat("Pedidos "+ actualDate );
+			     MessageFormat pageNumber = new MessageFormat("- {0} -");
+
+				boolean success = table.print(PrintMode.FIT_WIDTH,headerFormat, pageNumber,
+                        true, null,
+                        true, null);
+				
 				if(success){
 					JOptionPane.showMessageDialog(this, "Impresión exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
 				}else{
@@ -1716,7 +1730,6 @@ System.out.println("TEXO:"  + filterText.getText());
 
 if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
 {
-System.out.println("ENTRO");	
 setModelToTotalesPorAlmacenFabuloso(filterText.getText());
 
 }
@@ -1769,7 +1782,6 @@ else
 
 					table.setRowSorter(sorter);
 			
-			System.out.println("CASO 2");	
 			}
 }
 	}
@@ -1813,7 +1825,6 @@ else
  fechitas = mundo.getFechasRepo();
 
 }
-System.out.println("Tamaño Fechitas:"+fechitas.size() + "");
 
 
 		for (int i = 0; i < fechitas.size(); i++) {
@@ -1825,8 +1836,6 @@ System.out.println("Tamaño Fechitas:"+fechitas.size() + "");
 		
 		if(!agregado)
     	{
-    		System.out.println("AGREGAR");	
-
         itemListener = new ItemListener() {
             public void itemStateChanged(ItemEvent itemEvent) {
               int state = itemEvent.getStateChange();
@@ -1834,9 +1843,9 @@ System.out.println("Tamaño Fechitas:"+fechitas.size() + "");
              {
             	 
             		System.out.println("FECHACAMBIO");	
+            		actualDate=(String) itemEvent.getItem();
 
             	 setModelToTotalesPorAlmacenFabulosoConFecha(itemEvent.getItem(),filterText.getText());
-
             	 
              }
          
@@ -1936,4 +1945,17 @@ System.out.println("Tamaño Fechitas:"+fechitas.size() + "");
 		mundo.guardar();
 		agregarCombobox();		
 	}
+	private static class Title implements Printable {
+
+		@Override
+		public int print(Graphics graphics, PageFormat arg1, int arg2) throws PrinterException {
+	        graphics.drawString(actualDate, 100, 100);
+	        
+	        return PAGE_EXISTS;
+
+
+		}
+		
+	}
+
 }
