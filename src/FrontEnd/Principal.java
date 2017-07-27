@@ -30,6 +30,8 @@ import BackEnd.Zapato;
 
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileFilter;
@@ -73,6 +75,7 @@ import java.awt.Image;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.ItemSelectable;
 import java.awt.Panel;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -115,9 +118,9 @@ public class Principal extends JFrame implements ActionListener {
 	private JCheckBox checkBox_2Repo ;
 	private JCheckBox checkBox_3Pedidos;
 	private JComboBox<String> comboBox_1;
-	
+	private ItemListener itemListener;
 	private static final String FORMATO_FECHA = "dd-MMM-yyyy";
-
+	private boolean agregado;
     /**
 	 * Launch the application.
 	 */
@@ -155,6 +158,7 @@ public class Principal extends JFrame implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		agregado=false;
 		frmInventario = new JFrame();
 		frmInventario.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/icon.jpg")));
 		frmInventario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -957,6 +961,8 @@ else
 				comboBox_1.setBounds(921, 527, 235, 22);
 				frmInventario.getContentPane().add(comboBox_1);
 				comboBox_1.setVisible(false);
+
+				
 		actualizarTotales("Seleccione una referencia");
 		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
@@ -968,6 +974,7 @@ else
 
 	
 
+	
 	private void agregarCombobox() {
 		
 	}
@@ -1709,12 +1716,15 @@ System.out.println("TEXO:"  + filterText.getText());
 
 if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
 {
-	System.out.println("ENTRO");	
-
+System.out.println("ENTRO");	
 setModelToTotalesPorAlmacenFabuloso(filterText.getText());
+
 }
 else
 {
+    comboBox_1.removeAllItems();
+	comboBox_1.setVisible(false);
+	
     if(checkBoxREP.isSelected())
     {
     setModelToTotalesPorAlmacenResposicion();
@@ -1791,10 +1801,61 @@ else
 		});			button_3.requestFocus();
         table.setRowSorter(sorter);
 
+        comboBox_1.removeAllItems();
+		comboBox_1.setVisible(true);
+		List<String> fechitas= null;
+if(!checkBoxREP.isSelected())
+{
+ fechitas = mundo.getFechas();
+}	
+else
+{
+ fechitas = mundo.getFechasRepo();
+
+}
+System.out.println("Tamaño Fechitas:"+fechitas.size() + "");
+
+
+		for (int i = 0; i < fechitas.size(); i++) {
+			String x = (String) fechitas.get(i);
+			comboBox_1.addItem(x);			
+		}
+		comboBox_1.addItem("TODO");
+		comboBox_1.setSelectedIndex(fechitas.size());
+		
+		if(!agregado)
+    	{
+    		System.out.println("AGREGAR");	
+
+        itemListener = new ItemListener() {
+            public void itemStateChanged(ItemEvent itemEvent) {
+              int state = itemEvent.getStateChange();
+             if(state == ItemEvent.SELECTED&& !itemEvent.getItem().equals("TODO"))
+             {
+            	 
+            		System.out.println("FECHACAMBIO");	
+
+            	 setModelToTotalesPorAlmacenFabulosoConFecha(itemEvent.getItem(),filterText.getText());
+
+            	 
+             }
+         
+
+
+            }
+          };
+          comboBox_1.addItemListener(itemListener);
+              agregado = true;
+
+    	}
+		
 		panel_1.setVisible(false);
                 estoyEnTotales = true;
                 rdbtnDama.setSelected(false);
-		
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
 		rdbtnCaballero.setSelected(false);	
 		
 		rdbtnGlobal.setSelected(false);
@@ -1803,6 +1864,53 @@ else
 		filterText.requestFocusInWindow();
 
 	}
+	
+	
+	
+	public void setModelToTotalesPorAlmacenFabulosoConFecha(Object item,String prefix) {
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaroConFecha( item,prefix, checkBoxREP.isSelected()));
+		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
+		table.setModel(sol);
+		filterText.setVisible(true);
+		//filterText.setCursor(new Cursor(Cursor.TEXT_CURSOR));filterText.requestFocus();
+
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("TOTALES".equals(status) ) {
+		            setBackground(Color.BLACK);
+		            setForeground(Color.WHITE);
+		        } else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});			button_3.requestFocus();
+        table.setRowSorter(sorter);
+     
+		
+		panel_1.setVisible(false);
+                estoyEnTotales = true;
+                rdbtnDama.setSelected(false);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+		rdbtnCaballero.setSelected(false);	
+		
+		rdbtnGlobal.setSelected(false);
+		rdbtnInfatil.setSelected(false);
+
+		filterText.requestFocusInWindow();
+
+	}
+
 	
 	
 		
