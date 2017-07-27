@@ -1298,6 +1298,22 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 
             if (b[9].equals("X")) { //b es DAMA
 
+    		    Date fecha1 = null;
+    		    Date fecha2 = null ;
+    			try {
+    				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[13]);
+    				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[13]);
+
+    			} catch (ParseException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    			
+    		        int compFechas= fecha1.compareTo(fecha2); // use your logic
+    		   if(compFechas==0) 
+    		   {
+            	
+            	
                 int retorno = a[0].toString().compareTo(b[0].toString());
                 if (retorno == 0) {
                     int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
@@ -1313,6 +1329,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 } else {
                     return retorno;
                 }
+    		   }
+    		   else
+    		   {
+    			   return compFechas;
+    		   }
 
             } else if (b[10].equals("X")) { //b es CABALLERO
                 return -1;
@@ -1325,7 +1346,23 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             if (b[9].equals("X")) { //b es DAMA
                 return 1;
             } else if (b[10].equals("X")) { //b es CABALLERO
-                int retorno = a[0].toString().compareTo(b[0].toString());
+                
+            	
+        	    Date fecha1 = null;
+    		    Date fecha2 = null ;
+    			try {
+    				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[13]);
+    				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[13]);
+
+    			} catch (ParseException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    			
+    		        int compFechas= fecha1.compareTo(fecha2); // use your logic
+    		   if(compFechas==0) 
+    		   {
+            	int retorno = a[0].toString().compareTo(b[0].toString());
                 if (retorno == 0) {
                     int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
                     int betha = Integer.parseInt(b[1].toString().split(" -")[0]);
@@ -1342,6 +1379,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 } else {
                     return retorno;
                 }
+    		   }
+    		   else
+    		   {
+    			   return compFechas;
+    		   }
             } else if (b[11].equals("X")) { //b es INFANTIL
                 return -1;
             }
@@ -1353,11 +1395,28 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             } else if (b[10].equals("X")) { //b es CABALLERO
                 return 1;
             } else if (b[11].equals("X")) { //b es INFANTIL
+            	
+            	
+            	   Date fecha1 = null;
+       		    Date fecha2 = null ;
+       			try {
+       				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[13]);
+       				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[13]);
+
+       			} catch (ParseException e) {
+       				// TODO Auto-generated catch block
+       				e.printStackTrace();
+       			}
+       			
+       		        int compFechas= fecha1.compareTo(fecha2); // use your logic
+       		   if(compFechas==0) 
+       		   {
+            	
                 int retorno = a[0].toString().compareTo(b[0].toString());
                 if (retorno == 0) {
                     int alpha = Integer.parseInt(a[1].toString().split(" -")[0]);
                     int betha = Integer.parseInt(b[1].toString().split(" -")[0]);
-    if (alpha > betha) {
+                   if (alpha > betha) {
                         return 1;
                     } else if (alpha < betha) {
                         return -1;
@@ -1368,6 +1427,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 } else {
                     return retorno;
                 }
+    		   }
+    		   else
+    		   {
+    			   return compFechas;
+    		   }
             }
 
         }
