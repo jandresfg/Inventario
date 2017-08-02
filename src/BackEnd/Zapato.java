@@ -365,6 +365,10 @@ if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
 		else
 			return "-";
 	}
+        public String getStringFecha()  {
+			return new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha);
+
+	}
 
 	
 	public static final String FORMATO_FECHA = "dd-MMM-yyyy";
