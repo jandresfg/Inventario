@@ -39,7 +39,6 @@ public class TablaGrandesTotales  extends AbstractTableModel
 
 	    	if(data.get(rowIndex)[columnIndex] instanceof Integer){
 		    	if (columnIndex == 1 || columnIndex == 2 || columnIndex ==3 ) {
-			    	System.out.println( "SALIDA "+data.get(rowIndex)[columnIndex].toString());
 
 		        	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
 		        	String number_ge = nf_ge.format(data.get(rowIndex)[columnIndex]);

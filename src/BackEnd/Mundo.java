@@ -1133,7 +1133,22 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             arr.add(a);
 
         }
-
+        Object[] ris = new Object[4];
+        ris[0] = filtroA + " + " +filtroB;
+        ris[1] = "";
+        ris[2] = "";
+        ris[3] = "";
+        arr.add(ris);
+        Object[] ros = new Object[4];
+        int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3];
+        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2];
+        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1];
+        ros[0] = "TOTAL";
+        ros[1] = totalPC;
+        ros[2] = totalPV;
+        ros[3] = cantidad;
+        arr.add(ros);
+              
         return arr;
     }
 
@@ -1181,6 +1196,26 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             arr.add(a);
 
         }
+        
+        Object[] ris = new Object[4];
+
+        ris[0] = "GASOLINA EXTRA";
+        ris[1] = "";
+        ris[2] = "";
+        ris[3] = "";
+        arr.add(ris);
+        Object[] ros = new Object[4];
+
+        int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3] + (int)tostacos.get(tostacos.size()-1)[3] ;
+        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2] +(int)tostacos.get(tostacos.size()-1)[2] ;
+        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1] + (int)tostacos.get(tostacos.size()-1)[1] ;
+
+        ros[0] = "TOTAL";
+        ros[1] = totalPC;
+        ros[2] = totalPV;
+        ros[3] = cantidad;
+        arr.add(ros);
+        
 
         return arr;
     }

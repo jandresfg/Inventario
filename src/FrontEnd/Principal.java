@@ -1631,6 +1631,7 @@ setBackground(table.getBackground());
                 table.setRowSorter(sorter);
         		estoyEnTotales = false;
                         panel_filter.setVisible(false);
+                		comboBox_1.setVisible(false);
 
 
 	}
@@ -1649,7 +1650,9 @@ setBackground(table.getBackground());
 		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
-		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)
+		        		|| "DAMA + INFANTIL".equals(status)|| "CABALLERO + INFANTIL".equals(status) 
+		        			|| "DAMA + CABALLERO".equals(status) ) {
 		          setFont(new Font("default", Font.BOLD, 15));
       setBackground(table.getBackground());
 		            setForeground(table.getForeground());    
@@ -1670,16 +1673,12 @@ setBackground(table.getBackground());
 		    }   
 		});
 
-		
-		
-		
-		
-		
-		button_4.requestFocus();
+	button_4.requestFocus();
 		panel_1.setVisible(true);
-                table.setRowSorter(sorter);
-        		estoyEnTotales = false;
-                        panel_filter.setVisible(false);
+		table.setRowSorter(sorter);
+        estoyEnTotales = false;
+        panel_filter.setVisible(false);
+        comboBox_1.setVisible(false);
 
 	}
 	public void setModelToGrandesTotalesFiltradosTriple(){
@@ -1700,7 +1699,7 @@ setBackground(table.getBackground());
 		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
-		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)) {
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status) ||  "GASOLINA EXTRA".equals(status)) {
 		      setFont(new Font("default", Font.BOLD, 15));
       setBackground(table.getBackground());
 		            setForeground(table.getForeground());    
@@ -1727,6 +1726,7 @@ setBackground(table.getBackground());
 
 		panel_1.setVisible(true);
 		estoyEnTotales = false;
+        comboBox_1.setVisible(false);
 
                         panel_filter.setVisible(false);
 
@@ -1744,6 +1744,7 @@ setBackground(table.getBackground());
                 table.setRowSorter(sorter);
         		estoyEnTotales = false;
                         panel_filter.setVisible(false);
+                        comboBox_1.setVisible(false);
 
 
 	}
