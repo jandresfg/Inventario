@@ -1538,7 +1538,7 @@ rdbtnInfatil.setSelected(false);
 	{
 		mundo.eliminarAlmacen(referencia);
 		setModelToAlmacenes();
-		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el almacÃ©n de ciudad: " + referencia);
+		JOptionPane.showMessageDialog(this, "Se ha eliminado exitosamente el almacén de ciudad: " + referencia);
 
 	}
 	

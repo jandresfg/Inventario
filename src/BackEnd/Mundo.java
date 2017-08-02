@@ -668,20 +668,21 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
     }
 
     public void eliminarAlmacen(String ciudad) throws Exception {
-        for (int i = 0; i < almacenes.size(); i++) {
+    	boolean encontro = false;
+        for (int i = 0; i < almacenes.size() && !encontro; i++) {
             Almacen x = almacenes.get(i);
-            if (x.getCiudad().equals(ciudad)) {
+            if (x.getCiudad().equalsIgnoreCase(ciudad)) {
                 if (!almacenEstaRelacionadoConZapato(ciudad)) {
-                    almacenes.remove(i);
-		     guardar();
-	
-                    break;
+                	almacenes.remove(i);
+                    guardar();
+                    encontro = true;
                 } else {
-                    throw new Exception("El AlmacÃ©n de ciudad '" + ciudad + "' estÃ¡ vinculado a al menos una referencia de Zapato y no puede ser borrado");
+                    throw new Exception("El Almacén de ciudad '" + ciudad + "' está vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
             }
 
         }
+        if (!encontro) throw new Exception("No se ha encontrado el Almacén con ciudad '"+ ciudad +"'");
     }
 
     /**
