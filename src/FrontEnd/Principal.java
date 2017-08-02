@@ -190,7 +190,7 @@ public class Principal extends JFrame implements ActionListener {
 		frmInventario.setTitle("Inventario");
 		frmInventario.getContentPane().setBackground(UIManager.getColor("MenuBar.background"));
 		frmInventario.setBackground(Color.GRAY);
-		frmInventario.setBounds(100, 100, 1162, 751);
+		frmInventario.setBounds(100, 100, 1162, 768);
 		frmInventario.setResizable(false);
 		Principal.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -206,7 +206,7 @@ public class Principal extends JFrame implements ActionListener {
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		 
 		  panel_1 = new JPanel();
-		  panel_1.setBounds(972, 335, 184, 359);
+		  panel_1.setBounds(972, 335, 184, 370);
 		  frmInventario.getContentPane().add(panel_1);
 		  panel_1.setLayout(null);
 		  
@@ -641,19 +641,19 @@ else
 		  
 		  datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		  datePicker.setSize(184, 23);
-		  datePicker.setLocation(0, 209);
+		  datePicker.setLocation(0, 214);
 		  
 		  datePicker.setTextEditable(false);
 		  panel_1.add(datePicker);
 
 		  datePicker2 = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		  datePicker2.setSize(184, 23);
-		  datePicker2.setLocation(0, 258);
+		  datePicker2.setLocation(0, 267);
 		  datePicker2.setTextEditable(false);
 		  panel_1.add(datePicker2);
 
 		  JButton btnFiltrarPorFecha = new JButton("Filtrar por Fecha");
-		  btnFiltrarPorFecha.setBounds(24, 292, 150, 23);
+		  btnFiltrarPorFecha.setBounds(24, 301, 150, 23);
 		  panel_1.add(btnFiltrarPorFecha);
 		  
 		  JButton button_5 = new JButton("Todo");
@@ -661,7 +661,7 @@ else
 		  	public void actionPerformed(ActionEvent arg0) {
 		  	}
 		  });
-		  button_5.setBounds(24, 327, 150, 23);
+		  button_5.setBounds(24, 336, 150, 23);
 		  panel_1.add(button_5);
 		  
 		  JLabel label = new JLabel("Fecha Inicial");
@@ -673,7 +673,7 @@ else
 		  JLabel label_1 = new JLabel("Fecha Final");
 		  label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		  label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		  label_1.setBounds(0, 239, 184, 14);
+		  label_1.setBounds(0, 243, 184, 14);
 		  panel_1.add(label_1);
 
 		  
@@ -755,7 +755,7 @@ else
 
 		panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
-		panel.setBounds(0, 32, 973, 656);
+		panel.setBounds(0, 32, 973, 670);
 		frmInventario.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -763,7 +763,7 @@ else
 		tcr = table.getDefaultRenderer(Object.class);
 		
 		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 973, 656);
+		scrollPane.setBounds(0, 0, 973, 671);
 		panel.add(scrollPane);
 		try {
 			Image i = ImageIO.read(getClass().getResource("/resources/add_shoe.png"));
@@ -838,6 +838,9 @@ else
 				panel_filterReposiciones.setVisible(false);
 				checkBox_3Pedidos.setSelected(true);
                                 checkBox_2Repo.setSelected(false);
+                                
+                                panel_filter.setVisible(false);
+                                comboBox_1.setVisible(false);
 
 			}
 		});
@@ -999,7 +1002,7 @@ else
 				
 				panel_filter = new JPanel();
 				panel_filter.setLayout(null);
-				panel_filter.setBounds(0, 690, 911, 32);
+				panel_filter.setBounds(0, 707, 911, 32);
 				frmInventario.getContentPane().add(panel_filter);
 				
 				lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
@@ -1032,7 +1035,7 @@ else
 				panel_filter.setVisible(false);
 
 				comboBox_1 = new JComboBox();
-				comboBox_1.setBounds(921, 693, 235, 22);
+				comboBox_1.setBounds(921, 710, 235, 22);
 				frmInventario.getContentPane().add(comboBox_1);
 				comboBox_1.setVisible(false);
 			    itemListener = new ItemListener() {
@@ -1414,8 +1417,8 @@ else
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
 		refrescar();
 		button.requestFocus();
-		panel.setSize(panel.getWidth(), 656);
-		scrollPane.setSize(scrollPane.getWidth(), 656);
+		panel.setSize(panel.getWidth(), 670);
+		scrollPane.setSize(scrollPane.getWidth(), 670);
 		agregarCombobox();
 		panel_1.setVisible(false);
                 
@@ -1455,8 +1458,8 @@ rdbtnCaballero.setSelected(false);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
 		refrescar();
 		buttonReposiciones.requestFocus();
-		panel.setSize(panel.getWidth(), 656);
-		scrollPane.setSize(scrollPane.getWidth(), 656);
+		panel.setSize(panel.getWidth(), 670);
+		scrollPane.setSize(scrollPane.getWidth(), 670);
 		agregarCombobox();
 		panel_1.setVisible(false);
 
