@@ -1009,6 +1009,147 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         return arr;
     }
 
+	
+	public ArrayList<Object[]>darGrandesTotalesUnaFecha(boolean selecionado, String fecha) {
+
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.esReposicion() == selecionado && z.getStringFecha().equals(fecha)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                        ka.setTotalPares(z.getCantidad());
+
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            res[0] = x.getCiudad();
+            res[1] = x.getTotalCosto();
+
+            res[2] = x.getTotalVenta();
+            res[3] = x.getTotalPares();
+
+            arr.add(res);
+            x.volverCero();
+            res = new Object[4];
+
+        }
+
+        Object[] ras = new Object[4];
+
+        ras[0] = "TOTAL";
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+
+        ArrayList<Object[]> papitas = setModelToHiperDuperTotalConFecha(selecionado,fecha);
+        arr.addAll(papitas);
+
+        return arr;
+    }
+	
+	public ArrayList<Object[]>darGrandesTotalesDosFechas(boolean selecionado, Date fecha, Date fecha2) {
+
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.esReposicion() == selecionado && z.getFecha().after(fecha)&&z.getFecha().before(fecha2)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                        ka.setTotalPares(z.getCantidad());
+
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            res[0] = x.getCiudad();
+            res[1] = x.getTotalCosto();
+
+            res[2] = x.getTotalVenta();
+            res[3] = x.getTotalPares();
+
+            arr.add(res);
+            x.volverCero();
+            res = new Object[4];
+
+        }
+
+        Object[] ras = new Object[4];
+
+        ras[0] = "TOTAL";
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+
+        ArrayList<Object[]> papitas = setModelToHiperDuperTotalConFechas(selecionado,fecha,fecha2);
+        arr.addAll(papitas);
+
+        return arr;
+    }
+	
+	
+	
     public String verificarCodigoProveedor(Proveedor prov) {
 
         boolean codigoUsado = false;
@@ -1103,6 +1244,150 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         return arr;
     }
 
+    
+    public ArrayList<Object[]>   darGrandesTotalesFiltradoFecha(String filtro, boolean selecionado,Date fecha1, Date fecha2) {
+
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro) && z.esReposicion() == selecionado  && z.getFecha().after(fecha1)&&z.getFecha().before(fecha2)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                        ka.setTotalPares(z.getCantidad());
+
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+        int totalCosto = 0;
+        int totalVenta = 0;
+        int totalPares = 0;
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            res[0] = x.getCiudad();
+            res[1] = x.getTotalCosto();
+
+            res[2] = x.getTotalVenta();
+            res[3] = x.getTotalPares();
+
+            totalCosto += x.getTotalCosto();
+            totalVenta += x.getTotalVenta();
+            totalPares += x.getTotalPares();
+
+            arr.add(res);
+            x.volverCero();
+            res = new Object[4];
+
+        }
+        Object[] ras = new Object[4];
+
+        ras[0] = "TOTAL";
+        ras[1] = totalCosto;
+
+        ras[2] = totalVenta;
+        ras[3] = totalPares;
+        arr.add(ras);
+
+        return arr;
+    }
+    
+    public ArrayList<Object[]>   darGrandesTotalesFiltradoFechaUnica(String filtro, boolean selecionado,String fecha) {
+
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.getCategoria().equals(filtro) && z.esReposicion() == selecionado  && z.getStringFecha().equals(fecha)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+                        ka.setTotalPares(z.getCantidad());
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+        int totalCosto = 0;
+        int totalVenta = 0;
+        int totalPares = 0;
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            res[0] = x.getCiudad();
+            res[1] = x.getTotalCosto();
+
+            res[2] = x.getTotalVenta();
+            res[3] = x.getTotalPares();
+
+            totalCosto += x.getTotalCosto();
+            totalVenta += x.getTotalVenta();
+            totalPares += x.getTotalPares();
+
+            arr.add(res);
+            x.volverCero();
+            res = new Object[4];
+
+        }
+        Object[] ras = new Object[4];
+
+        ras[0] = "TOTAL";
+        ras[1] = totalCosto;
+
+        ras[2] = totalVenta;
+        ras[3] = totalPares;
+        arr.add(ras);
+
+        return arr;
+    }
+    
+    
     public ArrayList<Object[]> darGrandesTotalesFiltradoDoble(String filtroA, String filtroB, boolean selecionado) {
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -1151,6 +1436,105 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
               
         return arr;
     }
+    
+    public ArrayList<Object[]>  darGrandesTotalesFiltradoDobleDosFechas(String filtroA, String filtroB,boolean selecionado,Date fecha1, Date fecha2){
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        Object[] res = new Object[4];
+        res[0] = filtroA;
+        res[1] = "";
+
+        res[2] = "";
+        res[3] = "";
+        arr.add(res);
+        ArrayList<Object[]> papitas = darGrandesTotalesFiltradoFecha(filtroA, selecionado,fecha1,fecha2);
+        for (int i = 0; i < papitas.size(); i++) {
+            Object[] a = papitas.get(i);
+            arr.add(a);
+
+        }
+        Object[] ras = new Object[4];
+
+        ras[0] = filtroB;
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        ArrayList<Object[]> doritos = darGrandesTotalesFiltradoFecha(filtroB, selecionado,fecha1,fecha2);
+        for (int i = 0; i < doritos.size(); i++) {
+            Object[] a = doritos.get(i);
+            arr.add(a);
+
+        }
+        Object[] ris = new Object[4];
+        ris[0] = filtroA + " + " +filtroB;
+        ris[1] = "";
+        ris[2] = "";
+        ris[3] = "";
+        arr.add(ris);
+        Object[] ros = new Object[4];
+        int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3];
+        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2];
+        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1];
+        ros[0] = "TOTAL";
+        ros[1] = totalPC;
+        ros[2] = totalPV;
+        ros[3] = cantidad;
+        arr.add(ros);
+              
+        return arr;
+    }
+    public ArrayList<Object[]>  darGrandesTotalesFiltradoDobleUnaFechas(String filtroA, String filtroB,boolean selecionado,String fecha1){
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        Object[] res = new Object[4];
+        res[0] = filtroA;
+        res[1] = "";
+
+        res[2] = "";
+        res[3] = "";
+        arr.add(res);
+        ArrayList<Object[]> papitas = darGrandesTotalesFiltradoFechaUnica(filtroA, selecionado,fecha1);
+        for (int i = 0; i < papitas.size(); i++) {
+            Object[] a = papitas.get(i);
+            arr.add(a);
+
+        }
+        Object[] ras = new Object[4];
+
+        ras[0] = filtroB;
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        ArrayList<Object[]> doritos = darGrandesTotalesFiltradoFechaUnica(filtroB, selecionado,fecha1);
+        for (int i = 0; i < doritos.size(); i++) {
+            Object[] a = doritos.get(i);
+            arr.add(a);
+
+        }
+        Object[] ris = new Object[4];
+        ris[0] = filtroA + " + " +filtroB;
+        ris[1] = "";
+        ris[2] = "";
+        ris[3] = "";
+        arr.add(ris);
+        Object[] ros = new Object[4];
+        int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3];
+        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2];
+        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1];
+        ros[0] = "TOTAL";
+        ros[1] = totalPC;
+        ros[2] = totalPV;
+        ros[3] = cantidad;
+        arr.add(ros);
+              
+        return arr;
+    }
+    
+    
 
     public ArrayList<Object[]> darGrandesTotalesFiltradoTriple(String filtroA, String filtroB, String filtroC, boolean selecionado) {
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
@@ -1220,6 +1604,145 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         return arr;
     }
 
+    
+    public ArrayList<Object[]> darGrandesTotalesFiltradoTripleDosFechas(String filtroA, String filtroB, String filtroC, boolean selecionado,Date fecha1,Date fecha2) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        Object[] res = new Object[4];
+        res[0] = filtroA;
+        res[1] = "";
+
+        res[2] = "";
+        res[3] = "";
+        arr.add(res);
+        ArrayList<Object[]> papitas = darGrandesTotalesFiltradoFecha(filtroA, selecionado,fecha1,fecha2);
+        for (int i = 0; i < papitas.size(); i++) {
+            Object[] a = papitas.get(i);
+            arr.add(a);
+
+        }
+        Object[] ras = new Object[4];
+
+        ras[0] = filtroB;
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        ArrayList<Object[]> doritos = darGrandesTotalesFiltradoFecha(filtroB, selecionado,fecha1,fecha2);
+        for (int i = 0; i < doritos.size(); i++) {
+            Object[] a = doritos.get(i);
+            arr.add(a);
+
+        }
+        Object[] rus = new Object[4];
+
+        rus[0] = filtroC;
+        rus[1] = "";
+
+        rus[2] = "";
+        rus[3] = "";
+        arr.add(rus);
+        ArrayList<Object[]> tostacos = darGrandesTotalesFiltradoFecha(filtroC, selecionado,fecha1,fecha2);
+        for (int i = 0; i < tostacos.size(); i++) {
+            Object[] a = tostacos.get(i);
+            arr.add(a);
+
+        }
+        
+        Object[] ris = new Object[4];
+
+        ris[0] = "GASOLINA EXTRA";
+        ris[1] = "";
+        ris[2] = "";
+        ris[3] = "";
+        arr.add(ris);
+        Object[] ros = new Object[4];
+
+        int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3] + (int)tostacos.get(tostacos.size()-1)[3] ;
+        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2] +(int)tostacos.get(tostacos.size()-1)[2] ;
+        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1] + (int)tostacos.get(tostacos.size()-1)[1] ;
+
+        ros[0] = "TOTAL";
+        ros[1] = totalPC;
+        ros[2] = totalPV;
+        ros[3] = cantidad;
+        arr.add(ros);
+        
+
+        return arr;
+    }
+    
+    
+    public ArrayList<Object[]>   darGrandesTotalesFiltradoTripleUnaFecha(String filtroA, String filtroB, String filtroC, boolean selecionado,String fecha1) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        Object[] res = new Object[4];
+        res[0] = filtroA;
+        res[1] = "";
+
+        res[2] = "";
+        res[3] = "";
+        arr.add(res);
+        ArrayList<Object[]> papitas = darGrandesTotalesFiltradoFechaUnica(filtroA, selecionado,fecha1);
+        for (int i = 0; i < papitas.size(); i++) {
+            Object[] a = papitas.get(i);
+            arr.add(a);
+
+        }
+        Object[] ras = new Object[4];
+
+        ras[0] = filtroB;
+        ras[1] = "";
+
+        ras[2] = "";
+        ras[3] = "";
+        arr.add(ras);
+        ArrayList<Object[]> doritos = darGrandesTotalesFiltradoFechaUnica(filtroB, selecionado,fecha1);
+        for (int i = 0; i < doritos.size(); i++) {
+            Object[] a = doritos.get(i);
+            arr.add(a);
+
+        }
+        Object[] rus = new Object[4];
+
+        rus[0] = filtroC;
+        rus[1] = "";
+
+        rus[2] = "";
+        rus[3] = "";
+        arr.add(rus);
+        ArrayList<Object[]> tostacos = darGrandesTotalesFiltradoFechaUnica(filtroC, selecionado,fecha1);
+        for (int i = 0; i < tostacos.size(); i++) {
+            Object[] a = tostacos.get(i);
+            arr.add(a);
+
+        }
+        
+        Object[] ris = new Object[4];
+
+        ris[0] = "GASOLINA EXTRA";
+        ris[1] = "";
+        ris[2] = "";
+        ris[3] = "";
+        arr.add(ris);
+        Object[] ros = new Object[4];
+
+        int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3] + (int)tostacos.get(tostacos.size()-1)[3] ;
+        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2] +(int)tostacos.get(tostacos.size()-1)[2] ;
+        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1] + (int)tostacos.get(tostacos.size()-1)[1] ;
+
+        ros[0] = "TOTAL";
+        ros[1] = totalPC;
+        ros[2] = totalPV;
+        ros[3] = cantidad;
+        arr.add(ros);
+        
+
+        return arr;
+    }
+    
+    
     public ArrayList<Object[]> setModelToHiperDuperTotal(boolean selecionado) {
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
 
@@ -1281,6 +1804,131 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         return arr;
 
     }
+    public ArrayList<Object[]> setModelToHiperDuperTotalConFecha (boolean selecionado, String fecha1) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.esReposicion() == selecionado && z.getStringFecha().equals(fecha1)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                        ka.setTotalPares(z.getCantidad());
+
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+
+        int totalCosto = 0;
+        int totalVenta = 0;
+        int totalPares = 0;
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            totalCosto += x.getTotalCosto();
+            totalVenta += x.getTotalVenta();
+            totalPares += x.getTotalPares();
+            x.volverCero();
+
+        }
+        res[0] = "GASOLINA EXTRA";
+        res[1] = totalCosto;
+
+        res[2] = totalVenta;
+        res[3] = totalPares;
+        arr.add(res);
+
+        return arr;
+
+    }
+    
+    public ArrayList<Object[]> setModelToHiperDuperTotalConFechas(boolean selecionado, Date fecha1, Date fecha2) {
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+
+        ArrayList<Almacen> almas = new ArrayList<Almacen>();
+
+        for (int j = 0; j < zapatos.size(); j++) {
+            Zapato z = zapatos.get(j);
+
+            Almacen ka = z.getAlamacenes().get(0);
+            if (z.getCantidad() > 0 && z.esReposicion() == selecionado && z.getFecha().after(fecha1)&&z.getFecha().before(fecha2)) {
+                boolean flag = false;
+                for (int k = 0; k < almas.size() && !flag; k++) {
+                    Almacen papitas = almas.get(k);
+                    if (papitas.getCiudad().equals(ka.getCiudad())) {
+
+                        flag = true;
+                        papitas.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                        ka.setTotalPares(z.getCantidad());
+
+                        papitas.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    }
+                }
+                if (!flag) {
+                    ka.setTotalCosto(z.getPrecioCosto() * z.getCantidad());
+
+                    ka.setTotalPares(z.getCantidad());
+
+                    ka.setTotalVenta(z.getPrecioVenta() * z.getCantidad());
+
+                    almas.add(ka);
+
+                }
+            }
+        }
+        Object[] res = new Object[4];
+
+        int totalCosto = 0;
+        int totalVenta = 0;
+        int totalPares = 0;
+
+        for (int i = 0; i < almas.size(); i++) {
+            Almacen x = almas.get(i);
+
+            totalCosto += x.getTotalCosto();
+            totalVenta += x.getTotalVenta();
+            totalPares += x.getTotalPares();
+            x.volverCero();
+
+        }
+        res[0] = "GASOLINA EXTRA";
+        res[1] = totalCosto;
+
+        res[2] = totalVenta;
+        res[3] = totalPares;
+        arr.add(res);
+
+        return arr;
+
+    }
+  
+    
 
     private ArrayList<Object[]> quickSort(ArrayList<Object[]> arr, int lowerIndex, int higherIndex) {
         int i = lowerIndex;

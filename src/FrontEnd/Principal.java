@@ -43,6 +43,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -638,12 +639,178 @@ else
 		  panel_1.add(datePicker2);
 
 		  JButton btnFiltrarPorFecha = new JButton("Filtrar por Fecha");
+		  btnFiltrarPorFecha.addActionListener(new ActionListener() {
+		  	public void actionPerformed(ActionEvent arg0) {
+           
+		  	     String fech = datePicker.getJFormattedTextField().getText();
+	                String fech2 = datePicker2.getJFormattedTextField().getText();
+	                System.out.println(fech);
+	                System.out.println(fech2);
+
+	                Date fecha = null ;
+	                Date fecha2 = null;
+					try {
+					fecha=	 new SimpleDateFormat(FORMATO_FECHA).parse(fech);
+					fecha2=	 new SimpleDateFormat(FORMATO_FECHA).parse(fech2);
+					} catch (ParseException e) 
+					{
+		                JOptionPane.showMessageDialog(Principal.this, "Error en el campo Fecha", "Filtrar por fecha", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					if(fecha.equals(fecha2))
+	                {
+	                	//MISMO DIA PUEDE SER UN SOLO DIA
+						String papitas =  new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha);
+						if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltradosUnaFecha("INFANTIL",papitas);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleUnaFechas("DAMA","INFANTIL",papitas);
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleUnaFechas("CABALLERO","INFANTIL",papitas);
+				  		
+				  		}
+				  		
+				  		else  if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltradosUnaFecha("DAMA",papitas);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleUnaFechas("DAMA","CABALLERO",papitas);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleUnaFechas("DAMA","INFANTIL",papitas);
+
+				  		}
+				  		
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltradosUnaFecha("CABALLERO",papitas);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleUnaFechas("DAMA","CABALLERO",papitas);
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleUnaFechas("DAMA","INFANTIL",papitas);
+				  		
+				  		}
+				  		
+				  		
+				  		
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosTripleUnaFecha(papitas);
+
+				  		}
+				  		else
+				  		{
+						setModelToGrandesTotalesUnaFecha(papitas);
+				  		}
+	                }
+					else if (fecha.before(fecha2))
+					{
+						
+						if (!rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltradosDosFechas("INFANTIL",fecha,fecha2);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleDosFechas("DAMA","INFANTIL",fecha,fecha2);
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleDosFechas("CABALLERO","INFANTIL",fecha,fecha2);
+				  		
+				  		}
+				  		
+				  		else  if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltradosDosFechas("DAMA",fecha,fecha2);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleDosFechas("DAMA","CABALLERO",fecha,fecha2);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleDosFechas("DAMA","INFANTIL",fecha,fecha2);
+
+				  		}
+				  		
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			setModelToGrandesTotalesFiltradosDosFechas("CABALLERO",fecha,fecha2);
+
+				  		}
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleDosFechas("DAMA","CABALLERO",fecha,fecha2);
+
+				  		}
+				  		else if (!rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosDobleDosFechas("DAMA","INFANTIL",fecha,fecha2);
+				  		
+				  		}
+				  		
+				  		
+				  		
+				  		else if (rdbtnDama.isSelected() && rdbtnCaballero.isSelected() && rdbtnInfatil.isSelected()) {
+				  			//DAMA && CABALLERO
+				  			setModelToGrandesTotalesFiltradosTripleDosFechas(fecha,fecha2);
+
+				  		}
+				  		else
+				  		{
+												// DOS FECHAS 
+						setModelToGrandesTotalesDosFechas(fecha,fecha2);
+				  		}
+					}
+					else
+					{
+		                JOptionPane.showMessageDialog(Principal.this, "La fecha final tiene que ser mayor que la fecha inicial", "Filtrar por fecha", JOptionPane.ERROR_MESSAGE);
+	
+					}
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  		
+		  	}
+		  });
 		  btnFiltrarPorFecha.setBounds(24, 301, 150, 23);
 		  panel_1.add(btnFiltrarPorFecha);
 		  
 		  JButton button_5 = new JButton("Todo");
 		  button_5.addActionListener(new ActionListener() {
 		  	public void actionPerformed(ActionEvent arg0) {
+				rdbtnGlobal.setSelected(true);
+rdbtnDama.setSelected(false);
+rdbtnCaballero.setSelected(false);
+rdbtnInfatil.setSelected(false);
+		  		
+		  		
+		  		setModelToGrandesTotales();
+
 		  	}
 		  });
 		  button_5.setBounds(24, 336, 150, 23);
@@ -1606,7 +1773,7 @@ rdbtnCaballero.setSelected(false);
 	
 	
 	public void setModelToGrandesTotales(){
-		
+		System.out.println("GRANDES TOTALES");
 		
 		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotales(checkBox_2Repo.isSelected()));
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
@@ -1638,7 +1805,8 @@ setBackground(table.getBackground());
 		        }       
 		        return this;
 		    }   
-		});		button_4.requestFocus();
+		});		
+		button_4.requestFocus();
 		panel_1.setVisible(true);
                 table.setRowSorter(sorter);
         		estoyEnTotales = false;
@@ -1647,6 +1815,94 @@ setBackground(table.getBackground());
 		
 
 	}
+	
+	 public void	setModelToGrandesTotalesUnaFecha(String fecha)
+	 {
+			TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesUnaFecha( checkBox_2Repo.isSelected(),fecha));
+			sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+			table.setModel(sol);
+
+			table.setDefaultRenderer(Object.class, tcr);
+			table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+			    @Override
+			    public Component getTableCellRendererComponent(JTable table,
+			            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+			        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+			        String status = (String)table.getModel().getValueAt(row, 0);
+			        if ("TOTAL".equals(status) ) {
+	                            setFont(new Font("default", Font.BOLD, 15));
+	setBackground(table.getBackground());
+			            setForeground(table.getForeground());		        }
+	                         else if ("GASOLINA EXTRA".equals(status))
+	                        {		          
+	                            setFont(new Font("default", Font.BOLD, 15));
+	      setBackground(table.getBackground());
+			            setForeground(table.getForeground());           }
+	                        
+	                        else {
+			            setBackground(table.getBackground());
+			            setForeground(table.getForeground());
+			        }       
+			        return this;
+			    }   
+			});
+			
+			button_4.requestFocus();
+			panel_1.setVisible(true);
+	             table.setRowSorter(sorter);
+	     		estoyEnTotales = false;
+	                     panel_filter.setVisible(false);
+	                     comboBox_1.setVisible(false);
+	 }
+		
+	 public void setModelToGrandesTotalesDosFechas(Date fecha,Date fecha2)
+	 {
+			TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesDosFechas( checkBox_2Repo.isSelected(),fecha,fecha2));
+		//	TablaGrandesTotales sol = new TablaGrandesTotales(mundo.setModelToHiperDuperTotal( checkBox_2Repo.isSelected()));
+
+			sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+			table.setModel(sol);
+
+			table.setDefaultRenderer(Object.class, tcr);
+			table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+			    @Override
+			    public Component getTableCellRendererComponent(JTable table,
+			            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+			        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+			        String status = (String)table.getModel().getValueAt(row, 0);
+			        if ("TOTAL".equals(status) ) {
+	                            setFont(new Font("default", Font.BOLD, 15));
+	setBackground(table.getBackground());
+			            setForeground(table.getForeground());		        }
+	                         else if ("GASOLINA EXTRA".equals(status))
+	                        {		          
+	                            setFont(new Font("default", Font.BOLD, 15));
+	      setBackground(table.getBackground());
+			            setForeground(table.getForeground());           }
+	                        
+	                        else {
+			            setBackground(table.getBackground());
+			            setForeground(table.getForeground());
+			        }       
+			        return this;
+			    }   
+			});
+			button_4.requestFocus();
+			panel_1.setVisible(true);
+	          table.setRowSorter(sorter);
+	  		estoyEnTotales = false;
+	                  panel_filter.setVisible(false);
+	                  comboBox_1.setVisible(false);
+	}
+	
+	
+	
 	public void setModelToGrandesTotalesFiltrados(String filtro){
 		System.out.println(filtro);
 		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltrado(filtro, checkBox_2Repo.isSelected()));
@@ -1685,6 +1941,87 @@ setBackground(table.getBackground());
 
 
 	}
+	
+	public void setModelToGrandesTotalesFiltradosDosFechas(String filtro,Date fecha1, Date fecha2){
+		System.out.println(filtro);
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoFecha(filtro, checkBox_2Repo.isSelected(),fecha1,fecha2));
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+
+	table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		     if ("TOTAL".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+                        } 
+                        
+                        
+                        else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});		button_4.requestFocus();
+		panel_1.setVisible(true);
+                table.setRowSorter(sorter);
+        		estoyEnTotales = false;
+                        panel_filter.setVisible(false);
+                		comboBox_1.setVisible(false);
+
+
+	}
+	
+	public void	setModelToGrandesTotalesFiltradosUnaFecha(String filtro,String fecha1){
+			System.out.println(filtro);
+			TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoFechaUnica(filtro, checkBox_2Repo.isSelected(),fecha1));
+			sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+			table.setModel(sol);
+
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+			    @Override
+			    public Component getTableCellRendererComponent(JTable table,
+			            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+			        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+			        String status = (String)table.getModel().getValueAt(row, 0);
+			     if ("TOTAL".equals(status))
+	                        {		          
+	                            setFont(new Font("default", Font.BOLD, 15));
+	      setBackground(table.getBackground());
+			            setForeground(table.getForeground());    
+	                        } 
+	                        
+	                        
+	                        else {
+			            setBackground(table.getBackground());
+			            setForeground(table.getForeground());
+			        }       
+			        return this;
+			    }   
+			});		button_4.requestFocus();
+			panel_1.setVisible(true);
+	                table.setRowSorter(sorter);
+	        		estoyEnTotales = false;
+	                        panel_filter.setVisible(false);
+	                		comboBox_1.setVisible(false);
+
+
+		}
+	
+	
+	
 	public void setModelToGrandesTotalesFiltradosDoble(String filtroA, String filtroB){
 		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoDoble(filtroA,filtroB,checkBox_2Repo.isSelected()));
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
@@ -1731,9 +2068,207 @@ setBackground(table.getBackground());
         comboBox_1.setVisible(false);
 
 	}
+	
+	public void setModelToGrandesTotalesFiltradosDobleDosFechas(String filtroA, String filtroB,Date fecha1, Date fecha2){
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoDobleDosFechas(filtroA,filtroB,checkBox_2Repo.isSelected(), fecha1,  fecha2));
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+
+//		table.setDefaultRenderer(Object.class, tcr);
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)
+		        		|| "DAMA + INFANTIL".equals(status)|| "CABALLERO + INFANTIL".equals(status) 
+		        			|| "DAMA + CABALLERO".equals(status) ) {
+		          setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+		        } 
+                        else if ("TOTAL".equals(status))
+                        {		          
+                         setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+                        } 
+                        
+                        
+                        else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});
+
+	button_4.requestFocus();
+		panel_1.setVisible(true);
+		table.setRowSorter(sorter);
+        estoyEnTotales = false;
+        panel_filter.setVisible(false);
+        comboBox_1.setVisible(false);
+
+	}
+	
+	public void setModelToGrandesTotalesFiltradosDobleUnaFechas(String filtroA, String filtroB,String fecha1){
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoDobleUnaFechas(filtroA,filtroB,checkBox_2Repo.isSelected(), fecha1));
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+
+//		table.setDefaultRenderer(Object.class, tcr);
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status)
+		        		|| "DAMA + INFANTIL".equals(status)|| "CABALLERO + INFANTIL".equals(status) 
+		        			|| "DAMA + CABALLERO".equals(status) ) {
+		          setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+		        } 
+                        else if ("TOTAL".equals(status))
+                        {		          
+                         setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+                        } 
+                        
+                        
+                        else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});
+
+	button_4.requestFocus();
+		panel_1.setVisible(true);
+		table.setRowSorter(sorter);
+        estoyEnTotales = false;
+        panel_filter.setVisible(false);
+        comboBox_1.setVisible(false);
+
+	}
+	
 	public void setModelToGrandesTotalesFiltradosTriple(){
 
 		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoTriple("DAMA","CABALLERO","INFANTIL",checkBox_2Repo.isSelected()));
+		System.out.println( "TOTAL" +sol.getRowCount());
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+		
+
+		
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status) ||  "GASOLINA EXTRA".equals(status)) {
+		      setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+		        } 
+                        else   if ("TOTAL".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+                        } 
+                       
+
+
+                        else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});		
+		button_4.requestFocus();
+        table.setRowSorter(sorter);
+
+
+		panel_1.setVisible(true);
+		estoyEnTotales = false;
+        comboBox_1.setVisible(false);
+
+                        panel_filter.setVisible(false);
+
+	}
+	
+	public void setModelToGrandesTotalesFiltradosTripleUnaFecha(String fecha1){
+
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoTripleUnaFecha("DAMA","CABALLERO","INFANTIL",checkBox_2Repo.isSelected(),fecha1));
+		System.out.println( "TOTAL" +sol.getRowCount());
+		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
+
+		table.setModel(sol);
+		
+
+		
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+		    @Override
+		    public Component getTableCellRendererComponent(JTable table,
+		            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+
+		        String status = (String)table.getModel().getValueAt(row, 0);
+		        if ("DAMA".equals(status) ||"CABALLERO".equals(status)|| "INFANTIL".equals(status) ||  "GASOLINA EXTRA".equals(status)) {
+		      setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+		        } 
+                        else   if ("TOTAL".equals(status))
+                        {		          
+                            setFont(new Font("default", Font.BOLD, 15));
+      setBackground(table.getBackground());
+		            setForeground(table.getForeground());    
+                        } 
+                       
+
+
+                        else {
+		            setBackground(table.getBackground());
+		            setForeground(table.getForeground());
+		        }       
+		        return this;
+		    }   
+		});		
+		button_4.requestFocus();
+        table.setRowSorter(sorter);
+
+
+		panel_1.setVisible(true);
+		estoyEnTotales = false;
+        comboBox_1.setVisible(false);
+
+                        panel_filter.setVisible(false);
+
+	}
+	
+	
+	public void setModelToGrandesTotalesFiltradosTripleDosFechas(Date fecha1, Date fecha2){
+
+		TablaGrandesTotales sol = new TablaGrandesTotales(mundo.darGrandesTotalesFiltradoTripleDosFechas("DAMA","CABALLERO","INFANTIL",checkBox_2Repo.isSelected(),fecha1,fecha2));
 		System.out.println( "TOTAL" +sol.getRowCount());
 		sorter = new TableRowSorter<TablaGrandesTotales>(sol);
 
@@ -1795,9 +2330,10 @@ setBackground(table.getBackground());
         		estoyEnTotales = false;
                         panel_filter.setVisible(false);
                         comboBox_1.setVisible(false);
+}
+	
+	
 
-
-	}
 
 	
 	private void newFilter(){
