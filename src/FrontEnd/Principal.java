@@ -1557,6 +1557,7 @@ rdbtnInfatil.setSelected(false);
 		table.setModel(sol);
 		table.setDefaultRenderer(Object.class, new MultipleLines());
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Proveedor")).setPreferredWidth(100);
+
 		JComboBox comboBox = new JComboBox();
 		for(Proveedor p:mundo.darProveedores()){
 			comboBox.addItem(p.toString());
@@ -1567,6 +1568,13 @@ rdbtnInfatil.setSelected(false);
 		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
 		leftRenderer.setVerticalAlignment(JLabel.NORTH);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		centerRenderer.setVerticalAlignment(JLabel.NORTH);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha de Llegada")).setCellRenderer(centerRenderer);
+
+		
+		
 		refrescar();
 		button.requestFocus();
 		panel.setSize(panel.getWidth(), 670);
