@@ -122,7 +122,7 @@ public class Mundo {
         zapatos.add(pZapato);
         guardar();
 
-        return "Se ha agregado exitosamente el zapato de Referencia: \"" + pZapato.getReferencia() + "\" y AlmacÈn: \"" + pZapato.getAlmacenesString() + "\"";
+        return "Se ha agregado exitosamente el zapato de Referencia: \"" + pZapato.getReferencia() + "\" y Almac√©n: \"" + pZapato.getAlmacenesString() + "\"";
     }
 
     public String agregarReposicion(Zapato pZapato) {
@@ -130,7 +130,7 @@ public class Mundo {
 
         guardar();
 
-        return "Se ha agregado exitosamente la reposiciÛn de Referencia: \"" + pZapato.getReferencia() + "\" y AlmacÈn: \"" + pZapato.getAlmacenesString() + "\"";
+        return "Se ha agregado exitosamente la reposici√≥n de Referencia: \"" + pZapato.getReferencia() + "\" y Almac√©n: \"" + pZapato.getAlmacenesString() + "\"";
     }
 
     public String agregarProovedores(Proveedor pProveedor, String flag) {
@@ -188,7 +188,7 @@ public class Mundo {
             try {
             	zap.setFechaLlegada(zap.getFechaFromString(arr[15]));
 			} catch (IndexOutOfBoundsException e) {
-				//nada que hacer ac·, significa que no hay fecha de llegada, 
+				//nada que hacer ac√°, significa que no hay fecha de llegada, 
 				//se deja que quede null, como queda por defecto
 			}
             zapatos.add(zap);
@@ -550,7 +550,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                                 if (alm.getCiudad().equals(codigoAlmacen)) {
                                     zapatos.remove(i);
                                     return "Se ha eliminado exitosamente el zapato de referencia: " + referencia
-                                            + ", color "+color+" y proveedor relacionado con cÛdigo: " + codigoProveedor;
+                                            + ", color "+color+" y proveedor relacionado con c√≥digo: " + codigoProveedor;
                                 }
                             }
                         }
@@ -640,13 +640,13 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     borrado = true;
                     guardar();
                 } else {
-                    throw new Exception("El Proveedor con cÛdigo '" + codigoAborrar + "' est· vinculado a al menos una referencia de Zapato y no puede ser borrado");
+                    throw new Exception("El Proveedor con c√≥digo '" + codigoAborrar + "' est√° vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
             }
 
         }
         if (!borrado) {
-            throw new Exception("El Proveedor con cÛdigo '" + codigoAborrar + "' no fue encontrado");
+            throw new Exception("El Proveedor con c√≥digo '" + codigoAborrar + "' no fue encontrado");
         }
     }
 
@@ -673,9 +673,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             if (x.getCiudad().equals(ciudad)) {
                 if (!almacenEstaRelacionadoConZapato(ciudad)) {
                     almacenes.remove(i);
+		     guardar();
+	
                     break;
                 } else {
-                    throw new Exception("El AlmacÈn de ciudad '" + ciudad + "' est· vinculado a al menos una referencia de Zapato y no puede ser borrado");
+                    throw new Exception("El Almac√©n de ciudad '" + ciudad + "' est√° vinculado a al menos una referencia de Zapato y no puede ser borrado");
                 }
             }
 
@@ -2338,7 +2340,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                                 if (alm.getCiudad().equals(codigoAlmacen)) {
                                     zapatos.remove(i);
                                     return "Se ha eliminado exitosamente la reposicion de referencia: " + referencia
-                                            + ", color "+color+" y proveedor relacionado con cÛdigo: " + codigoProveedor;
+                                            + ", color "+color+" y proveedor relacionado con c√≥digo: " + codigoProveedor;
                                 }
                             }
 
@@ -2347,7 +2349,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 }
             }
         }
-        return "No se ha encontrado la reposiciÛn especificada para eliminar.";
+        return "No se ha encontrado la reposici√≥n especificada para eliminar.";
     }
 
     public ArrayList<Object[]> darTotalesResposicion() {
