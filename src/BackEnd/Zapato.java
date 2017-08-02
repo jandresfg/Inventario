@@ -28,6 +28,7 @@ public class Zapato
 	private List<Almacen> almacenes;
 	
 	private Date fecha;
+	private Date fechaLlegada;
         
         private boolean esReposicion;
 
@@ -47,6 +48,7 @@ public class Zapato
 		setCategoria(pCategoria);
 		vendidos=pVendidos;
 		fecha = pFecha;
+		fechaLlegada = null;
 		proveedores = new ArrayList<Proveedor>();
 		almacenes = new ArrayList<Almacen>();
                 esReposicion=false;
@@ -81,6 +83,7 @@ if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
 		setCategoria(pCategoria);
 		vendidos=pVendidos;
 		fecha = pFecha;
+		fechaLlegada = null;
 		proveedores = new ArrayList<Proveedor>();
 		almacenes = new ArrayList<Almacen>();
                 esReposicion=pesReposicion;
@@ -90,7 +93,25 @@ if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
 
 
 
-        public boolean esReposicion(){
+        /**
+		 * @return the fechaLlegada
+		 */
+		public Date getFechaLlegada() {
+			return fechaLlegada;
+		}
+
+
+
+		/**
+		 * @param fechaLlegada the fechaLlegada to set
+		 */
+		public void setFechaLlegada(Date fechaLlegada) {
+			this.fechaLlegada = fechaLlegada;
+		}
+
+
+
+		public boolean esReposicion(){
             return esReposicion;
         }
 	public String getReferencia() {
@@ -332,12 +353,19 @@ if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
 
 	
 	public static Date getFechaFromString(String string) throws ParseException {
-		return new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse(string);
+		if (string.equals("-"))
+			return null;
+		else
+			return new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse(string);
 	}
 	
-	public String getStringFecha()  {
-		return new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha);
+	public String getStringFecha(Date d)  {
+		if (d != null)
+			return new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(d);
+		else
+			return "-";
 	}
+
 	
 	public static final String FORMATO_FECHA = "dd-MMM-yyyy";
 	

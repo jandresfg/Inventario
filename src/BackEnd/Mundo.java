@@ -185,6 +185,12 @@ public class Mundo {
             Zapato zap = new Zapato(arr[0], arr[1], arr[2], arr[3], arr[4], Integer.parseInt(arr[5]), Integer.parseInt(arr[6]), Integer.parseInt(arr[7]), arr[8], Integer.parseInt(arr[9]), Zapato.getFechaFromString(arr[10]), Boolean.parseBoolean(arr[13]),arr[14]);
             zap.setProveedores(darProveedores(arr[11]));
             zap.setAlmacenes(darAlmacenes(arr[12]));
+            try {
+            	zap.setFechaLlegada(zap.getFechaFromString(arr[15]));
+			} catch (IndexOutOfBoundsException e) {
+				//nada que hacer acá, significa que no hay fecha de llegada, 
+				//se deja que quede null, como queda por defecto
+			}
             zapatos.add(zap);
 
         }
@@ -342,6 +348,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         row.createCell(9).setCellValue("Precio Costo");
         row.createCell(10).setCellValue("Categoria");
         row.createCell(11).setCellValue("Fecha");
+        row.createCell(12).setCellValue("Fecha de Llegada");
 
         for (Zapato z : zapatos) {
             row = sheetZapatos.createRow(rownum++);
@@ -385,8 +392,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             row.createCell(10).setCellValue(z.getCategoria());
             sheetZapatos.autoSizeColumn(10);
 
-            row.createCell(11).setCellValue(z.getStringFecha());
+            row.createCell(11).setCellValue(z.getStringFecha(z.getFecha()));
             sheetZapatos.autoSizeColumn(11);
+            
+            row.createCell(12).setCellValue(z.getStringFecha(z.getFechaLlegada()));
+            sheetZapatos.autoSizeColumn(12);
 
         }
 
@@ -602,7 +612,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 for (int i = 0; i < zapatos.size(); i++) {
 
                     Zapato pZapato = zapatos.get(i);
-                    out.println(pZapato.getReferencia() + "}" + pZapato.getPlanta() + "}" + pZapato.getAltura() + "}" + pZapato.getColor() + "}" + pZapato.getMaterial() + "}" + pZapato.getPrecioCosto() + "}" + pZapato.getPrecioVenta() + "}" + pZapato.getCantidad() + "}" + pZapato.getCategoria() + "}" + pZapato.getVendidos() + "}" + pZapato.getStringFecha() + "}" + pZapato.getProveedoresString() + "}" + pZapato.getAlmacenesString() + "}" + pZapato.esReposicion()+"}" + pZapato.getNumeracion());
+                    out.println(pZapato.getReferencia() + "}" + pZapato.getPlanta() + "}" + pZapato.getAltura() + "}" + pZapato.getColor() + "}" + pZapato.getMaterial() + "}" + pZapato.getPrecioCosto() + "}" + pZapato.getPrecioVenta() + "}" + pZapato.getCantidad() + "}" + pZapato.getCategoria() + "}" + pZapato.getVendidos() + "}" + pZapato.getStringFecha(pZapato.getFecha()) + "}" + pZapato.getProveedoresString() + "}" + pZapato.getAlmacenesString() + "}" + pZapato.esReposicion()+"}" + pZapato.getNumeracion() + "}" + pZapato.getStringFecha(pZapato.getFechaLlegada()));
 
                 }
                 out.close();
@@ -904,7 +914,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[6] = sumaCantidad;
                 res[7] = sumaPrecioCosto;
                 res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha();  
+                res[13] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
                     res[10] = "X";
                     res[9] = " ";
@@ -1493,12 +1503,12 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
                     if(es )
                     {
-                        addDateToARRREPO(z.getStringFecha());
+                        addDateToARRREPO(z.getStringFecha(z.getFecha()));
 
                     }
                     else
                     {
-                    addDateToARRNORMAL(z.getStringFecha());
+                    addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
                     }
                     
                     
@@ -1512,7 +1522,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[6] = sumaCantidad;
                 res[7] = sumaPrecioCosto;
                 res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha();  
+                res[13] = z.getStringFecha(z.getFecha());  
     
                 if (z.getCategoria().equals("CABALLERO")) {
                     res[10] = "X";
@@ -1718,7 +1728,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[6] = sumaCantidad;
                 res[7] = sumaPrecioCosto;
                 res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha();
+                res[13] = z.getStringFecha(z.getFecha());
                 if (z.getCategoria().equals("CABALLERO")) {
                     res[10] = "X";
                     res[9] = " ";
@@ -1851,7 +1861,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 int sumaPrecioCosto = 0;
                 int sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
-                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es && z.getStringFecha().equals(item)) {
+                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es && z.getStringFecha(z.getFecha()).equals(item)) {
                     sumaCantidad += z.getCantidad();
                     sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
@@ -1866,15 +1876,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[6] = sumaCantidad;
                 res[7] = sumaPrecioCosto;
                 res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha();  
+                res[13] = z.getStringFecha(z.getFecha());  
                 if(es && z.esReposicion() == es)
                 {
-                    addDateToARRREPO(z.getStringFecha());
+                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
 
                 }
                 else
                 {
-                addDateToARRNORMAL(z.getStringFecha());
+                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
                 }
                 if (z.getCategoria().equals("CABALLERO")) {
                     res[10] = "X";
