@@ -190,7 +190,7 @@ public class Principal extends JFrame implements ActionListener {
 		frmInventario.setTitle("Inventario");
 		frmInventario.getContentPane().setBackground(UIManager.getColor("MenuBar.background"));
 		frmInventario.setBackground(Color.GRAY);
-		frmInventario.setBounds(100, 100, 1162, 768);
+		frmInventario.setBounds(100, 100, 1280, 768);
 		frmInventario.setResizable(false);
 		Principal.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -204,9 +204,19 @@ public class Principal extends JFrame implements ActionListener {
         p.put("text.month", "Mes");
         p.put("text.year", "Año");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        
+        
+        UtilDateModel modela = new UtilDateModel();
+        //model.setDate(20,04,2014);
+        // Need this...
+        Properties pp = new Properties();
+        pp.put("text.today", "Hoy");
+        pp.put("text.month", "Mes");
+        pp.put("text.year", "Año");
+        JDatePanelImpl datePanel2 = new JDatePanelImpl(modela, pp);
 		 
 		  panel_1 = new JPanel();
-		  panel_1.setBounds(972, 335, 184, 370);
+		  panel_1.setBounds(1090, 335, 184, 370);
 		  frmInventario.getContentPane().add(panel_1);
 		  panel_1.setLayout(null);
 		  
@@ -319,16 +329,6 @@ else
 		  			setModelToGrandesTotalesFiltradosDoble("CABALLERO","INFANTIL");
 		  		
 		  		}
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
 		  		else if (rdbtnDama.isSelected() && !rdbtnCaballero.isSelected() && !rdbtnInfatil.isSelected()) {
 		  			setModelToGrandesTotalesFiltrados("DAMA");
 
@@ -413,22 +413,7 @@ else
 		  			setModelToGrandesTotalesFiltradosTriple();
 
 		  		}
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		
-		  		else 
+		else 
 		  		{
 		  			setModelToGrandesTotales();
 
@@ -646,7 +631,7 @@ else
 		  datePicker.setTextEditable(false);
 		  panel_1.add(datePicker);
 
-		  datePicker2 = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		  datePicker2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
 		  datePicker2.setSize(184, 23);
 		  datePicker2.setLocation(0, 267);
 		  datePicker2.setTextEditable(false);
@@ -686,7 +671,7 @@ else
 		 
 		 
 		 panel_filterReposiciones = new JPanel();
-		 panel_filterReposiciones.setBounds(972, 335, 184, 183);
+		 panel_filterReposiciones.setBounds(1090, 335, 184, 183);
 		 frmInventario.getContentPane().add(panel_filterReposiciones);
 		 panel_filterReposiciones.setLayout(null);
 		 
@@ -755,7 +740,7 @@ else
 
 		panel = new JPanel();
 		panel.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
-		panel.setBounds(0, 32, 973, 670);
+		panel.setBounds(0, 32, 1093, 670);
 		frmInventario.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -763,7 +748,7 @@ else
 		tcr = table.getDefaultRenderer(Object.class);
 		
 		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 0, 973, 671);
+		scrollPane.setBounds(0, 0, 1091, 670);
 		panel.add(scrollPane);
 		try {
 			Image i = ImageIO.read(getClass().getResource("/resources/add_shoe.png"));
@@ -775,7 +760,7 @@ else
 		}
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 0, 973, 32);
+		panel_2.setBounds(0, 0, 1093, 32);
 		frmInventario.getContentPane().add(panel_2);
 
 		button = new Button("Zapatos");
@@ -860,7 +845,7 @@ else
 		});
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(972, 0, 184, 342);
+		panel_3.setBounds(1090, 0, 184, 342);
 		frmInventario.getContentPane().add(panel_3);
 				panel_3.setLayout(null);
 		
@@ -1002,7 +987,7 @@ else
 				
 				panel_filter = new JPanel();
 				panel_filter.setLayout(null);
-				panel_filter.setBounds(0, 707, 911, 32);
+				panel_filter.setBounds(0, 707, 1037, 32);
 				frmInventario.getContentPane().add(panel_filter);
 				
 				lblTextoDeFiltro = new JLabel("Filtrar por Almac\u00E9n:");
@@ -1012,7 +997,7 @@ else
 				
 				filterText = new JTextField();
 				filterText.setColumns(10);
-				filterText.setBounds(117, 4, 794, 22);
+				filterText.setBounds(117, 4, 910, 22);
 				filterText.getDocument().addDocumentListener(new DocumentListener() {
 					
 					@Override
@@ -1035,7 +1020,7 @@ else
 				panel_filter.setVisible(false);
 
 				comboBox_1 = new JComboBox();
-				comboBox_1.setBounds(921, 710, 235, 22);
+				comboBox_1.setBounds(1040, 710, 235, 22);
 				frmInventario.getContentPane().add(comboBox_1);
 				comboBox_1.setVisible(false);
 			    itemListener = new ItemListener() {
