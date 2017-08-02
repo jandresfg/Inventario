@@ -128,6 +128,9 @@ public class Principal extends JFrame implements ActionListener {
 	private static final String FORMATO_FECHA = "dd-MMM-yyyy";
 	private boolean agregado;
 	private static String actualDate = "";
+	private boolean inicial ;
+	private boolean maximo ;
+
     /**
 	 * Launch the application.
 	 */
@@ -165,6 +168,8 @@ public class Principal extends JFrame implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		inicial=true;
+		maximo=false;
 		agregado=false;
 		frmInventario = new JFrame();
 		frmInventario.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/icon.jpg")));
@@ -968,6 +973,37 @@ else
 				comboBox_1.setBounds(921, 527, 235, 22);
 				frmInventario.getContentPane().add(comboBox_1);
 				comboBox_1.setVisible(false);
+			    itemListener = new ItemListener() {
+			            public void itemStateChanged(ItemEvent itemEvent) {
+			              int state = itemEvent.getStateChange();
+			             if(state == ItemEvent.SELECTED&& !itemEvent.getItem().equals("TODO")&&!inicial&&!maximo)
+			             {
+			            	System.out.println("FECHACAMBIO");	
+			            		actualDate=(String) itemEvent.getItem();
+			                	System.out.println("A:" + actualDate);	
+
+			            	 setModelToTotalesPorAlmacenFabulosoConFecha(itemEvent.getItem(),filterText.getText());
+			            	 
+			            	             }
+			             else if(state == ItemEvent.SELECTED&& itemEvent.getItem().equals("TODO")&&inicial)
+			             {
+			            	 
+			            		System.out.println("INICIAL");	
+			            		//setModelToTotalesPorAlmacenFabuloso(filterText.getText());
+			            		inicial=false;
+			             }         
+			             else if(state == ItemEvent.SELECTED&& itemEvent.getItem().equals("TODO")&&!maximo)
+			             {
+			            		System.out.println("ESPICHOOOO TODO");	
+			            		maximo=true;
+			            		setModelToTotalesPorAlmacenFabuloso(filterText.getText());
+
+			             }
+
+			            }
+			          };
+
+			          comboBox_1.addItemListener(itemListener);
 
 				
 		actualizarTotales("Seleccione una referencia");
@@ -1730,14 +1766,15 @@ System.out.println("TEXO:"  + filterText.getText());
 
 if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
 {
-setModelToTotalesPorAlmacenFabuloso(filterText.getText());
 
+setModelToTotalesPorAlmacenFabuloso(filterText.getText());
 }
 else
 {
     comboBox_1.removeAllItems();
 	comboBox_1.setVisible(false);
-	
+	inicial=true;
+
     if(checkBoxREP.isSelected())
     {
     setModelToTotalesPorAlmacenResposicion();
@@ -1831,32 +1868,21 @@ else
 			String x = (String) fechitas.get(i);
 			comboBox_1.addItem(x);			
 		}
-		comboBox_1.addItem("TODO");
-		comboBox_1.setSelectedIndex(fechitas.size());
+		//System.out.println("SELECCIONADO: "+comboBox_1.getSelectedItem());
 		
-		if(!agregado)
-    	{
-        itemListener = new ItemListener() {
-            public void itemStateChanged(ItemEvent itemEvent) {
-              int state = itemEvent.getStateChange();
-             if(state == ItemEvent.SELECTED&& !itemEvent.getItem().equals("TODO"))
-             {
-            	 
-            		System.out.println("FECHACAMBIO");	
-            		actualDate=(String) itemEvent.getItem();
+		comboBox_1.addItem("TODO");
+		// SELECCIONO TODO
 
-            	 setModelToTotalesPorAlmacenFabulosoConFecha(itemEvent.getItem(),filterText.getText());
-            	 
-             }
-         
+		if(inicial || maximo)
+		{
+			comboBox_1.setSelectedIndex(fechitas.size());
 
+			System.out.println("SELECCIONADO: "+comboBox_1.getSelectedItem());
+			
+			System.out.println("COUNT: "+comboBox_1.getItemCount());
+		maximo=false;
+		}
 
-            }
-          };
-          comboBox_1.addItemListener(itemListener);
-              agregado = true;
-
-    	}
 		
 		panel_1.setVisible(false);
                 estoyEnTotales = true;
