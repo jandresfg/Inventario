@@ -22,7 +22,7 @@ public class TablaZapatos extends AbstractTableModel {
     //	String colNames[] = { "Referencia", "Planta", "Altura", "Color", "Material", "Proveedor", "Almacen", "Cantidad", "Precio Costo", "Precio Venta","Categorï¿½a","Fecha" };
     // Class<?> colClasses[] = { String.class, String.class, String.class , String.class, String.class, Object.class, Object.class, Integer.class, Integer.class, Integer.class, String.class, String.class};
     Class<?> colClasses[] = {Object.class, Object.class, String.class, String.class, String.class, String.class,String.class, Object.class, Object.class, String.class, String.class, Integer.class, String.class, String.class};
-    String colNames[] = {"Almacen", "Proveedor", "Fecha", "Fecha de Llegada", "Referencia", "Categoría","Numeración", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
+    String colNames[] = {"Almacen", "Proveedor", "Fecha", "Fecha de Llegada", "REF", "Categoría","Numeración", "Planta", "Altura", "Color", "Material", "Cantidad", "Precio Costo", "Precio Venta"};
 
     public TablaZapatos(List<Zapato> arr, Mundo mundop) {
         data = arr;

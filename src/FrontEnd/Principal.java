@@ -43,6 +43,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1572,8 +1573,8 @@ rdbtnInfatil.setSelected(false);
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 		centerRenderer.setVerticalAlignment(JLabel.NORTH);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha de Llegada")).setCellRenderer(centerRenderer);
+		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 
-		
 		
 		refrescar();
 		button.requestFocus();
@@ -1584,8 +1585,8 @@ rdbtnInfatil.setSelected(false);
                 
                 //vaina para que el filtro no influya en este model
                 table.setRowSorter(new TableRowSorter<>(table.getModel()));
-rdbtnDama.setSelected(false);
-rdbtnCaballero.setSelected(false);	
+                rdbtnDama.setSelected(false);
+                rdbtnCaballero.setSelected(false);	
 
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
@@ -1616,6 +1617,11 @@ rdbtnCaballero.setSelected(false);
 		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
 		leftRenderer.setVerticalAlignment(JLabel.NORTH);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Cantidad")).setCellRenderer(leftRenderer);
+		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		centerRenderer.setVerticalAlignment(JLabel.NORTH);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha de Llegada")).setCellRenderer(centerRenderer);
 		refrescar();
 		buttonReposiciones.requestFocus();
 		panel.setSize(panel.getWidth(), 670);
@@ -1656,7 +1662,8 @@ rdbtnCaballero.setSelected(false);
 		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
 		leftRenderer.setVerticalAlignment(JLabel.NORTH);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Telefono")).setCellRenderer(leftRenderer);
-		
+		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+
 		button_1.requestFocus();
 		panel_1.setVisible(false);
                 
@@ -1698,7 +1705,8 @@ rdbtnCaballero.setSelected(false);
 		leftRenderer.setVerticalAlignment(JLabel.NORTH);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setCellRenderer(leftRenderer);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Codigo")).setMaxWidth(50);
-		
+		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+
 		button_2.requestFocus();
 
 		
@@ -1737,24 +1745,28 @@ rdbtnCaballero.setSelected(false);
 
 		button_3.requestFocus();
 		panel_1.setVisible(false);
-                table.setRowSorter(sorter);
-                filterText.setText("");
-                estoyEnTotales = true;
-                rdbtnDama.setSelected(false);
-        		panel_filter.setVisible(true);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+		table.setRowSorter(sorter);
+		filterText.setText("");
+		estoyEnTotales = true;
+		rdbtnDama.setSelected(false);
+		panel_filter.setVisible(true);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
+		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 
 		rdbtnCaballero.setSelected(false);	
-		
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 
 
 	}
-	
+
 	public void setModelToTotalesPorAlmacenResposicion(){
 		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotalesResposicion());
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
@@ -1769,9 +1781,19 @@ rdbtnCaballero.setSelected(false);
                 filterText.setText("");
                 estoyEnTotales = true;
                 rdbtnDama.setSelected(false);
-		
+        		panel_filter.setVisible(true);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
+        		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	
 		rdbtnCaballero.setSelected(false);	
-		
+	
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 
@@ -1798,18 +1820,20 @@ rdbtnCaballero.setSelected(false);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
 		        if ("TOTAL".equals(status) ) {
-                            setFont(new Font("default", Font.BOLD, 15));
+                            setFont(new Font("default", Font.BOLD, 16));
 setBackground(table.getBackground());
 		            setForeground(table.getForeground());		        }
                          else if ("GASOLINA EXTRA".equals(status))
                         {		          
-                            setFont(new Font("default", Font.BOLD, 15));
+                            setFont(new Font("default", Font.BOLD, 16));
       setBackground(table.getBackground());
 		            setForeground(table.getForeground());           }
                         
                         else {
 		            setBackground(table.getBackground());
 		            setForeground(table.getForeground());
+                    setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+
 		        }       
 		        return this;
 		    }   
@@ -2419,12 +2443,45 @@ else
 	}
 	
 	public void setModelToTotalesPorAlmacenFabuloso(String prefix){
-		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darGrandiososTotalesCasoRaro(prefix, checkBoxREP.isSelected()));
+		
+		ArrayList<Object[]> lista = mundo.darGrandiososTotalesCasoRaro(prefix, checkBoxREP.isSelected());
+	final	int cantidadTotal;
+	final	int costoTotal;
+	final	int VentaTotal;
+		
+		if(lista.size()>0)
+		{
+		 cantidadTotal= (int) lista.get(lista.size()-1)[6];
+		 costoTotal= (int) lista.get(lista.size()-1)[7];
+		 VentaTotal= (int) lista.get(lista.size()-1)[8];
+		}
+		else
+		{
+			 cantidadTotal=0;
+			 costoTotal=0;
+			 VentaTotal=0;
+		}
+	 	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
+    	String number_ge = nf_ge.format(cantidadTotal);
+		
+		System.out.println(number_ge);
+
+		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(lista);
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
 		//filterText.setCursor(new Cursor(Cursor.TEXT_CURSOR));filterText.requestFocus();
+		
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
 
+		
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 		    @Override
 		    public Component getTableCellRendererComponent(JTable table,
@@ -2433,12 +2490,30 @@ else
 		        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 
 		        String status = (String)table.getModel().getValueAt(row, 0);
-		        if ("TOTALES".equals(status) ) {
+				
+		/**        if(row == table.getRowCount()-1 && row == 6)
+		        {
+				   if(table.getModel().getValueAt(row, row) instanceof Integer){
+						setFont(new Font("default", Font.BOLD, 16));
+						System.out.println(status);
+
+						}
+		        }
+		        */
+				
+		//        int statusb = (int)table.getModel().getValueAt(row, 6);
+
+				  if ("TOTALES".equals(status) ) {
 		            setBackground(Color.BLACK);
 		            setForeground(Color.WHITE);
-		        } else {
+					setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 16));
+		        }
+
+		        else {
 		            setBackground(table.getBackground());
 		            setForeground(table.getForeground());
+					setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+
 		        }       
 		        return this;
 		    }   
@@ -2472,9 +2547,7 @@ else
 		{
 			comboBox_1.setSelectedIndex(fechitas.size());
 
-			System.out.println("SELECCIONADO: "+comboBox_1.getSelectedItem());
 			
-			System.out.println("COUNT: "+comboBox_1.getItemCount());
 		maximo=false;
 		}
 
@@ -2482,15 +2555,9 @@ else
 		panel_1.setVisible(false);
                 estoyEnTotales = true;
                 rdbtnDama.setSelected(false);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
-        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
-		rdbtnCaballero.setSelected(false);	
-		
-		rdbtnGlobal.setSelected(false);
+        			rdbtnCaballero.setSelected(false);	
+				rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
-
 		filterText.requestFocusInWindow();
 
 	}
@@ -2515,9 +2582,13 @@ else
 		        if ("TOTALES".equals(status) ) {
 		            setBackground(Color.BLACK);
 		            setForeground(Color.WHITE);
+					setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 16));
+
 		        } else {
 		            setBackground(table.getBackground());
 		            setForeground(table.getForeground());
+					setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+
 		        }       
 		        return this;
 		    }   
@@ -2532,6 +2603,9 @@ else
         		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
         		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
         		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
+        		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
 		rdbtnCaballero.setSelected(false);	
 		
 		rdbtnGlobal.setSelected(false);
