@@ -610,7 +610,11 @@ lblNumeracion.setEditable(true);
                     String planta = textPlanta.getText();
                     String fecha = datePicker.getJFormattedTextField().getText();
                     String numeracion = lblNumeracion.getText();
-
+if (numeracion.equals("Numeracion"))
+{
+	
+numeracion  ="";	
+}
                     Zapato zap = new Zapato(referencia, planta, altura, color, material, precioCosto, precioVenta, cantidad, categoria, 0, Zapato.getFechaFromString(fecha),numeracion);
 
                     ArrayList<String> provs = new ArrayList<String>();

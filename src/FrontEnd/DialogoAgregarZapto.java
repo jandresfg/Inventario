@@ -611,7 +611,6 @@ lblnumeracion.setEditable(true);
                     String planta = textPlanta.getText();
                     String fecha = datePicker.getJFormattedTextField().getText();
                     String numeracion = lblNumeracion.getText();
-System.out.println(numeracion);
 if (numeracion.equals("Numeracion"))
 {
 	
