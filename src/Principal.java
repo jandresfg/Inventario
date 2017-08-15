@@ -28,6 +28,7 @@ import BackEnd.Almacen;
 import BackEnd.Mundo;
 import BackEnd.Proveedor;
 import BackEnd.Zapato;
+import static BackEnd.Zapato.FORMATO_FECHA;
 
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
@@ -145,7 +146,7 @@ public class Principal extends JFrame implements ActionListener {
 	private boolean maximo ;
     private JDatePickerImpl datePicker;
     private JDatePickerImpl datePicker2;
-
+private boolean estoyAlmacenes ;
     /**
 	 * Launch the application.
 	 */
@@ -197,6 +198,7 @@ public class Principal extends JFrame implements ActionListener {
 		Principal.this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		frmInventario.getContentPane().setLayout(null);
+                estoyAlmacenes = false;
 		
 	    UtilDateModel model = new UtilDateModel();
         //model.setDate(20,04,2014);
@@ -1259,7 +1261,22 @@ rdbtnInfatil.setSelected(false);
 			try{
 				//boolean success = table.print();
 				 MessageFormat headerFormat = new MessageFormat( actualDate );
-			     MessageFormat pageNumber = new MessageFormat("- {0} -");
+                                 			     MessageFormat pageNumber ;
+
+                                 if ( estoyAlmacenes )
+                                 {
+                                    
+                                                StringBuilder builder = new StringBuilder();
+builder.append("CALLE 124 N° 15 - 47 BOGOTA.         TELEFONOS: 2153326/22 - 2154818         FAX: 21587799 - 7183159 ");
+
+
+
+pageNumber = new MessageFormat(builder.toString());                         
+                                 }
+                                 else
+                                 {
+                                      pageNumber = new MessageFormat("- {0} -");
+                                 }
 
 				boolean success = table.print(PrintMode.FIT_WIDTH,headerFormat, pageNumber,
                         true, null,
@@ -1677,6 +1694,7 @@ actualDate = "RESPOSICIONES";
 		estoyEnTotales = false;
 		comboBox_1.setVisible(false);
 actualDate = "ALMACENES";
+estoyAlmacenes = true;
 	}
 	
 	public void setModelToProveedores(){
@@ -1844,7 +1862,7 @@ setBackground(table.getBackground());
         		estoyEnTotales = false;
                         panel_filter.setVisible(false);
 actualDate = "Pedidos:";
-		
+		 estoyAlmacenes = false;
 
 	}
 	
@@ -1933,6 +1951,12 @@ actualDate = "Pedidos:";
 	                  panel_filter.setVisible(false);
 	                  comboBox_1.setVisible(false);
 
+                   String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha);
+                           String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);
+
+        
+        actualDate = "Pedidos: "+ fechas1 + " - " +fechas2 ;
+ estoyAlmacenes = false;
 	}
 	
 	
@@ -1974,7 +1998,7 @@ actualDate = "Pedidos:";
                 		comboBox_1.setVisible(false);
 actualDate = "Pedidos";
 
-
+ estoyAlmacenes = false;
 	}
 	
 	public void setModelToGrandesTotalesFiltradosDosFechas(String filtro,Date fecha1, Date fecha2){
@@ -2013,8 +2037,12 @@ actualDate = "Pedidos";
                         panel_filter.setVisible(false);
                 		comboBox_1.setVisible(false);
 
-actualDate = "Pedidos";
+                   String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha1);
+                           String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);
 
+        
+        actualDate = "Pedidos: "+ fechas1 + " - " +fechas2 ;
+ estoyAlmacenes = false;
 	}
 	
 	public void	setModelToGrandesTotalesFiltradosUnaFecha(String filtro,String fecha1){
@@ -2054,7 +2082,7 @@ actualDate = "Pedidos";
 	                		comboBox_1.setVisible(false);
 
 actualDate = "Pedidos: "+ fecha1;
-
+ estoyAlmacenes = false;
 		}
 	
 	
@@ -2103,7 +2131,7 @@ actualDate = "Pedidos: "+ fecha1;
         estoyEnTotales = false;
         panel_filter.setVisible(false);
         comboBox_1.setVisible(false);
-
+ estoyAlmacenes = false;
 	}
 	
 	public void setModelToGrandesTotalesFiltradosDobleDosFechas(String filtroA, String filtroB,Date fecha1, Date fecha2){
@@ -2150,7 +2178,12 @@ actualDate = "Pedidos: "+ fecha1;
         estoyEnTotales = false;
         panel_filter.setVisible(false);
         comboBox_1.setVisible(false);
+                   String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha1);
+                           String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);
 
+        
+        actualDate = "Pedidos: "+ fechas1 + " - " +fechas2 ;
+         estoyAlmacenes = false;
 	}
 	
 	public void setModelToGrandesTotalesFiltradosDobleUnaFechas(String filtroA, String filtroB,String fecha1){
@@ -2198,7 +2231,7 @@ actualDate = "Pedidos: "+ fecha1;
         panel_filter.setVisible(false);
         comboBox_1.setVisible(false);
 actualDate = "Pedidos: "+ fecha1;
-
+ estoyAlmacenes = false;
 	}
 	
 	public void setModelToGrandesTotalesFiltradosTriple(){
@@ -2249,7 +2282,7 @@ actualDate = "Pedidos: "+ fecha1;
         comboBox_1.setVisible(false);
 
                         panel_filter.setVisible(false);
-
+ estoyAlmacenes = false;
 	}
 	
 	public void setModelToGrandesTotalesFiltradosTripleUnaFecha(String fecha1){
@@ -2301,7 +2334,7 @@ actualDate = "Pedidos: "+ fecha1;
 
                         panel_filter.setVisible(false);
 actualDate = "Pedidos: "+ fecha1;
-
+ estoyAlmacenes = false;
 	}
 	
 	
@@ -2353,7 +2386,11 @@ actualDate = "Pedidos: "+ fecha1;
         comboBox_1.setVisible(false);
 
                         panel_filter.setVisible(false);
+                   String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha1);
+                           String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);
 
+         estoyAlmacenes = false;
+        actualDate = "Pedidos: "+ fechas1 + " - " +fechas2 ;
 	}
 	public void setModelToHiperDuperTotal(){
 
@@ -2370,6 +2407,7 @@ actualDate = "Pedidos: "+ fecha1;
                         panel_filter.setVisible(false);
                         comboBox_1.setVisible(false);
                         actualDate = "Pedidos";
+                         estoyAlmacenes = false;
 
 }
 	
@@ -2569,6 +2607,7 @@ else
 		rdbtnInfatil.setSelected(false);
 		filterText.requestFocusInWindow();
 actualDate = "Pedidos";
+ estoyAlmacenes = false;
 	}
 	
 	
@@ -2622,6 +2661,7 @@ actualDate = "Pedidos";
 
 		filterText.requestFocusInWindow();
 actualDate = "Pedidos:" +item;
+ estoyAlmacenes = false;
 	}
 
 	
