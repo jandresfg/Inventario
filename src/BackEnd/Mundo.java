@@ -2627,7 +2627,403 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             return retorno;
 	}
 
-}
+	}
+	public ArrayList<Object[]> darTotalesFabulososConFecha(Date fecha,  boolean es)
+	{
+
+        fechas = new ArrayList<String>();
+        fechasRepo= new ArrayList<String>();
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+        for (int i = 0; i < almacenes.size(); i++) {
+            for (int j = 0; j < zapatos.size(); j++) {
+                Object[] res = new Object[14];
+                Almacen a = almacenes.get(i);
+                Zapato z = zapatos.get(j);
+                int sumaCantidad = 0;
+                int sumaPrecioCosto = 0;
+                int sumaPrecioVenta = 0;
+                Almacen ka = z.getAlamacenes().get(0);
+                if (ka.toString().equals(a.toString())  && z.esReposicion() == es && z.getFecha().equals(fecha)) {
+                    sumaCantidad += z.getCantidad();
+                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+
+                }
+               res[0] = a.toString();
+                res[1] = z.getProveedores().get(0).toString();
+                res[2] = z.getReferencia();
+                res[3] = z.getColor();
+                res[4] = z.getPrecioCosto();
+                res[5] = z.getPrecioVenta();
+                res[6] = sumaCantidad;
+                res[7] = sumaPrecioCosto;
+                res[8] = sumaPrecioVenta;
+                res[13] = z.getStringFecha(z.getFecha());  
+                if(es && z.esReposicion() == es)
+                {
+                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
+
+                }
+                else
+                {
+                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
+                }
+                if (z.getCategoria().equals("CABALLERO")) {
+                    res[10] = "X";
+                    res[9] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[9] = "X";
+                    res[10] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[11] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
+
+                }
+                String numeracion = z.getNumeracion();
+
+                if(numeracion.equals("0"))
+                {
+                    res[12] = "";
+
+                }
+                else
+                {
+                res[12] = numeracion;
+                }
+
+                if ((int) res[6] > 0) {
+                    arr.add(res);
+                }
+            }
+        }
+        if (arr.size() == 0) {
+
+            return arr;
+
+        } else {
+            Object[] linea = new Object[14];
+            linea[0] = "TOTALES";
+            linea[1] = " ";
+            linea[2] = " ";
+            linea[3] = " ";
+            linea[4] = " ";
+            linea[9] = " ";
+            linea[8] = " ";
+            linea[10] = " ";
+            linea[5] = " ";
+            linea[6] = " ";
+            linea[7] = " ";
+            linea[11] = " ";
+            linea[12] = " ";
+            linea[13] = " ";
+
+            Object[] fabulosoTotal = new Object[14];
+            fabulosoTotal[0] = " ";
+            fabulosoTotal[1] = " ";
+            fabulosoTotal[2] = " ";
+            fabulosoTotal[3] = " ";
+            fabulosoTotal[4] = " ";
+            fabulosoTotal[5] = " ";
+
+            fabulosoTotal[9] = " ";
+            fabulosoTotal[8] = " ";
+            fabulosoTotal[10] = " ";
+                        fabulosoTotal[11] = " ";
+                        fabulosoTotal[12] = " ";
+                        linea[13] = " ";
+
+            int sumaCantidad = 0;
+            int sumaPrecioCosto = 0;
+            int sumaPrecioVenta = 0;
+
+            for (int i = 0; i < arr.size(); i++) {
+                Object[] res = arr.get(i);
+
+                sumaCantidad += (int) res[6];
+                sumaPrecioCosto += (int) res[7];
+                sumaPrecioVenta += (int) res[8];
+
+            }
+            fabulosoTotal[6] = sumaCantidad;
+            fabulosoTotal[7] = sumaPrecioCosto;
+            fabulosoTotal[8] = sumaPrecioVenta;
+
+            ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
+            retorno.add(linea);
+            retorno.add(fabulosoTotal);
+
+            return retorno;
+	}
+	}
+	
+	public ArrayList<Object[]>	darGrandiososTotalesCasoRaroConDosFecha(Date fecha, Date fecha1, String prefix,  boolean es)
+	{
+
+        fechas = new ArrayList<String>();
+        fechasRepo= new ArrayList<String>();
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+        for (int i = 0; i < almacenes.size(); i++) {
+            for (int j = 0; j < zapatos.size(); j++) {
+                Object[] res = new Object[14];
+                Almacen a = almacenes.get(i);
+                Zapato z = zapatos.get(j);
+                int sumaCantidad = 0;
+                int sumaPrecioCosto = 0;
+                int sumaPrecioVenta = 0;
+                Almacen ka = z.getAlamacenes().get(0);
+                if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es && z.getFecha().before(fecha1)&& z.getFecha().after(fecha)) {
+                    sumaCantidad += z.getCantidad();
+                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+
+                }
+               res[0] = a.toString();
+                res[1] = z.getProveedores().get(0).toString();
+                res[2] = z.getReferencia();
+                res[3] = z.getColor();
+                res[4] = z.getPrecioCosto();
+                res[5] = z.getPrecioVenta();
+                res[6] = sumaCantidad;
+                res[7] = sumaPrecioCosto;
+                res[8] = sumaPrecioVenta;
+                res[13] = z.getStringFecha(z.getFecha());  
+                if(es && z.esReposicion() == es)
+                {
+                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
+
+                }
+                else
+                {
+                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
+                }
+                if (z.getCategoria().equals("CABALLERO")) {
+                    res[10] = "X";
+                    res[9] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[9] = "X";
+                    res[10] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[11] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
+
+                }
+                String numeracion = z.getNumeracion();
+
+                if(numeracion.equals("0"))
+                {
+                    res[12] = "";
+
+                }
+                else
+                {
+                res[12] = numeracion;
+                }
+
+                if ((int) res[6] > 0) {
+                    arr.add(res);
+                }
+            }
+        }
+        if (arr.size() == 0) {
+
+            return arr;
+
+        } else {
+            Object[] linea = new Object[14];
+            linea[0] = "TOTALES";
+            linea[1] = " ";
+            linea[2] = " ";
+            linea[3] = " ";
+            linea[4] = " ";
+            linea[9] = " ";
+            linea[8] = " ";
+            linea[10] = " ";
+            linea[5] = " ";
+            linea[6] = " ";
+            linea[7] = " ";
+            linea[11] = " ";
+            linea[12] = " ";
+            linea[13] = " ";
+
+            Object[] fabulosoTotal = new Object[14];
+            fabulosoTotal[0] = " ";
+            fabulosoTotal[1] = " ";
+            fabulosoTotal[2] = " ";
+            fabulosoTotal[3] = " ";
+            fabulosoTotal[4] = " ";
+            fabulosoTotal[5] = " ";
+
+            fabulosoTotal[9] = " ";
+            fabulosoTotal[8] = " ";
+            fabulosoTotal[10] = " ";
+                        fabulosoTotal[11] = " ";
+                        fabulosoTotal[12] = " ";
+                        linea[13] = " ";
+
+            int sumaCantidad = 0;
+            int sumaPrecioCosto = 0;
+            int sumaPrecioVenta = 0;
+
+            for (int i = 0; i < arr.size(); i++) {
+                Object[] res = arr.get(i);
+
+                sumaCantidad += (int) res[6];
+                sumaPrecioCosto += (int) res[7];
+                sumaPrecioVenta += (int) res[8];
+
+            }
+            fabulosoTotal[6] = sumaCantidad;
+            fabulosoTotal[7] = sumaPrecioCosto;
+            fabulosoTotal[8] = sumaPrecioVenta;
+
+            ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
+            retorno.add(linea);
+            retorno.add(fabulosoTotal);
+
+            return retorno;
+	}
+	}
 	
 	
-}
+	public ArrayList<Object[]>	darGrandiososTotalesConDosFecha(Date fecha, Date fecha1,   boolean es)
+	{
+
+        fechas = new ArrayList<String>();
+        fechasRepo= new ArrayList<String>();
+        ArrayList<Object[]> arr = new ArrayList<Object[]>();
+        for (int i = 0; i < almacenes.size(); i++) {
+            for (int j = 0; j < zapatos.size(); j++) {
+                Object[] res = new Object[14];
+                Almacen a = almacenes.get(i);
+                Zapato z = zapatos.get(j);
+                int sumaCantidad = 0;
+                int sumaPrecioCosto = 0;
+                int sumaPrecioVenta = 0;
+                Almacen ka = z.getAlamacenes().get(0);
+                if (ka.toString().equals(a.toString())  && z.esReposicion() == es && z.getFecha().before(fecha1)&& z.getFecha().after(fecha)) {
+                    sumaCantidad += z.getCantidad();
+                    sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
+                    sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+
+                }
+               res[0] = a.toString();
+                res[1] = z.getProveedores().get(0).toString();
+                res[2] = z.getReferencia();
+                res[3] = z.getColor();
+                res[4] = z.getPrecioCosto();
+                res[5] = z.getPrecioVenta();
+                res[6] = sumaCantidad;
+                res[7] = sumaPrecioCosto;
+                res[8] = sumaPrecioVenta;
+                res[13] = z.getStringFecha(z.getFecha());  
+                if(es && z.esReposicion() == es)
+                {
+                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
+
+                }
+                else
+                {
+                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
+                }
+                if (z.getCategoria().equals("CABALLERO")) {
+                    res[10] = "X";
+                    res[9] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("DAMA")) {
+                    res[9] = "X";
+                    res[10] = " ";
+                    res[11] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[11] = "X";
+                    res[9] = " ";
+                    res[10] = " ";
+
+                }
+                String numeracion = z.getNumeracion();
+
+                if(numeracion.equals("0"))
+                {
+                    res[12] = "";
+
+                }
+                else
+                {
+                res[12] = numeracion;
+                }
+
+                if ((int) res[6] > 0) {
+                    arr.add(res);
+                }
+            }
+        }
+        if (arr.size() == 0) {
+
+            return arr;
+
+        } else {
+            Object[] linea = new Object[14];
+            linea[0] = "TOTALES";
+            linea[1] = " ";
+            linea[2] = " ";
+            linea[3] = " ";
+            linea[4] = " ";
+            linea[9] = " ";
+            linea[8] = " ";
+            linea[10] = " ";
+            linea[5] = " ";
+            linea[6] = " ";
+            linea[7] = " ";
+            linea[11] = " ";
+            linea[12] = " ";
+            linea[13] = " ";
+
+            Object[] fabulosoTotal = new Object[14];
+            fabulosoTotal[0] = " ";
+            fabulosoTotal[1] = " ";
+            fabulosoTotal[2] = " ";
+            fabulosoTotal[3] = " ";
+            fabulosoTotal[4] = " ";
+            fabulosoTotal[5] = " ";
+
+            fabulosoTotal[9] = " ";
+            fabulosoTotal[8] = " ";
+            fabulosoTotal[10] = " ";
+                        fabulosoTotal[11] = " ";
+                        fabulosoTotal[12] = " ";
+                        linea[13] = " ";
+
+            int sumaCantidad = 0;
+            int sumaPrecioCosto = 0;
+            int sumaPrecioVenta = 0;
+
+            for (int i = 0; i < arr.size(); i++) {
+                Object[] res = arr.get(i);
+
+                sumaCantidad += (int) res[6];
+                sumaPrecioCosto += (int) res[7];
+                sumaPrecioVenta += (int) res[8];
+
+            }
+            fabulosoTotal[6] = sumaCantidad;
+            fabulosoTotal[7] = sumaPrecioCosto;
+            fabulosoTotal[8] = sumaPrecioVenta;
+
+            ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
+            retorno.add(linea);
+            retorno.add(fabulosoTotal);
+
+            return retorno;
+	}
+	}
+	
+	
+	
+	
+	
+	}

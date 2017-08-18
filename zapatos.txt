@@ -32,7 +32,7 @@ referencia2}planta2}altura2}color2}material2}99999}88888}40}DAMA}0}09-ene-2017}7
 204}}PLANO}DORADO}SINTETICO}18000}36000}12}DAMA}0}25-ene-2017}649 - STYLOS}KENNEDY 1}true}0}-
 prueba}}alt1}col2}mat1}15000}30000}12}DAMA}0}25-ene-2017}7 - MARIANGEL}BOSA 1}true}12}-
 prueba}planta1}alt1}col3}mat1}15000}30000}12}DAMA}0}25-ene-2017}7 - MARIANGEL}BOSA 1}true}0}-
-xxx}xxxx}xxx}xxx}xxx}123}123}123}INFANTIL}0}16-mar-2017}5 - DAZALEA}20 DE JULIO 2}false}Numeracion}-
+xxx}xxxx}xxx}xxx}xxx}123}123}123}INFANTIL}0}16-mar-2017}5 - DAZALEA}20 DE JULIO 2}false}6969}-
 asdf}asdf}asdf}asdf}asdf}1234}1234}1234}INFANTIL}0}23-mar-2017}8 - GINU'S}CUCUTA 2}false}Numeracion}-
 asdf}asdf}asdf}asdf}asdf}1234}1234}1234}INFANTIL}0}23-mar-2017}8 - GINU'S}CUCUTA 3}false}Numeracion}-
 zxcv}zxcv}zxcv}zxcv}zxcv}1234}1234}1324}INFANTIL}0}23-mar-2017}8 - GINU'S}CUCUTA 3}false}1}-

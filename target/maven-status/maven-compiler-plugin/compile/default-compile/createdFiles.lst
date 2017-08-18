@@ -6,7 +6,6 @@ FrontEnd\Principal$42.class
 FrontEnd\DialogoEliminarReposicion$1.class
 FrontEnd\Principal$7.class
 FrontEnd\DialogoAgregarReposicion$2.class
-FrontEnd\Principal$45.class
 FrontEnd\TablaProveedor.class
 FrontEnd\Principal$28.class
 BackEnd\Proveedor.class
@@ -32,7 +31,6 @@ FrontEnd\DialogoEliminarAlmacen$1.class
 FrontEnd\DialogoEliminarZapto$1.class
 FrontEnd\DialogoEliminarProveedor.class
 FrontEnd\DialogoAgregarZapto$4.class
-FrontEnd\Principal$46.class
 FrontEnd\Principal$8.class
 FrontEnd\Principal$11.class
 BackEnd\Mundo.class
