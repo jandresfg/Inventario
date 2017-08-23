@@ -52,9 +52,10 @@ public class Zapato
 		proveedores = new ArrayList<Proveedor>();
 		almacenes = new ArrayList<Almacen>();
                 esReposicion=false;
-                if(            !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
+                if(  !pnumeracion.equals("") &&  !pnumeracion.equals(" "))
                 {
                 	numeracion = pnumeracion;
+System.out.println(numeracion);
 
 
                 }	}

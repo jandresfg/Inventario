@@ -507,6 +507,7 @@ public class DialogoAgregarZapto extends JDialog implements ActionListener {
 lblnumeracion.setEnabled(true);
 lblnumeracion.setEditable(true);
 
+
             }
         });
         GridBagConstraints gbc_rdbtnInfantil = new GridBagConstraints();
@@ -610,12 +611,15 @@ lblnumeracion.setEditable(true);
                     String referencia = textReft.getText();
                     String planta = textPlanta.getText();
                     String fecha = datePicker.getJFormattedTextField().getText();
-                    String numeracion = lblNumeracion.getText();
+                    String numeracion = lblnumeracion.getText();
 if (numeracion.equals("Numeracion"))
 {
 	
 numeracion  ="";	
+System.out.println(numeracion);
 }
+System.out.println("ALGO"+numeracion);
+
                     Zapato zap = new Zapato(referencia, planta, altura, color, material, precioCosto, precioVenta, cantidad, categoria, 0, Zapato.getFechaFromString(fecha),numeracion);
 
                     ArrayList<String> provs = new ArrayList<String>();

@@ -1813,14 +1813,15 @@ public class Principal extends JFrame implements ActionListener {
 		estoyEnTotales = true;
 		rdbtnDama.setSelected(false);
 		panel_filter.setVisible(true);
-		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
-		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(76);
+		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Fecha")).setMinWidth(70);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Dama")).setMaxWidth(47);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Caballero")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("Infantil")).setMaxWidth(50);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
+                 table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("REF")).setMaxWidth(65);
+
 		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 
 		rdbtnCaballero.setSelected(false);	
@@ -1855,6 +1856,8 @@ public class Principal extends JFrame implements ActionListener {
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
+                 table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("REF")).setMaxWidth(65);
+
 		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 
 		rdbtnCaballero.setSelected(false);	
@@ -1892,7 +1895,8 @@ public class Principal extends JFrame implements ActionListener {
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
-		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+                table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("REF")).setMaxWidth(65);
+                table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 			@Override
 			public Component getTableCellRendererComponent(JTable table,
@@ -1961,6 +1965,8 @@ public class Principal extends JFrame implements ActionListener {
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
+                table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("REF")).setMaxWidth(65);
+
 		table.setFont(new Font("default", Font.LAYOUT_LEFT_TO_RIGHT, 14));
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
 			@Override
@@ -2703,9 +2709,9 @@ public class Principal extends JFrame implements ActionListener {
 
 		if(lista.size()>0)
 		{
-			cantidadTotal= (int) lista.get(lista.size()-1)[6];
-			costoTotal= (int) lista.get(lista.size()-1)[7];
-			VentaTotal= (int) lista.get(lista.size()-1)[8];
+			cantidadTotal= (int) lista.get(lista.size()-1)[8];
+			costoTotal= (int) lista.get(lista.size()-1)[9];
+			VentaTotal= (int) lista.get(lista.size()-1)[10];
 		}
 		else
 		{
@@ -2732,6 +2738,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
+                 table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("REF")).setMaxWidth(65);
 
 
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
@@ -2861,7 +2868,9 @@ public class Principal extends JFrame implements ActionListener {
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CTO UN")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("CDN T")).setMaxWidth(55);
 		table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("VTA UN")).setMaxWidth(55);
-		rdbtnCaballero.setSelected(false);	
+		                 table.getColumnModel().getColumn(table.getColumnModel().getColumnIndex("REF")).setMaxWidth(65);
+
+                rdbtnCaballero.setSelected(false);	
 
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
