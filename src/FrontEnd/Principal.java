@@ -138,7 +138,7 @@ public class Principal extends JFrame implements ActionListener {
 	private JCheckBox   checkBoxPedidos;
 	private JCheckBox checkBox_2Repo ;
 	private JCheckBox checkBox_3Pedidos;
-	private JComboBox<String> comboBox_1;
+//	private JComboBox<String> //comboBox_1;
 	private ItemListener itemListener;
 	private static final String FORMATO_FECHA = "dd-MMM-yyyy";
 	private boolean agregado;
@@ -178,7 +178,6 @@ public class Principal extends JFrame implements ActionListener {
 		////////El mismo metodo de cuando se oprime el boton "Zapatos"
 		setModelToZapatos();
 		////////
-
 
 	}
 
@@ -678,8 +677,8 @@ public class Principal extends JFrame implements ActionListener {
 						else
 						{
 
-							comboBox_1.removeAllItems();
-							comboBox_1.setVisible(false);
+//							//comboBox_1.removeAllItems();
+	//						//comboBox_1.setVisible(false);
 							inicial=true;
 							setModelToTotalesPorAlmacenConFecha(fecha);  		
 						}
@@ -699,8 +698,8 @@ public class Principal extends JFrame implements ActionListener {
 						else
 						{
 
-							comboBox_1.removeAllItems();
-							comboBox_1.setVisible(false);
+	//						//comboBox_1.removeAllItems();
+		//					//comboBox_1.setVisible(false);
 							inicial=true;
 							setModelToTotalesPorAlmacenConDosFechas(fecha,fecha2);  		
 
@@ -830,7 +829,8 @@ public class Principal extends JFrame implements ActionListener {
 
 				if(estoyEnTotales)
 				{
-
+					datePicker2.getModel().setValue(null);
+					datePicker.getModel().setValue(null);
 
 					if (checkBoxREP.isSelected())
 					{
@@ -1040,7 +1040,7 @@ public class Principal extends JFrame implements ActionListener {
 				checkBox_3Pedidos.setSelected(true);
 				checkBox_2Repo.setSelected(false);
 				panel_filter.setVisible(false);
-				comboBox_1.setVisible(false);
+	//			//comboBox_1.setVisible(false);
 
 			}
 		});
@@ -1234,10 +1234,10 @@ public class Principal extends JFrame implements ActionListener {
 		panel_filter.add(filterText);
 		panel_filter.setVisible(false);
 
-		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(1040, 710, 235, 22);
-		frmInventario.getContentPane().add(comboBox_1);
-		comboBox_1.setVisible(false);
+	//	//comboBox_1 = new JComboBox();
+		////comboBox_1.setBounds(1040, 710, 235, 22);
+	//	frmInventario.getContentPane().add(//comboBox_1);
+		////comboBox_1.setVisible(false);
 		itemListener = new ItemListener() {
 			public void itemStateChanged(ItemEvent itemEvent) {
 				int state = itemEvent.getStateChange();
@@ -1268,7 +1268,7 @@ public class Principal extends JFrame implements ActionListener {
 			}
 		};
 
-		comboBox_1.addItemListener(itemListener);
+	//	//comboBox_1.addItemListener(itemListener);
 
 
 		actualizarTotales("Seleccione una referencia");
@@ -1654,7 +1654,7 @@ public class Principal extends JFrame implements ActionListener {
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "ZAPATOS";
 		panel_fechas.setVisible(false);
 
@@ -1703,7 +1703,7 @@ public class Principal extends JFrame implements ActionListener {
 		rdbtnGlobal.setSelected(false);
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "RESPOSICIONES";
 		panel_fechas.setVisible(false);
 
@@ -1741,7 +1741,7 @@ public class Principal extends JFrame implements ActionListener {
 
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "ALMACENES";
 		estoyAlmacenes = true;
 		panel_fechas.setVisible(false);
@@ -1789,7 +1789,7 @@ public class Principal extends JFrame implements ActionListener {
 		rdbtnInfatil.setSelected(false);
 		estoyEnTotales = false;
 		panel_1.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		panel_fechas.setVisible(false);
 		actualDate = "PROVEEDORES";
 
@@ -2089,7 +2089,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "Pedidos: " + fecha;
 		panel_fechas.setVisible(true);
 
@@ -2135,7 +2135,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 
 		String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha);
 		String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);
@@ -2183,7 +2183,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "Pedidos";
 
 		estoyAlmacenes = false;
@@ -2225,7 +2225,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 
 		String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha1);
 		String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);
@@ -2271,7 +2271,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 
 		actualDate = "Pedidos: "+ fecha1;
 		estoyAlmacenes = false;
@@ -2324,7 +2324,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		estoyAlmacenes = false;
 		panel_fechas.setVisible(true);
 
@@ -2373,7 +2373,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha1);
 		String fechas2=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha2);       
 		actualDate = "Pedidos: "+ fechas1 + " - " +fechas2 ;
@@ -2425,7 +2425,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "Pedidos: "+ fecha1;
 		estoyAlmacenes = false;
 		panel_fechas.setVisible(true);
@@ -2477,7 +2477,7 @@ public class Principal extends JFrame implements ActionListener {
 
 		panel_1.setVisible(true);
 		estoyEnTotales = false;
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 
 		panel_filter.setVisible(false);
 		estoyAlmacenes = false;
@@ -2530,7 +2530,7 @@ public class Principal extends JFrame implements ActionListener {
 
 		panel_1.setVisible(true);
 		estoyEnTotales = false;
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 
 		panel_filter.setVisible(false);
 		actualDate = "Pedidos: "+ fecha1;
@@ -2585,7 +2585,7 @@ public class Principal extends JFrame implements ActionListener {
 
 		panel_1.setVisible(true);
 		estoyEnTotales = false;
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 
 		panel_filter.setVisible(false);
 		String fechas1=       new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).format(fecha1);
@@ -2609,7 +2609,7 @@ public class Principal extends JFrame implements ActionListener {
 		table.setRowSorter(sorter);
 		estoyEnTotales = false;
 		panel_filter.setVisible(false);
-		comboBox_1.setVisible(false);
+		//comboBox_1.setVisible(false);
 		actualDate = "Pedidos";
 		estoyAlmacenes = false;
 		panel_fechas.setVisible(true);
@@ -2642,8 +2642,8 @@ public class Principal extends JFrame implements ActionListener {
 			}
 			else
 			{
-				comboBox_1.removeAllItems();
-				comboBox_1.setVisible(false);
+				//comboBox_1.removeAllItems();
+				//comboBox_1.setVisible(false);
 				inicial=true;
 
 				if(checkBoxREP.isSelected())
@@ -2772,8 +2772,8 @@ public class Principal extends JFrame implements ActionListener {
 		});			button_3.requestFocus();
 		table.setRowSorter(sorter);
 
-		comboBox_1.removeAllItems();
-		comboBox_1.setVisible(true);
+		//comboBox_1.removeAllItems();
+		//comboBox_1.setVisible(true);
 		List<String> fechitas= null;
 		if(!checkBoxREP.isSelected())
 		{
@@ -2788,16 +2788,16 @@ public class Principal extends JFrame implements ActionListener {
 
 		for (int i = 0; i < fechitas.size(); i++) {
 			String x = (String) fechitas.get(i);
-			comboBox_1.addItem(x);			
+			//comboBox_1.addItem(x);			
 		}
-		//System.out.println("SELECCIONADO: "+comboBox_1.getSelectedItem());
+		//System.out.println("SELECCIONADO: "+//comboBox_1.getSelectedItem());
 
-		comboBox_1.addItem("TODO");
+		//comboBox_1.addItem("TODO");
 		// SELECCIONO TODO
 
 		if(inicial || maximo)
 		{
-			comboBox_1.setSelectedIndex(fechitas.size());
+			//comboBox_1.setSelectedIndex(fechitas.size());
 
 
 			maximo=false;
