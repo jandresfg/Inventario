@@ -896,7 +896,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[14];
+                Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -907,43 +907,50 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     sumaCantidad += z.getCantidad();
                     sumaPrecioCosto += z.getPrecioCosto() * z.getCantidad();
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
+
                 }
                 res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());  
+                
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+
+                
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
-                if ((int) res[6] > 0) {
+                if ((int) res[8] > 0) {
+
                     arr.add(res);
                 }
             }
@@ -1812,6 +1819,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 
         res[2] = totalVenta;
         res[3] = totalPares;
+
+
         arr.add(res);
 
         return arr;
@@ -1990,15 +1999,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
      * @return
      */
     private int compararCategoria(Object[] a, Object[] b) {
-        if (a[9].equals("X")) { //a es DAMA
+        if (a[11].equals("X")) { //a es DAMA
 
-            if (b[9].equals("X")) { //b es DAMA
+            if (b[11].equals("X")) { //b es DAMA
 
     		    Date fecha1 = null;
     		    Date fecha2 = null ;
     			try {
-    				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[13]);
-    				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[13]);
+    				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[15]);
+    				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[15]);
 
     			} catch (ParseException e) {
     				// TODO Auto-generated catch block
@@ -2031,24 +2040,24 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
     			   return compFechas;
     		   }
 
-            } else if (b[10].equals("X")) { //b es CABALLERO
+            } else if (b[12].equals("X")) { //b es CABALLERO
                 return -1;
-            } else if (b[11].equals("X")) { //b es INFANTIL
+            } else if (b[13].equals("X")) { //b es INFANTIL
                 return -1;
             }
 
-        } else if (a[10].equals("X")) { //a es CABALLERO
+        } else if (a[12].equals("X")) { //a es CABALLERO
 
-            if (b[9].equals("X")) { //b es DAMA
+            if (b[11].equals("X")) { //b es DAMA
                 return 1;
-            } else if (b[10].equals("X")) { //b es CABALLERO
+            } else if (b[12].equals("X")) { //b es CABALLERO
                 
             	
         	    Date fecha1 = null;
     		    Date fecha2 = null ;
     			try {
-    				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[13]);
-    				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[13]);
+    				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[15]);
+    				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[15]);
 
     			} catch (ParseException e) {
     				// TODO Auto-generated catch block
@@ -2080,24 +2089,24 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
     		   {
     			   return compFechas;
     		   }
-            } else if (b[11].equals("X")) { //b es INFANTIL
+            } else if (b[13].equals("X")) { //b es INFANTIL
                 return -1;
             }
 
-        } else if (a[11].equals("X")) { //a es INFANTIL
+        } else if (a[13].equals("X")) { //a es INFANTIL
 
-            if (b[9].equals("X")) { //b es DAMA
+            if (b[11].equals("X")) { //b es DAMA
                 return 1;
-            } else if (b[10].equals("X")) { //b es CABALLERO
+            } else if (b[12].equals("X")) { //b es CABALLERO
                 return 1;
-            } else if (b[11].equals("X")) { //b es INFANTIL
+            } else if (b[13].equals("X")) { //b es INFANTIL
             	
             	
             	   Date fecha1 = null;
        		    Date fecha2 = null ;
        			try {
-       				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[13]);
-       				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[13]);
+       				fecha1 = new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) a[15]);
+       				fecha2  =	new SimpleDateFormat(FORMATO_FECHA, new Locale("es", "ES")).parse((String) b[15]);
 
        			} catch (ParseException e) {
        				// TODO Auto-generated catch block
@@ -2141,7 +2150,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[14];
+                Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -2164,44 +2173,45 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     
                     
                 }
-               res[0] = a.toString();
+              res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());  
-    
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
-
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
-                if ((int) res[6] > 0) {
+                if ((int) res[8] > 0) {
+
                     arr.add(res);
                 }
             }
@@ -2211,7 +2221,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             return arr;
 
         } else {
-            Object[] linea = new Object[14];
+            Object[] linea = new Object[16];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -2226,8 +2236,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             linea[11] = " ";
             linea[12] = " ";
             linea[13] = " ";
+            linea[14] = " ";
+            linea[15] = " ";
 
-            Object[] fabulosoTotal = new Object[14];
+            Object[] fabulosoTotal = new Object[16];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
@@ -2240,7 +2252,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[10] = " ";
                         fabulosoTotal[11] = " ";
                         fabulosoTotal[12] = " ";
-                        linea[13] = " ";
+                        fabulosoTotal[13] = " ";
+                        fabulosoTotal[14] = " ";
+                        fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
@@ -2249,14 +2263,14 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
-                sumaCantidad += (int) res[6];
-                sumaPrecioCosto += (int) res[7];
-                sumaPrecioVenta += (int) res[8];
+                sumaCantidad += (int) res[8];
+                sumaPrecioCosto += (int) res[9];
+                sumaPrecioVenta += (int) res[10];
 
             }
-            fabulosoTotal[6] = sumaCantidad;
-            fabulosoTotal[7] = sumaPrecioCosto;
-            fabulosoTotal[8] = sumaPrecioVenta;
+            fabulosoTotal[8] = sumaCantidad;
+            fabulosoTotal[9] = sumaPrecioCosto;
+            fabulosoTotal[10] = sumaPrecioVenta;
 
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
             retorno.add(linea);
@@ -2374,40 +2388,41 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
-
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
+                if ((int) res[8] > 0) {
 
-                if ((int) res[6] > 0) {
                     arr.add(res);
                 }
             }
@@ -2505,7 +2520,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[14];
+                Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -2522,48 +2537,41 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());  
-                if(es && z.esReposicion() == es)
-                {
-                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
-
-                }
-                else
-                {
-                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
-                }
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
-
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
-                if ((int) res[6] > 0) {
+                if ((int) res[8] > 0) {
+
                     arr.add(res);
                 }
             }
@@ -2573,7 +2581,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             return arr;
 
         } else {
-            Object[] linea = new Object[14];
+            Object[] linea = new Object[16];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -2588,8 +2596,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             linea[11] = " ";
             linea[12] = " ";
             linea[13] = " ";
+            linea[14] = " ";
+            linea[15] = " ";
 
-            Object[] fabulosoTotal = new Object[14];
+            Object[] fabulosoTotal = new Object[16];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
@@ -2602,7 +2612,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[10] = " ";
                         fabulosoTotal[11] = " ";
                         fabulosoTotal[12] = " ";
-                        linea[13] = " ";
+                        fabulosoTotal[13] = " ";
+                        fabulosoTotal[14] = " ";
+                        fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
@@ -2611,14 +2623,14 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
-                sumaCantidad += (int) res[6];
-                sumaPrecioCosto += (int) res[7];
-                sumaPrecioVenta += (int) res[8];
+                sumaCantidad += (int) res[8];
+                sumaPrecioCosto += (int) res[9];
+                sumaPrecioVenta += (int) res[10];
 
             }
-            fabulosoTotal[6] = sumaCantidad;
-            fabulosoTotal[7] = sumaPrecioCosto;
-            fabulosoTotal[8] = sumaPrecioVenta;
+            fabulosoTotal[8] = sumaCantidad;
+            fabulosoTotal[9] = sumaPrecioCosto;
+            fabulosoTotal[10] = sumaPrecioVenta;
 
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
             retorno.add(linea);
@@ -2636,7 +2648,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[14];
+                Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -2653,48 +2665,41 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());  
-                if(es && z.esReposicion() == es)
-                {
-                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
-
-                }
-                else
-                {
-                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
-                }
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
-
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
-                if ((int) res[6] > 0) {
+                if ((int) res[8] > 0) {
+
                     arr.add(res);
                 }
             }
@@ -2704,7 +2709,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             return arr;
 
         } else {
-            Object[] linea = new Object[14];
+            Object[] linea = new Object[16];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -2719,8 +2724,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             linea[11] = " ";
             linea[12] = " ";
             linea[13] = " ";
+            linea[14] = " ";
+            linea[15] = " ";
 
-            Object[] fabulosoTotal = new Object[14];
+            Object[] fabulosoTotal = new Object[16];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
@@ -2733,7 +2740,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[10] = " ";
                         fabulosoTotal[11] = " ";
                         fabulosoTotal[12] = " ";
-                        linea[13] = " ";
+                        fabulosoTotal[13] = " ";
+                        fabulosoTotal[14] = " ";
+                        fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
@@ -2742,14 +2751,14 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
-                sumaCantidad += (int) res[6];
-                sumaPrecioCosto += (int) res[7];
-                sumaPrecioVenta += (int) res[8];
+                sumaCantidad += (int) res[8];
+                sumaPrecioCosto += (int) res[9];
+                sumaPrecioVenta += (int) res[10];
 
             }
-            fabulosoTotal[6] = sumaCantidad;
-            fabulosoTotal[7] = sumaPrecioCosto;
-            fabulosoTotal[8] = sumaPrecioVenta;
+            fabulosoTotal[8] = sumaCantidad;
+            fabulosoTotal[9] = sumaPrecioCosto;
+            fabulosoTotal[10] = sumaPrecioVenta;
 
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
             retorno.add(linea);
@@ -2767,7 +2776,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[14];
+                Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -2780,52 +2789,45 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
 
                 }
-               res[0] = a.toString();
+              res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());  
-                if(es && z.esReposicion() == es)
-                {
-                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
-
-                }
-                else
-                {
-                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
-                }
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
-
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
-                if ((int) res[6] > 0) {
+                if ((int) res[8] > 0) {
+
                     arr.add(res);
                 }
             }
@@ -2835,7 +2837,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             return arr;
 
         } else {
-            Object[] linea = new Object[14];
+            Object[] linea = new Object[16];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -2850,8 +2852,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             linea[11] = " ";
             linea[12] = " ";
             linea[13] = " ";
+            linea[14] = " ";
+            linea[15] = " ";
 
-            Object[] fabulosoTotal = new Object[14];
+            Object[] fabulosoTotal = new Object[16];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
@@ -2864,7 +2868,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[10] = " ";
                         fabulosoTotal[11] = " ";
                         fabulosoTotal[12] = " ";
-                        linea[13] = " ";
+                        fabulosoTotal[13] = " ";
+                        fabulosoTotal[14] = " ";
+                        fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
@@ -2873,14 +2879,14 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
-                sumaCantidad += (int) res[6];
-                sumaPrecioCosto += (int) res[7];
-                sumaPrecioVenta += (int) res[8];
+                sumaCantidad += (int) res[8];
+                sumaPrecioCosto += (int) res[9];
+                sumaPrecioVenta += (int) res[10];
 
             }
-            fabulosoTotal[6] = sumaCantidad;
-            fabulosoTotal[7] = sumaPrecioCosto;
-            fabulosoTotal[8] = sumaPrecioVenta;
+            fabulosoTotal[8] = sumaCantidad;
+            fabulosoTotal[9] = sumaPrecioCosto;
+            fabulosoTotal[10] = sumaPrecioVenta;
 
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
             retorno.add(linea);
@@ -2899,7 +2905,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
-                Object[] res = new Object[14];
+                Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
@@ -2912,52 +2918,45 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                     sumaPrecioVenta += z.getPrecioVenta() * z.getCantidad();
 
                 }
-               res[0] = a.toString();
+                res[0] = a.toString();
                 res[1] = z.getProveedores().get(0).toString();
                 res[2] = z.getReferencia();
                 res[3] = z.getColor();
-                res[4] = z.getPrecioCosto();
-                res[5] = z.getPrecioVenta();
-                res[6] = sumaCantidad;
-                res[7] = sumaPrecioCosto;
-                res[8] = sumaPrecioVenta;
-                res[13] = z.getStringFecha(z.getFecha());  
-                if(es && z.esReposicion() == es)
-                {
-                    addDateToARRREPO(z.getStringFecha(z.getFecha()));
-
-                }
-                else
-                {
-                addDateToARRNORMAL(z.getStringFecha(z.getFecha()));
-                }
+                res[4] = z.getPlanta();
+                res[5] = z.getAltura();
+                res[6] = z.getPrecioCosto();
+                res[7] = z.getPrecioVenta();
+                res[8] = sumaCantidad;
+                res[9] = sumaPrecioCosto;
+                res[10] = sumaPrecioVenta;
+                res[15] = z.getStringFecha(z.getFecha());  
                 if (z.getCategoria().equals("CABALLERO")) {
-                    res[10] = "X";
-                    res[9] = " ";
+                    res[12] = "X";
                     res[11] = " ";
+                    res[13] = " ";
                 } else if (z.getCategoria().equals("DAMA")) {
-                    res[9] = "X";
-                    res[10] = " ";
-                    res[11] = " ";
-                } else if (z.getCategoria().equals("INFANTIL")) {
                     res[11] = "X";
-                    res[9] = " ";
-                    res[10] = " ";
+                    res[12] = " ";
+                    res[13] = " ";
+                } else if (z.getCategoria().equals("INFANTIL")) {
+                    res[13] = "X";
+                    res[11] = " ";
+                    res[12] = " ";
 
                 }
                 String numeracion = z.getNumeracion();
-
                 if(numeracion.equals("0"))
                 {
-                    res[12] = "";
+                    res[14] = "";
 
                 }
                 else
                 {
-                res[12] = numeracion;
+                res[14] = numeracion;
                 }
 
-                if ((int) res[6] > 0) {
+                if ((int) res[8] > 0) {
+
                     arr.add(res);
                 }
             }
@@ -2967,7 +2966,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             return arr;
 
         } else {
-            Object[] linea = new Object[14];
+            Object[] linea = new Object[16];
             linea[0] = "TOTALES";
             linea[1] = " ";
             linea[2] = " ";
@@ -2982,8 +2981,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             linea[11] = " ";
             linea[12] = " ";
             linea[13] = " ";
+            linea[14] = " ";
+            linea[15] = " ";
 
-            Object[] fabulosoTotal = new Object[14];
+            Object[] fabulosoTotal = new Object[16];
             fabulosoTotal[0] = " ";
             fabulosoTotal[1] = " ";
             fabulosoTotal[2] = " ";
@@ -2996,7 +2997,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             fabulosoTotal[10] = " ";
                         fabulosoTotal[11] = " ";
                         fabulosoTotal[12] = " ";
-                        linea[13] = " ";
+                        fabulosoTotal[13] = " ";
+                        fabulosoTotal[14] = " ";
+                        fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
             int sumaPrecioCosto = 0;
@@ -3005,14 +3008,14 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
-                sumaCantidad += (int) res[6];
-                sumaPrecioCosto += (int) res[7];
-                sumaPrecioVenta += (int) res[8];
+                sumaCantidad += (int) res[8];
+                sumaPrecioCosto += (int) res[9];
+                sumaPrecioVenta += (int) res[10];
 
             }
-            fabulosoTotal[6] = sumaCantidad;
-            fabulosoTotal[7] = sumaPrecioCosto;
-            fabulosoTotal[8] = sumaPrecioVenta;
+            fabulosoTotal[8] = sumaCantidad;
+            fabulosoTotal[9] = sumaPrecioCosto;
+            fabulosoTotal[10] = sumaPrecioVenta;
 
             ArrayList<Object[]> retorno = quickSort(arr, 0, (arr.size()) - 1);
             retorno.add(linea);
