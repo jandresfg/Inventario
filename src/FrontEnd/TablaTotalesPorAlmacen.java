@@ -36,7 +36,7 @@ public class TablaTotalesPorAlmacen extends AbstractTableModel {
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if(data.get(rowIndex)[columnIndex] instanceof Integer){
+        if(data.get(rowIndex)[columnIndex] instanceof Integer ||data.get(rowIndex)[columnIndex] instanceof Long ){
     	if (columnIndex == 9 || columnIndex == 6 || columnIndex == 7 || columnIndex == 10) {
         	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
         	String number_ge = nf_ge.format(data.get(rowIndex)[columnIndex]);

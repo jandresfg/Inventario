@@ -899,9 +899,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Object[] res = new Object[16];
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
-                int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaCantidad = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
                 if (ka.toString().equals(a.toString()) && !z.esReposicion()) {
                     sumaCantidad += z.getCantidad();
@@ -949,7 +949,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 res[14] = numeracion;
                 }
 
-                if ((int) res[8] > 0) {
+                if ((long) res[8] > 0) {
 
                     arr.add(res);
                 }
@@ -1230,8 +1230,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             }
         }
         Object[] res = new Object[4];
-        int totalCosto = 0;
-        int totalVenta = 0;
+        long totalCosto = 0;
+        long totalVenta = 0;
         int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
@@ -1303,8 +1303,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             }
         }
         Object[] res = new Object[4];
-        int totalCosto = 0;
-        int totalVenta = 0;
+        long totalCosto = 0;
+        long totalVenta = 0;
         int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
@@ -1373,8 +1373,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
             }
         }
         Object[] res = new Object[4];
-        int totalCosto = 0;
-        int totalVenta = 0;
+        long totalCosto = 0;
+        long totalVenta = 0;
         int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
@@ -1446,8 +1446,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         arr.add(ris);
         Object[] ros = new Object[4];
         int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3];
-        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2];
-        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1];
+        long totalPV = (long)papitas.get(papitas.size()-1)[2] + (long)doritos.get(doritos.size()-1)[2];
+        long totalPC = (long)papitas.get(papitas.size()-1)[1] + (long)doritos.get(doritos.size()-1)[1];
         ros[0] = "TOTAL";
         ros[1] = totalPC;
         ros[2] = totalPV;
@@ -1495,8 +1495,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         arr.add(ris);
         Object[] ros = new Object[4];
         int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3];
-        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2];
-        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1];
+   long totalPV = (long)papitas.get(papitas.size()-1)[2] + (long)doritos.get(doritos.size()-1)[2];
+        long totalPC = (long)papitas.get(papitas.size()-1)[1] + (long)doritos.get(doritos.size()-1)[1];
         ros[0] = "TOTAL";
         ros[1] = totalPC;
         ros[2] = totalPV;
@@ -1543,8 +1543,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         arr.add(ris);
         Object[] ros = new Object[4];
         int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3];
-        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2];
-        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1];
+   long totalPV = (long)papitas.get(papitas.size()-1)[2] + (long)doritos.get(doritos.size()-1)[2];
+        long totalPC = (long)papitas.get(papitas.size()-1)[1] + (long)doritos.get(doritos.size()-1)[1];
         ros[0] = "TOTAL";
         ros[1] = totalPC;
         ros[2] = totalPV;
@@ -1611,8 +1611,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         Object[] ros = new Object[4];
 
         int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3] + (int)tostacos.get(tostacos.size()-1)[3] ;
-        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2] +(int)tostacos.get(tostacos.size()-1)[2] ;
-        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1] + (int)tostacos.get(tostacos.size()-1)[1] ;
+        long totalPV = (long)papitas.get(papitas.size()-1)[2] + (long)doritos.get(doritos.size()-1)[2] +(long)tostacos.get(tostacos.size()-1)[2] ;
+        long totalPC = (long)papitas.get(papitas.size()-1)[1] + (long)doritos.get(doritos.size()-1)[1] + (long)tostacos.get(tostacos.size()-1)[1] ;
 
         ros[0] = "TOTAL";
         ros[1] = totalPC;
@@ -1680,8 +1680,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         Object[] ros = new Object[4];
 
         int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3] + (int)tostacos.get(tostacos.size()-1)[3] ;
-        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2] +(int)tostacos.get(tostacos.size()-1)[2] ;
-        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1] + (int)tostacos.get(tostacos.size()-1)[1] ;
+        long totalPV = (long)papitas.get(papitas.size()-1)[2] + (long)doritos.get(doritos.size()-1)[2] +(long)tostacos.get(tostacos.size()-1)[2] ;
+        long totalPC = (long)papitas.get(papitas.size()-1)[1] + (long)doritos.get(doritos.size()-1)[1] + (long)tostacos.get(tostacos.size()-1)[1] ;
+
 
         ros[0] = "TOTAL";
         ros[1] = totalPC;
@@ -1749,8 +1750,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         Object[] ros = new Object[4];
 
         int cantidad = (int)papitas.get(papitas.size()-1)[3] + (int)doritos.get(doritos.size()-1)[3] + (int)tostacos.get(tostacos.size()-1)[3] ;
-        int totalPV = (int)papitas.get(papitas.size()-1)[2] + (int)doritos.get(doritos.size()-1)[2] +(int)tostacos.get(tostacos.size()-1)[2] ;
-        int totalPC = (int)papitas.get(papitas.size()-1)[1] + (int)doritos.get(doritos.size()-1)[1] + (int)tostacos.get(tostacos.size()-1)[1] ;
+        long totalPV = (long)papitas.get(papitas.size()-1)[2] + (long)doritos.get(doritos.size()-1)[2] +(long)tostacos.get(tostacos.size()-1)[2] ;
+        long totalPC = (long)papitas.get(papitas.size()-1)[1] + (long)doritos.get(doritos.size()-1)[1] + (long)tostacos.get(tostacos.size()-1)[1] ;
+
 
         ros[0] = "TOTAL";
         ros[1] = totalPC;
@@ -1801,8 +1803,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         }
         Object[] res = new Object[4];
 
-        int totalCosto = 0;
-        int totalVenta = 0;
+        long totalCosto = 0;
+        long totalVenta = 0;
         int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
@@ -1864,8 +1866,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         }
         Object[] res = new Object[4];
 
-        int totalCosto = 0;
-        int totalVenta = 0;
+        long totalCosto = 0;
+        long totalVenta = 0;
         int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
@@ -1926,8 +1928,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         }
         Object[] res = new Object[4];
 
-        int totalCosto = 0;
-        int totalVenta = 0;
+        long totalCosto = 0;
+        long totalVenta = 0;
         int totalPares = 0;
 
         for (int i = 0; i < almas.size(); i++) {
@@ -2154,8 +2156,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
                 if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es) {
                     sumaCantidad += z.getCantidad();
@@ -2257,15 +2259,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
-            int sumaPrecioCosto = 0;
-            int sumaPrecioVenta = 0;
+            long sumaPrecioCosto = 0;
+            long sumaPrecioVenta = 0;
 
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
                 sumaCantidad += (int) res[8];
-                sumaPrecioCosto += (int) res[9];
-                sumaPrecioVenta += (int) res[10];
+                sumaPrecioCosto += (long) res[9];
+                sumaPrecioVenta += (long) res[10];
 
             }
             fabulosoTotal[8] = sumaCantidad;
@@ -2376,8 +2378,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
                 if (ka.toString().equals(a.toString()) && z.esReposicion()) {
                     sumaCantidad += z.getCantidad();
@@ -2514,6 +2516,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 	}
 	public ArrayList<Object[]> darGrandiososTotalesCasoRaroConFecha(Object item, String prefix, boolean es)
 	{
+System.out.println("ALGOOO" + item);
+System.out.println("ALUNO" + prefix);
 
         fechas = new ArrayList<String>();
         fechasRepo= new ArrayList<String>();
@@ -2524,8 +2528,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
                 if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es && z.getStringFecha(z.getFecha()).equals(item)) {
                     sumaCantidad += z.getCantidad();
@@ -2617,15 +2621,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
-            int sumaPrecioCosto = 0;
-            int sumaPrecioVenta = 0;
+            long sumaPrecioCosto = 0;
+            long sumaPrecioVenta = 0;
 
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
                 sumaCantidad += (int) res[8];
-                sumaPrecioCosto += (int) res[9];
-                sumaPrecioVenta += (int) res[10];
+                sumaPrecioCosto += (long) res[9];
+                sumaPrecioVenta += (long) res[10];
 
             }
             fabulosoTotal[8] = sumaCantidad;
@@ -2652,8 +2656,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
                 if (ka.toString().equals(a.toString())  && z.esReposicion() == es && z.getFecha().equals(fecha)) {
                     sumaCantidad += z.getCantidad();
@@ -2745,15 +2749,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
-            int sumaPrecioCosto = 0;
-            int sumaPrecioVenta = 0;
+            long sumaPrecioCosto = 0;
+            long sumaPrecioVenta = 0;
 
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
                 sumaCantidad += (int) res[8];
-                sumaPrecioCosto += (int) res[9];
-                sumaPrecioVenta += (int) res[10];
+                sumaPrecioCosto += (long) res[9];
+                sumaPrecioVenta += (long) res[10];
 
             }
             fabulosoTotal[8] = sumaCantidad;
@@ -2780,8 +2784,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
                 if (ka.toString().equals(a.toString()) && ka.toString().startsWith(prefix) && z.esReposicion() == es && !z.getFecha().after(fecha1)&& !z.getFecha().before(fecha)) {
                     sumaCantidad += z.getCantidad();
@@ -2873,15 +2877,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
-            int sumaPrecioCosto = 0;
-            int sumaPrecioVenta = 0;
+            long sumaPrecioCosto = 0;
+            long sumaPrecioVenta = 0;
 
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
                 sumaCantidad += (int) res[8];
-                sumaPrecioCosto += (int) res[9];
-                sumaPrecioVenta += (int) res[10];
+                sumaPrecioCosto += (long) res[9];
+                sumaPrecioVenta += (long) res[10];
 
             }
             fabulosoTotal[8] = sumaCantidad;
@@ -2909,8 +2913,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 Almacen a = almacenes.get(i);
                 Zapato z = zapatos.get(j);
                 int sumaCantidad = 0;
-                int sumaPrecioCosto = 0;
-                int sumaPrecioVenta = 0;
+                long sumaPrecioCosto = 0;
+                long sumaPrecioVenta = 0;
                 Almacen ka = z.getAlamacenes().get(0);
   if (ka.toString().equals(a.toString())  && z.esReposicion() == es && !z.getFecha().after(fecha1)&& !z.getFecha().before(fecha)) {
                     sumaCantidad += z.getCantidad();
@@ -3002,15 +3006,15 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         fabulosoTotal[15] = " ";
 
             int sumaCantidad = 0;
-            int sumaPrecioCosto = 0;
-            int sumaPrecioVenta = 0;
+            long sumaPrecioCosto = 0;
+            long sumaPrecioVenta = 0;
 
             for (int i = 0; i < arr.size(); i++) {
                 Object[] res = arr.get(i);
 
                 sumaCantidad += (int) res[8];
-                sumaPrecioCosto += (int) res[9];
-                sumaPrecioVenta += (int) res[10];
+                sumaPrecioCosto += (long) res[9];
+                sumaPrecioVenta += (long) res[10];
 
             }
             fabulosoTotal[8] = sumaCantidad;

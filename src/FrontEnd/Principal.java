@@ -671,7 +671,7 @@ public class Principal extends JFrame implements ActionListener {
 						if (!filterText.getText().equals("")&&!filterText.getText().equals(" ") && filterText.getText().length()>0)
 						{
 
-							setModelToTotalesPorAlmacenFabulosoConFecha(filterText.getText(),papitas);  			    
+							setModelToTotalesPorAlmacenFabulosoConFecha(papitas,filterText.getText());  			    
 
 						}
 						else
@@ -1034,6 +1034,8 @@ public class Principal extends JFrame implements ActionListener {
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
+				datePicker2.getModel().setValue(null);
+				datePicker.getModel().setValue(null);
 				setModelToGrandesTotales();
 				rdbtnGlobal.setSelected(true);
 				panel_filterReposiciones.setVisible(false);
@@ -1047,6 +1049,8 @@ public class Principal extends JFrame implements ActionListener {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
+				datePicker2.getModel().setValue(null);
+				datePicker.getModel().setValue(null);
 				setModelToTotalesPorAlmacen();
 				panel_filter.setVisible(true);
 				panel_filterReposiciones.setVisible(true);
@@ -2703,15 +2707,15 @@ public class Principal extends JFrame implements ActionListener {
 	public void setModelToTotalesPorAlmacenFabuloso(String prefix){
 
 		ArrayList<Object[]> lista = mundo.darGrandiososTotalesCasoRaro(prefix, checkBoxREP.isSelected());
-		final	int cantidadTotal;
-		final	int costoTotal;
-		final	int VentaTotal;
+			int cantidadTotal;
+			long costoTotal;
+			long VentaTotal;
 
 		if(lista.size()>0)
 		{
 			cantidadTotal= (int) lista.get(lista.size()-1)[8];
-			costoTotal= (int) lista.get(lista.size()-1)[9];
-			VentaTotal= (int) lista.get(lista.size()-1)[10];
+			costoTotal= (long) lista.get(lista.size()-1)[9];
+			VentaTotal= (long) lista.get(lista.size()-1)[10];
 		}
 		else
 		{

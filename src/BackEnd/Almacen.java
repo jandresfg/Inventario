@@ -8,7 +8,7 @@ public class Almacen implements Comparable<Almacen>
 	private String telefono;
 	private String razonSocial;
 	private String nit;
-	public int getTotalCosto() {
+	public long getTotalCosto() {
 		return totalCosto;
 	}
 
@@ -28,7 +28,7 @@ public class Almacen implements Comparable<Almacen>
 
 
 
-	public int getTotalVenta() {
+	public long getTotalVenta() {
 		return totalVenta;
 	}
 
@@ -38,7 +38,7 @@ public class Almacen implements Comparable<Almacen>
 
 
 
-	public void setTotalVenta(int totalVenta) {
+	public void setTotalVenta(long totalVenta) {
 		this.totalVenta += totalVenta;
 	}
 
@@ -114,8 +114,8 @@ public void setTotalInfantil(int totalInfantil) {
 
 
 
-	private int totalCosto = 0;
-	private int totalVenta= 0;
+	private long totalCosto = 0;
+	private long totalVenta= 0;
 	private int totalPares= 0;
 	private int totalDama= 0;
 	private int totalCaballero= 0;

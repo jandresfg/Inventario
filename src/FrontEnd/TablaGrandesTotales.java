@@ -37,7 +37,7 @@ public class TablaGrandesTotales  extends AbstractTableModel
 	
 	    public Object getValueAt(int rowIndex, int columnIndex) {
 
-	    	if(data.get(rowIndex)[columnIndex] instanceof Integer){
+	    	if(data.get(rowIndex)[columnIndex] instanceof Integer||data.get(rowIndex)[columnIndex] instanceof Long){
 		    	if (columnIndex == 1 || columnIndex == 2 || columnIndex ==3 ) {
 
 		        	NumberFormat nf_ge = NumberFormat.getInstance(Locale.GERMAN);
