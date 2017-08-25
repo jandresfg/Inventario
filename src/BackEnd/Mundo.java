@@ -722,7 +722,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         && z.getReferencia().equals(x.getReferencia())
                                                  && z.getColor().equals(x.getColor())
                         && x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString())
-                        && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
+                        && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())
+                        && x.getCategoria().equalsIgnoreCase(z.getCategoria())
+                        && x.getPlanta().equalsIgnoreCase(z.getPlanta())
+                        && x.getNumeracion().equalsIgnoreCase(z.getNumeracion())) {
 
                     this.zapatos.set(j, x);
 
@@ -743,7 +746,10 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         && z.getReferencia().equals(x.getReferencia())
                          && z.getColor().equals(x.getColor())
                         && x.getProveedoresString().equalsIgnoreCase(z.getProveedoresString())
-                        && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())) {
+                        && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())
+                          && x.getCategoria().equalsIgnoreCase(z.getCategoria())
+                        && x.getPlanta().equalsIgnoreCase(z.getPlanta())
+                        && x.getNumeracion().equalsIgnoreCase(z.getNumeracion())) {
 
                     this.zapatos.set(j, x);
 
