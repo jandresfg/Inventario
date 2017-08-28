@@ -102,6 +102,7 @@ private JButton btnNewButton_1;
 private JTextField textCodigoProveedor;
 private JTextField txtAlmacen;
 private JTextField textField;
+private JTextField textCategoria;
 // -----------------------------------------------
 // Métodos
 // -----------------------------------------------
@@ -145,14 +146,22 @@ public DialogoEliminarZapto( Principal pprincipal )
     JLabel lblAlmacen = new JLabel("Almacen");
     lblAlmacen.setHorizontalAlignment(SwingConstants.LEFT);
     
+     JLabel lblCategoria = new JLabel("Categoria");
+    lblAlmacen.setHorizontalAlignment(SwingConstants.LEFT);
+    
     txtAlmacen = new JTextField();
     txtAlmacen.setColumns(10);
     
     textField = new JTextField();
     textField.setColumns(10);
     
+    textCategoria = new JTextField();
+    textCategoria.setColumns(10);
+    
     JLabel lblColor = new JLabel("Color");
     lblColor.setHorizontalAlignment(SwingConstants.LEFT);
+    
+    
     GroupLayout groupLayout = new GroupLayout(getContentPane());
     groupLayout.setHorizontalGroup(
     	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -166,6 +175,20 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addGroup(groupLayout.createSequentialGroup()
     					.addGap(44)
     					.addComponent(lblReferencia)))
+                        
+                        
+                        
+                        
+                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(32)
+    					.addComponent(lblCategoria, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(18)
+    					.addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
+                        
+                        
+                        
     			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     				.addGroup(groupLayout.createSequentialGroup()
     					.addGap(32)
@@ -179,6 +202,13 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addGroup(groupLayout.createSequentialGroup()
     					.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
     					.addGap(34)))
+                       
+                        
+                        
+                        
+                        
+                        
+                        
     			.addPreferredGap(ComponentPlacement.RELATED)
     			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -200,10 +230,14 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addComponent(lblciudadAlmacen)
     				.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
     				.addComponent(lblReferencia)
+                                    				.addComponent(lblCategoria)
+
     				.addComponent(lblColor))
     			.addGap(4)
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                               .addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+
     				.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(textField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
@@ -258,9 +292,10 @@ public void actionPerformed( ActionEvent e )
           String codigoProveedor = textCodigoProveedor.getText();
           String codigoAlmacen = txtAlmacen.getText();
           String color = textField.getText();
+          String categoria = textCategoria.getText();
 
           
-        principal.eliminar(referencia, codigoProveedor,codigoAlmacen, color);
+        principal.eliminar(referencia, codigoProveedor,codigoAlmacen, color,categoria);
            
             setVisible( false );
             dispose( );
