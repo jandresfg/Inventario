@@ -103,6 +103,8 @@ private JTextField textCodigoProveedor;
 private JTextField txtAlmacen;
 private JTextField textField;
 private JTextField textCategoria;
+private JTextField textNumeracion;
+
 // -----------------------------------------------
 // Métodos
 // -----------------------------------------------
@@ -149,6 +151,9 @@ public DialogoEliminarZapto( Principal pprincipal )
      JLabel lblCategoria = new JLabel("Categoria");
     lblAlmacen.setHorizontalAlignment(SwingConstants.LEFT);
     
+     JLabel lblnumeracion = new JLabel("Numeracion");
+    lblnumeracion.setHorizontalAlignment(SwingConstants.LEFT);
+    
     txtAlmacen = new JTextField();
     txtAlmacen.setColumns(10);
     
@@ -157,6 +162,10 @@ public DialogoEliminarZapto( Principal pprincipal )
     
     textCategoria = new JTextField();
     textCategoria.setColumns(10);
+    
+        
+    textNumeracion = new JTextField();
+    textNumeracion.setColumns(10);
     
     JLabel lblColor = new JLabel("Color");
     lblColor.setHorizontalAlignment(SwingConstants.LEFT);
@@ -187,7 +196,13 @@ public DialogoEliminarZapto( Principal pprincipal )
     					.addGap(18)
     					.addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
                         
-                        
+                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(32)
+    					.addComponent(lblnumeracion, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(18)
+    					.addComponent(textNumeracion, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
                         
     			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     				.addGroup(groupLayout.createSequentialGroup()
@@ -231,12 +246,14 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addComponent(lblAlmacen, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
     				.addComponent(lblReferencia)
                                     				.addComponent(lblCategoria)
+                                    				.addComponent(lblnumeracion)
 
     				.addComponent(lblColor))
     			.addGap(4)
     			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
     				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                .addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                               .addComponent(textNumeracion, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 
     				.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
@@ -293,9 +310,15 @@ public void actionPerformed( ActionEvent e )
           String codigoAlmacen = txtAlmacen.getText();
           String color = textField.getText();
           String categoria = textCategoria.getText();
+          String numeracion = textNumeracion.getText();
+                if(  numeracion.equals("") ||  numeracion.equals(" "))
+                {
+                numeracion = "0";
+                }          
 
-          
-        principal.eliminar(referencia, codigoProveedor,codigoAlmacen, color,categoria);
+
+
+        principal.eliminar(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion);
            
             setVisible( false );
             dispose( );
