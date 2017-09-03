@@ -535,11 +535,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 
     }
 
-    public String eliminarZapato(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria, String numeracion ) {
+    public String eliminarZapato(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria, String numeracion , int pPrecioVenta) {
         for (int i = 0; i < zapatos.size(); i++) {
             Zapato x = zapatos.get(i);
             if (!x.esReposicion()) {
-                if (x.getReferencia().equals(referencia) && x.getColor().equalsIgnoreCase(color) && x.getCategoria().equals(categoria)&&x.getNumeracion().equals(numeracion)) {
+                if (x.getReferencia().equals(referencia) && x.getColor().equalsIgnoreCase(color) && x.getCategoria().equals(categoria)&&x.getNumeracion().equals(numeracion)&&x.getPrecioVenta()==pPrecioVenta) {
                     for (int j = 0; j < x.getProveedores().size(); j++) {
                         Proveedor y = x.getProveedores().get(j);
                         if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {
@@ -725,6 +725,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())
                         && x.getCategoria().equalsIgnoreCase(z.getCategoria())
                         && x.getPlanta().equalsIgnoreCase(z.getPlanta())
+                        
+                           && x.getPrecioCosto()==(z.getPrecioCosto())
+                           && x.getPrecioVenta()==(z.getPrecioVenta())
                         && x.getNumeracion().equalsIgnoreCase(z.getNumeracion())) {
 
                     this.zapatos.set(j, x);
@@ -749,6 +752,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())
                           && x.getCategoria().equalsIgnoreCase(z.getCategoria())
                         && x.getPlanta().equalsIgnoreCase(z.getPlanta())
+                          && x.getPrecioCosto()==(z.getPrecioCosto())
+                           && x.getPrecioVenta()==(z.getPrecioVenta())
                         && x.getNumeracion().equalsIgnoreCase(z.getNumeracion())) {
 
                     this.zapatos.set(j, x);
@@ -2348,11 +2353,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 
     }
 
-    public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria,String numeracion) {
+    public String eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria,String numeracion, int pPrecioVenta) {
         for (int i = 0; i < zapatos.size(); i++) {
             Zapato x = zapatos.get(i);
             if (x.esReposicion()) {
-                if (x.getReferencia().equals(referencia) && x.getColor().equalsIgnoreCase(color)&&x.getCategoria().equals(categoria)&&x.getNumeracion().equals(numeracion)) {
+                if (x.getReferencia().equals(referencia) && x.getColor().equalsIgnoreCase(color)&&x.getCategoria().equals(categoria)&&x.getNumeracion().equals(numeracion)&&x.getPrecioVenta()==pPrecioVenta) {
                     for (int j = 0; j < x.getProveedores().size(); j++) {
                         Proveedor y = x.getProveedores().get(j);
                         if (y.getCodigo() == Integer.parseInt(codigoProveedor)) {

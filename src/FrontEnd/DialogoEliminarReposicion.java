@@ -105,7 +105,7 @@ private JLabel lblColor;
 private JTextField textField;
 private JTextField textCategoria;
 private JTextField textNumeracion;
-
+private JTextField textPrecioCosto;
 // -----------------------------------------------
 // Métodos
 // -----------------------------------------------
@@ -155,6 +155,9 @@ public DialogoEliminarReposicion( Principal pprincipal )
      JLabel lblnumeracion = new JLabel("Numeracion");
     lblnumeracion.setHorizontalAlignment(SwingConstants.LEFT);
     
+      JLabel lblpCosto = new JLabel("Precio Costo");
+    lblpCosto.setHorizontalAlignment(SwingConstants.LEFT);
+    
     txtAlmacen = new JTextField();
     txtAlmacen.setColumns(10);
     
@@ -164,7 +167,10 @@ public DialogoEliminarReposicion( Principal pprincipal )
     textCategoria = new JTextField();
     textCategoria.setColumns(10);
     
+        textPrecioCosto = new JTextField();
+    textPrecioCosto.setColumns(10);
         
+    
     textNumeracion = new JTextField();
     textNumeracion.setColumns(10);
     
@@ -186,7 +192,13 @@ public DialogoEliminarReposicion( Principal pprincipal )
     					.addGap(44)
     					.addComponent(lblReferencia)))
                         
-                        
+                                                                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(32)
+    					.addComponent(lblpCosto, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(18)
+    					.addComponent(textPrecioCosto, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
                         
                         
                         .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -248,6 +260,7 @@ public DialogoEliminarReposicion( Principal pprincipal )
     				.addComponent(lblReferencia)
                                     				.addComponent(lblCategoria)
                                     				.addComponent(lblnumeracion)
+                                                                                                    				.addComponent(lblpCosto)
 
     				.addComponent(lblColor))
     			.addGap(4)
@@ -255,7 +268,7 @@ public DialogoEliminarReposicion( Principal pprincipal )
     				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                .addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                .addComponent(textNumeracion, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-
+                               .addComponent(textPrecioCosto, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(textField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
@@ -313,13 +326,15 @@ public void actionPerformed( ActionEvent e )
           String categoria = textCategoria.getText();
           String numeracion = textNumeracion.getText();
           System.out.println(numeracion);
+                    int precioCosto = Integer.parseInt(textPrecioCosto.getText());
+
                 if(  numeracion.equals("") ||  numeracion.equals(" "))
                 {
                 numeracion = "0";
                 }          
 
           
-        principal.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen,color,categoria,numeracion);
+        principal.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen,color,categoria,numeracion,precioCosto);
            
             setVisible( false );
             dispose( );

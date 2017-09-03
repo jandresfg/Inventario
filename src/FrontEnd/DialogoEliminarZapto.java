@@ -104,6 +104,7 @@ private JTextField txtAlmacen;
 private JTextField textField;
 private JTextField textCategoria;
 private JTextField textNumeracion;
+private JTextField textPrecioCosto;
 
 // -----------------------------------------------
 // Métodos
@@ -154,6 +155,9 @@ public DialogoEliminarZapto( Principal pprincipal )
      JLabel lblnumeracion = new JLabel("Numeracion");
     lblnumeracion.setHorizontalAlignment(SwingConstants.LEFT);
     
+    JLabel lblpCosto = new JLabel("Precio Costo");
+    lblpCosto.setHorizontalAlignment(SwingConstants.LEFT);
+    
     txtAlmacen = new JTextField();
     txtAlmacen.setColumns(10);
     
@@ -166,6 +170,11 @@ public DialogoEliminarZapto( Principal pprincipal )
         
     textNumeracion = new JTextField();
     textNumeracion.setColumns(10);
+    
+    
+    textPrecioCosto = new JTextField();
+    textPrecioCosto.setColumns(10);
+    
     
     JLabel lblColor = new JLabel("Color");
     lblColor.setHorizontalAlignment(SwingConstants.LEFT);
@@ -195,6 +204,15 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addGroup(groupLayout.createSequentialGroup()
     					.addGap(18)
     					.addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
+                        
+                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(32)
+    					.addComponent(lblpCosto, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+    				.addGroup(groupLayout.createSequentialGroup()
+    					.addGap(18)
+    					.addComponent(textPrecioCosto, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
+                        
                         
                         .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
     				.addGroup(groupLayout.createSequentialGroup()
@@ -247,6 +265,8 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addComponent(lblReferencia)
                                     				.addComponent(lblCategoria)
                                     				.addComponent(lblnumeracion)
+                                                                    				.addComponent(lblpCosto)
+
 
     				.addComponent(lblColor))
     			.addGap(4)
@@ -254,6 +274,7 @@ public DialogoEliminarZapto( Principal pprincipal )
     				.addComponent(textReft, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                .addComponent(textCategoria, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                .addComponent(textNumeracion, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                               .addComponent(textPrecioCosto, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 
     				.addComponent(txtAlmacen, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
     				.addComponent(textCodigoProveedor, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
@@ -311,6 +332,8 @@ public void actionPerformed( ActionEvent e )
           String color = textField.getText();
           String categoria = textCategoria.getText();
           String numeracion = textNumeracion.getText();
+          int precioCosto = Integer.parseInt(textPrecioCosto.getText());
+          
                 if(  numeracion.equals("") ||  numeracion.equals(" "))
                 {
                 numeracion = "0";
@@ -318,7 +341,7 @@ public void actionPerformed( ActionEvent e )
 
 
 
-        principal.eliminar(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion);
+        principal.eliminar(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion,precioCosto);
            
             setVisible( false );
             dispose( );

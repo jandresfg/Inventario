@@ -1582,9 +1582,9 @@ public class Principal extends JFrame implements ActionListener {
 		}
 	}
 
-	public void eliminar(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria,String numeracion)
+	public void eliminar(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria,String numeracion, int precioVenta)
 	{
-		String res = mundo.eliminarZapato(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion);
+		String res = mundo.eliminarZapato(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion,  precioVenta);
 		setModelToZapatos();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
@@ -2958,8 +2958,8 @@ public class Principal extends JFrame implements ActionListener {
 		return mundo.darAlmacenes();
 	}
 
-	public void eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria,String numeracion) {
-		String res = mundo.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion);
+	public void eliminarReposicion(String referencia, String codigoProveedor, String codigoAlmacen, String color,String categoria,String numeracion,int precioVenta) {
+		String res = mundo.eliminarReposicion(referencia, codigoProveedor,codigoAlmacen, color,categoria,numeracion,precioVenta);
 		setModelToReposiciones();
 		JOptionPane.showMessageDialog(this, res);
 		mundo.guardar();
