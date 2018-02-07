@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -726,14 +727,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         && x.getAlmacenesString().equalsIgnoreCase(z.getAlmacenesString())
                         && x.getCategoria().equalsIgnoreCase(z.getCategoria())
                         && x.getPlanta().equalsIgnoreCase(z.getPlanta())
-                        
                            && x.getPrecioCosto()==(z.getPrecioCosto())
                            && x.getPrecioVenta()==(z.getPrecioVenta())
                         && x.getNumeracion().equalsIgnoreCase(z.getNumeracion())) {
 
                     this.zapatos.set(j, x);
-                    System.out.println("Posicion TABLA "+ j);
-                                        System.out.println("Nombre "+ x.getColor());
 
 
                 }
@@ -741,10 +739,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         
     }
 
-    public void setReposiciones(List<Zapato> reposiciones) {
+    public void setReposiciones(List<Zapato> reposiciones , int posicion) {
         //mierda para identificar referencia y actualizarla
-        for (int i = 0; i < zapatos.size(); i++) {//el zapato que llega desde la JTable
-            Zapato x = zapatos.get(i);
+            Zapato x = zapatos.get(posicion);
 
             for (int j = 0; j < this.zapatos.size(); j++) {//el zapato que esta ya en el mundo; el que hay que reemplazar
                 Zapato z = this.zapatos.get(j);
@@ -764,7 +761,7 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
 
                 }
             }
-        }
+        
     }
 
     public List<Proveedor> darProveedores(ArrayList<String> provs) {
@@ -908,6 +905,9 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
     }
 
     public ArrayList<Object[]> darTotales() {
+        
+                    System.out.println("INICIO" +  new Timestamp(System.currentTimeMillis()));
+
         ArrayList<Object[]> arr = new ArrayList<Object[]>();
         for (int i = 0; i < almacenes.size(); i++) {
             for (int j = 0; j < zapatos.size(); j++) {
@@ -970,6 +970,8 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                 }
             }
         }
+                            System.out.println("FIN" +  new Timestamp(System.currentTimeMillis()));
+
         return quickSort(arr, 0, (arr.size()) - 1);
     }
 

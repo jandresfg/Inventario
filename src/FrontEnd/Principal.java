@@ -1673,7 +1673,7 @@ public class Principal extends JFrame implements ActionListener {
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				System.out.println("table changed");
-				mundo.setReposiciones(sol.getData());
+                                				mundo.setReposiciones(sol.getData(),e.getFirstRow());
 				mundo.guardar();
 				agregarCombobox();
 			}
@@ -1803,6 +1803,7 @@ public class Principal extends JFrame implements ActionListener {
 	public void setModelToTotalesPorAlmacen(){
 
 		TablaTotalesPorAlmacen sol = new TablaTotalesPorAlmacen(mundo.darTotales());
+
 		sorter = new TableRowSorter<TablaTotalesPorAlmacen>(sol);
 		table.setModel(sol);
 		filterText.setVisible(true);
