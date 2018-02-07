@@ -710,10 +710,11 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
         this.proveedores = proveedores;
     }
 
-    public void setZapatos(List<Zapato> zapatos) {
+    public void setZapatos(List<Zapato> zapatos, int posicion) {
         //mierda para identificar zapato y actualizarlo
-        for (int i = 0; i < zapatos.size(); i++) {//el zapato que llega desde la JTable
-            Zapato x = zapatos.get(i);
+
+
+            Zapato x = zapatos.get(posicion);
 
             for (int j = 0; j < this.zapatos.size(); j++) {//el zapato que esta ya en el mundo; el que hay que reemplazar
                 Zapato z = this.zapatos.get(j);
@@ -731,10 +732,13 @@ Collections.sort(proveedores, new Comparator<Proveedor>(){
                         && x.getNumeracion().equalsIgnoreCase(z.getNumeracion())) {
 
                     this.zapatos.set(j, x);
+                    System.out.println("Posicion TABLA "+ j);
+                                        System.out.println("Nombre "+ x.getColor());
+
 
                 }
             }
-        }
+        
     }
 
     public void setReposiciones(List<Zapato> reposiciones) {

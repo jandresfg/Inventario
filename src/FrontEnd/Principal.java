@@ -23,6 +23,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JTable.PrintMode;
+import java.sql.Timestamp;
 
 import BackEnd.Almacen;
 import BackEnd.Mundo;
@@ -1615,9 +1616,8 @@ public class Principal extends JFrame implements ActionListener {
 
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				System.out.println("table changed");
-				mundo.setZapatos(sol.getData());
-				mundo.guardar();
+				mundo.setZapatos(sol.getData(),e.getFirstRow());
+                                				mundo.guardar();
 				agregarCombobox();
 			}
 		});
